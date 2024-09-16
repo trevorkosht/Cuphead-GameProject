@@ -1,58 +1,36 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Sprint0;
+using static IController;
 
-public class MouseController : IController
+public class MouseController : IMouseController
 {
-    private MouseState currentMouseState;
-    private int screenWidth;
-    private int screenHeight;
-    private Game1 game;
-
+    MouseState curMS, preMS;
+    public MouseController()
+    {
+        curMS = Mouse.GetState();
+        preMS = curMS;
+    }
     public void Update()
     {
-        currentMouseState = Mouse.GetState();
-    }
-    public MouseController(Game1 game, int screenWidth, int screenHeight)
-    {
-        this.game = game;
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
+        preMS = curMS;
+        curMS = Mouse.GetState();
     }
 
-    public void HandleInputs()
+    public bool OnMouseClick(MouseButton mouseButton)
     {
-
-        if (currentMouseState.LeftButton == ButtonState.Pressed)
-        {
-            if (currentMouseState.X < screenWidth / 2 && currentMouseState.Y < screenHeight / 2)
-            {
-                // Top-left: Display a non-moving, non-animated sprite
-                game.SetCurrentSpriteToNonMovingNonAnimated();
-            }
-            else if (currentMouseState.X >= screenWidth / 2 && currentMouseState.Y < screenHeight / 2)
-            {
-                // Top-right: Display a non-moving, animated sprite
-                game.SetCurrentSpriteToNonMovingAnimated();
-            }
-            else if (currentMouseState.X < screenWidth / 2 && currentMouseState.Y >= screenHeight / 2)
-            {
-                // Bottom-left: Display a moving, non-animated sprite
-                game.SetCurrentSpriteToMovingNonAnimated();
-            }
-            else if (currentMouseState.X >= screenWidth / 2 && currentMouseState.Y >= screenHeight / 2)
-            {
-                // Bottom-right: Display a moving, animated sprite 
-                game.SetCurrentSpriteToMovingAnimated();
-            }
-        }
-        else if (currentMouseState.RightButton == ButtonState.Pressed)
-        {
-            game.Exit();
-        }
+        bool mouseDown = false;
+        if (mouseButton == MouseButton.Left)
+            if (curMS.LeftButton == ButtonState.Pressed && preMS.LeftButton != ButtonState.Pressed)
+                mouseDown = true;
+        if (mouseButton == MouseButton.Right)
+            if (curMS.RightButton == ButtonState.Pressed && preMS.RightButton != ButtonState.Pressed)
+                mouseDown = true;
+        return mouseDown;
     }
 
-    public void HandleEvents()
+    public Point GetMousePosition()
     {
-
+        return Mouse.GetState().Position;
     }
 }

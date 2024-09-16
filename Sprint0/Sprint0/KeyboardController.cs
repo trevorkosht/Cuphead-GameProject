@@ -1,53 +1,27 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using Sprint0;
+using System;
+using static IController;
 
-public class KeyboardController : IController
+public class KeyboardController : IKeyboardController
 {
-    private KeyboardState currentKeyState;
-    private Game1 game;
+    private KeyboardState curKS, preKS;
 
-    public KeyboardController(Game1 game)
+    public KeyboardController()
     {
-        this.game = game;
+        curKS = Keyboard.GetState();
+        preKS = curKS;
     }
-
-
     public void Update()
     {
-        currentKeyState = Keyboard.GetState();
+        preKS = curKS;
+        curKS = Keyboard.GetState();
     }
-
-
-    public void HandleInputs()
+    public bool OnKeyDown(Keys key)
     {
-        if (currentKeyState.IsKeyDown(Keys.D1))
-        {
-            game.SetCurrentSpriteToNonMovingNonAnimated();
-        }
-
-        if (currentKeyState.IsKeyDown(Keys.D2))
-        {
-            game.SetCurrentSpriteToNonMovingAnimated();
-        }
-
-        if (currentKeyState.IsKeyDown(Keys.D3))
-        {
-            game.SetCurrentSpriteToMovingNonAnimated();
-        }
-
-        if (currentKeyState.IsKeyDown(Keys.D4))
-        {
-            game.SetCurrentSpriteToMovingAnimated();
-        }
-
-        if (currentKeyState.IsKeyDown(Keys.Escape))
-        {
-            game.Exit();
-        }
-    }
-
-    public void HandleEvents()
-    {
-
+        bool keyDown = false;
+        if (curKS.IsKeyDown(key) && !preKS.IsKeyDown(key))
+            keyDown = true;
+        return keyDown;
     }
 }
+
