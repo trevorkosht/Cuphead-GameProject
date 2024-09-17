@@ -4,9 +4,6 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using static IController;
 
-
-namespace Sprint0
-{
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -73,4 +70,3 @@ namespace Sprint0
             base.Draw(gameTime);
         }
     }
-}
