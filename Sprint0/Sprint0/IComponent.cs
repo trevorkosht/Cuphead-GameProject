@@ -5,6 +5,7 @@ public interface IComponent
 {
     // Reference to the parent GameObject
     GameObject GameObject { get; set; }
+    bool enabled { get; set; }
 
     // Called during the Update loop
     void Update(GameTime gameTime);

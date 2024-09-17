@@ -8,11 +8,24 @@ public class GameObject
     // List of components attached to this GameObjects
     private List<IComponent> components = new List<IComponent>();
 
+    public GameObject(IComponent component)
+    {
+        AddComponent(component);
+    }
+    public GameObject(List<IComponent> components)
+    {
+        foreach(IComponent component in components)
+        {
+            AddComponent(component);
+        }
+    }
+
     // Add a component to this GameObject
     public void AddComponent(IComponent component)
     {
         components.Add(component);
         component.GameObject = this;
+        component.enabled = true;
     }
 
     // Get a component of a specific type

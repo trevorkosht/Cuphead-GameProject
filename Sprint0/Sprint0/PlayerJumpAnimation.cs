@@ -18,6 +18,8 @@ public class PlayerJumpAnimation : IAnimation {
     private int xPos;
     private int yPos;
 
+    public GameObject GameObject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
     public void load(ContentManager content) {
         //this.texture = content.Load<Texture2D>("ch-jump");
 
@@ -53,5 +55,15 @@ public class PlayerJumpAnimation : IAnimation {
     }
     public void draw(SpriteBatch spriteBatch) {
 
+    }
+
+    public void Update(GameTime gameTime)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        throw new NotImplementedException();
     }
 }
