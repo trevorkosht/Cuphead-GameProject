@@ -1,14 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using static IController;
 
 
-namespace Sprint0
-{
-    public class Game1 : Game
-    {
+namespace Sprint0 {
+    public class Game1 : Game {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont _font;
@@ -22,8 +19,7 @@ namespace Sprint0
         GameObject player = new GameObject(new List<IComponent> { new Transform(new Vector2(100, 100)), new SpriteRenderer(null), new PlayerController() });
 
 
-        public Game1()
-        {
+        public Game1() {
 
             _graphics = new GraphicsDeviceManager(this);
             _graphics.PreferredBackBufferWidth = 1280;
@@ -36,8 +32,7 @@ namespace Sprint0
 
         }
 
-        protected override void Initialize()
-        {
+        protected override void Initialize() {
             base.Initialize();
             player.GetComponent<SpriteRenderer>().texture = playerTexture; //This is how to set the frame of the animation for the player
         }
@@ -59,8 +54,7 @@ namespace Sprint0
         }
 
 
-        protected override void Draw(GameTime gameTime)
-        {
+        protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.BlanchedAlmond);
 
             _spriteBatch.Begin(); //Draw stuff here
