@@ -24,14 +24,14 @@ public class PlayerJumpAnimation : IAnimation {
         //this.texture = content.Load<Texture2D>("ch-jump");
 
         //Adding each frame of jump animation
-        animationFrames.Add(content.Load<Texture2D>("/PlayerJumpTextures/cuphead_jump_0001"));
-        animationFrames.Add(content.Load<Texture2D>("/PlayerJumpTextures/cuphead_jump_0002"));
-        animationFrames.Add(content.Load<Texture2D>("/PlayerJumpTextures/cuphead_jump_0003"));
-        animationFrames.Add(content.Load<Texture2D>("/PlayerJumpTextures/cuphead_jump_0004"));
-        animationFrames.Add(content.Load<Texture2D>("/PlayerJumpTextures/cuphead_jump_0005"));
-        animationFrames.Add(content.Load<Texture2D>("/PlayerJumpTextures/cuphead_jump_0006"));
-        animationFrames.Add(content.Load<Texture2D>("/PlayerJumpTextures/cuphead_jump_0007"));
-        animationFrames.Add(content.Load<Texture2D>("/PlayerJumpTextures/cuphead_jump_0008"));
+        animationFrames.Add(content.Load<Texture2D>("PlayerJumpTextures/cuphead_jump_0001"));
+        animationFrames.Add(content.Load<Texture2D>("PlayerJumpTextures/cuphead_jump_0002"));
+        animationFrames.Add(content.Load<Texture2D>("PlayerJumpTextures/cuphead_jump_0003"));
+        animationFrames.Add(content.Load<Texture2D>("PlayerJumpTextures/cuphead_jump_0004"));
+        animationFrames.Add(content.Load<Texture2D>("PlayerJumpTextures/cuphead_jump_0005"));
+        animationFrames.Add(content.Load<Texture2D>("PlayerJumpTextures/cuphead_jump_0006"));
+        animationFrames.Add(content.Load<Texture2D>("PlayerJumpTextures/cuphead_jump_0007"));
+        animationFrames.Add(content.Load<Texture2D>("PlayerJumpTextures/cuphead_jump_0008"));
     }
 
     public void update(GameTime gameTime, int x, int y) {
