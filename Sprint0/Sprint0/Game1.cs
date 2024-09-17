@@ -21,6 +21,9 @@ namespace Sprint0
         //Example of how to make a GameObject
         GameObject player = new GameObject(new List<IComponent> { new Transform(new Vector2(100, 100)), new SpriteRenderer(null), new PlayerController() });
 
+        //controls the list of enemies and the cycle between them
+        private EnemyController enemyController;
+
 
         public Game1()
         {
@@ -40,6 +43,8 @@ namespace Sprint0
         {
             base.Initialize();
             player.GetComponent<SpriteRenderer>().texture = playerTexture; //This is how to set the frame of the animation for the player
+
+            enemyController = new EnemyController(keyboardController);
         }
 
         protected override void LoadContent() //Load sprites, fonts, etc. here
@@ -55,6 +60,8 @@ namespace Sprint0
         {
             player.Update(gameTime);
 
+            enemyController.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -66,6 +73,8 @@ namespace Sprint0
             _spriteBatch.Begin(); //Draw stuff here
 
             player.Draw(_spriteBatch);
+
+            enemyController.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
