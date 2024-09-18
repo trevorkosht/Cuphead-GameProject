@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using static IController;
 
@@ -9,27 +9,28 @@ public class EnemyController
     private List<BaseEnemy> enemies;
     private int currentEnemyIndex;
     private BaseEnemy currentEnemy;
-
     private IKeyboardController keyboardController;
+    private Texture2DStorage textureStorage;
 
-    public EnemyController(IKeyboardController keyboardController)
+    public EnemyController(IKeyboardController keyboardController, Texture2DStorage textureStorage)
     {
         this.keyboardController = keyboardController;
+        this.textureStorage = textureStorage;
         currentEnemyIndex = 0;
 
         // Initialize the enemy list using the factory
         enemies = new List<BaseEnemy>
         {
-            EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn),
-            EnemyFactory.CreateEnemy(EnemyType.DeadlyDaisy),
-            EnemyFactory.CreateEnemy(EnemyType.MurderousMushroom),
-            EnemyFactory.CreateEnemy(EnemyType.TerribleTulip),
-            EnemyFactory.CreateEnemy(EnemyType.AcornMaker)
-            // Add more enemies here
+            EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn, textureStorage),
+            EnemyFactory.CreateEnemy(EnemyType.DeadlyDaisy, textureStorage),
+            EnemyFactory.CreateEnemy(EnemyType.MurderousMushroom, textureStorage),
+            EnemyFactory.CreateEnemy(EnemyType.TerribleTulip, textureStorage),
+            EnemyFactory.CreateEnemy(EnemyType.AcornMaker, textureStorage),
+            EnemyFactory.CreateEnemy(EnemyType.BothersomeBlueberry, textureStorage),
+            EnemyFactory.CreateEnemy(EnemyType.ToothyTerror, textureStorage)
         };
 
         currentEnemy = enemies[currentEnemyIndex];
-        currentEnemy.Initialize(new Vector2(200, 200));
     }
 
     public void Update(GameTime gameTime)
@@ -46,33 +47,23 @@ public class EnemyController
             CycleToNextEnemy();
         }
 
-        currentEnemy.Update(gameTime);
+        currentEnemy?.Update(gameTime);
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        currentEnemy.Draw(spriteBatch);
+        currentEnemy?.Draw(spriteBatch);
     }
 
     private void CycleToNextEnemy()
     {
-        currentEnemyIndex++;
-        if (currentEnemyIndex >= enemies.Count)
-        {
-            currentEnemyIndex = 0;
-        }
+        currentEnemyIndex = (currentEnemyIndex + 1) % enemies.Count;
         currentEnemy = enemies[currentEnemyIndex];
-        currentEnemy.Initialize(new Vector2(200, 200)); // Reset position or other parameters
     }
 
     private void CycleToPreviousEnemy()
     {
-        currentEnemyIndex--;
-        if (currentEnemyIndex < 0)
-        {
-            currentEnemyIndex = enemies.Count - 1;
-        }
+        currentEnemyIndex = (currentEnemyIndex - 1 + enemies.Count) % enemies.Count;
         currentEnemy = enemies[currentEnemyIndex];
-        currentEnemy.Initialize(new Vector2(200, 200)); // Reset position or other parameters
     }
 }

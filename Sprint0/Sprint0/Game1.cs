@@ -14,6 +14,7 @@ namespace Sprint0
         private SpriteFont _font;
 
         private Texture2D playerTexture;
+        private Texture2DStorage textureStorage;
 
         private IKeyboardController keyboardController;
         private IMouseController mouseController;
@@ -43,8 +44,9 @@ namespace Sprint0
         {
             base.Initialize();
             player.GetComponent<SpriteRenderer>().texture = playerTexture; //This is how to set the frame of the animation for the player
+            textureStorage = new Texture2DStorage();
 
-            enemyController = new EnemyController(keyboardController);
+            enemyController = new EnemyController(keyboardController, textureStorage);
         }
 
         protected override void LoadContent() //Load sprites, fonts, etc. here
@@ -52,6 +54,7 @@ namespace Sprint0
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _font = Content.Load<SpriteFont>("Font");
+            textureStorage.LoadContent(Content);
             playerTexture = Content.Load<Texture2D>("ch-jump"); //Replace by adding an animator component (holds animations and transition states)
 
         }
