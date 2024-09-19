@@ -60,7 +60,7 @@ public class SpriteAnimator : IComponent {
     }
 
     public void Draw(SpriteBatch spriteBatch) {
-        spriteAnimations[currentAnimation.Key].draw(spriteBatch, destRectangle);
+        spriteAnimations[currentAnimation.Key].draw(spriteBatch, destRectangle, isFacingRight);
     }
 
 }

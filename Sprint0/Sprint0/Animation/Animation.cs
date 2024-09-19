@@ -2,9 +2,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+
 public class Animation {
     private List<Rectangle> frames;
-    private Texture2D spriteSheet; 
+    private Texture2D spriteSheet;
     private int update = 0;
     private int updatesPerFrame;
     private int frameCount;
@@ -28,24 +29,24 @@ public class Animation {
         }
     }
 
-    public int UpdatesPerFrame {get {return updatesPerFrame;} set {updatesPerFrame = value;}}
-    public int FrameCount {get { return frameCount; } set {frameCount = value;}}
-    public int CurrentFrame { get { return currentFrame; } set{currentFrame = value; }}
+    public int UpdatesPerFrame { get { return updatesPerFrame; } set { updatesPerFrame = value; } }
+    public int FrameCount { get { return frameCount; } set { frameCount = value; } }
+    public int CurrentFrame { get { return currentFrame; } set { currentFrame = value; } }
     public List<Rectangle> Frames { get { return frames; } }
 
-    
+
     public void updateAnimation() {
-        if(update < updatesPerFrame) {
+        if (update < updatesPerFrame) {
             update++;
         }
         else {
             update = 0;
             updateFrame();
         }
-      
+
     }
     private void updateFrame() {
-        if(currentFrame != frameCount - 1) {
+        if (currentFrame != frameCount - 1) {
             currentFrame++;
         }
         else {
@@ -53,9 +54,15 @@ public class Animation {
         }
     }
 
-    public void draw(SpriteBatch spriteBatch, Rectangle destRectangle) {
+    public void draw(SpriteBatch spriteBatch, Rectangle destRectangle, bool isFacingRight) {
         spriteBatch.Begin();
-        spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White);
+
+        if (isFacingRight) { 
+            spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White);
+        }else{
+            spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, (float)0.0, new Vector2(0,0), SpriteEffects.FlipHorizontally, 0);
+        }
+
         spriteBatch.End();
     }
 
