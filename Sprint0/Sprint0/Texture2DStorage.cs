@@ -9,17 +9,26 @@ public class Texture2DStorage
     // Initialize the texture storage with the ContentManager
     public void LoadContent(ContentManager content)
     {
-        // Example: Load your enemy textures
-        _textures["DeadlyDaisy"] = content.Load<Texture2D>("DeadlyDaisySprite");
-        _textures["MurderousMushroom"] = content.Load<Texture2D>("MurderousMushroomSprite");
-        _textures["TerribleTulip"] = content.Load<Texture2D>("TerribleTulipSprite");
-		_textures["ToothyTerror"] = content.Load<Texture2D>("ToothyTerrorSprite");
-		_textures["BothersomeBlueberry"] = content.Load<Texture2D>("BothersomeBlueberrySprite");
-        _textures["AggravatingAcorn"] = content.Load<Texture2D>("AggravatingAcornSprite");
-        _textures["AcornMaker"] = content.Load<Texture2D>("AcornMakerSprite");
-        _textures["Seed"] = content.Load<Texture2D>("lobber_seed_0001");
-        _textures["PurpleSpore"] = content.Load<Texture2D>("mushroom_poison_cloud_0001");
-        _textures["PinkSpore"] = content.Load<Texture2D>("mushroom_poison_cloud_pink_0003");
+        //Example: Load your enemy textures
+        _textures["DeadlyDaisy"] = content.Load<Texture2D>(@"EnemyTextures\DeadlyDaisySprite");
+        _textures["MurderousMushroom"] = content.Load<Texture2D>(@"EnemyTextures\MurderousMushroomSprite");
+        _textures["TerribleTulip"] = content.Load<Texture2D>(@"EnemyTextures\TerribleTulipSprite");
+        _textures["ToothyTerror"] = content.Load<Texture2D>(@"EnemyTextures\ToothyTerrorSprite");
+        _textures["BothersomeBlueberry"] = content.Load<Texture2D>(@"EnemyTextures\BothersomeBlueberrySprite");
+        _textures["AggravatingAcorn"] = content.Load<Texture2D>(@"EnemyTextures\AggravatingAcornSprite");
+        _textures["AcornMaker"] = content.Load<Texture2D>(@"EnemyTextures\AcornMakerSprite");
+        //_textures["Seed"] = content.Load<Texture2D>(@"EnemyTextures\lobber_seed_0001");
+        _textures["PurpleSpore"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_poison_cloud_0001");
+        _textures["PinkSpore"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_poison_cloud_pink_0003");
+
+        // Block/Obstacle Textures
+        _textures["TreeStump"] = content.Load<Texture2D>(@"BlockTextures\ForestStumps");
+        _textures["FallenLog"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-6");
+        _textures["PlatformMd"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-2");
+        _textures["PlatformLg"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-1");
+        _textures["FloatingPlatformSm"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
+        _textures["FloatingPlatformLg"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
+
         // Add more textures as needed
     }
 
