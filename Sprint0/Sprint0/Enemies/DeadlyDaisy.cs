@@ -9,9 +9,9 @@ public class DeadlyDaisy : BaseEnemy
     private bool isJumping;
     private Vector2 velocity;
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture)
+    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
-        base.Initialize(startPosition, hitPoints, texture);
+        base.Initialize(startPosition, hitPoints, texture, storage);
         speed = 100f;  // Speed of movement towards the player
         jumpHeight = 200f;  // How high the daisy can jump
         isJumping = false;
@@ -62,7 +62,7 @@ public class DeadlyDaisy : BaseEnemy
         velocity.Y = -jumpHeight;  // Set upward velocity
     }
 
-    public override void Shoot()
+    public override void Shoot(GameTime gameTime)
     {
         // Deadly Daisy doesn't shoot
     }

@@ -9,9 +9,9 @@ public class ToothyTterror : BaseEnemy
     private float jumpSpeed;
     private float startYPosition; // Starting Y position for jumping
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture)
+    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
-        base.Initialize(startPosition, hitPoints, texture);
+        base.Initialize(startPosition, hitPoints, texture, storage);
         jumpHeight = 150f; // The height it jumps up
         gravity = 300f;    // Gravity to pull it back down
         isJumping = true;  // Start with the ToothyTerror jumping out of the pit
@@ -50,7 +50,7 @@ public class ToothyTterror : BaseEnemy
         }
     }
 
-    public override void Shoot()
+    public override void Shoot(GameTime gameTime)
     {
         // Toothy Terror doesn't shoot
     }

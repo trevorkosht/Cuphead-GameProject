@@ -9,7 +9,7 @@ namespace Sprint0
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont _font;
 

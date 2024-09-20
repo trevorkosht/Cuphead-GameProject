@@ -8,12 +8,12 @@ public class TerribleTulip : BaseEnemy
     private List<HomingProjectile> projectiles; // List of projectiles to track
     private Texture2D projectileTexture;        // Store the projectile texture
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture)
+    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
-        base.Initialize(startPosition, hitPoints, texture);
+        base.Initialize(startPosition, hitPoints, texture, storage);
         shootCooldown = 3.0;
         projectiles = new List<HomingProjectile>();
-        projectileTexture = Texture2DStorage.GetTexture("Seed"); // Get projectile texture from storage
+        projectileTexture = storage.GetTexture("Seed"); // Get projectile texture from storage
     }
 
     public override void Move(GameTime gameTime)

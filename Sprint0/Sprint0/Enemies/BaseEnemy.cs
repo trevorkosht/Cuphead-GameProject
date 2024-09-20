@@ -11,17 +11,19 @@ public abstract class BaseEnemy : IEnemy
     protected float spriteScale = 1f;     // Scaling factor for the sprite
     protected Rectangle sourceRectangle;  // Rectangle for sprite sheet animation
     protected Vector2 origin;             // Origin point for the sprite
+    protected Texture2DStorage textureStorage;
 
     public abstract void Move(GameTime gameTime);
-    public abstract void Shoot();
+    public abstract void Shoot(GameTime gameTime);
 
     // Initialize with position, hitpoints, and the texture
-    public virtual void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture)
+    public virtual void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
         position = startPosition;
         HitPoints = hitPoints;
         IsActive = true;
         spriteTexture = texture;
+        textureStorage = storage;
 
         // Set the sourceRectangle to the entire texture if no animation (single frame)
         if (spriteTexture != null)
@@ -36,7 +38,7 @@ public abstract class BaseEnemy : IEnemy
         if (IsActive)
         {
             Move(gameTime);
-            Shoot();
+            Shoot(gameTime);
         }
     }
 

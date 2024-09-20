@@ -12,31 +12,31 @@ public static class EnemyFactory
         {
             case EnemyType.AggravatingAcorn:
                 enemy = new AggravatingAcorn();
-                enemy.Initialize(new Vector2(100, 100), 2, textureStorage.GetTexture("AggravatingAcorn"));
+                enemy.Initialize(new Vector2(100, 100), 2, textureStorage.GetTexture("AggravatingAcorn"), textureStorage);
                 break;
             case EnemyType.DeadlyDaisy:
                 enemy = new DeadlyDaisy();
-                enemy.Initialize(new Vector2(150, 200), 1, textureStorage.GetTexture("DeadlyDaisy"));
+                enemy.Initialize(new Vector2(150, 200), 1, textureStorage.GetTexture("DeadlyDaisy"), textureStorage);
                 break;
             case EnemyType.MurderousMushroom:
                 enemy = new MurderousMushroom();
-                enemy.Initialize(new Vector2(200, 150), 2, textureStorage.GetTexture("MurderousMushroom"));
+                enemy.Initialize(new Vector2(200, 150), 2, textureStorage.GetTexture("MurderousMushroom"), textureStorage);
                 break;
             case EnemyType.TerribleTulip:
                 enemy = new TerribleTulip();
-                enemy.Initialize(new Vector2(250, 300), 4, textureStorage.GetTexture("TerribleTulip"));
+                enemy.Initialize(new Vector2(250, 300), 4, textureStorage.GetTexture("TerribleTulip"), textureStorage);
                 break;
             case EnemyType.AcornMaker:
                 enemy = new AcornMaker();
-                enemy.Initialize(new Vector2(300, 350), 125, textureStorage.GetTexture("AcornMaker"));
+                enemy.Initialize(new Vector2(300, 350), 125, textureStorage.GetTexture("AcornMaker"), textureStorage);
                 break;
             case EnemyType.BothersomeBlueberry:
                 enemy = new BothersomeBlueberry();
-                enemy.Initialize(new Vector2(120, 180), 1, textureStorage.GetTexture("BothersomeBlueberry"));
+                enemy.Initialize(new Vector2(120, 180), 1, textureStorage.GetTexture("BothersomeBlueberry"), textureStorage);
                 break;
             case EnemyType.ToothyTerror:
                 enemy = new ToothyTerror();
-                enemy.Initialize(new Vector2(400, 400), 1, textureStorage.GetTexture("ToothyTerror")); // HP might not matter since it's invincible
+                enemy.Initialize(new Vector2(400, 400), 1, textureStorage.GetTexture("ToothyTerror"), textureStorage); // HP might not matter since it's invincible
                 break;
             // Add other cases for different enemies here
             default:

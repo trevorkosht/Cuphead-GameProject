@@ -8,9 +8,9 @@ public class AggravatingAcorn : BaseEnemy
     private bool isFalling;
     private float speed;
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture)
+    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
-        base.Initialize(startPosition, hitPoints, texture);
+        base.Initialize(startPosition, hitPoints, texture, storage);
         speed = 200f;  // Speed of horizontal movement
         isFalling = false;
         dropPosition = Vector2.Zero; // Will set when ready to fall
@@ -43,13 +43,13 @@ public class AggravatingAcorn : BaseEnemy
         }
 
         // Handle screen wrapping when moving horizontally
-        if (position.X > GraphicsDevice.Viewport.Width)  // Use Screen Width
+        if (position.X > _graphics.Width)  // Use Screen Width
         {
             position.X = -spriteTexture.Width; // Use the width of the sprite texture
         }
     }
 
-    public override void Shoot()
+    public override void Shoot(GameTime gameTime)
     {
         // Aggravating Acorn doesn't shoot, so no implementation needed
     }

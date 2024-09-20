@@ -11,9 +11,9 @@ public class BothersomeBlueberry : BaseEnemy
     private bool movingRight;          // Whether the blueberry is moving to the right
     private float respawnDelay = 3.0f; // Delay in seconds before respawning
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture)
+    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
-        base.Initialize(startPosition, hitPoints, texture);
+        base.Initialize(startPosition, hitPoints, texture, storage);
         respawnPosition = startPosition;
         speed = 150f; // Speed of horizontal movement
         isKnockedOut = false;
@@ -44,16 +44,16 @@ public class BothersomeBlueberry : BaseEnemy
         }
     }
 
-    public override void Shoot()
+    public override void Shoot(GameTime gameTime)
     {
         // BothersomeBlueberry doesn't shoot, so no implementation needed
     }
 
     private bool ReachedEdge()
     {
-        // Simple edge detection logic (you can replace this with your actual platform edge detection)
+        // Simple edge detection logic 
         // For now, assume if blueberry goes off-screen or hits a certain X position, it changes direction
-        if (position.X <= 0 || position.X + spriteTexture.Width >= GraphicsDevice.Viewport.Width)
+        if (position.X <= 0 || position.X + spriteTexture.Width >= _graphics.Width)
         {
             return true;
         }

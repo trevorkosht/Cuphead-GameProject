@@ -10,16 +10,16 @@ public class MurderousMushroom : BaseEnemy
     private Texture2D purpleSporeTexture;
     private Texture2D pinkSporeTexture;
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture)
+    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
-        base.Initialize(startPosition, hitPoints, texture);
+        base.Initialize(startPosition, hitPoints, texture, storage);
         isHidden = false;
         shootCooldown = 2.0;
         spores = new List<SporeProjectile>();
 
         // Fetch the spore textures from the texture storage
-        purpleSporeTexture = Texture2DStorage.GetTexture("PurpleSpore");
-        pinkSporeTexture = Texture2DStorage.GetTexture("PinkSpore");
+        purpleSporeTexture = storage.GetTexture("PurpleSpore");
+        pinkSporeTexture = storage.GetTexture("PinkSpore");
     }
 
     public override void Move(GameTime gameTime)
