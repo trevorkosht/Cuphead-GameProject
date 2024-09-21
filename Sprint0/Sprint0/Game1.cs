@@ -22,7 +22,7 @@ namespace Sprint0
         private IMouseController mouseController;
 
         //Example of how to make a GameObject
-        GameObject player = new GameObject(new List<IComponent> { new Transform(new Vector2(100, 100)), new SpriteRenderer(null), new PlayerController() });
+        GameObject player = new GameObject(50, 50, new List<IComponent> { new Transform(new Vector2(100, 100)), new SpriteRenderer(null), new PlayerController() });
 
         //controls the list of enemies and the cycle between them
         //private EnemyController enemyController;
