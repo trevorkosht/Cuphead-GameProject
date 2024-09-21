@@ -5,8 +5,8 @@ using System.Linq;
 
 public class GameObject
 {
-    public int X { get; set; }
-    public int Y { get; set; }
+    public int X;
+    public int Y;
     public float rotation {  get; set; }
     public Vector2 scale { get; set; }
 
@@ -15,12 +15,13 @@ public class GameObject
 
     public GameObject(int xPosition, int yPosition, IComponent component)
     {
-        this.X = xPosition; 
+        this.X = xPosition;
         this.Y = yPosition;
         AddComponent(component);
     }
     public GameObject(int xPosition, int yPosition, List<IComponent> components)
     {
+
         this.X = xPosition;
         this.Y = yPosition;
 
