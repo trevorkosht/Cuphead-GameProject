@@ -29,6 +29,10 @@ public class Texture2DStorage
         _textures["FloatingPlatformSm"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
         _textures["FloatingPlatformLg"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
 
+        //item texture
+        _textures["Item1_3"] = content.Load<Texture2D>(@"Items\Items1_3");
+        _textures["Item4-6"] = content.Load<Texture2D>(@"Items\Items4_6");
+
         // Add more textures as needed
     }
 
