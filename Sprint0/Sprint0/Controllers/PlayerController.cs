@@ -8,7 +8,6 @@ public class PlayerController : IComponent
     public GameObject GameObject { get; set; }
     public bool enabled { get; set; } = true;
 
-    private Transform transform;
     //private Rigidbody rigidbody;
 
     public float Speed { get; set; } = 150f;
@@ -27,10 +26,10 @@ public class PlayerController : IComponent
         keyboardController.Update();
         mouseController.Update();
 
-        transform = GameObject.GetComponent<Transform>();
+        //transform = GameObject.GetComponent<Transform>();
         //rigidbody = GameObject.GetComponent<RigidbodyComponent>();
 
-        if (transform != null) //&& rigidbody != null)
+        if (true) //temporary since I removed transform, && rigidbody != null)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Vector2 input = new Vector2(0, 0);
@@ -45,16 +44,23 @@ public class PlayerController : IComponent
             input = new Vector2(0, 0);
 
             if (state.IsKeyDown(Keys.A) || state.IsKeyDown(Keys.Left)) 
+            {
                 input.X = -1;
+                GameObject.GetComponent<SpriteRenderer>().isFacingRight = false;
+            }    
+
             if (state.IsKeyDown(Keys.D) || state.IsKeyDown(Keys.Right))
             {
-                if(input.X < 0) //No input if both left/right are pressed
+                if (input.X < 0) //No input if both left/right are pressed
                     input.X = 0;
-                else
+                else {
                     input.X = 1;
+                    GameObject.GetComponent<SpriteRenderer>().isFacingRight = true;
+                }
             }
 
-            transform.Position += input * Speed * deltaTime;
+            GameObject.X += (int)(input.X * Speed * deltaTime);
+            GameObject.Y += (int)(input.Y * Speed * deltaTime);
         }
     }
 
