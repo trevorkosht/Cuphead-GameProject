@@ -54,7 +54,8 @@ public class SpriteAnimator : IComponent {
         }
     }
 
-    public void Update(GameTime gameTime) {  
+    public void Update(GameTime gameTime) {
+        destRectangle = new Rectangle(GameObject.X, GameObject.Y, destRectangle.Width, destRectangle.Height);
         spriteAnimations[currentAnimation.Key].updateAnimation();
     }
 

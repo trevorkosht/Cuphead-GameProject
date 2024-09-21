@@ -48,6 +48,17 @@ namespace Sprint0
             base.Initialize();
             player.GetComponent<SpriteRenderer>().texture = playerTexture; //This is how to set the frame of the animation for the player
 
+
+            //Animation setup testing:
+            Texture2D playerJumpTexture = textureStorage.GetTexture("PlayerJump");
+            Animation playerJumpAnimation = new Animation(playerJumpTexture, 5, 8, 81, 109);
+
+            SpriteAnimator playerSpriteAnimator = new SpriteAnimator(player, true, new Rectangle(player.X, player.Y, 81, 109), true);
+            player.AddComponent(playerSpriteAnimator);
+            playerSpriteAnimator.addAnimation("jump", playerJumpAnimation);
+
+            playerSpriteAnimator.setAnimation("jump");
+
             //enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(keyboardController, textureStorage);
         }
