@@ -29,6 +29,17 @@ public class Texture2DStorage
         _textures["FloatingPlatformSm"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
         _textures["FloatingPlatformLg"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
 
+        //Player Animation Textures
+        _textures["PlayerDeath"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDeath");
+        _textures["PlayerDuck_Idle"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDuck_Idle");
+        _textures["PlayerDuck_Shooting"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDuck_Shooting");
+        _textures["PlayerHit_Air"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerHit_Air");
+        _textures["PlayerHit_Ground"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerHit_Ground");
+        _textures["PlayerIdle"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerIdle");
+        _textures["PlayerJump"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerJump");
+        _textures["PlayerRunNormal"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerRunNormal");
+
+
         //item texture
         _textures["Item1_3"] = content.Load<Texture2D>(@"Items\Items1_3");
         _textures["Item4-6"] = content.Load<Texture2D>(@"Items\Items4_6");
