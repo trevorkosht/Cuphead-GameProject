@@ -5,16 +5,24 @@ using System.Linq;
 
 public class GameObject
 {
+    public int X { get; set; }
+    public int Y { get; set; }
+
     // List of components attached to this GameObjects
     private List<IComponent> components = new List<IComponent>();
 
-    public GameObject(IComponent component)
+    public GameObject(int xPosition, int yPosition, IComponent component)
     {
+        this.X = xPosition; 
+        this.Y = yPosition;
         AddComponent(component);
     }
-    public GameObject(List<IComponent> components)
+    public GameObject(int xPosition, int yPosition, List<IComponent> components)
     {
-        foreach(IComponent component in components)
+        this.X = xPosition;
+        this.Y = yPosition;
+
+        foreach (IComponent component in components)
         {
             AddComponent(component);
         }

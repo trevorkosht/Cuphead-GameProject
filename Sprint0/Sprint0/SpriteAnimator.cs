@@ -10,14 +10,13 @@ public class SpriteAnimator : IComponent {
     public bool isFacingRight { get; set; }
 
     private KeyValuePair<string, Animation> currentAnimation;
-    private Dictionary<string, Animation> spriteAnimations;
+    private Dictionary<string, Animation> spriteAnimations = new Dictionary<string, Animation>();
 
-    public SpriteAnimator(GameObject gameObject, bool enabled, Rectangle destRectangle, bool isFacingRight, Dictionary<string, Animation> spriteAnimations) {
+    public SpriteAnimator(GameObject gameObject, bool enabled, Rectangle destRectangle, bool isFacingRight) {
         GameObject = gameObject;
         this.enabled = enabled;
         this.destRectangle = destRectangle;
         this.isFacingRight = isFacingRight;
-        this.spriteAnimations = spriteAnimations;
     }
 
     public void addAnimation(string animationName, Animation animation) {

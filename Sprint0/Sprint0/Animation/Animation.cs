@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 
 public class Animation {
-    private List<Rectangle> frames;
+    private List<Rectangle> frames = new List<Rectangle>();
     private Texture2D spriteSheet;
     private int update = 0;
     private int updatesPerFrame;
@@ -12,6 +12,12 @@ public class Animation {
     private int frameHeight;
     private int frameWidth;
     private int currentFrame = 0;
+
+    public int UpdatesPerFrame { get { return updatesPerFrame; } set { updatesPerFrame = value; } }
+    public int FrameCount { get { return frameCount; } set { frameCount = value; } }
+    public int CurrentFrame { get { return currentFrame; } set { currentFrame = value; } }
+    public List<Rectangle> Frames { get { return frames; } }
+
 
     public Animation(Texture2D spriteSheet, int updatesPerFrame, int frameCount, int frameHeight, int frameWidth) {
         this.spriteSheet = spriteSheet;
@@ -28,12 +34,6 @@ public class Animation {
             frames.Add(new Rectangle(i * frameWidth, 0, frameWidth, frameHeight));
         }
     }
-
-    public int UpdatesPerFrame { get { return updatesPerFrame; } set { updatesPerFrame = value; } }
-    public int FrameCount { get { return frameCount; } set { frameCount = value; } }
-    public int CurrentFrame { get { return currentFrame; } set { currentFrame = value; } }
-    public List<Rectangle> Frames { get { return frames; } }
-
 
     public void updateAnimation() {
         if (update < updatesPerFrame) {
