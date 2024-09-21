@@ -7,6 +7,8 @@ public class GameObject
 {
     public int X { get; set; }
     public int Y { get; set; }
+    public float rotation {  get; set; }
+    public Vector2 scale { get; set; }
 
     // List of components attached to this GameObjects
     private List<IComponent> components = new List<IComponent>();
@@ -58,5 +60,17 @@ public class GameObject
         {
             component.Draw(spriteBatch);
         }
+    }
+
+    //Move an amount relative to current position
+    public void Move(int deltaX, int deltaY) {
+        X += deltaX;
+        Y += deltaY;
+    }
+
+    //Moves the GameObject to the position specified by the vector
+    public void MoveToPosition(int newX, int newY) {
+        X = newX;
+        Y = newY;
     }
 }

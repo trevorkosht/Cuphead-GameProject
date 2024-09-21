@@ -22,7 +22,7 @@ namespace Sprint0
         private IMouseController mouseController;
 
         //Example of how to make a GameObject
-        GameObject player = new GameObject(50, 50, new List<IComponent> { new Transform(new Vector2(100, 100)), new SpriteRenderer(null), new PlayerController() });
+        GameObject player = new GameObject(50, 50, new List<IComponent> { new Transform(new Vector2(100, 100)), new PlayerController() });
 
         //controls the list of enemies and the cycle between them
         //private EnemyController enemyController;
@@ -46,19 +46,7 @@ namespace Sprint0
         protected override void Initialize()
         {
             base.Initialize();
-            player.GetComponent<SpriteRenderer>().texture = playerTexture; //This is how to set the frame of the animation for the player
-
-
-            //Animation setup testing:
-            Texture2D playerJumpTexture = textureStorage.GetTexture("PlayerJump");
-            Animation playerJumpAnimation = new Animation(playerJumpTexture, 5, 8, 81, 109);
-
-            SpriteAnimator playerSpriteAnimator = new SpriteAnimator(player, true, new Rectangle(player.X, player.Y, 81, 109), true);
-            player.AddComponent(playerSpriteAnimator);
-            playerSpriteAnimator.addAnimation("jump", playerJumpAnimation);
-
-            playerSpriteAnimator.setAnimation("jump");
-
+            
             //enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(keyboardController, textureStorage);
         }
@@ -71,7 +59,18 @@ namespace Sprint0
 
             _font = Content.Load<SpriteFont>("Font");
             //textureStorage.LoadContent(Content);
-            playerTexture = Content.Load<Texture2D>("ch-jump"); //Replace by adding an animator component (holds animations and transition states)
+            
+
+            //Animation setup testing:
+            Texture2D playerJumpTexture = textureStorage.GetTexture("PlayerJump");
+            Animation playerJumpAnimation = new Animation(playerJumpTexture, 5, 8, 81, 109);
+
+            SpriteRenderer playerSpriteRenderer = new SpriteRenderer(player, true, new Rectangle(player.X, player.Y, 81, 109), true);
+            player.AddComponent(playerSpriteRenderer);
+            playerSpriteRenderer.addAnimation("jump", playerJumpAnimation);
+            playerSpriteRenderer.loadAllAnimations();
+
+            playerSpriteRenderer.setAnimation("jump");
         }
 
         protected override void Update(GameTime gameTime) //Update stuff here

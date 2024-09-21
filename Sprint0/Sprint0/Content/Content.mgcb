@@ -85,30 +85,6 @@
 /processorParam:TextureFormat=Color
 /build:BlockTextures/ForestStumps.png
 
-#begin ch-jump.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:ch-jump.png;PlayerJump.png
-
-#begin ch-run-normal.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:ch-run-normal.png;PlayerRun_Normal.png
-
 #begin characters.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -156,18 +132,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/BothersomeBlueberrySprite.png
-
-#begin EnemyTextures/ch-run-normal.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:EnemyTextures/ch-run-normal.png
 
 #begin EnemyTextures/DeadlyDaisySprite.png
 /importer:TextureImporter
@@ -248,7 +212,7 @@
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont;Font.spritefont
 
-#begin PlayerDeathAnimation.png
+#begin PlayerAnimationTextures/PlayerDeath.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -258,9 +222,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:PlayerDeathAnimation.png;PlayerDeath.png
+/build:PlayerAnimationTextures/PlayerDeath.png
 
-#begin PlayerDuckAnimation_Idle.png
+#begin PlayerAnimationTextures/PlayerDuck_Idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -270,9 +234,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:PlayerDuckAnimation_Idle.png;PlayerDuck_Idle.png
+/build:PlayerAnimationTextures/PlayerDuck_Idle.png
 
-#begin PlayerDuckAnimation_Shooting.png
+#begin PlayerAnimationTextures/PlayerDuck_Shooting.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -282,5 +246,53 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:PlayerDuckAnimation_Shooting.png;PlayerDuck_Shooting.png
+/build:PlayerAnimationTextures/PlayerDuck_Shooting.png
+
+#begin PlayerAnimationTextures/PlayerHit_Air.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerHit_Air.png
+
+#begin PlayerAnimationTextures/PlayerHit_Ground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerHit_Ground.png
+
+#begin PlayerAnimationTextures/PlayerJump.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerJump.png
+
+#begin PlayerAnimationTextures/PlayerRun_Normal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerRun_Normal.png
 

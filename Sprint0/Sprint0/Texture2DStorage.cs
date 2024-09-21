@@ -35,7 +35,7 @@ public class Texture2DStorage
         _textures["PlayerDuck_Shooting"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDuck_Shooting");
         _textures["PlayerHit_Air"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerHit_Air");
         _textures["PlayerHit_Ground"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerHit_Ground");
-        _textures["PlayerIdle"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerIdle")
+        _textures["PlayerIdle"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerIdle");
         _textures["PlayerJump"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerJump");
         _textures["PlayerRunNormal"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerRunNormal");
 
