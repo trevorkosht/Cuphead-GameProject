@@ -55,15 +55,12 @@ public class Animation {
     }
 
     public void draw(SpriteBatch spriteBatch, Rectangle destRectangle, bool isFacingRight) {
-        spriteBatch.Begin();
 
         if (isFacingRight) { 
             spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White);
         }else{
             spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, (float)0.0, new Vector2(0,0), SpriteEffects.FlipHorizontally, 0);
         }
-
-        spriteBatch.End();
     }
 
     public void resetAnimation() {

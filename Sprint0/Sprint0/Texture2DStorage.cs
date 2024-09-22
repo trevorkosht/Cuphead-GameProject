@@ -35,14 +35,14 @@ public class Texture2DStorage
         _textures["PlayerDuck_Shooting"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDuck_Shooting");
         _textures["PlayerHit_Air"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerHit_Air");
         _textures["PlayerHit_Ground"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerHit_Ground");
-        _textures["PlayerIdle"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerIdle");
+        //_textures["PlayerIdle"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerIdle");
         _textures["PlayerJump"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerJump");
-        _textures["PlayerRunNormal"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerRunNormal");
+        //_textures["PlayerRunNormal"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerRunNormal");
 
 
         //item texture
-        _textures["Item1_3"] = content.Load<Texture2D>(@"Items\PC Computer - Cuphead Dont Deal With the Devil - Shop Items DLC.png");
-        _textures["Item4-6"] = content.Load<Texture2D>(@"Items\PC Computer - Cuphead Dont Deal With the Devil - Shop Items.png");
+        //_textures["Item1_3"] = content.Load<Texture2D>(@"Items\PC Computer - Cuphead Dont Deal With the Devil - Shop Items DLC.png");
+        //_textures["Item4-6"] = content.Load<Texture2D>(@"Items\PC Computer - Cuphead Dont Deal With the Devil - Shop Items.png");
 
         // Add more textures as needed
     }

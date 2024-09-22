@@ -64,9 +64,7 @@ namespace Sprint0.Controllers
 
         public void Draw(SpriteBatch spriteBatch) {
             if (enabled && currentBlock != null)
-            {
                 currentBlock.Draw(spriteBatch);
-            }
         }
     }
 }
