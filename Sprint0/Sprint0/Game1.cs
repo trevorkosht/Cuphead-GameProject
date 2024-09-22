@@ -96,16 +96,30 @@ namespace Sprint0
             Animation playerShootDiagonalDownAnimation = new Animation(playerShootDiagonalDownTexture, 5, 3, 144, 144);
             Animation playerShootDiagonalUpAnimation = new Animation(playerShootDiagonalUpTexture, 5, 3, 144, 144);
             Animation playerShootDownAnimation = new Animation(playerShootDownTexture, 5, 3, 144, 144);
-            Animation playerShootStraight = new Animation(playerShootStraightTexture, 5, 3, 144, 144);
+            Animation playerShootStraightAnimation = new Animation(playerShootStraightTexture, 5, 3, 144, 144);
             Animation playerShootUpAnimation = new Animation(playerShootUpTexture, 5, 3, 144, 144);
-
 
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(player, true, new Rectangle(player.X, player.Y, 81, 109), true);
             player.AddComponent(playerSpriteRenderer);
-            playerSpriteRenderer.addAnimation("jump", playerJumpAnimation);
+
+            playerSpriteRenderer.addAnimation("Death", playerDeathAnimation);
+            playerSpriteRenderer.addAnimation("HitAir", playerHitAirAnimation);
+            playerSpriteRenderer.addAnimation("HitGround", playerHitGroundAnimation);
+            playerSpriteRenderer.addAnimation("Idle", playerIdleAnimation);
+            playerSpriteRenderer.addAnimation("Intro", playerIntroAnimation);
+            playerSpriteRenderer.addAnimation("Jump", playerJumpAnimation);
+            playerSpriteRenderer.addAnimation("Run", playerRunAnimation);
+            playerSpriteRenderer.addAnimation("RunShootingDiagonalUp", playerRunShootingDiagonalUpAnimation);
+            playerSpriteRenderer.addAnimation("RunShootingStraight", playerRunShootingStraightAnimation);
+            playerSpriteRenderer.addAnimation("ShootDiagonalDown", playerShootDiagonalDownAnimation);
+            playerSpriteRenderer.addAnimation("ShootDiagonalUp", playerShootDiagonalUpAnimation);
+            playerSpriteRenderer.addAnimation("ShootDown", playerShootDownAnimation);
+            playerSpriteRenderer.addAnimation("ShootStraight", playerShootStraightAnimation);
+            playerSpriteRenderer.addAnimation("ShootUp", playerShootUpAnimation);
+
             playerSpriteRenderer.loadAllAnimations();
 
-            playerSpriteRenderer.setAnimation("jump");
+            playerSpriteRenderer.setAnimation("Jump");
         }
 
         protected override void Update(GameTime gameTime) //Update stuff here
