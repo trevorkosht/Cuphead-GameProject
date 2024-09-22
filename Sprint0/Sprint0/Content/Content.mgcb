@@ -296,27 +296,3 @@
 /processorParam:TextureFormat=Color
 /build:PlayerAnimationTextures/PlayerRun_Normal.png
 
-#begin Items/PC Computer - Cuphead Dont Deal With the Devil - Shop Items DLC.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/PC Computer - Cuphead Dont Deal With the Devil - Shop Items DLC.png
-
-#begin Items/PC Computer - Cuphead Dont Deal With the Devil - Shop Items.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Items/PC Computer - Cuphead Dont Deal With the Devil - Shop Items.png
-

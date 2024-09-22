@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;          // For Vector2, GameTime
 using Microsoft.Xna.Framework.Graphics; // For SpriteBatch, Texture2D
+using Sprint0;
 using System;                           // For Math
 
 public class DeadlyDaisy : BaseEnemy
@@ -20,7 +21,7 @@ public class DeadlyDaisy : BaseEnemy
 
     public override void Move(GameTime gameTime)
     {
-        var playerPosition = Player.Instance.Position; // Assuming Player.Instance gives the player position
+        Vector2 playerPosition = new Vector2(player.X, player.Y); // Assuming this meant the character player and not game window
 
         // Calculate direction towards the player
         Vector2 direction = playerPosition - position;

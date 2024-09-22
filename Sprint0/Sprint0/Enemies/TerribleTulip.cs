@@ -23,11 +23,12 @@ public class TerribleTulip : BaseEnemy
 
     public override void Shoot(GameTime gametime)
     {
-        shootCooldown -= gameTime.ElapsedGameTime.TotalSeconds;
+        shootCooldown -= gametime.ElapsedGameTime.TotalSeconds;
         if (shootCooldown <= 0)
         {
+            Vector2 playerPosition = new Vector2(player.X, player.Y);
             // Create and shoot a homing projectile towards the player
-            projectiles.Add(new HomingProjectile(position, Player.Instance.Position, projectileTexture));
+            projectiles.Add(new HomingProjectile(position, playerPosition, projectileTexture));
             shootCooldown = 3.0; // Reset the cooldown after shooting
         }
     }

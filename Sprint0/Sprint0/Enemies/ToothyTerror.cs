@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;          // For Vector2, GameTime
 using Microsoft.Xna.Framework.Graphics; // For SpriteBatch, Texture2D
 
-public class ToothyTterror : BaseEnemy
+public class ToothyTerror : BaseEnemy
 {
     private float jumpHeight;
     private float gravity;

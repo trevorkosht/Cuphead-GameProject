@@ -46,7 +46,7 @@ namespace Sprint0
         protected override void Initialize()
         {
             base.Initialize();
-            
+            GOManager.Instance.Player = player;
             //enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(keyboardController, textureStorage);
         }

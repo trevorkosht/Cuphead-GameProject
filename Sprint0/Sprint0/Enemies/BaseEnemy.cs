@@ -12,6 +12,7 @@ public abstract class BaseEnemy : IEnemy
     protected Rectangle sourceRectangle;  // Rectangle for sprite sheet animation
     protected Vector2 origin;             // Origin point for the sprite
     protected Texture2DStorage textureStorage;
+    protected GameObject player;
 
     public abstract void Move(GameTime gameTime);
     public abstract void Shoot(GameTime gameTime);
@@ -24,6 +25,7 @@ public abstract class BaseEnemy : IEnemy
         IsActive = true;
         spriteTexture = texture;
         textureStorage = storage;
+        player = GOManager.Instance.Player;
 
         // Set the sourceRectangle to the entire texture if no animation (single frame)
         if (spriteTexture != null)

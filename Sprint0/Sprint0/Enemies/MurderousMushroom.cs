@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;          // For Vector2, GameTime
 using Microsoft.Xna.Framework.Graphics; // For SpriteBatch, Texture2D
+using System;
 using System.Collections.Generic;       // For managing spores
 
 public class MurderousMushroom : BaseEnemy
@@ -34,12 +35,13 @@ public class MurderousMushroom : BaseEnemy
             shootCooldown -= gameTime.ElapsedGameTime.TotalSeconds;
             if (shootCooldown <= 0)
             {
+                Vector2 playerPosition = new Vector2(player.X, player.Y);
                 // Randomly decide between shooting a purple or pink spore
                 bool shootPinkSpore = (new Random().Next(0, 2) == 0); // 50% chance
 
                 // Shoot a spore in the direction of the player
                 Texture2D sporeTexture = shootPinkSpore ? pinkSporeTexture : purpleSporeTexture;
-                spores.Add(new SporeProjectile(position, Player.Instance.Position, sporeTexture, shootPinkSpore));
+                spores.Add(new SporeProjectile(position, playerPosition, sporeTexture, shootPinkSpore));
 
                 shootCooldown = 2.0; // Reset the cooldown for the next spore
             }
