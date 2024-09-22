@@ -69,8 +69,36 @@ namespace Sprint0
             items = new Items(itemPart1, itemPart2, 6);
 
             //Animation setup testing:
+            Texture2D playerDeathTexture = textureStorage.GetTexture("PlayerDeath");
+            Texture2D playerHitAirTexture = textureStorage.GetTexture("PlayerHitAir");
+            Texture2D playerHitGroundTexture = textureStorage.GetTexture("PlayerHitGround");
+            Texture2D playerIdleTexture = textureStorage.GetTexture("PlayerIdle");
+            Texture2D playerIntroTexture = textureStorage.GetTexture("PlayerIntro");
             Texture2D playerJumpTexture = textureStorage.GetTexture("PlayerJump");
+            Texture2D playerRunTexture = textureStorage.GetTexture("PlayerRun");
+            Texture2D playerRunShootingDiagonalUpTexture = textureStorage.GetTexture("PlayerRunShootingDiagonalUp");
+            Texture2D playerRunShootingStraightTexture = textureStorage.GetTexture("PlayerRunShootingStraight");
+            Texture2D playerShootDiagonalDownTexture = textureStorage.GetTexture("PlayerShootDiagonalDown");
+            Texture2D playerShootDiagonalUpTexture = textureStorage.GetTexture("PlayerShootDiagonalUp");
+            Texture2D playerShootDownTexture = textureStorage.GetTexture("PlayerShootDown");
+            Texture2D playerShootStraightTexture = textureStorage.GetTexture("PlayerShootStraight");
+            Texture2D playerShootUpTexture = textureStorage.GetTexture("PlayerShootUp");
+
+            Animation playerDeathAnimation = new Animation(playerDeathTexture, 5, 16, 144, 144);
+            Animation playerHitAirAnimation = new Animation(playerHitAirTexture, 5, 6, 144, 144);
+            Animation playerHitGroundAnimation = new Animation(playerHitGroundTexture, 5, 6, 144, 144);
+            Animation playerIdleAnimation = new Animation(playerIdleTexture, 5, 5, 144, 144);
+            Animation playerIntroAnimation = new Animation(playerIntroTexture, 5, 28, 144, 144);
             Animation playerJumpAnimation = new Animation(playerJumpTexture, 5, 8, 144, 144);
+            Animation playerRunAnimation = new Animation(playerRunTexture, 5, 16, 144, 144);
+            Animation playerRunShootingDiagonalUpAnimation = new Animation(playerRunShootingDiagonalUpTexture, 5, 16, 144, 144);
+            Animation playerRunShootingStraightAnimation = new Animation(playerRunShootingStraightTexture, 5, 16, 144, 144);
+            Animation playerShootDiagonalDownAnimation = new Animation(playerShootDiagonalDownTexture, 5, 3, 144, 144);
+            Animation playerShootDiagonalUpAnimation = new Animation(playerShootDiagonalUpTexture, 5, 3, 144, 144);
+            Animation playerShootDownAnimation = new Animation(playerShootDownTexture, 5, 3, 144, 144);
+            Animation playerShootStraight = new Animation(playerShootStraightTexture, 5, 3, 144, 144);
+            Animation playerShootUpAnimation = new Animation(playerShootUpTexture, 5, 3, 144, 144);
+
 
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(player, true, new Rectangle(player.X, player.Y, 81, 109), true);
             player.AddComponent(playerSpriteRenderer);
