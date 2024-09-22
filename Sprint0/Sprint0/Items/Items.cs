@@ -116,6 +116,7 @@ namespace Cuphead.Items
 
         public void update(GameTime gameTime, int x, int y)
         {
+            position = new Vector2(x, y);
             counter++;
             if (counter > 50)
             {
@@ -130,6 +131,7 @@ namespace Cuphead.Items
                 }
                 counter = 0;
             }
+
         }
     }
 }

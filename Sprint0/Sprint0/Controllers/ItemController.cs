@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cuphead.Controllers
 {
-    internal class ItemController
+    internal class ItemController : IController
     {
 
 
