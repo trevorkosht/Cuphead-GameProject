@@ -49,7 +49,7 @@ public class Texture2DStorage
 
         //item texture
         _textures["Item1_3"] = content.Load<Texture2D>("items/Items1");
-        _textures["Item4-6"] = content.Load<Texture2D>("items/Items2");
+        _textures["Item4_6"] = content.Load<Texture2D>("items/Items2");
 
         // Add more textures as needed
     }

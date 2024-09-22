@@ -17,13 +17,14 @@ namespace Cuphead.Items
         private Rectangle[] source;
         private int counter = 0;
         private int frame = 0;
+        private int inc = 1;
         private int part = 1;
 
         public Items(Texture2D texture1, Texture2D texture2, int potionNum)
         {
             this.texture1 = texture1;
             this.texture2 = texture2;
-            position = new Vector2(400, 480);
+            position = new Vector2(400, 460);
             sourcecorrection(potionNum);
 
         }
@@ -42,54 +43,54 @@ namespace Cuphead.Items
             {
                 this.source = new Rectangle[]
                 {
-                new Rectangle(20, 175, 196, 235),
-                new Rectangle(190, 175, 196, 235),
-                new Rectangle(358, 175, 196, 235)
+                new Rectangle(21, 175, 196, 235),
+                new Rectangle(234, 175, 196, 235),
+                new Rectangle(446, 175, 196, 235)
                 };
             }
             if (potionNum == 2)
             {
                 this.source = new Rectangle[]
                 {
-                new Rectangle(20, 490, 173, 740),
-                new Rectangle(190, 490, 173, 740),
-                new Rectangle(357, 490, 173, 740)
+                new Rectangle(21, 492, 153, 740),
+                new Rectangle(190, 492, 152, 740),
+                new Rectangle(358, 492, 153, 740)
                 };
             }
             if (potionNum == 3)
             {
                 this.source = new Rectangle[]
                 {
-                new Rectangle(20, 820, 147, 230),
-                new Rectangle(183, 820, 145, 230),
-                new Rectangle(346, 820, 145, 230)
+                new Rectangle(21, 820, 147, 229),
+                new Rectangle(186, 820, 145, 229),
+                new Rectangle(347, 820, 145, 229)
                 };
             }
             if (potionNum == 4)
             {
                 this.source = new Rectangle[]
                 {
-                new Rectangle(202, 1, 153, 235),
-                new Rectangle(389, 1, 153, 235),
-                 new Rectangle(571, 1, 153, 235)
+                new Rectangle(205, 1, 153, 255),
+                new Rectangle(389, 1, 153, 255),
+                 new Rectangle(571, 1, 153, 255)
                 };
             }
             if (potionNum == 5)
             {
                 this.source = new Rectangle[]
                 {
-                new Rectangle(210, 287, 371, 208),
-                new Rectangle(395, 287, 371, 208),
-                new Rectangle(585, 287, 371, 208)
+                new Rectangle(210, 287, 155, 208),
+                new Rectangle(395, 287, 155, 208),
+                new Rectangle(585, 287, 155, 208)
                 };
             }
             if (potionNum == 6)
             {
                 this.source = new Rectangle[]
                 {
-                new Rectangle(205, 540, 315, 240),
-                new Rectangle(370, 540, 315, 240),
-                new Rectangle(536, 540, 315, 250)
+                new Rectangle(205, 540, 140, 240),
+                new Rectangle(370, 540, 140, 240),
+                new Rectangle(536, 540, 140, 250)
                 };
             }
 
@@ -116,15 +117,16 @@ namespace Cuphead.Items
         public void update(GameTime gameTime, int x, int y)
         {
             counter++;
-            if (counter > 30)
+            if (counter > 50)
             {
+                frame = frame + inc;
                 if (frame > 1)
                 {
-                    frame = 0;
+                    inc = -inc;
                 }
-                else
+                else if (frame < 1)
                 {
-                    frame++;
+                    inc = -inc;
                 }
                 counter = 0;
             }
