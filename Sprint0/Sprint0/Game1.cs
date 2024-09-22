@@ -70,7 +70,7 @@ namespace Sprint0
 
             //Animation setup testing:
             Texture2D playerJumpTexture = textureStorage.GetTexture("PlayerJump");
-            Animation playerJumpAnimation = new Animation(playerJumpTexture, 5, 8, 81, 109);
+            Animation playerJumpAnimation = new Animation(playerJumpTexture, 5, 8, 144, 144);
 
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(player, true, new Rectangle(player.X, player.Y, 81, 109), true);
             player.AddComponent(playerSpriteRenderer);

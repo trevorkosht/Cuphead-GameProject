@@ -248,7 +248,7 @@
 /processorParam:TextureFormat=Color
 /build:PlayerAnimationTextures/PlayerDeath.png
 
-#begin PlayerAnimationTextures/PlayerDuck_Idle.png
+#begin PlayerAnimationTextures/PlayerHitAir.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -258,9 +258,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:PlayerAnimationTextures/PlayerDuck_Idle.png
+/build:PlayerAnimationTextures/PlayerHitAir.png
 
-#begin PlayerAnimationTextures/PlayerDuck_Shooting.png
+#begin PlayerAnimationTextures/PlayerHitGround.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -270,9 +270,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:PlayerAnimationTextures/PlayerDuck_Shooting.png
+/build:PlayerAnimationTextures/PlayerHitGround.png
 
-#begin PlayerAnimationTextures/PlayerHit_Air.png
+#begin PlayerAnimationTextures/PlayerIdle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -282,9 +282,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:PlayerAnimationTextures/PlayerHit_Air.png
+/build:PlayerAnimationTextures/PlayerIdle.png
 
-#begin PlayerAnimationTextures/PlayerHit_Ground.png
+#begin PlayerAnimationTextures/PlayerIntro.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -294,7 +294,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:PlayerAnimationTextures/PlayerHit_Ground.png
+/build:PlayerAnimationTextures/PlayerIntro.png
 
 #begin PlayerAnimationTextures/PlayerJump.png
 /importer:TextureImporter
@@ -308,7 +308,7 @@
 /processorParam:TextureFormat=Color
 /build:PlayerAnimationTextures/PlayerJump.png
 
-#begin PlayerAnimationTextures/PlayerRun_Normal.png
+#begin PlayerAnimationTextures/PlayerRun.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -318,5 +318,89 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:PlayerAnimationTextures/PlayerRun_Normal.png
+/build:PlayerAnimationTextures/PlayerRun.png
+
+#begin PlayerAnimationTextures/PlayerRunShootingDiagonalUp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerRunShootingDiagonalUp.png
+
+#begin PlayerAnimationTextures/PlayerRunShootingStraight.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerRunShootingStraight.png
+
+#begin PlayerAnimationTextures/PlayerShootDiagonalDown.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerShootDiagonalDown.png
+
+#begin PlayerAnimationTextures/PlayerShootDiagonalUp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerShootDiagonalUp.png
+
+#begin PlayerAnimationTextures/PlayerShootDown.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerShootDown.png
+
+#begin PlayerAnimationTextures/PlayerShootStraight.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerShootStraight.png
+
+#begin PlayerAnimationTextures/PlayerShootUp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerShootUp.png
 
