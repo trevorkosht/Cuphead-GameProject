@@ -48,8 +48,8 @@ public class Texture2DStorage
 
 
         //item texture
-        //_textures["Item1_3"] = content.Load<Texture2D>(@"Items\PC Computer - Cuphead Dont Deal With the Devil - Shop Items DLC.png");
-        //_textures["Item4-6"] = content.Load<Texture2D>(@"Items\PC Computer - Cuphead Dont Deal With the Devil - Shop Items.png");
+        _textures["Item1_3"] = content.Load<Texture2D>("items/Items1");
+        _textures["Item4-6"] = content.Load<Texture2D>("items/Items2");
 
         // Add more textures as needed
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cuphead.Items;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0.Controllers;
@@ -28,6 +29,7 @@ namespace Sprint0
         //private EnemyController enemyController;
 
         private BlockController blockController;
+        private IAnimation items;
 
 
         public Game1()
@@ -59,7 +61,12 @@ namespace Sprint0
 
             _font = Content.Load<SpriteFont>("Font");
             //textureStorage.LoadContent(Content);
-            
+
+
+            //item animation
+            Texture2D itemPart1 = textureStorage.GetTexture("Item1_3");
+            Texture2D itemPart2 = textureStorage.GetTexture("Item4_6");
+            items = new Items(itemPart1, itemPart2, 1);
 
             //Animation setup testing:
             Texture2D playerJumpTexture = textureStorage.GetTexture("PlayerJump");
@@ -79,6 +86,7 @@ namespace Sprint0
 
             //enemyController.Update(gameTime);
             blockController.Update(gameTime);
+            items.update(gameTime, 1, 1);
 
             base.Update(gameTime);
         }
@@ -92,6 +100,7 @@ namespace Sprint0
 
             player.Draw(_spriteBatch);
             blockController.Draw(_spriteBatch);
+            items.draw(_spriteBatch);
 
             //enemyController.Draw(_spriteBatch);
 
