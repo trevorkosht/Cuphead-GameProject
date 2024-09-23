@@ -1,4 +1,5 @@
-﻿using Cuphead.Items;
+﻿using Cuphead.Controllers;
+using Cuphead.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -29,7 +30,8 @@ namespace Sprint0
         //private EnemyController enemyController;
 
         private BlockController blockController;
-        private IAnimation items;
+        private Cuphead.Items.Items items;
+        private ItemController itemControl;
 
 
         public Game1()
@@ -51,6 +53,7 @@ namespace Sprint0
             GOManager.Instance.Player = player;
             //enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(keyboardController, textureStorage);
+            itemControl = new ItemController();
         }
 
         protected override void LoadContent() //Load sprites, fonts, etc. here
@@ -66,7 +69,7 @@ namespace Sprint0
             //item animation
             Texture2D itemPart1 = textureStorage.GetTexture("Item1_3");
             Texture2D itemPart2 = textureStorage.GetTexture("Item4_6");
-            items = new Items(itemPart1, itemPart2, 6);
+            items = new Items(itemPart1, itemPart2, 2);
 
             //Load player animations
             Animation playerDeathAnimation = new Animation(textureStorage.GetTexture("PlayerDeath"), 5, 16, 144, 144);
@@ -115,7 +118,9 @@ namespace Sprint0
 
             //enemyController.Update(gameTime);
             blockController.Update(gameTime);
-            items.update(gameTime, 400, 460);
+            items.update(gameTime, 580, 330);
+            itemControl.update(items);
+            
 
             base.Update(gameTime);
         }
