@@ -92,6 +92,8 @@ public class PlayerController : IComponent
             if (velocity.Y > 0)
                 velocity.Y = 0;
         }
+        else
+            IsGrounded = false;
 
         // Apply gravity if not grounded
         if (!IsGrounded)
