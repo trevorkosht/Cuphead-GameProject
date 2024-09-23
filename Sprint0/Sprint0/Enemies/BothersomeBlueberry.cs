@@ -11,6 +11,8 @@ public class BothersomeBlueberry : BaseEnemy
     private bool movingRight;          // Whether the blueberry is moving to the right
     private float respawnDelay = 3.0f; // Delay in seconds before respawning
 
+    
+
     public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(startPosition, hitPoints, texture, storage);
@@ -52,6 +54,14 @@ public class BothersomeBlueberry : BaseEnemy
 
     private bool ReachedEdge()
     {
+        // Get the screen width from the graphics device viewport
+        int screenWidth = 1280;
+
+        // Check if the blueberry has reached the left or right edge of the screen
+        if (position.X <= 0 || position.X + spriteTexture.Width >= screenWidth)
+        {
+            return true;
+        }
         return false;
     }
 

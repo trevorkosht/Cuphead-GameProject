@@ -61,26 +61,11 @@ public abstract class BaseEnemy : IEnemy
     {
         if (IsActive && spriteTexture != null)
         {
-            // Draw the sprite
 
             if(currentAnimation.Key != null) {
                 spriteAnimations[currentAnimation.Key].draw(spriteBatch, destRectangle, isFacingRight);
 
             }
-
-            /*
-            spriteBatch.Draw(
-                spriteTexture,
-                position,                   // Position of the sprite
-                sourceRectangle,            // Part of the texture to draw (whole image in this case)
-                Color.White,                // Tint color
-                0f,                         // Rotation (0 = no rotation)
-                origin,                     // Origin point (center)
-                spriteScale,                // Scale of the sprite
-                SpriteEffects.None,         // Effects (flipping, etc.)
-                0f                          // Layer depth
-            );
-            */
 
         }
     }
