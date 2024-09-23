@@ -38,11 +38,11 @@ public class EnemyController
         // Update enemy based on player input
         keyboardController.Update();
 
-        if (keyboardController.OnKeyDown(Keys.U))
+        if (keyboardController.OnKeyDown(Keys.O))
         {
             CycleToPreviousEnemy();
         }
-        else if (keyboardController.OnKeyDown(Keys.I))
+        else if (keyboardController.OnKeyDown(Keys.P))
         {
             CycleToNextEnemy();
         }
