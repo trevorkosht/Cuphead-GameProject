@@ -102,7 +102,7 @@ public class PlayerController : IComponent
 
         if (state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) // Shoot logic
         {
-            GameObject.GetComponent<ProjectileManager>().FireProjectile();
+            GameObject.GetComponent<ProjectileManager>().FireProjectile(GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
         }
 
         for (int i = 1; i <= 5; i++)

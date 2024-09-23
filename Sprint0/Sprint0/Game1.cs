@@ -24,7 +24,7 @@ namespace Sprint0
         private IMouseController mouseController;
 
         //Example of how to make a GameObject
-        GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController() });
+        GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
 
         private EnemyController enemyController;
 
@@ -50,6 +50,7 @@ namespace Sprint0
         {
             base.Initialize();
             GOManager.Instance.Player = player;
+            GOManager.Instance.textureStorage = textureStorage;
             enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(textureStorage);
             itemControl = new ItemController();
