@@ -19,7 +19,7 @@ namespace Sprint0.Controllers
 
         public bool enabled { get; set; } = true;
 
-        public BlockController(KeyboardController keyboardController, Texture2DStorage textureStorage)
+        public BlockController(Texture2DStorage textureStorage)
         {
             blockPosition = new Vector2(625, 600);
             blocks = new List<IBlock>() 
@@ -33,7 +33,7 @@ namespace Sprint0.Controllers
             };
             currentBlock = blocks[0];
 
-            this.keyboardController = keyboardController;
+            this.keyboardController = new KeyboardController();
         }
 
         public void Update(GameTime gameTime)

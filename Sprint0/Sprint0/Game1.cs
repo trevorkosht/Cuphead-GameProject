@@ -51,7 +51,7 @@ namespace Sprint0
             base.Initialize();
             GOManager.Instance.Player = player;
             enemyController = new EnemyController(keyboardController, textureStorage);
-            blockController = new BlockController(keyboardController, textureStorage);
+            blockController = new BlockController(textureStorage);
             itemControl = new ItemController();
         }
 
