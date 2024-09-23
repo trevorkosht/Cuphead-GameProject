@@ -112,6 +112,7 @@ namespace Sprint0
 
             //Sets the player's current animation 
             playerSpriteRenderer.setAnimation("Jump");
+            playerSpriteRenderer.setAnimation("Run");
         }
 
         protected override void Update(GameTime gameTime) //Update stuff here
