@@ -14,7 +14,7 @@ public class ProjectileManager : IComponent {
     }
 
     public void fireProjectile(Rectangle collider, Vector2 velocity, int damageAmount) {
-        //activeProjectiles.Add(new Projectile(collider, velocity, damageAmount));
+        activeProjectiles.Add(new Projectile(collider.X, collider.Y, new SpriteRenderer(this, true, collider, true), collider.X, collider.Y, damageAmount));
     }
 
     public void Update(GameTime gameTime) {

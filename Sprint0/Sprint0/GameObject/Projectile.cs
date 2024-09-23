@@ -2,32 +2,25 @@
 using System.Collections.Generic;
 
 public class Projectile : GameObject {
+    public Rectangle Collider { get; set; }
+    public Vector2 Velocity { get; set; }
+    public int DamageAmount { get; set; }
 
-    public int X { get; set; }
-    public int Y { get; set; }
-    public float rotation { get; set; }
-    public Vector2 scale { get; set; }
-
-    // List of components attached to this GameObjects
-    private List<IComponent> components = new List<IComponent>();
-
-    public Projectile(int xPosition, int yPosition, IComponent component) : base(xPosition, yPosition, component) {
+    public Projectile(int xPosition, int yPosition, IComponent component, int colliderHeight, int colliderWidth, int damageAmount) : base(xPosition, yPosition, component) {
         X = xPosition;
         Y = yPosition;
         rotation = 0;
+        Collider = new Rectangle(X, Y, colliderHeight, colliderWidth);
+        DamageAmount = damageAmount;
     }
 
-    public Rectangle Collider { get; set; }
-    public Vector2 Velocity { get; set;}
-    public int DamageAmount { get; set;}
-    //public Projectile(int xPosition, int yPosition, IComponent component) {
-    //    this.X = xPosition;
-    //    this.Y = yPosition;
-    //    AddComponent(component);
-    //}
+    new public void Update(GameTime gameTime) {
+        float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-    public void Update(GameTime gameTime) {
-        Collider = new Rectangle(Collider.X + (int)Velocity.X, Collider.Y + (int)Velocity.Y, Collider.Height, Collider.Width);
+        X += (int)(Velocity.X * deltaTime);
+        Y += (int)(Velocity.Y * deltaTime);
+
+        Collider = new Rectangle(X, Y, Collider.Height, Collider.Width);
     }
 
 }
