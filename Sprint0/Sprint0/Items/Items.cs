@@ -100,11 +100,11 @@ namespace Cuphead.Items
         {
             if (this.part == 1)
             {
-                spriteBatch.Draw(this.texture1, this.position, source[frame], Microsoft.Xna.Framework.Color.White);
+                spriteBatch.Draw(this.texture1, this.position, source[frame], Color.White, 0f, Vector2.Zero, .33f, SpriteEffects.None, 0f);
             }
             else
             {
-                spriteBatch.Draw(this.texture2, this.position, source[frame], Microsoft.Xna.Framework.Color.White);
+                spriteBatch.Draw(this.texture2, this.position, source[frame], Color.White, 0f, Vector2.Zero, .33f, SpriteEffects.None, 0f);
             }
             
         }
