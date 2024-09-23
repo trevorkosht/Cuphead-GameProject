@@ -1,26 +1,35 @@
 ﻿using Microsoft.Xna.Framework;
-using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
 
-public class Projectile : GameObject {
-    public Rectangle Collider { get; set; }
-    public Vector2 Velocity { get; set; }
-    public int DamageAmount { get; set; }
+public class Projectile
+{
+    private Vector2 position;
+    private Vector2 velocity;
+    private Texture2D texture;
 
-    public Projectile(int xPosition, int yPosition, IComponent component, int colliderHeight, int colliderWidth, int damageAmount) : base(xPosition, yPosition, component) {
-        X = xPosition;
-        Y = yPosition;
-        rotation = 0;
-        Collider = new Rectangle(X, Y, colliderHeight, colliderWidth);
-        DamageAmount = damageAmount;
+    public Projectile(float x, float y, Vector2 velocity)
+    {
+        this.position = new Vector2(x, y);
+        this.velocity = velocity;
+
+        // Load the texture (you should replace this with actual texture loading logic)
+        texture = GOManager.Instance.textureStorage.GetTexture("PurpleSpore");
     }
 
-    new public void Update(GameTime gameTime) {
+    public void Update(GameTime gameTime)
+    {
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-        X += (int)(Velocity.X * deltaTime);
-        Y += (int)(Velocity.Y * deltaTime);
-
-        Collider = new Rectangle(X, Y, Collider.Height, Collider.Width);
+        position += velocity * deltaTime;
     }
 
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(texture, position, Color.White);
+    }
+
+    public bool IsOffScreen()
+    {
+        // Check if the projectile has gone off of the screen (you can adjust this logic as needed)
+        return position.X < 0 || position.X > 800;  // 0 and 800 are arbitrary for now
+    }
 }

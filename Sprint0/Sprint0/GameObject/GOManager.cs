@@ -2,6 +2,7 @@
 {
     private static GOManager instance;
     public GameObject Player { get; set; }
+    public Texture2DStorage textureStorage { get; set; }
 
     private GOManager() { }
 

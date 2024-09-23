@@ -92,6 +92,8 @@ public class PlayerController : IComponent
             if (velocity.Y > 0)
                 velocity.Y = 0;
         }
+        else
+            IsGrounded = false;
 
         // Apply gravity if not grounded
         if (!IsGrounded)
@@ -102,7 +104,7 @@ public class PlayerController : IComponent
 
         if (state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) // Shoot logic
         {
-            GameObject.GetComponent<ProjectileManager>().FireProjectile();
+            GameObject.GetComponent<ProjectileManager>().FireProjectile(GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
         }
 
         for (int i = 1; i <= 5; i++)
