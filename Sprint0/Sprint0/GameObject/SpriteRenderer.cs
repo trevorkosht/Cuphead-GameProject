@@ -52,7 +52,18 @@ public class SpriteRenderer : IComponent {
     }
 
     public void setAnimation(string animationName) {
+        if (animationName == currentAnimation.Key)
+            return;
         if (spriteAnimations.ContainsKey(animationName)) {
+            spriteAnimations[animationName].resetAnimation();
+            currentAnimation = new KeyValuePair<string, Animation>(animationName, spriteAnimations[animationName]);
+        }
+    }
+
+    public void immediateSetAnimation(string animationName)
+    {
+        if (spriteAnimations.ContainsKey(animationName))
+        {
             spriteAnimations[animationName].resetAnimation();
             currentAnimation = new KeyValuePair<string, Animation>(animationName, spriteAnimations[animationName]);
         }
