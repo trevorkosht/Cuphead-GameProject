@@ -47,6 +47,10 @@ public class SpriteRenderer : IComponent {
         destRectangle = newDestRectangle;
     }
 
+    public string getAnimationName() {
+        return this.currentAnimation.Key;
+    }
+
     public void setAnimation(string animationName) {
         if (spriteAnimations.ContainsKey(animationName)) {
             spriteAnimations[animationName].resetAnimation();
