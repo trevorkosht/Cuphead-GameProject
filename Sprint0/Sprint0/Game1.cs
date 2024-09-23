@@ -23,6 +23,8 @@ namespace Sprint0
         private KeyboardController keyboardController;
         private IMouseController mouseController;
 
+        private List<GameObject> gameObjects = new List<GameObject>();
+
         //Example of how to make a GameObject
         GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController() });
 
@@ -49,10 +51,14 @@ namespace Sprint0
         protected override void Initialize()
         {
             base.Initialize();
+
             GOManager.Instance.Player = player;
             enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(textureStorage);
             itemControl = new ItemController();
+
+            gameObjects.Add(player);
+
         }
 
         protected override void LoadContent() //Load sprites, fonts, etc. here
@@ -71,6 +77,7 @@ namespace Sprint0
 
             //Load player animations
             Animation playerDeathAnimation = new Animation(textureStorage.GetTexture("PlayerDeath"), 5, 16, 144, 144);
+            Animation playerDuckAnimation = new Animation(textureStorage.GetTexture("PlayerDuck"), 5, 5, 144, 144);
             Animation playerHitAirAnimation = new Animation(textureStorage.GetTexture("PlayerHitAir"), 5, 6, 144, 144);
             Animation playerHitGroundAnimation = new Animation(textureStorage.GetTexture("PlayerHitGround"), 5, 6, 144, 144);
             Animation playerIdleAnimation = new Animation(textureStorage.GetTexture("PlayerIdle"), 5, 5, 144, 144);
@@ -117,7 +124,16 @@ namespace Sprint0
 
         protected override void Update(GameTime gameTime) //Update stuff here
         {
-            player.Update(gameTime);
+            if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
+                Exit();
+            }else if (Keyboard.GetState().IsKeyDown(Keys.R)) {
+                Exit();
+            }
+
+            foreach(var gameObject in gameObjects) {
+                gameObject.Update(gameTime);
+            }
+
 
             enemyController.Update(gameTime);
             blockController.Update(gameTime);
@@ -135,7 +151,10 @@ namespace Sprint0
 
             _spriteBatch.Begin(); //Draw stuff here
 
-            player.Draw(_spriteBatch);
+            foreach (var gameObject in gameObjects) {
+                gameObject.Draw(_spriteBatch);
+            }
+
             blockController.Draw(_spriteBatch);
             items.draw(_spriteBatch);
 
