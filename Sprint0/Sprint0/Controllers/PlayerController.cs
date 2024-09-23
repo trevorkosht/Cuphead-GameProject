@@ -11,9 +11,16 @@ public class PlayerController : IComponent
 
     //private Rigidbody rigidbody;
 
-    public float Speed { get; set; } = 150f;
+    public float Speed { get; set; } = 300f;
     public float JumpForce { get; set; } = -350f;
     public bool IsGrounded { get; set; } = false;
+    public Vector2 velocity;
+    public float GroundLevel { get; set; } = 300f; // Arbitrary floor height
+    public float Gravity { get; set; } = 500f;     // Constant downward force
+    float airTime = 0f;
+
+
+
 
     public PlayerController() { }
 
@@ -64,14 +71,30 @@ public class PlayerController : IComponent
             if ((state.IsKeyDown(Keys.S) || state.IsKeyDown(Keys.Down)) && IsGrounded) // Duck
             {
                 input.X = 0;
-                input.Y = -1;
+                //Ducking logic
             }
             else if ((state.IsKeyDown(Keys.W) || state.IsKeyDown(Keys.Up)) && IsGrounded) // Jump
             {
-                input.Y = 1;
+                velocity.Y = JumpForce;
+                IsGrounded = false;
             }
 
-            if(state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) // Shoot logic
+            if (GameObject.Y >= GroundLevel)
+            {
+                airTime = 1;
+                IsGrounded = true;
+                if(velocity.Y > 0)
+                    velocity.Y = 0;
+            }
+
+            // Apply gravity if not grounded
+            if (!IsGrounded)
+            {
+                airTime += deltaTime;
+                velocity.Y += Gravity * deltaTime * airTime;  // Gravity pulls down
+            }
+
+            if (state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) // Shoot logic
             {
                 GameObject.GetComponent<ProjectileManager>().FireProjectile();
             }
@@ -86,7 +109,7 @@ public class PlayerController : IComponent
             }
 
             GameObject.X += (int)(input.X * Speed * deltaTime);
-            GameObject.Y += (int)(input.Y * Speed * deltaTime);
+            GameObject.Y += (int)(velocity.Y * deltaTime);
         }
     }
 
