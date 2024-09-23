@@ -62,14 +62,15 @@ public class PlayerController : IComponent
 
             if(state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) // Shoot logic
             {
-
+                GameObject.GetComponent<ProjectileManager>().FireProjectile();
             }
 
             for (int i = 1; i <= 5; i++)
             {
-                if (state.IsKeyDown((Keys)Enum.Parse(typeof(Keys), $"D{i}")))
+                if (state.IsKeyDown((Keys)Enum.Parse(typeof(Keys), $"D{i}"))) // Handle the key press for D1, D2, D3, etc. (switch projectile based off of i)
                 {
-                    // Handle the key press for D1, D2, D3, etc. (switch projectile based off of i)
+                    GameObject.GetComponent<ProjectileManager>().projectileType = i;
+                    break;
                 }
             }
 
