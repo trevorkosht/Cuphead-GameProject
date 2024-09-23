@@ -12,11 +12,11 @@ public class PlayerController : IComponent
     //private Rigidbody rigidbody;
 
     public float Speed { get; set; } = 300f;
-    public float JumpForce { get; set; } = -350f;
+    public float JumpForce { get; set; } = -850f;
     public bool IsGrounded { get; set; } = false;
     public Vector2 velocity;
-    public float GroundLevel { get; set; } = 300f; // Arbitrary floor height
-    public float Gravity { get; set; } = 500f;     // Constant downward force
+    public float GroundLevel { get; set; } = 500f; // Arbitrary floor height
+    public float Gravity { get; set; } = 1200f;     // Constant downward force
     float airTime = 0f;
 
 
