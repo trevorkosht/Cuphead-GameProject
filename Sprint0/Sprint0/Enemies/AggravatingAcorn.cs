@@ -14,6 +14,7 @@ public class AggravatingAcorn : BaseEnemy
     public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(startPosition, hitPoints, texture, storage);
+        base.setAnimation("aggravatingAcornAnimation");
         speed = 200f;  // Speed of horizontal movement
         isFalling = false;
         dropPosition = Vector2.Zero; // Will set when ready to fall
@@ -55,7 +56,7 @@ public class AggravatingAcorn : BaseEnemy
     private bool PlayerIsUnderneath()
     {
         // Logic to detect if the player is underneath the acorn
-        return true;
+        return false;
     }
 
     public override void TakeDamage(int damage)
@@ -72,8 +73,9 @@ public class AggravatingAcorn : BaseEnemy
     {
         if (IsActive)
         {
+            base.Draw(spriteBatch);
             // Draw acorn sprite here
-            spriteBatch.Draw(spriteTexture, position, Color.White);
+            //spriteBatch.Draw(spriteTexture, position, Color.White);
         }
     }
 }

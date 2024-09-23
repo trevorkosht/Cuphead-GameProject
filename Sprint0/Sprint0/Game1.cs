@@ -85,6 +85,10 @@ namespace Sprint0
             Animation playerShootStraightAnimation = new Animation(textureStorage.GetTexture("PlayerShootStraight"), 5, 3, 144, 144);
             Animation playerShootUpAnimation = new Animation(textureStorage.GetTexture("PlayerShootUp"), 5, 3, 144, 144);
 
+            Animation seedAnimation = new Animation(textureStorage.GetTexture("Seed"), 5, 8, 144, 144);
+            Animation purpleSporeAnimation = new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 16, 144, 144);
+            Animation pinkSporeAnimation = new Animation(textureStorage.GetTexture("PinkSpore"), 5, 8, 144, 144);
+
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(player, true, new Rectangle(player.X, player.Y, 81, 109), true);
             player.AddComponent(playerSpriteRenderer);
 

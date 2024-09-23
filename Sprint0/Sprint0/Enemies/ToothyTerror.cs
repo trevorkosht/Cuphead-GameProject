@@ -12,6 +12,7 @@ public class ToothyTerror : BaseEnemy
     public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(startPosition, hitPoints, texture, storage);
+        base.setAnimation("toothyTerrorAnimation");
         jumpHeight = 150f; // The height it jumps up
         gravity = 300f;    // Gravity to pull it back down
         isJumping = true;  // Start with the ToothyTerror jumping out of the pit
@@ -65,7 +66,7 @@ public class ToothyTerror : BaseEnemy
         if (IsActive)
         {
             // Draw the Toothy Terror sprite
-            spriteBatch.Draw(spriteTexture, position, Color.White);
+            base.Draw(spriteBatch);
         }
     }
 }

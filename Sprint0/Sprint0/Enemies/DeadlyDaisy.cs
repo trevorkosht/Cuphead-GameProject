@@ -13,6 +13,7 @@ public class DeadlyDaisy : BaseEnemy
     public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(startPosition, hitPoints, texture, storage);
+        base.setAnimation("deadlyDaisyAnimation");
         speed = 100f;  // Speed of movement towards the player
         jumpHeight = 200f;  // How high the daisy can jump
         isJumping = false;
@@ -82,7 +83,7 @@ public class DeadlyDaisy : BaseEnemy
         if (IsActive)
         {
             // Draw Deadly Daisy sprite here
-            spriteBatch.Draw(spriteTexture, position, Color.White);
+            base.Draw(spriteBatch);
         }
     }
 }

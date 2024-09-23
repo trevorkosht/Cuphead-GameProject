@@ -19,8 +19,8 @@ public abstract class BaseEnemy : IEnemy
     public Rectangle destRectangle { get; set; }
     public bool isFacingRight { get; set; }
 
-    private KeyValuePair<string, Animation> currentAnimation = new KeyValuePair<string, Animation>();
-    private Dictionary<string, Animation> spriteAnimations = new Dictionary<string, Animation>();
+    protected KeyValuePair<string, Animation> currentAnimation = new KeyValuePair<string, Animation>();
+    protected Dictionary<string, Animation> spriteAnimations = new Dictionary<string, Animation>();
 
 
     public abstract void Move(GameTime gameTime);
@@ -36,12 +36,8 @@ public abstract class BaseEnemy : IEnemy
         textureStorage = storage;
         player = GOManager.Instance.Player;
 
-        // Set the sourceRectangle to the entire texture if no animation (single frame)
-        if (spriteTexture != null)
-        {
-            sourceRectangle = new Rectangle(0, 0, spriteTexture.Width, spriteTexture.Height);
-            origin = new Vector2(spriteTexture.Width / 2, spriteTexture.Height / 2);
-        }
+        destRectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+
     }
 
     public virtual void Update(GameTime gameTime)

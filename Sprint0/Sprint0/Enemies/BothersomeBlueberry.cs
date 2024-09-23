@@ -14,6 +14,7 @@ public class BothersomeBlueberry : BaseEnemy
     public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(startPosition, hitPoints, texture, storage);
+        base.setAnimation("bothersomeBlueberryAnimation");
         respawnPosition = startPosition;
         speed = 150f; // Speed of horizontal movement
         isKnockedOut = false;
@@ -99,7 +100,8 @@ public class BothersomeBlueberry : BaseEnemy
         if (IsActive)
         {
             // Draw the blueberry sprite if active (not knocked out)
-            spriteBatch.Draw(spriteTexture, position, Color.White);
+            //spriteBatch.Draw(spriteTexture, position, Color.White);
+            base.Draw(spriteBatch);
         }
     }
 }

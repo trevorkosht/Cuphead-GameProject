@@ -14,6 +14,7 @@ public class MurderousMushroom : BaseEnemy
     public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(startPosition, hitPoints, texture, storage);
+        base.setAnimation("murderousMushroomAnimation");
         isHidden = false;
         shootCooldown = 2.0;
         spores = new List<SporeProjectile>();
@@ -95,8 +96,9 @@ public class MurderousMushroom : BaseEnemy
     {
         if (IsActive)
         {
+            base.Draw(spriteBatch);
             // Draw the mushroom sprite
-            spriteBatch.Draw(spriteTexture, position, Color.White);
+            //spriteBatch.Draw(spriteTexture, position, Color.White);
 
             // Draw each active spore
             foreach (var spore in spores)

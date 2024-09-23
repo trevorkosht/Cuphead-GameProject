@@ -15,25 +15,17 @@ public class AcornMaker : BaseEnemy
 
     public override void Shoot(GameTime gameTime)
     {
-        // Reduce the cooldown based on elapsed time
-        spawnCooldown -= gameTime.ElapsedGameTime.TotalSeconds;
-        if (spawnCooldown <= 0)
-        {
-            // Spawn new acorn when cooldown is 0
-            var acorn = new AggravatingAcorn();
-            acorn.Initialize(new Vector2(position.X, position.Y), 1, spriteTexture, storageObject); // Spawn at the AcornMaker's position
-            acorns.Add(acorn);
-            spawnCooldown = 1.5; // Reset spawn cooldown to 1.5 seconds
-        }
+        // TO-DO Add behavior
     }
 
     public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
         // Initialize the base enemy with the starting position, hitpoints, and texture
         base.Initialize(startPosition, hitPoints, texture, storage);
+        base.setAnimation("acornMakerAnimation");
         storageObject = storage;
         acorns = new List<AggravatingAcorn>();  // Initialize the list of acorns
-        spawnCooldown = 1.5;                    // Set initial spawn cooldown to 1.5 seconds
+        spawnCooldown = 1.5;      
     }
 
     public override void Update(GameTime gameTime)
@@ -52,11 +44,6 @@ public class AcornMaker : BaseEnemy
     {
         // Draw the Acorn Maker sprite
         base.Draw(spriteBatch);
-
-        // Draw each acorn that has been spawned
-        foreach (var acorn in acorns)
-        {
-            acorn.Draw(spriteBatch);
-        }
+        // TO-DO make sure enemy acorns get spawned In
     }
 }
