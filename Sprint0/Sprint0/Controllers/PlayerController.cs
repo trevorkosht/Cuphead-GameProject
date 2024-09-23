@@ -13,7 +13,7 @@ public class PlayerController : IComponent
 
     public float Speed { get; set; } = 150f;
     public float JumpForce { get; set; } = -350f;
-    //public bool IsGrounded { get; set; } = false;
+    public bool IsGrounded { get; set; } = false;
 
     public PlayerController() { }
 
@@ -59,6 +59,16 @@ public class PlayerController : IComponent
                     input.X = 1;
                     GameObject.GetComponent<SpriteRenderer>().isFacingRight = true;
                 }
+            }
+
+            if ((state.IsKeyDown(Keys.S) || state.IsKeyDown(Keys.Down)) && IsGrounded) // Duck
+            {
+                input.X = 0;
+                input.Y = -1;
+            }
+            else if ((state.IsKeyDown(Keys.W) || state.IsKeyDown(Keys.Up)) && IsGrounded) // Jump
+            {
+                input.Y = 1;
             }
 
             if(state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) // Shoot logic
