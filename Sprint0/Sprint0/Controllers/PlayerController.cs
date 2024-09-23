@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using static IController;
 
 public class PlayerController : IComponent
@@ -56,6 +57,19 @@ public class PlayerController : IComponent
                 else {
                     input.X = 1;
                     GameObject.GetComponent<SpriteRenderer>().isFacingRight = true;
+                }
+            }
+
+            if(state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) // Shoot logic
+            {
+
+            }
+
+            for (int i = 1; i <= 5; i++)
+            {
+                if (state.IsKeyDown((Keys)Enum.Parse(typeof(Keys), $"D{i}")))
+                {
+                    // Handle the key press for D1, D2, D3, etc. (switch projectile based off of i)
                 }
             }
 
