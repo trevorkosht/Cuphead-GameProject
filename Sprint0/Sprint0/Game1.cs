@@ -101,6 +101,7 @@ namespace Sprint0
             player.AddComponent(playerSpriteRenderer);
 
             playerSpriteRenderer.addAnimation("Death", playerDeathAnimation);
+            playerSpriteRenderer.addAnimation("Duck", playerDuckAnimation);
             playerSpriteRenderer.addAnimation("HitAir", playerHitAirAnimation);
             playerSpriteRenderer.addAnimation("HitGround", playerHitGroundAnimation);
             playerSpriteRenderer.addAnimation("Idle", playerIdleAnimation);
