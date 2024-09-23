@@ -24,12 +24,12 @@ namespace Cuphead.Items
         {
             this.texture1 = texture1;
             this.texture2 = texture2;
-            position = new Vector2(400, 460);
-            sourcecorrection(potionNum);
+            position = new Vector2(400, 360);
+            Sourcecorrection(potionNum);
 
         }
 
-        private void sourcecorrection(int potionNum)
+        public void Sourcecorrection(int potionNum)
         {
             if (potionNum < 4)
             {
@@ -52,9 +52,9 @@ namespace Cuphead.Items
             {
                 this.source = new Rectangle[]
                 {
-                new Rectangle(21, 492, 153, 740),
-                new Rectangle(190, 492, 152, 740),
-                new Rectangle(358, 492, 153, 740)
+                new Rectangle(21, 492, 153, 235),
+                new Rectangle(190, 492, 152, 235),
+                new Rectangle(358, 492, 153, 235)
                 };
             }
             if (potionNum == 3)
@@ -100,11 +100,11 @@ namespace Cuphead.Items
         {
             if (this.part == 1)
             {
-                spriteBatch.Draw(this.texture1, this.position, source[frame], Microsoft.Xna.Framework.Color.White);
+                spriteBatch.Draw(this.texture1, this.position, source[frame], Color.White, 0f, Vector2.Zero, .33f, SpriteEffects.None, 0f);
             }
             else
             {
-                spriteBatch.Draw(this.texture2, this.position, source[frame], Microsoft.Xna.Framework.Color.White);
+                spriteBatch.Draw(this.texture2, this.position, source[frame], Color.White, 0f, Vector2.Zero, .33f, SpriteEffects.None, 0f);
             }
             
         }
