@@ -96,7 +96,7 @@ public abstract class BaseEnemy : IEnemy
     }
 
 
-    //TEMPORARY ANIMATION HANDLING CODE - REMOVE WHILE REFACTORINGN
+    //TEMPORARY ANIMATION HANDLING CODE - REMOVE WHILE REFACTORING
     public void addAnimation(string animationName, Animation animation) {
         spriteAnimations.Add(animationName, animation);
     }
