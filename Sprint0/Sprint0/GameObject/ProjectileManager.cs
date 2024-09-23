@@ -8,13 +8,15 @@ public class ProjectileManager : IComponent {
 
     public List<Projectile> activeProjectiles = new List<Projectile>();
 
+    public int projectileType = 1;
+
     public ProjectileManager(GameObject gameObject, bool enabled) {
         GameObject = gameObject;
         this.enabled = enabled;
     }
 
-    public void fireProjectile(Rectangle collider, Vector2 velocity, int damageAmount) {
-        activeProjectiles.Add(new Projectile(collider.X, collider.Y, new SpriteRenderer(this, true, collider, true), collider.X, collider.Y, damageAmount));
+    public void FireProjectile(/*Rectangle collider, Vector2 velocity, int damageAmount*/) {
+        //activeProjectiles.Add(new Projectile(collider.X, collider.Y, new SpriteRenderer(GameObject, true, collider, true), collider.X, collider.Y, damageAmount));
     }
 
     public void Update(GameTime gameTime) {

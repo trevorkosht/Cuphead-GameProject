@@ -44,6 +44,7 @@ public class PlayerController : IComponent
             KeyboardState state = Keyboard.GetState();
             input = new Vector2(0, 0);
 
+            // Movement
             if (state.IsKeyDown(Keys.A) || state.IsKeyDown(Keys.Left)) 
             {
                 input.X = -1;

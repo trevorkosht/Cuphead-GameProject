@@ -20,7 +20,7 @@ namespace Cuphead.Controllers
             potionNum = 2;
         }
 
-        public void update(Items.Items items)
+        public void Update(Items.Items items)
         {
             keyboardController.Update();
             if (keyboardController.OnKeyDown(Keys.U))

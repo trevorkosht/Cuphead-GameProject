@@ -121,7 +121,7 @@ namespace Sprint0
             enemyController.Update(gameTime);
             blockController.Update(gameTime);
             items.update(gameTime, 580, 330);
-            itemControl.update(items);
+            itemControl.Update(items);
             
 
             base.Update(gameTime);
