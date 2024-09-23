@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 public abstract class BaseEnemy : IEnemy
 {
@@ -13,6 +14,14 @@ public abstract class BaseEnemy : IEnemy
     protected Vector2 origin;             // Origin point for the sprite
     protected Texture2DStorage textureStorage;
     protected GameObject player;
+
+    //TEMPORARY ANIMATION VARIABLES - REMOVE WHILE REFACTORING
+    public Rectangle destRectangle { get; set; }
+    public bool isFacingRight { get; set; }
+
+    private KeyValuePair<string, Animation> currentAnimation = new KeyValuePair<string, Animation>();
+    private Dictionary<string, Animation> spriteAnimations = new Dictionary<string, Animation>();
+
 
     public abstract void Move(GameTime gameTime);
     public abstract void Shoot(GameTime gameTime);
@@ -41,6 +50,14 @@ public abstract class BaseEnemy : IEnemy
         {
             Move(gameTime);
             Shoot(gameTime);
+
+
+            //TEMPORARY
+            destRectangle = new Rectangle((int)position.X, (int)position.Y, destRectangle.Width, destRectangle.Height);
+            if(currentAnimation.Key != null) {
+                spriteAnimations[currentAnimation.Key].updateAnimation();
+            }
+
         }
     }
 
@@ -49,6 +66,10 @@ public abstract class BaseEnemy : IEnemy
         if (IsActive && spriteTexture != null)
         {
             // Draw the sprite
+
+            spriteAnimations[currentAnimation.Key].draw(spriteBatch, destRectangle, isFacingRight);
+           
+            /*
             spriteBatch.Draw(
                 spriteTexture,
                 position,                   // Position of the sprite
@@ -60,6 +81,8 @@ public abstract class BaseEnemy : IEnemy
                 SpriteEffects.None,         // Effects (flipping, etc.)
                 0f                          // Layer depth
             );
+            */
+
         }
     }
 
@@ -69,6 +92,43 @@ public abstract class BaseEnemy : IEnemy
         if (HitPoints <= 0)
         {
             IsActive = false;
+        }
+    }
+
+
+    //TEMPORARY ANIMATION HANDLING CODE - REMOVE WHILE REFACTORINGN
+    public void addAnimation(string animationName, Animation animation) {
+        spriteAnimations.Add(animationName, animation);
+    }
+
+    public bool removeAnimation(string animationName) {
+        return spriteAnimations.Remove(animationName);
+    }
+
+    public void loadAllAnimations() {
+        foreach (var animationKVPair in spriteAnimations) {
+            if (animationKVPair.Value.Frames.Count == 0) {
+                animationKVPair.Value.loadFrames();
+            }
+        }
+    }
+
+    public void changeDirection() {
+        isFacingRight = !isFacingRight;
+    }
+
+    public void moveAnimation(int deltaX, int deltaY) {
+        destRectangle = new Rectangle(destRectangle.Location.X + deltaX, destRectangle.Location.Y + deltaY, destRectangle.Width, destRectangle.Height);
+    }
+
+    public void moveAnimation(Rectangle newDestRectangle) {
+        destRectangle = newDestRectangle;
+    }
+
+    public void setAnimation(string animationName) {
+        if (spriteAnimations.ContainsKey(animationName)) {
+            spriteAnimations[animationName].resetAnimation();
+            currentAnimation = new KeyValuePair<string, Animation>(animationName, spriteAnimations[animationName]);
         }
     }
 }

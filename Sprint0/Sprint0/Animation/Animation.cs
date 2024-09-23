@@ -38,27 +38,23 @@ public class Animation {
     public void updateAnimation() {
         if (update < updatesPerFrame) {
             update++;
-        }
-        else {
+        } else {
             update = 0;
             updateFrame();
         }
-
     }
     private void updateFrame() {
-        if (currentFrame != frameCount - 1) {
+        if (currentFrame < frameCount - 1) {
             currentFrame++;
-        }
-        else {
+        } else {
             currentFrame = 0;
         }
     }
 
     public void draw(SpriteBatch spriteBatch, Rectangle destRectangle, bool isFacingRight) {
-
         if (isFacingRight) { 
             spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White);
-        }else{
+        } else {
             spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, (float)0.0, new Vector2(0,0), SpriteEffects.FlipHorizontally, 0);
         }
     }
@@ -66,5 +62,4 @@ public class Animation {
     public void resetAnimation() {
         currentFrame = 0;
     }
-
 }
