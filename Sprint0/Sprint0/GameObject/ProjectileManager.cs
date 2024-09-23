@@ -13,6 +13,10 @@ public class ProjectileManager : IComponent {
         this.enabled = enabled;
     }
 
+    public void fireProjectile(Rectangle collider, Vector2 velocity, int damageAmount) {
+        //activeProjectiles.Add(new Projectile(collider, velocity, damageAmount));
+    }
+
     public void Update(GameTime gameTime) {
         foreach (var projectile in activeProjectiles) {
             projectile.Update(gameTime);

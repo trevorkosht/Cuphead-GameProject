@@ -36,7 +36,7 @@ public abstract class BaseEnemy : IEnemy
         textureStorage = storage;
         player = GOManager.Instance.Player;
 
-        destRectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+        destRectangle = new Rectangle((int)position.X, (int)position.Y, 144, 144);
 
     }
 
@@ -44,7 +44,7 @@ public abstract class BaseEnemy : IEnemy
     {
         if (IsActive)
         {
-            Move(gameTime);
+            //Move(gameTime);
             Shoot(gameTime);
 
 
@@ -63,8 +63,11 @@ public abstract class BaseEnemy : IEnemy
         {
             // Draw the sprite
 
-            spriteAnimations[currentAnimation.Key].draw(spriteBatch, destRectangle, isFacingRight);
-           
+            if(currentAnimation.Key != null) {
+                spriteAnimations[currentAnimation.Key].draw(spriteBatch, destRectangle, isFacingRight);
+
+            }
+
             /*
             spriteBatch.Draw(
                 spriteTexture,

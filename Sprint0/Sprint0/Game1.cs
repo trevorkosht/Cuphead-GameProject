@@ -89,7 +89,7 @@ namespace Sprint0
             Animation purpleSporeAnimation = new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 16, 144, 144);
             Animation pinkSporeAnimation = new Animation(textureStorage.GetTexture("PinkSpore"), 5, 8, 144, 144);
 
-            SpriteRenderer playerSpriteRenderer = new SpriteRenderer(player, true, new Rectangle(player.X, player.Y, 81, 109), true);
+            SpriteRenderer playerSpriteRenderer = new SpriteRenderer(player, true, new Rectangle(player.X, player.Y, 144, 144), true);
             player.AddComponent(playerSpriteRenderer);
 
             playerSpriteRenderer.addAnimation("Death", playerDeathAnimation);

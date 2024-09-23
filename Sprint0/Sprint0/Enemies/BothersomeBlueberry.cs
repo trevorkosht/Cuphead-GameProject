@@ -72,6 +72,8 @@ public class BothersomeBlueberry : BaseEnemy
 
     public override void Update(GameTime gameTime)
     {
+        base.Update(gameTime);
+
         if (isKnockedOut)
         {
             // Handle respawn logic
