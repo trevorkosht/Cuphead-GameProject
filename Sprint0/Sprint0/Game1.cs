@@ -25,8 +25,7 @@ namespace Sprint0
         //Example of how to make a GameObject
         GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController() });
 
-        //controls the list of enemies and the cycle between them
-        //private EnemyController enemyController;
+        private EnemyController enemyController;
 
         private BlockController blockController;
         private IAnimation items;
@@ -49,7 +48,7 @@ namespace Sprint0
         {
             base.Initialize();
             GOManager.Instance.Player = player;
-            //enemyController = new EnemyController(keyboardController, textureStorage);
+            enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(keyboardController, textureStorage);
         }
 
@@ -60,7 +59,6 @@ namespace Sprint0
             textureStorage.LoadContent(Content);
 
             _font = Content.Load<SpriteFont>("Font");
-            //textureStorage.LoadContent(Content);
 
 
             //item animation
@@ -113,7 +111,7 @@ namespace Sprint0
         {
             player.Update(gameTime);
 
-            //enemyController.Update(gameTime);
+            enemyController.Update(gameTime);
             blockController.Update(gameTime);
             items.update(gameTime, 400, 460);
 
@@ -131,7 +129,7 @@ namespace Sprint0
             blockController.Draw(_spriteBatch);
             items.draw(_spriteBatch);
 
-            //enemyController.Draw(_spriteBatch);
+            enemyController.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

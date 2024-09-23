@@ -9,7 +9,7 @@ public class Texture2DStorage
     // Initialize the texture storage with the ContentManager
     public void LoadContent(ContentManager content)
     {
-        //Example: Load your enemy textures
+        //Enemy textures
         _textures["DeadlyDaisy"] = content.Load<Texture2D>(@"EnemyTextures\DeadlyDaisySprite");
         _textures["MurderousMushroom"] = content.Load<Texture2D>(@"EnemyTextures\MurderousMushroomSprite");
         _textures["TerribleTulip"] = content.Load<Texture2D>(@"EnemyTextures\TerribleTulipSprite");
@@ -17,7 +17,7 @@ public class Texture2DStorage
         _textures["BothersomeBlueberry"] = content.Load<Texture2D>(@"EnemyTextures\BothersomeBlueberrySprite");
         _textures["AggravatingAcorn"] = content.Load<Texture2D>(@"EnemyTextures\AggravatingAcornSprite");
         _textures["AcornMaker"] = content.Load<Texture2D>(@"EnemyTextures\AcornMakerSprite");
-        //_textures["Seed"] = content.Load<Texture2D>(@"EnemyTextures\lobber_seed_0001");
+        _textures["Seed"] = content.Load<Texture2D>(@"EnemyTextures\LoberSeed");
         _textures["PurpleSpore"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_poison_cloud_0001");
         _textures["PinkSpore"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_poison_cloud_pink_0003");
 

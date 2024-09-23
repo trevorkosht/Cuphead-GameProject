@@ -10,7 +10,6 @@ public class BothersomeBlueberry : BaseEnemy
     private float speed;               // Speed of movement
     private bool movingRight;          // Whether the blueberry is moving to the right
     private float respawnDelay = 3.0f; // Delay in seconds before respawning
-    GraphicsDevice _graphics = null;
 
     public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
     {
@@ -52,12 +51,6 @@ public class BothersomeBlueberry : BaseEnemy
 
     private bool ReachedEdge()
     {
-        // Simple edge detection logic 
-        // For now, assume if blueberry goes off-screen or hits a certain X position, it changes direction
-        if (position.X <= 0 || position.X + spriteTexture.Width >= _graphics.Viewport.Width)
-        {
-            return true;
-        }
         return false;
     }
 

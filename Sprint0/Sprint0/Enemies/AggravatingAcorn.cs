@@ -7,7 +7,7 @@ public class AggravatingAcorn : BaseEnemy
     private Vector2 dropPosition;
     private bool isFalling;
     private float speed;
-    GraphicsDevice _graphics = null;
+    GraphicsDevice _graphics;
 
 
 
@@ -45,11 +45,6 @@ public class AggravatingAcorn : BaseEnemy
             }
         }
 
-        // Handle screen wrapping when moving horizontally
-        if (position.X > _graphics.Viewport.Width)  // Use Screen Width
-        {
-            position.X = -spriteTexture.Width; // Use the width of the sprite texture
-        }
     }
 
     public override void Shoot(GameTime gameTime)

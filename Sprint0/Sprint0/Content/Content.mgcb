@@ -121,6 +121,18 @@
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/DeadlyDaisySprite.png
 
+#begin EnemyTextures/LoberSeed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/LoberSeed.png
+
 #begin EnemyTextures/MurderousMushroomSprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
