@@ -61,7 +61,7 @@ namespace Cuphead.Items
             {
                 this.source = new Rectangle[]
                 {
-                new Rectangle(21, 820, 147, 229),
+                new Rectangle(21, 820, 145, 228),
                 new Rectangle(186, 820, 145, 229),
                 new Rectangle(347, 820, 145, 229)
                 };
