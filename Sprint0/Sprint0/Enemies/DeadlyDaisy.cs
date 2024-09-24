@@ -14,7 +14,7 @@ public class DeadlyDaisy : BaseEnemy
     {
         base.Initialize(startPosition, hitPoints, texture, storage);
         base.setAnimation("deadlyDaisyAnimation");
-        speed = 100f;  // Speed of movement towards the player
+        speed = 300f;  // Speed of movement towards the player
         jumpHeight = 200f;  // How high the daisy can jump
         isJumping = false;
         velocity = Vector2.Zero;  // Start with no velocity
@@ -28,8 +28,19 @@ public class DeadlyDaisy : BaseEnemy
         Vector2 direction = playerPosition - position;
         direction.Normalize();
 
+        // Face right if the player is to the right, otherwise face left
+        if (playerPosition.X > position.X)
+        {
+            base.isFacingRight = false; // Face right
+        }
+        else
+        {
+            base.isFacingRight = true; // Face left
+        }
+
         // Move horizontally towards the player
         position.X += direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        position.Y += direction.Y * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         // If the Daisy is near a ledge, simulate a jump
         if (NeedsToJump(playerPosition))
