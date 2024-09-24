@@ -126,16 +126,9 @@ namespace Sprint0
 
         protected override void Update(GameTime gameTime) //Update stuff here
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
-                Exit();
-            }else if (Keyboard.GetState().IsKeyDown(Keys.R)) {
-                Exit();
-            }
-
             foreach(var gameObject in gameObjects) {
                 gameObject.Update(gameTime);
             }
-
 
             enemyController.Update(gameTime);
             blockController.Update(gameTime);
@@ -153,6 +146,7 @@ namespace Sprint0
 
         private void ResetGame()
         {
+            gameObjects.Clear();
             player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
             Initialize();
         }
