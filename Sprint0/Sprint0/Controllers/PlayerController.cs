@@ -11,14 +11,16 @@ public class PlayerController : IComponent
 
     //private Rigidbody rigidbody;
 
-    public float Speed { get; set; } = 300f;
+    public float Speed { get; set; } = 600f;
     public float JumpForce { get; set; } = -1150f;
     public bool IsGrounded { get; set; } = false;
     public Vector2 velocity;
     public float GroundLevel { get; set; } = 500f; // Arbitrary floor height
     public float Gravity { get; set; } = 1200f;     // Constant downward force
-    float airTime = 0f, shootTime = 0;
+    float airTime = 0f, shootTime = 0, hitTime = 0;
     public float timeTillNextBullet { get; set; } = .2f;
+    public float timeTillNextHit { get; set; } = .4f;
+
 
     bool IsDucking, IsRunning;
 
@@ -39,6 +41,7 @@ public class PlayerController : IComponent
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         shootTime -= deltaTime;
+        hitTime -= deltaTime;
         Vector2 input = new Vector2(0, 0);
 
         KeyboardState state = Keyboard.GetState();
@@ -62,15 +65,18 @@ public class PlayerController : IComponent
             }
         }
 
-        if (input.X != 0 && IsGrounded && !IsDucking) // Animation logic for idle/run
+        if (hitTime <= 0) // Animation logic for idle/run
         {
-            IsRunning = true;
-            animator.setAnimation("Run");
-        }
-        if (input.X == 0 && IsGrounded)
-        {
-            IsRunning = false;
-            animator.setAnimation("Idle");
+            if (input.X != 0 && IsGrounded && !IsDucking)
+            {
+                IsRunning = true;
+                animator.setAnimation("Run");
+            }
+            else if (input.X == 0 && IsGrounded)
+            {
+                IsRunning = false;
+                animator.setAnimation("Idle");
+            }
         }
 
         if ((state.IsKeyDown(Keys.S) || state.IsKeyDown(Keys.Down)) && IsGrounded) // Duck logic
@@ -78,7 +84,7 @@ public class PlayerController : IComponent
             input.X = 0;
             IsDucking = true;
             IsRunning = false;
-            animator.setAnimation("Idle"); // Change for ducking animation
+            // Change for ducking animation
         }
         else if ((state.IsKeyDown(Keys.W) || state.IsKeyDown(Keys.Up)) && IsGrounded) // Jump logic
         {
@@ -89,6 +95,16 @@ public class PlayerController : IComponent
         }
         else
             IsDucking = false;
+
+        if(state.IsKeyDown(Keys.E)) // Play damage animation
+        {
+            hitTime = timeTillNextHit;
+            if(IsGrounded)
+                animator.setAnimation("HitGround");
+            else
+                animator.setAnimation("HitAir");
+
+        }
 
         if (GameObject.Y >= GroundLevel) // Ground check logic
         {
