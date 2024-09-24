@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using static IController;
 
 public class PlayerController : IComponent
@@ -11,7 +12,7 @@ public class PlayerController : IComponent
 
     //private Rigidbody rigidbody;
 
-    public float Speed { get; set; } = 600f;
+    public float Speed { get; set; } = 700f;
     public float JumpForce { get; set; } = -1150f;
     public bool IsGrounded { get; set; } = false;
     public Vector2 velocity;
@@ -65,23 +66,20 @@ public class PlayerController : IComponent
             }
         }
 
-        if (hitTime <= 0 && shootTime <= 0) // Animation logic for idle/run
+        if(input.X != 0 && IsGrounded)
+            IsRunning = true;
+        else
+            IsRunning = false;
+
+
+        if (hitTime <= 0 && shootTime <= 0 && !(state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N))) // Animation logic for idle/run
         {
             if(IsDucking)
-            {
-                IsRunning = false;
                 animator.setAnimation("Duck");
-            }
             else if (input.X != 0 && IsGrounded)
-            {
-                IsRunning = true;
                 animator.setAnimation("Run");
-            }
             else if (input.X == 0 && IsGrounded)
-            {
-                IsRunning = false;
                 animator.setAnimation("Idle");
-            }
         }
 
         if ((state.IsKeyDown(Keys.S) || state.IsKeyDown(Keys.Down)) && IsGrounded) // Duck logic
@@ -91,7 +89,6 @@ public class PlayerController : IComponent
         }
         else if ((state.IsKeyDown(Keys.W) || state.IsKeyDown(Keys.Up)) && IsGrounded) // Jump logic
         {
-            animator.setAnimation("Jump");
             velocity.Y = JumpForce;
             IsGrounded = false;
             IsDucking = false;
@@ -117,7 +114,10 @@ public class PlayerController : IComponent
                 velocity.Y = 0;
         }
         else
+        {
+            animator.setAnimation("Jump");
             IsGrounded = false;
+        }
 
         // Apply gravity if not grounded
         if (!IsGrounded)
@@ -125,11 +125,13 @@ public class PlayerController : IComponent
             airTime += deltaTime;
             velocity.Y += Gravity * deltaTime * airTime * 2;  // Gravity pulls down
         }
-
-        if ((state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) && shootTime <= 0) // Shoot logic
+        if ((state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) && hitTime <= 0) // Shoot logic
         {
-            shootTime = timeTillNextBullet;
-            GameObject.GetComponent<ProjectileManager>().FireProjectile(GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+            if (shootTime <= 0)
+            {
+                shootTime = timeTillNextBullet;
+                GameObject.GetComponent<ProjectileManager>().FireProjectile(GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+            }
             if (IsGrounded)
             {
                 if (IsDucking)

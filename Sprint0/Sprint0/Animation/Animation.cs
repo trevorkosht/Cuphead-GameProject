@@ -19,6 +19,7 @@ public class Animation {
     public List<Rectangle> Frames { get { return frames; } }
 
 
+
     public Animation(Texture2D spriteSheet, int updatesPerFrame, int frameCount, int frameHeight, int frameWidth) {
         this.spriteSheet = spriteSheet;
         this.updatesPerFrame = updatesPerFrame;

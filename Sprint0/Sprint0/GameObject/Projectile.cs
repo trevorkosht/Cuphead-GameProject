@@ -67,6 +67,6 @@ public class Projectile
     public bool IsOffScreen()
     {
         // Check if the projectile has gone off of the screen (you can adjust this logic as needed)
-        return position.X < 0 || position.X > 800;  // 0 and 800 are arbitrary for now
+        return position.X < 0 || position.X > 1200;  // 0 and 800 are arbitrary for now
     }
 }

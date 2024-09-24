@@ -8,6 +8,8 @@ public class SpriteRenderer : IComponent {
     public bool enabled { get; set; }
     public Rectangle destRectangle { get; set; }
     public bool isFacingRight { get; set; }
+    public string animationName { get; set; }
+
 
     private KeyValuePair<string, Animation> currentAnimation;
     private Dictionary<string, Animation> spriteAnimations = new Dictionary<string, Animation>();
@@ -57,6 +59,7 @@ public class SpriteRenderer : IComponent {
         if (spriteAnimations.ContainsKey(animationName)) {
             spriteAnimations[animationName].resetAnimation();
             currentAnimation = new KeyValuePair<string, Animation>(animationName, spriteAnimations[animationName]);
+            this.animationName = animationName;
         }
         else
         {
@@ -70,6 +73,7 @@ public class SpriteRenderer : IComponent {
         {
             spriteAnimations[animationName].resetAnimation();
             currentAnimation = new KeyValuePair<string, Animation>(animationName, spriteAnimations[animationName]);
+            this.animationName = animationName;
         }
     }
 
