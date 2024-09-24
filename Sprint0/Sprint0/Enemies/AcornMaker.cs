@@ -76,7 +76,7 @@ public class AcornMaker : BaseEnemy
             );
 
             // Draw with the adjusted rectangle
-            spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, false);
+            spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, base.isFacingRight = true);
         }
 
         // Draw all active acorns

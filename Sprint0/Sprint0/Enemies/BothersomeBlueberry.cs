@@ -25,19 +25,21 @@ public class BothersomeBlueberry : BaseEnemy
 
     public override void Move(GameTime gameTime)
     {
-        if (isKnockedOut)
-            return; // No movement when knocked out
 
-        float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        Vector2 direction = position;
+        direction.Normalize();
+        
 
         // Move left or right
         if (movingRight)
         {
-            position.X += speed * deltaTime;
+            base.isFacingRight = false;
+            position.X += direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
         else
         {
-            position.X -= speed * deltaTime;
+            base.isFacingRight = true;
+            position.X -= direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         // Check for edges and reverse direction if necessary
@@ -58,7 +60,7 @@ public class BothersomeBlueberry : BaseEnemy
         int screenWidth = 1280;
 
         // Check if the blueberry has reached the left or right edge of the screen
-        if (position.X <= 0 || position.X + spriteTexture.Width >= screenWidth)
+        if (position.X <= 2 || position.X >= screenWidth)
         {
             return true;
         }
@@ -68,44 +70,9 @@ public class BothersomeBlueberry : BaseEnemy
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
-        if (HitPoints <= 0)
-        {
-            KnockOut();
-        }
+
     }
 
-    private void KnockOut()
-    {
-        isKnockedOut = true;
-        respawnTimer = respawnDelay; // Start respawn timer
-    }
-
-    public override void Update(GameTime gameTime)
-    {
-        base.Update(gameTime);
-
-        if (isKnockedOut)
-        {
-            // Handle respawn logic
-            respawnTimer -= gameTime.ElapsedGameTime.TotalSeconds;
-            if (respawnTimer <= 0)
-            {
-                Respawn();
-            }
-        }
-        else
-        {
-            // Update movement
-            Move(gameTime);
-        }
-    }
-
-    private void Respawn()
-    {
-        isKnockedOut = false;
-        HitPoints = 2;  // Reset hit points (or whatever the initial HP is)
-        position = respawnPosition;  // Respawn at the same position it died
-    }
 
     public override void Draw(SpriteBatch spriteBatch)
     {

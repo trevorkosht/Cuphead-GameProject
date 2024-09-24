@@ -44,7 +44,7 @@ public abstract class BaseEnemy : IEnemy
     {
         if (IsActive)
         {
-            //Move(gameTime);
+            Move(gameTime);
             Shoot(gameTime);
 
 
