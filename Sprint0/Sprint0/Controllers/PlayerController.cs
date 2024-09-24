@@ -21,6 +21,7 @@ public class PlayerController : IComponent
     float airTime = 0f, shootTime = 0, hitTime = 0;
     public float timeTillNextBullet { get; set; } = .2f;
     public float timeTillNextHit { get; set; } = .4f;
+    int floorY;
 
 
     bool IsDucking, IsRunning;
@@ -47,6 +48,20 @@ public class PlayerController : IComponent
 
         KeyboardState state = Keyboard.GetState();
         input = new Vector2(0, 0);
+
+        if (GameObject.Y >= GroundLevel) // Ground check logic
+        {
+            airTime = 1;
+            IsGrounded = true;
+            floorY = (int)GroundLevel;
+            if (velocity.Y > 0)
+                velocity.Y = 0;
+        }
+        else
+        {
+            animator.setAnimation("Jump");
+            IsGrounded = false;
+        }
 
         // Movement
         if (state.IsKeyDown(Keys.A) || state.IsKeyDown(Keys.Left)) // Left
@@ -106,19 +121,6 @@ public class PlayerController : IComponent
 
         }
 
-        if (GameObject.Y >= GroundLevel) // Ground check logic
-        {
-            airTime = 1;
-            IsGrounded = true;
-            if (velocity.Y > 0)
-                velocity.Y = 0;
-        }
-        else
-        {
-            animator.setAnimation("Jump");
-            IsGrounded = false;
-        }
-
         // Apply gravity if not grounded
         if (!IsGrounded)
         {
@@ -175,6 +177,10 @@ public class PlayerController : IComponent
 
         GameObject.X += (int)(input.X * Speed * deltaTime);
         GameObject.Y += (int)(velocity.Y * deltaTime);
+        if(animator.animationName == "Duck" || animator.animationName == "DuckShoot")
+            GameObject.Y = floorY + 50;
+        else if (IsGrounded)
+            GameObject.Y = floorY;
     }
 
     public void Draw(SpriteBatch spriteBatch) { /* Non-visual */ }
