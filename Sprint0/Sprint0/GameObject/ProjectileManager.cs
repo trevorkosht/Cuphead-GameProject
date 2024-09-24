@@ -17,7 +17,7 @@ public class ProjectileManager : IComponent {
     {
         // Define the starting position for the projectile based on player's position
         float projectileX = isFacingRight ? playerX + 70 : playerX - 25;  // Offset slightly from the player
-        float projectileY = playerY + 30;  // Shoot from the player's height
+        float projectileY = playerY + 25;  // Shoot from the player's height
 
         // Define the velocity (positive for right, negative for left)
         Vector2 velocity = new Vector2(isFacingRight ? 800f : -800f, 0f);
@@ -25,8 +25,8 @@ public class ProjectileManager : IComponent {
         // Create a new bullet GO and add it to the list
         if(projectileType == 2)
         {
-            Vector2 velocity2 = new Vector2(isFacingRight ? 800f : -800f, 100f);
-            Vector2 velocity3 = new Vector2(isFacingRight ? 800f : -800f, -100f);
+            Vector2 velocity2 = new Vector2(isFacingRight ? 800f : -800f, 250f);
+            Vector2 velocity3 = new Vector2(isFacingRight ? 800f : -800f, -250f);
             GameObject bullet2 = new GameObject((int)projectileX, (int)projectileY, new Projectile(projectileX, projectileY, velocity2, projectileType));
             GameObject bullet3 = new GameObject((int)projectileX, (int)projectileY, new Projectile(projectileX, projectileY, velocity3, projectileType));
             //bullet2.AddComponent(new SpriteRenderer(bullet2, true, new Rectangle((int)projectileX, (int)projectileY, 144, 144), true));
