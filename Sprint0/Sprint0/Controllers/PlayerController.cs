@@ -65,9 +65,14 @@ public class PlayerController : IComponent
             }
         }
 
-        if (hitTime <= 0) // Animation logic for idle/run
+        if (hitTime <= 0 && shootTime <= 0) // Animation logic for idle/run
         {
-            if (input.X != 0 && IsGrounded && !IsDucking)
+            if(IsDucking)
+            {
+                IsRunning = false;
+                animator.setAnimation("Duck");
+            }
+            else if (input.X != 0 && IsGrounded)
             {
                 IsRunning = true;
                 animator.setAnimation("Run");
@@ -83,8 +88,6 @@ public class PlayerController : IComponent
         {
             input.X = 0;
             IsDucking = true;
-            IsRunning = false;
-            // Change for ducking animation
         }
         else if ((state.IsKeyDown(Keys.W) || state.IsKeyDown(Keys.Up)) && IsGrounded) // Jump logic
         {
@@ -127,6 +130,13 @@ public class PlayerController : IComponent
         {
             shootTime = timeTillNextBullet;
             GameObject.GetComponent<ProjectileManager>().FireProjectile(GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+            if (IsDucking)
+                animator.setAnimation("DuckShoot");
+            else if (IsRunning)
+                animator.setAnimation("RunShootingStraight");
+            else
+                animator.setAnimation("ShootStraight");
+
         }
 
         for (int i = 1; i <= 5; i++) // Bullet type switch
