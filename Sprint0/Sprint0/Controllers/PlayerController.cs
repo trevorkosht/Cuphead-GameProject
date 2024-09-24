@@ -17,7 +17,7 @@ public class PlayerController : IComponent
     public Vector2 velocity;
     public float GroundLevel { get; set; } = 500f; // Arbitrary floor height
     public float Gravity { get; set; } = 1200f;     // Constant downward force
-    float airTime = 0f;
+    float airTime = 0f, shootTime = 0;
     bool IsDucking, IsRunning;
 
     public PlayerController() { }
@@ -35,6 +35,8 @@ public class PlayerController : IComponent
 
 
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        shootTime -= deltaTime;
         Vector2 input = new Vector2(0, 0);
 
         KeyboardState state = Keyboard.GetState();

@@ -58,6 +58,10 @@ public class SpriteRenderer : IComponent {
             spriteAnimations[animationName].resetAnimation();
             currentAnimation = new KeyValuePair<string, Animation>(animationName, spriteAnimations[animationName]);
         }
+        else
+        {
+            enabled = false;
+        }
     }
 
     public void immediateSetAnimation(string animationName)
