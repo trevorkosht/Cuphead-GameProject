@@ -141,11 +141,12 @@ public class PlayerController : IComponent
             }
         }
 
-        for (int i = 1; i <= 5; i++) // Bullet type switch
+        for (int i = 0; i <= 5; i++) // Bullet type switch
         {
             if (state.IsKeyDown((Keys)Enum.Parse(typeof(Keys), $"D{i}"))) // Handle the key press for D1, D2, D3, etc. (switch projectile based off of i)
             {
                 GameObject.GetComponent<ProjectileManager>().projectileType = i;
+                timeTillNextBullet = .2f + i/5f;
                 break;
             }
         }

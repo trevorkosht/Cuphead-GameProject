@@ -8,7 +8,7 @@ public class ProjectileManager : IComponent {
 
     public List<Projectile> activeProjectiles = new List<Projectile>();
 
-    public int projectileType = 1;
+    public int projectileType = 0;
 
     public ProjectileManager() {
     }
@@ -23,7 +23,7 @@ public class ProjectileManager : IComponent {
         Vector2 velocity = new Vector2(isFacingRight ? 600f : -600f, 0f);
 
         // Create a new projectile and add it to the list
-        Projectile newProjectile = new Projectile(projectileX, projectileY, velocity);
+        Projectile newProjectile = new Projectile(projectileX, projectileY, velocity, projectileType);
         activeProjectiles.Add(newProjectile);
     }
 
