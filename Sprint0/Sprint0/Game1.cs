@@ -124,9 +124,20 @@ namespace Sprint0
             blockController.Update(gameTime);
             items.update(gameTime, 580, 330);
             itemControl.Update(items);
-            
+
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+                ResetGame();
+            if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                Exit();
+
 
             base.Update(gameTime);
+        }
+
+        private void ResetGame()
+        {
+            player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
+            Initialize();
         }
 
 
