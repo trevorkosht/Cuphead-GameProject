@@ -17,7 +17,9 @@ public class PlayerController : IComponent
     public Vector2 velocity;
     public float GroundLevel { get; set; } = 500f; // Arbitrary floor height
     public float Gravity { get; set; } = 1200f;     // Constant downward force
-    float airTime = 0f;
+    float airTime = 0f, shootTime = 0;
+    public float timeTillNextBullet { get; set; } = .2f;
+
     bool IsDucking, IsRunning;
 
     public PlayerController() { }
@@ -35,19 +37,21 @@ public class PlayerController : IComponent
 
 
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        shootTime -= deltaTime;
         Vector2 input = new Vector2(0, 0);
 
         KeyboardState state = Keyboard.GetState();
         input = new Vector2(0, 0);
 
         // Movement
-        if (state.IsKeyDown(Keys.A) || state.IsKeyDown(Keys.Left))
+        if (state.IsKeyDown(Keys.A) || state.IsKeyDown(Keys.Left)) // Left
         {
             input.X = -1;
             GameObject.GetComponent<SpriteRenderer>().isFacingRight = false;
         }
 
-        if (state.IsKeyDown(Keys.D) || state.IsKeyDown(Keys.Right))
+        if (state.IsKeyDown(Keys.D) || state.IsKeyDown(Keys.Right)) // Right
         {
             if (input.X < 0) // No input if both left/right are pressed
                 input.X = 0;
@@ -57,7 +61,8 @@ public class PlayerController : IComponent
                 GameObject.GetComponent<SpriteRenderer>().isFacingRight = true;
             }
         }
-        if (input.X != 0 && IsGrounded && !IsDucking)
+
+        if (input.X != 0 && IsGrounded && !IsDucking) // Animation logic for idle/run
         {
             IsRunning = true;
             animator.setAnimation("Run");
@@ -68,14 +73,14 @@ public class PlayerController : IComponent
             animator.setAnimation("Idle");
         }
 
-        if ((state.IsKeyDown(Keys.S) || state.IsKeyDown(Keys.Down)) && IsGrounded) // Duck
+        if ((state.IsKeyDown(Keys.S) || state.IsKeyDown(Keys.Down)) && IsGrounded) // Duck logic
         {
             input.X = 0;
             IsDucking = true;
             IsRunning = false;
             animator.setAnimation("Idle"); // Change for ducking animation
         }
-        else if ((state.IsKeyDown(Keys.W) || state.IsKeyDown(Keys.Up)) && IsGrounded) // Jump
+        else if ((state.IsKeyDown(Keys.W) || state.IsKeyDown(Keys.Up)) && IsGrounded) // Jump logic
         {
             animator.setAnimation("Jump");
             velocity.Y = JumpForce;
@@ -85,13 +90,15 @@ public class PlayerController : IComponent
         else
             IsDucking = false;
 
-        if (GameObject.Y >= GroundLevel)
+        if (GameObject.Y >= GroundLevel) // Ground check logic
         {
             airTime = 1;
             IsGrounded = true;
             if (velocity.Y > 0)
                 velocity.Y = 0;
         }
+        else
+            IsGrounded = false;
 
         // Apply gravity if not grounded
         if (!IsGrounded)
@@ -100,12 +107,13 @@ public class PlayerController : IComponent
             velocity.Y += Gravity * deltaTime * airTime * 2;  // Gravity pulls down
         }
 
-        if (state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) // Shoot logic
+        if ((state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) && shootTime <= 0) // Shoot logic
         {
-            GameObject.GetComponent<ProjectileManager>().FireProjectile();
+            shootTime = timeTillNextBullet;
+            GameObject.GetComponent<ProjectileManager>().FireProjectile(GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
         }
 
-        for (int i = 1; i <= 5; i++)
+        for (int i = 1; i <= 5; i++) // Bullet type switch
         {
             if (state.IsKeyDown((Keys)Enum.Parse(typeof(Keys), $"D{i}"))) // Handle the key press for D1, D2, D3, etc. (switch projectile based off of i)
             {

@@ -23,8 +23,10 @@ namespace Sprint0
         private KeyboardController keyboardController;
         private IMouseController mouseController;
 
+        private List<GameObject> gameObjects = new List<GameObject>();
+
         //Example of how to make a GameObject
-        GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController() });
+        GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
 
         private EnemyController enemyController;
 
@@ -49,10 +51,15 @@ namespace Sprint0
         protected override void Initialize()
         {
             base.Initialize();
+
             GOManager.Instance.Player = player;
+            GOManager.Instance.textureStorage = textureStorage;
             enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(textureStorage);
             itemControl = new ItemController();
+
+            gameObjects.Add(player);
+
         }
 
         protected override void LoadContent() //Load sprites, fonts, etc. here
@@ -71,12 +78,14 @@ namespace Sprint0
 
             //Load player animations
             Animation playerDeathAnimation = new Animation(textureStorage.GetTexture("PlayerDeath"), 5, 16, 144, 144);
+            Animation playerDuckAnimation = new Animation(textureStorage.GetTexture("PlayerDuck"), 5, 5, 144, 144);
+            Animation playerDuckShootAnimation = new Animation(textureStorage.GetTexture("PlayerDuckShoot"), 5, 3, 144, 144);
             Animation playerHitAirAnimation = new Animation(textureStorage.GetTexture("PlayerHitAir"), 5, 6, 144, 144);
             Animation playerHitGroundAnimation = new Animation(textureStorage.GetTexture("PlayerHitGround"), 5, 6, 144, 144);
             Animation playerIdleAnimation = new Animation(textureStorage.GetTexture("PlayerIdle"), 5, 5, 144, 144);
             Animation playerIntroAnimation = new Animation(textureStorage.GetTexture("PlayerIntro"), 5, 28, 144, 144);
             Animation playerJumpAnimation = new Animation(textureStorage.GetTexture("PlayerJump"), 5, 8, 144, 144);
-            Animation playerRunAnimation = new Animation(textureStorage.GetTexture("PlayerRun"), 5, 16, 144, 144);
+            Animation playerRunAnimation = new Animation(textureStorage.GetTexture("PlayerRun"), 1, 16, 144, 144);
             Animation playerRunShootingDiagonalUpAnimation = new Animation(textureStorage.GetTexture("PlayerRunShootingDiagonalUp"), 5, 16, 144, 144);
             Animation playerRunShootingStraightAnimation = new Animation(textureStorage.GetTexture("PlayerRunShootingStraight"), 5, 16, 144, 144);
             Animation playerShootDiagonalDownAnimation = new Animation(textureStorage.GetTexture("PlayerShootDiagonalDown"), 5, 3, 144, 144);
@@ -93,6 +102,8 @@ namespace Sprint0
             player.AddComponent(playerSpriteRenderer);
 
             playerSpriteRenderer.addAnimation("Death", playerDeathAnimation);
+            playerSpriteRenderer.addAnimation("Duck", playerDuckAnimation);
+            playerSpriteRenderer.addAnimation("DuckShoot", playerDuckShootAnimation);
             playerSpriteRenderer.addAnimation("HitAir", playerHitAirAnimation);
             playerSpriteRenderer.addAnimation("HitGround", playerHitGroundAnimation);
             playerSpriteRenderer.addAnimation("Idle", playerIdleAnimation);
@@ -117,15 +128,29 @@ namespace Sprint0
 
         protected override void Update(GameTime gameTime) //Update stuff here
         {
-            player.Update(gameTime);
+            foreach(var gameObject in gameObjects) {
+                gameObject.Update(gameTime);
+            }
 
             enemyController.Update(gameTime);
             blockController.Update(gameTime);
             items.update(gameTime, 580, 330);
             itemControl.Update(items);
-            
+
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+                ResetGame();
+            if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                Exit();
+
 
             base.Update(gameTime);
+        }
+
+        private void ResetGame()
+        {
+            gameObjects.Clear();
+            player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
+            Initialize();
         }
 
 
@@ -135,7 +160,10 @@ namespace Sprint0
 
             _spriteBatch.Begin(); //Draw stuff here
 
-            player.Draw(_spriteBatch);
+            foreach (var gameObject in gameObjects) {
+                gameObject.Draw(_spriteBatch);
+            }
+
             blockController.Draw(_spriteBatch);
             items.draw(_spriteBatch);
 
