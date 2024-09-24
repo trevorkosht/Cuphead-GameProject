@@ -31,24 +31,21 @@ public class Projectile
                 //texture = GOManager.Instance.textureStorage.GetTexture("DefaultProjectile");
                 break;
             case 1:
-                //texture = GOManager.Instance.textureStorage.GetTexture("SpreadProjectile");
+                velocity /= 2;
+                //texture = GOManager.Instance.textureStorage.GetTexture("MegaBlastProjectile");
                 break;
             case 2:
                 velocity /= 1.5f;
-                //texture = GOManager.Instance.textureStorage.GetTexture("LoberProjectile");
+                //texture = GOManager.Instance.textureStorage.GetTexture("SpreadProjectile");
                 break;
             case 3:
-                velocity /= 2;
-                //texture = GOManager.Instance.textureStorage.GetTexture("MegaBlastProjectile");
+                //texture = GOManager.Instance.textureStorage.GetTexture("Way8Projectile");
                 break;
             case 4:
                 //texture = GOManager.Instance.textureStorage.GetTexture("ChaserProjectile");
                 break;
             case 5:
-                //texture = GOManager.Instance.textureStorage.GetTexture("Way8Projectile");
-                break;
-            default:
-                //texture = GOManager.Instance.textureStorage.GetTexture("StandardProjectile");
+                //texture = GOManager.Instance.textureStorage.GetTexture("LoberProjectile");
                 break;
         }
 

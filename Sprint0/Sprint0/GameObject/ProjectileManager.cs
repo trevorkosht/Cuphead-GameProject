@@ -23,6 +23,15 @@ public class ProjectileManager : IComponent {
         Vector2 velocity = new Vector2(isFacingRight ? 600f : -600f, 0f);
 
         // Create a new projectile and add it to the list
+        if(projectileType == 2)
+        {
+            Vector2 velocity2 = new Vector2(isFacingRight ? 600f : -600f, 100f);
+            Vector2 velocity3 = new Vector2(isFacingRight ? 600f : -600f, -100f);
+            Projectile newProjectile2 = new Projectile(projectileX, projectileY, velocity2, projectileType);
+            activeProjectiles.Add(newProjectile2);
+            Projectile newProjectile3 = new Projectile(projectileX, projectileY, velocity3, projectileType);
+            activeProjectiles.Add(newProjectile3);
+        }
         Projectile newProjectile = new Projectile(projectileX, projectileY, velocity, projectileType);
         activeProjectiles.Add(newProjectile);
     }
