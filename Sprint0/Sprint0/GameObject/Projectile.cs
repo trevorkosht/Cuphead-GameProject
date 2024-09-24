@@ -2,22 +2,16 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-public class Projectile
+public class Projectile : IComponent
 {
-    public enum ProjectileType
-    {
-        Standard,    // Default
-        Spread,      // Spread shot
-        Lober,        // Slow-moving projectile
-        MegaBlast,    // Very slow-moving projectile
-        Chaser,       // Chases enemies (placeholder for now)
-        Way8          // Circle attack
-    }
+
+    public GameObject GameObject { get; set; }
+    public bool enabled { get; set; } = true;
 
     private Vector2 position;
     private Vector2 velocity;
     private Texture2D texture;
-    int projectileType;
+    int projectileType, damage;
 
     public Projectile(float x, float y, Vector2 vel, int type)
     {
@@ -35,16 +29,17 @@ public class Projectile
                 //texture = GOManager.Instance.textureStorage.GetTexture("MegaBlastProjectile");
                 break;
             case 2:
-                velocity /= 1.5f;
                 //texture = GOManager.Instance.textureStorage.GetTexture("SpreadProjectile");
                 break;
             case 3:
-                //texture = GOManager.Instance.textureStorage.GetTexture("Way8Projectile");
+                //texture = GOManager.Instance.textureStorage.GetTexture("RoundaboutProjectile");
+                velocity /= 2;
                 break;
             case 4:
                 //texture = GOManager.Instance.textureStorage.GetTexture("ChaserProjectile");
                 break;
             case 5:
+                velocity /= 1.5f;
                 //texture = GOManager.Instance.textureStorage.GetTexture("LoberProjectile");
                 break;
         }

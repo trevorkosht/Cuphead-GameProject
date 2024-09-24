@@ -6,7 +6,7 @@ public class ProjectileManager : IComponent {
     public GameObject GameObject { get; set; }
     public bool enabled { get; set; }
 
-    public List<Projectile> activeProjectiles = new List<Projectile>();
+    public List<GameObject> bullets = new List<GameObject>();
 
     public int projectileType = 0;
 
@@ -16,39 +16,42 @@ public class ProjectileManager : IComponent {
     public void FireProjectile(float playerX, float playerY, bool isFacingRight)
     {
         // Define the starting position for the projectile based on player's position
-        float projectileX = isFacingRight ? playerX + 20 : playerX - 20;  // Offset slightly from the player
-        float projectileY = playerY;  // Shoot from the player's height
+        float projectileX = isFacingRight ? playerX + 70 : playerX - 25;  // Offset slightly from the player
+        float projectileY = playerY + 30;  // Shoot from the player's height
 
         // Define the velocity (positive for right, negative for left)
-        Vector2 velocity = new Vector2(isFacingRight ? 600f : -600f, 0f);
+        Vector2 velocity = new Vector2(isFacingRight ? 800f : -800f, 0f);
 
-        // Create a new projectile and add it to the list
+        // Create a new bullet GO and add it to the list
         if(projectileType == 2)
         {
-            Vector2 velocity2 = new Vector2(isFacingRight ? 600f : -600f, 100f);
-            Vector2 velocity3 = new Vector2(isFacingRight ? 600f : -600f, -100f);
-            Projectile newProjectile2 = new Projectile(projectileX, projectileY, velocity2, projectileType);
-            activeProjectiles.Add(newProjectile2);
-            Projectile newProjectile3 = new Projectile(projectileX, projectileY, velocity3, projectileType);
-            activeProjectiles.Add(newProjectile3);
+            Vector2 velocity2 = new Vector2(isFacingRight ? 800f : -800f, 100f);
+            Vector2 velocity3 = new Vector2(isFacingRight ? 800f : -800f, -100f);
+            GameObject bullet2 = new GameObject((int)projectileX, (int)projectileY, new Projectile(projectileX, projectileY, velocity2, projectileType));
+            GameObject bullet3 = new GameObject((int)projectileX, (int)projectileY, new Projectile(projectileX, projectileY, velocity3, projectileType));
+            //bullet2.AddComponent(new SpriteRenderer(bullet2, true, new Rectangle((int)projectileX, (int)projectileY, 144, 144), true));
+            //bullet3.AddComponent(new SpriteRenderer(bullet3, true, new Rectangle((int)projectileX, (int)projectileY, 144, 144), true));
+            bullets.Add(bullet2);
+            bullets.Add(bullet3);
         }
-        Projectile newProjectile = new Projectile(projectileX, projectileY, velocity, projectileType);
-        activeProjectiles.Add(newProjectile);
+        GameObject bullet = new GameObject((int)projectileX, (int)projectileY, new Projectile(projectileX, projectileY, velocity, projectileType));
+        //bullet.AddComponent(new SpriteRenderer(bullet, true, new Rectangle((int)projectileX, (int)projectileY, 144, 144), true));
+        bullets.Add(bullet);
     }
 
     public void Update(GameTime gameTime) {
-        foreach (var projectile in activeProjectiles) {
-            projectile.Update(gameTime);
+        foreach (GameObject GO in bullets) {
+            GO.Update(gameTime);
         }
 
-        activeProjectiles.RemoveAll(p => p.IsOffScreen()); //Remove projectile if off-screen
+        bullets.RemoveAll(p => p.GetComponent<Projectile>().IsOffScreen()); //Remove projectile if off-screen
     }
 
     public void Draw(SpriteBatch spriteBatch) {
 
-        foreach (var projectile in activeProjectiles)
+        foreach (GameObject GO in bullets)
         {
-            projectile.Draw(spriteBatch);
+            GO.Draw(spriteBatch);
         }
     }
 }

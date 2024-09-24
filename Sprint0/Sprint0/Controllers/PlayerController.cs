@@ -148,8 +148,28 @@ public class PlayerController : IComponent
             if (state.IsKeyDown((Keys)Enum.Parse(typeof(Keys), $"D{i}"))) // Handle the key press for D1, D2, D3, etc. (switch projectile based off of i)
             {
                 GameObject.GetComponent<ProjectileManager>().projectileType = i;
-                timeTillNextBullet = .2f + i/5f;
-                break;
+                switch (i) //Bullet shoot time from Wiki 1/(DPS/DamagePerShot)
+                {
+                    case 0: // Default
+                        timeTillNextBullet = 1 / (25f / 8.3f);
+                        break;
+                    case 1: // Megablast
+                        timeTillNextBullet = 1 / (35.38f / 26f);
+                        break;
+                    case 2: // Spread
+                        timeTillNextBullet = 1 / (41.33f / 6.2f);
+                        break;
+                    case 3: // Roundabout (unknown usage)
+                        timeTillNextBullet = 1 / (35.38f / 26f);
+                        break;
+                    case 4: //Chaser
+                        timeTillNextBullet = 1 / (17.1f / 2.85f);
+                        break;
+                    case 5: // Lobber
+                        timeTillNextBullet = 1 / (33.14f / 11.6f);
+                        break;
+                }
+                    
             }
         }
 
