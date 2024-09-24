@@ -20,7 +20,7 @@ public class ProjectileManager : IComponent {
         float projectileY = playerY;  // Shoot from the player's height
 
         // Define the velocity (positive for right, negative for left)
-        Vector2 velocity = new Vector2(isFacingRight ? 300f : -300f, 0f);
+        Vector2 velocity = new Vector2(isFacingRight ? 600f : -600f, 0f);
 
         // Create a new projectile and add it to the list
         Projectile newProjectile = new Projectile(projectileX, projectileY, velocity);
