@@ -65,4 +65,46 @@ public class Texture2DStorage
 
         return null; // Handle missing textures if necessary
     }
+
+    public void loadPlayerAnimations(SpriteRenderer spriteRenderer) {
+
+        //Load player animations
+        Animation playerDeathAnimation = new Animation(GetTexture("PlayerDeath"), 5, 16, 144, 144);
+        Animation playerDuckAnimation = new Animation(GetTexture("PlayerDuck"), 5, 5, 144, 144);
+        Animation playerDuckShootAnimation = new Animation(GetTexture("PlayerDuckShoot"), 5, 3, 144, 144);
+        Animation playerHitAirAnimation = new Animation(GetTexture("PlayerHitAir"), 5, 6, 144, 144);
+        Animation playerHitGroundAnimation = new Animation(GetTexture("PlayerHitGround"), 5, 6, 144, 144);
+        Animation playerIdleAnimation = new Animation(GetTexture("PlayerIdle"), 5, 5, 144, 144);
+        Animation playerIntroAnimation = new Animation(GetTexture("PlayerIntro"), 5, 28, 144, 144);
+        Animation playerJumpAnimation = new Animation(GetTexture("PlayerJump"), 5, 8, 144, 144);
+        Animation playerRunAnimation = new Animation(GetTexture("PlayerRun"), 1, 16, 144, 144);
+        Animation playerRunShootingDiagonalUpAnimation = new Animation(GetTexture("PlayerRunShootingDiagonalUp"), 5, 16, 144, 144);
+        Animation playerRunShootingStraightAnimation = new Animation(GetTexture("PlayerRunShootingStraight"), 5, 16, 144, 144);
+        Animation playerShootDiagonalDownAnimation = new Animation(GetTexture("PlayerShootDiagonalDown"), 5, 3, 144, 144);
+        Animation playerShootDiagonalUpAnimation = new Animation(GetTexture("PlayerShootDiagonalUp"), 5, 3, 144, 144);
+        Animation playerShootDownAnimation = new Animation(GetTexture("PlayerShootDown"), 5, 3, 144, 144);
+        Animation playerShootStraightAnimation = new Animation(GetTexture("PlayerShootStraight"), 5, 3, 144, 144);
+        Animation playerShootUpAnimation = new Animation(GetTexture("PlayerShootUp"), 5, 3, 144, 144);
+
+        spriteRenderer.addAnimation("Death", playerDeathAnimation);
+        spriteRenderer.addAnimation("Duck", playerDuckAnimation);
+        spriteRenderer.addAnimation("DuckShoot", playerDuckShootAnimation);
+        spriteRenderer.addAnimation("HitAir", playerHitAirAnimation);
+        spriteRenderer.addAnimation("HitGround", playerHitGroundAnimation);
+        spriteRenderer.addAnimation("Idle", playerIdleAnimation);
+        spriteRenderer.addAnimation("Intro", playerIntroAnimation);
+        spriteRenderer.addAnimation("Jump", playerJumpAnimation);
+        spriteRenderer.addAnimation("Run", playerRunAnimation);
+        spriteRenderer.addAnimation("RunShootingDiagonalUp", playerRunShootingDiagonalUpAnimation);
+        spriteRenderer.addAnimation("RunShootingStraight", playerRunShootingStraightAnimation);
+        spriteRenderer.addAnimation("ShootDiagonalDown", playerShootDiagonalDownAnimation);
+        spriteRenderer.addAnimation("ShootDiagonalUp", playerShootDiagonalUpAnimation);
+        spriteRenderer.addAnimation("ShootDown", playerShootDownAnimation);
+        spriteRenderer.addAnimation("ShootStraight", playerShootStraightAnimation);
+        spriteRenderer.addAnimation("ShootUp", playerShootUpAnimation);
+
+        spriteRenderer.loadAllAnimations();
+
+
+    }
 }
