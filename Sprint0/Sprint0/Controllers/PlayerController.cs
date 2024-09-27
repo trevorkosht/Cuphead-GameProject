@@ -22,7 +22,7 @@ public class PlayerController : IComponent
 
     private float airTime = 0f, shootTime = 0f, hitTime = 0f;
     private int floorY;
-    private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust;
+    private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust, isShooting;
 
     private readonly IKeyboardController keyboardController = new KeyboardController();
     private readonly IMouseController mouseController = new MouseController();
@@ -143,7 +143,7 @@ public class PlayerController : IComponent
                 GameObject.Y = floorY + DuckingYOffset;
                 IsDucking = true;
                 isDuckingYAdjust = true; // Set flag when ducking
-                System.Diagnostics.Debug.WriteLine($"Started Ducking: GameObject.Y = {GameObject.Y}");
+
             }
         }
         else
@@ -153,7 +153,7 @@ public class PlayerController : IComponent
                 GameObject.Y = floorY;
                 IsDucking = false;
                 isDuckingYAdjust = false; // Clear flag when not ducking
-                System.Diagnostics.Debug.WriteLine($"Stopped Ducking: GameObject.Y = {GameObject.Y}");
+
             }
         }
     }
@@ -164,6 +164,7 @@ public class PlayerController : IComponent
     {
         if (keyboardController.IsShootRequested() && shootTime <= 0 && hitTime <= 0)
         {
+            isShooting = true;
             shootTime = timeTillNextBullet;
             GameObject.GetComponent<ProjectileManager>().FireProjectile(GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
 
@@ -174,6 +175,7 @@ public class PlayerController : IComponent
                 else animator.setAnimation("ShootStraight");
             }
         }
+        isShooting = false;
     }
 
     private void HandleProjectileSwitching(KeyboardState state)
@@ -237,9 +239,13 @@ public class PlayerController : IComponent
         {
             animator.setAnimation(IsGrounded ? "HitGround" : "HitAir");
         }
-        else if (IsDucking)
+        else if (IsDucking && !isShooting)
         {
             animator.setAnimation("Duck");
+        }
+        else if(IsDucking && isShooting)
+        {
+            animator.setAnimation("DuckShoot");
         }
         else if (!IsGrounded)
         {
