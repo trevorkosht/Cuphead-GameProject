@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
 using static IController;
 
 public class PlayerController : IComponent
@@ -10,178 +9,255 @@ public class PlayerController : IComponent
     public GameObject GameObject { get; set; }
     public bool enabled { get; set; } = true;
 
-    //private Rigidbody rigidbody;
-
     public float Speed { get; set; } = 700f;
     public float JumpForce { get; set; } = -1150f;
     public bool IsGrounded { get; set; } = false;
     public Vector2 velocity;
     public float GroundLevel { get; set; } = 500f; // Arbitrary floor height
-    public float Gravity { get; set; } = 1200f;     // Constant downward force
-    float airTime = 0f, shootTime = 0, hitTime = 0;
+    public float Gravity { get; set; } = 1200f; // Constant downward force
     public float timeTillNextBullet { get; set; } = .2f;
     public float timeTillNextHit { get; set; } = .4f;
-    int floorY;
 
+    public int Health { get; set; } = 100; 
 
-    bool IsDucking, IsRunning;
+    private float airTime = 0f, shootTime = 0f, hitTime = 0f;
+    private int floorY;
+    private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust;
+
+    private readonly IKeyboardController keyboardController = new KeyboardController();
+    private readonly IMouseController mouseController = new MouseController();
+
+    private const int DuckingYOffset = 50; 
+    private const float InvincibilityDuration = 2f; 
 
     public PlayerController() { }
-
-    private IKeyboardController keyboardController = new KeyboardController();
-    private IMouseController mouseController = new MouseController();
 
     public void Update(GameTime gameTime)
     {
         if (!enabled) return;
+
         keyboardController.Update();
         mouseController.Update();
 
-        SpriteRenderer animator = GameObject.GetComponent<SpriteRenderer>();
-
-
+        var state = Keyboard.GetState();
+        var animator = GameObject.GetComponent<SpriteRenderer>();
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+        UpdateTimers(deltaTime);
+        HandleGroundCheck(animator);
+        HandleMovementAndActions(deltaTime);
+        HandleShooting(state, animator);
+        HandleProjectileSwitching(state);
+        HandleDamageDetection();
+        UpdateGravity(deltaTime);
+        UpdateAnimationState(animator);
+    }
+
+    private void UpdateTimers(float deltaTime)
+    {
         shootTime -= deltaTime;
         hitTime -= deltaTime;
-        Vector2 input = new Vector2(0, 0);
 
-        KeyboardState state = Keyboard.GetState();
-        input = new Vector2(0, 0);
-
-        if (GameObject.Y >= GroundLevel) // Ground check logic
+        // Update invincibility state if needed
+        if (IsInvincible)
         {
-            airTime = 1;
-            IsGrounded = true;
-            floorY = (int)GroundLevel;
-            if (velocity.Y > 0)
-                velocity.Y = 0;
-        }
-        else
-        {
-            animator.setAnimation("Jump");
-            IsGrounded = false;
-        }
-
-        // Movement
-        if (state.IsKeyDown(Keys.A) || state.IsKeyDown(Keys.Left)) // Left
-        {
-            input.X = -1;
-            GameObject.GetComponent<SpriteRenderer>().isFacingRight = false;
-        }
-
-        if (state.IsKeyDown(Keys.D) || state.IsKeyDown(Keys.Right)) // Right
-        {
-            if (input.X < 0) // No input if both left/right are pressed
-                input.X = 0;
-            else
+            hitTime -= deltaTime;
+            if (hitTime <= 0)
             {
-                input.X = 1;
-                GameObject.GetComponent<SpriteRenderer>().isFacingRight = true;
+                IsInvincible = false;
             }
         }
+    }
 
-        if(input.X != 0 && IsGrounded)
-            IsRunning = true;
-        else
-            IsRunning = false;
-
-
-        if (hitTime <= 0 && shootTime <= 0 && !(state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N))) // Animation logic for idle/run
+    private void HandleGroundCheck(SpriteRenderer animator)
+    {
+        if (!isDuckingYAdjust) // Prevent GroundCheck from interfering with ducking adjustment
         {
-            if(IsDucking)
-                animator.setAnimation("Duck");
-            else if (input.X != 0 && IsGrounded)
-                animator.setAnimation("Run");
-            else if (input.X == 0 && IsGrounded)
-                animator.setAnimation("Idle");
+            if (GameObject.Y >= GroundLevel)
+            {
+                IsGrounded = true;
+                floorY = (int)GroundLevel;
+                airTime = 1;
+
+                if (velocity.Y > 0) velocity.Y = 0;
+                GameObject.Y = floorY;
+            }
+            else
+            {
+                animator.setAnimation("Jump");
+                IsGrounded = false;
+            }
+        }
+    }
+
+    private void HandleMovementAndActions(float deltaTime)
+    {
+        Vector2 input = keyboardController.GetMovementInput();
+        bool jumpRequested = keyboardController.IsJumpRequested();
+        bool duckRequested = keyboardController.IsDuckRequested();
+
+        // Update Facing Direction
+        UpdateFacingDirection(input);
+
+        HandleDucking(duckRequested);
+
+        // Disable horizontal movement while ducking
+        if (!IsDucking)
+        {
+            // Horizontal Movement
+            if (input.X != 0 && IsGrounded)
+                IsRunning = true;
+            else
+                IsRunning = false;
+
+            GameObject.X += (int)(input.X * Speed * deltaTime);
         }
 
-        if ((state.IsKeyDown(Keys.S) || state.IsKeyDown(Keys.Down)) && IsGrounded) // Duck logic
-        {
-            input.X = 0;
-            IsDucking = true;
-        }
-        else if ((state.IsKeyDown(Keys.W) || state.IsKeyDown(Keys.Up)) && IsGrounded) // Jump logic
+        // Handle Jump
+        if (jumpRequested && IsGrounded && !IsDucking) // Prevent jumping while ducking
         {
             velocity.Y = JumpForce;
             IsGrounded = false;
-            IsDucking = false;
+        }
+        
+    }
+
+    private void UpdateFacingDirection(Vector2 input)
+    {
+        if (input.X < 0)
+        {
+            GameObject.GetComponent<SpriteRenderer>().isFacingRight = false;
+        }
+        else if (input.X > 0)
+        {
+            GameObject.GetComponent<SpriteRenderer>().isFacingRight = true;
+        }
+    }
+
+    private void HandleDucking(bool duckRequested)
+    {
+        if (duckRequested && IsGrounded)
+        {
+            if (!IsDucking)
+            {
+                GameObject.Y = floorY + DuckingYOffset;
+                IsDucking = true;
+                isDuckingYAdjust = true; // Set flag when ducking
+                System.Diagnostics.Debug.WriteLine($"Started Ducking: GameObject.Y = {GameObject.Y}");
+            }
         }
         else
-            IsDucking = false;
-
-        if(state.IsKeyDown(Keys.E)) // Play damage animation
         {
-            hitTime = timeTillNextHit;
-            if(IsGrounded)
-                animator.setAnimation("HitGround");
-            else
-                animator.setAnimation("HitAir");
-
+            if (IsDucking)
+            {
+                GameObject.Y = floorY;
+                IsDucking = false;
+                isDuckingYAdjust = false; // Clear flag when not ducking
+                System.Diagnostics.Debug.WriteLine($"Stopped Ducking: GameObject.Y = {GameObject.Y}");
+            }
         }
+    }
 
-        // Apply gravity if not grounded
+
+
+    private void HandleShooting(KeyboardState state, SpriteRenderer animator)
+    {
+        if (keyboardController.IsShootRequested() && shootTime <= 0 && hitTime <= 0)
+        {
+            shootTime = timeTillNextBullet;
+            GameObject.GetComponent<ProjectileManager>().FireProjectile(GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+
+            if (IsGrounded)
+            {
+                if (IsDucking) animator.setAnimation("DuckShoot");
+                else if (IsRunning) animator.setAnimation("RunShootingStraight");
+                else animator.setAnimation("ShootStraight");
+            }
+        }
+    }
+
+    private void HandleProjectileSwitching(KeyboardState state)
+    {
+        for (int i = 0; i <= 5; i++)
+        {
+            if (keyboardController.IsProjectileSwitchRequested(i))
+            {
+                GameObject.GetComponent<ProjectileManager>().projectileType = i;
+                timeTillNextBullet = GetBulletCooldown(i);
+                break;
+            }
+        }
+    }
+
+    private float GetBulletCooldown(int projectileType)
+    {
+        return projectileType switch
+        {
+            0 => 1 / (25f / 8.3f), // Default
+            1 => 1 / (35.38f / 26f), // Megablast
+            2 => 1 / (41.33f / 6.2f), // Spread
+            3 => 1 / (35.38f / 26f), // Roundabout
+            4 => 1 / (17.1f / 2.85f), // Chaser
+            5 => 1 / (33.14f / 11.6f), // Lobber
+            _ => timeTillNextBullet
+        };
+    }
+
+    private void HandleDamageDetection()
+    {
+        if(keyboardController.IsDamageRequested())
+        //if (!IsInvincible && GameObject.GetComponent<CollisionHandler>().IsCollidingWith("EnemyProjectile"))
+        //{
+            TakeDamage(20); // Example damage value
+        //}
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+        hitTime = InvincibilityDuration;
+        IsInvincible = true;
+        GameObject.GetComponent<SpriteRenderer>().setAnimation("HitGround");
+    }
+
+    private void UpdateGravity(float deltaTime)
+    {
         if (!IsGrounded)
         {
             airTime += deltaTime;
-            velocity.Y += Gravity * deltaTime * airTime * 2;  // Gravity pulls down
-        }
-        if ((state.IsKeyDown(Keys.Z) || state.IsKeyDown(Keys.N)) && hitTime <= 0) // Shoot logic
-        {
-            if (shootTime <= 0)
-            {
-                shootTime = timeTillNextBullet;
-                GameObject.GetComponent<ProjectileManager>().FireProjectile(GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
-            }
-            if (IsGrounded)
-            {
-                if (IsDucking)
-                    animator.setAnimation("DuckShoot");
-                else if (IsRunning)
-                    animator.setAnimation("RunShootingStraight");
-                else
-                    animator.setAnimation("ShootStraight");
-            }
-        }
+            velocity.Y += Gravity * deltaTime * airTime * 2; // Apply gravity
 
-        for (int i = 0; i <= 5; i++) // Bullet type switch
-        {
-            if (state.IsKeyDown((Keys)Enum.Parse(typeof(Keys), $"D{i}"))) // Handle the key press for D1, D2, D3, etc. (switch projectile based off of i)
-            {
-                GameObject.GetComponent<ProjectileManager>().projectileType = i;
-                switch (i) //Bullet shoot time from Wiki 1/(DPS/DamagePerShot)
-                {
-                    case 0: // Default
-                        timeTillNextBullet = 1 / (25f / 8.3f);
-                        break;
-                    case 1: // Megablast
-                        timeTillNextBullet = 1 / (35.38f / 26f);
-                        break;
-                    case 2: // Spread
-                        timeTillNextBullet = 1 / (41.33f / 6.2f);
-                        break;
-                    case 3: // Roundabout (unknown usage)
-                        timeTillNextBullet = 1 / (35.38f / 26f);
-                        break;
-                    case 4: //Chaser
-                        timeTillNextBullet = 1 / (17.1f / 2.85f);
-                        break;
-                    case 5: // Lobber
-                        timeTillNextBullet = 1 / (33.14f / 11.6f);
-                        break;
-                }
-                    
-            }
+            GameObject.Y += (int)(velocity.Y * deltaTime);
         }
-
-        GameObject.X += (int)(input.X * Speed * deltaTime);
-        GameObject.Y += (int)(velocity.Y * deltaTime);
-        if(animator.animationName == "Duck" || animator.animationName == "DuckShoot")
-            GameObject.Y = floorY + 50;
-        else if (IsGrounded)
-            GameObject.Y = floorY;
     }
 
-    public void Draw(SpriteBatch spriteBatch) { /* Non-visual */ }
+    private void UpdateAnimationState(SpriteRenderer animator)
+    {
+        if (hitTime > 0)
+        {
+            animator.setAnimation(IsGrounded ? "HitGround" : "HitAir");
+        }
+        else if (IsDucking)
+        {
+            animator.setAnimation("Duck");
+        }
+        else if (!IsGrounded)
+        {
+            animator.setAnimation("Jump");
+        }
+        else if (IsRunning)
+        {
+            animator.setAnimation(shootTime > 0 ? "RunShootingStraight" : "Run");
+        }
+        else if (shootTime > 0)
+        {
+            animator.setAnimation("ShootStraight");
+        }
+        else
+        {
+            animator.setAnimation("Idle");
+        }
+    }
+
+    public void Draw(SpriteBatch spriteBatch) { /* Non-visual, no changes here */ }
 }
