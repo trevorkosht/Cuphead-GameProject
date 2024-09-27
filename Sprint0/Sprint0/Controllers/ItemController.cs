@@ -17,7 +17,7 @@ namespace Cuphead.Controllers
 
         public ItemController()
         {
-            potionNum = 2;
+            potionNum = 1;
         }
 
         public void Update(Items.Items items)

@@ -70,7 +70,7 @@ namespace Sprint0
             //item animation
             Texture2D itemPart1 = textureStorage.GetTexture("Item1_3");
             Texture2D itemPart2 = textureStorage.GetTexture("Item4_6");
-            items = new Items(itemPart1, itemPart2, 2);
+            items = new Items(itemPart1, itemPart2, 1);
 
             Animation seedAnimation = new Animation(textureStorage.GetTexture("Seed"), 5, 8, 144, 144);
             Animation purpleSporeAnimation = new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 16, 144, 144);
