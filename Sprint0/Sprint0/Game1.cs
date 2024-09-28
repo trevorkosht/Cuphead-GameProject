@@ -31,6 +31,7 @@ namespace Sprint0
         private BlockController blockController;
         private Cuphead.Items.Items items;
         private ItemController itemControl;
+        private ItemsController itemsControl;
 
 
         public Game1()
@@ -54,6 +55,7 @@ namespace Sprint0
             enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(textureStorage);
             itemControl = new ItemController();
+            itemsControl = new ItemsController(textureStorage);
 
             gameObjects.Add(player);
         }
@@ -89,6 +91,7 @@ namespace Sprint0
 
             enemyController.Update(gameTime);
             blockController.Update(gameTime);
+            itemsControl.Update(gameTime);
             items.update(gameTime, 580, 330);
             itemControl.Update(items);
 
@@ -118,6 +121,7 @@ namespace Sprint0
             }
             blockController.Draw(_spriteBatch);
             items.draw(_spriteBatch);
+            itemsControl.Draw(_spriteBatch);
             enemyController.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
