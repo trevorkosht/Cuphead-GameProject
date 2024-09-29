@@ -30,6 +30,8 @@ namespace Sprint0
         private BlockController blockController;
         private ItemsController itemsControl;
 
+        bool resetFrame;
+
 
         public Game1()
         {
@@ -48,6 +50,7 @@ namespace Sprint0
             base.Initialize();
 
             GOManager.Instance.Player = player;
+            GOManager.Instance.allGOs = gameObjects;
             GOManager.Instance.textureStorage = textureStorage;
             enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(textureStorage);
@@ -64,7 +67,7 @@ namespace Sprint0
 
             _font = Content.Load<SpriteFont>("Font");
 
-            Animation seedAnimation = new Animation(textureStorage.GetTexture("Seed"), 5, 8, 144, 144);
+            //Animation seedAnimation = new Animation(textureStorage.GetTexture("Seed"), 5, 12, 144, 144);
             Animation purpleSporeAnimation = new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 16, 144, 144);
             Animation pinkSporeAnimation = new Animation(textureStorage.GetTexture("PinkSpore"), 5, 8, 144, 144);
 
@@ -75,7 +78,14 @@ namespace Sprint0
 
         protected override void Update(GameTime gameTime) //Update stuff here
         {
-            foreach(var gameObject in gameObjects) {
+            for(int i = 0; i < gameObjects.Count; i++) {
+                GameObject gameObject = gameObjects[i];
+                if (gameObject.destroyed) //Remove destroyed GOs
+                {
+                    gameObjects.RemoveAt(i);
+                    i--;
+                    continue;
+                }
                 gameObject.Update(gameTime);
             }
 
@@ -93,10 +103,17 @@ namespace Sprint0
 
         private void ResetGame()    
         {
-            gameObjects.Clear();
+            enemyController.currentEnemyIndex = 0;
+            for(int i = 0; i < gameObjects.Count; i++)
+            {
+                GameObject gameObject = gameObjects[i];
+                gameObject.Destroy();
+                gameObjects.RemoveAt(i);
+                i--;
+            }
+            resetFrame = true;
             player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
-            base.Initialize();
-            base.LoadContent();
+            Initialize();
         }
 
 
@@ -106,6 +123,11 @@ namespace Sprint0
             _spriteBatch.Begin(); //Draw stuff here
 
             foreach (var gameObject in gameObjects) {
+                if (resetFrame)
+                {
+                    resetFrame = false; 
+                    break;
+                }
                 gameObject.Draw(_spriteBatch);
             }
             blockController.Draw(_spriteBatch);
