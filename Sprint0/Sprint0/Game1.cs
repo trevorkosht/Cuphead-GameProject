@@ -1,12 +1,9 @@
-﻿using Cuphead.Commands;
-using Cuphead.Interfaces;
-using Cuphead.Items;
+﻿using Cuphead.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0.Controllers;
 using System.Collections.Generic;
-using System.Data;
 using static IController;
 
 
@@ -23,17 +20,15 @@ namespace Sprint0
         private KeyboardController keyboardController;
         private MouseController mouseController;
 
-        internal List<GameObject> gameObjects = new List<GameObject>();
+        private List<GameObject> gameObjects = new List<GameObject>();
 
         //Example of how to make a GameObject
         GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
 
-        internal EnemyController enemyController;
-        internal BlockController blockController;
-        internal ItemsController itemsControl;
+        private EnemyController enemyController;
 
-        internal CommandManager cmd;
-        internal UpdateGame updateGame;
+        private BlockController blockController;
+        private ItemsController itemsControl;
 
 
         public Game1()
@@ -52,8 +47,6 @@ namespace Sprint0
         {
             base.Initialize();
 
-            cmd = new CommandManager(this);
-            updateGame = new UpdateGame(this);
             GOManager.Instance.Player = player;
             GOManager.Instance.textureStorage = textureStorage;
             enemyController = new EnemyController(keyboardController, textureStorage);
@@ -82,10 +75,30 @@ namespace Sprint0
 
         protected override void Update(GameTime gameTime) //Update stuff here
         {
+            foreach(var gameObject in gameObjects) {
+                gameObject.Update(gameTime);
+            }
 
-            updateGame.Execute(gameTime);
+            enemyController.Update(gameTime);
+            blockController.Update(gameTime);
+            itemsControl.Update(gameTime);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+                ResetGame();
+            if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                Exit();
+
             base.Update(gameTime);
         }
+
+        private void ResetGame()    
+        {
+            gameObjects.Clear();
+            player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
+            base.Initialize();
+            base.LoadContent();
+        }
+
 
         protected override void Draw(GameTime gameTime)
         {
@@ -101,13 +114,6 @@ namespace Sprint0
             
             _spriteBatch.End();
             base.Draw(gameTime);
-        }
-
-        public void ResetGame()
-        {
-            gameObjects.Clear();
-            base.Initialize();
-            base.LoadContent();
         }
     }
 }
