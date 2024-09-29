@@ -14,7 +14,7 @@ public class MurderousMushroom : BaseEnemy
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
-        base.setAnimation("murderousMushroomAnimation");
+        sRend.setAnimation("murderousMushroomAnimation");
         isHidden = false;
         shootCooldown = 2.0;
         spores = new List<SporeProjectile>();
@@ -39,6 +39,8 @@ public class MurderousMushroom : BaseEnemy
                 Vector2 playerPosition = new Vector2(player.X, player.Y);
                 // Randomly decide between shooting a purple or pink spore
                 bool shootPinkSpore = (new Random().Next(0, 2) == 0); // 50% chance
+
+                sRend.isFacingRight = player.X < GameObject.X;
 
                 // Shoot a spore in the direction of the player
                 Texture2D sporeTexture = shootPinkSpore ? pinkSporeTexture : purpleSporeTexture;
@@ -83,16 +85,9 @@ public class MurderousMushroom : BaseEnemy
     public override void Draw(SpriteBatch spriteBatch)
     {
         if (IsActive)
-        {
-            base.Draw(spriteBatch);
-            // Draw the mushroom sprite
-            //spriteBatch.Draw(spriteTexture, position, Color.White);
-
-            // Draw each active spore
             foreach (var spore in spores)
             {
                 spore.Draw(spriteBatch);
             }
-        }
     }
 }

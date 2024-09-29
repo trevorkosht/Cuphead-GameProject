@@ -1,14 +1,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System;
 
 public class AcornMaker : BaseEnemy
 {
     private List<GameObject> acorns;  // List to hold spawned acorns
     private double spawnCooldown;           // Cooldown between acorn spawns
     private double timeSinceLastSpawn;      // Tracks time since last spawn
-    private Texture2DStorage storageObject;
-    private float spriteScale = 2.0f;
 
     public override void Move(GameTime gameTime)
     {
@@ -24,10 +23,9 @@ public class AcornMaker : BaseEnemy
         {
             // Create a new AggravatingAcorn using the factory system
             GameObject newAcorn = EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn);
-
             // Set its position near the AcornMaker
-            newAcorn.X += 50;
-            newAcorn.Y -= 150;
+            newAcorn.X = GameObject.X + 50;
+            newAcorn.Y = GameObject.Y - 150;
 
             // Add the acorn to the list
             acorns.Add(newAcorn);
@@ -41,8 +39,7 @@ public class AcornMaker : BaseEnemy
     {
         // Initialize the base enemy with the starting position, hitpoints, and texture
         base.Initialize(texture, storage);
-        base.setAnimation("acornMakerAnimation");
-        storageObject = storage;
+        sRend.setAnimation("acornMakerAnimation");
         acorns = new List<GameObject>();  // Initialize the list of acorns
         spawnCooldown = 1.5;
         timeSinceLastSpawn = 0;
@@ -54,34 +51,19 @@ public class AcornMaker : BaseEnemy
         base.Update(gameTime);
 
         // Update each acorn in the list
-        foreach (var acorn in acorns)
+        foreach (GameObject acorn in acorns)
         {
             acorn.Update(gameTime);
         }
 
         // Remove inactive acorns
-        acorns.RemoveAll(a => !a.GetComponent<AggravatingAcorn>().IsActive);
+        acorns.RemoveAll(a => a.destroyed);
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        // Draw the Acorn Maker sprite with scaling
-        if (IsActive)
-        {
-            // Adjust the destination rectangle based on the scale factor
-            Rectangle scaledDestRectangle = new Rectangle(
-                destRectangle.X,
-                destRectangle.Y,
-                (int)(destRectangle.Width * spriteScale),
-                (int)(destRectangle.Height * spriteScale)
-            );
-
-            // Draw with the adjusted rectangle
-            spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, base.isFacingRight = true);
-        }
-
         // Draw all active acorns
-        foreach (var acorn in acorns)
+        foreach (GameObject acorn in acorns)
         {
             acorn.Draw(spriteBatch);
         }
