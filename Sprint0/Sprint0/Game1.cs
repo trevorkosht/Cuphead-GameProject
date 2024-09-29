@@ -18,7 +18,7 @@ namespace Sprint0
         private Texture2DStorage textureStorage;
 
         private KeyboardController keyboardController;
-        private IMouseController mouseController;
+        private MouseController mouseController;
 
         private List<GameObject> gameObjects = new List<GameObject>();
 

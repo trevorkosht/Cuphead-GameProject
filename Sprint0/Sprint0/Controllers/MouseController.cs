@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using Sprint0;
 using static IController;
 
-public class MouseController : IMouseController
+public class MouseController : IController
 {
     MouseState curMS, preMS;
     public MouseController()

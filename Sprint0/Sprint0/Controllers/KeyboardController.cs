@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using static IController;
 
-public class KeyboardController : IKeyboardController
+public class KeyboardController : IController
 {
     private KeyboardState curKS, preKS;
 

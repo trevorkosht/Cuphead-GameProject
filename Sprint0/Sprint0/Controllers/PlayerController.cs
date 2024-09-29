@@ -24,8 +24,8 @@ public class PlayerController : IComponent
     private int floorY;
     private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust, isShooting;
 
-    private readonly IKeyboardController keyboardController = new KeyboardController();
-    private readonly IMouseController mouseController = new MouseController();
+    private readonly KeyboardController keyboardController = new KeyboardController();
+    private readonly MouseController mouseController = new MouseController();
 
     private const int DuckingYOffset = 50; 
     private const float InvincibilityDuration = 2f; 
