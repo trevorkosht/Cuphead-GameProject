@@ -67,7 +67,7 @@ namespace Sprint0
 
             _font = Content.Load<SpriteFont>("Font");
 
-            Animation seedAnimation = new Animation(textureStorage.GetTexture("Seed"), 5, 8, 144, 144);
+            //Animation seedAnimation = new Animation(textureStorage.GetTexture("Seed"), 5, 12, 144, 144);
             Animation purpleSporeAnimation = new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 16, 144, 144);
             Animation pinkSporeAnimation = new Animation(textureStorage.GetTexture("PinkSpore"), 5, 8, 144, 144);
 

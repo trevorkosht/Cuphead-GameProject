@@ -32,7 +32,7 @@ public class TerribleTulip : BaseEnemy
             SpriteRenderer projSrend = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), false);
             projectile.AddComponent(projSrend);
             projSrend.spriteScale = .5f;
-            projSrend.addAnimation("spin", new Animation(projectileTexture, 4, 8, 73, 60));
+            projSrend.addAnimation("spin", new Animation(projectileTexture, 3, 12, 144, 144));
             projSrend.setAnimation("spin");
             GOManager.Instance.allGOs.Add(projectile);
             shootCooldown = 3.0; // Reset the cooldown after shooting
