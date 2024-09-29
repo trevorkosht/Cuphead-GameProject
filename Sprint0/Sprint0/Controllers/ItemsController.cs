@@ -61,14 +61,13 @@ namespace Sprint0.Controllers
             }
 
             currentItem = Items[currentItemIndex];
+
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (enabled && currentItem != null)
-            {
-                currentItem.Draw(spriteBatch);
-            }
+            currentItem.Update(gameTime);
+            currentItem.Draw(spriteBatch);
                 
         }
     }
