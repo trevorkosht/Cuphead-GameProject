@@ -9,14 +9,14 @@ public class SpriteRenderer : IComponent {
     public Rectangle destRectangle { get; set; }
     public bool isFacingRight { get; set; }
     public string animationName { get; set; }
+    public float spriteScale { get; set; } = 1f;
+    Texture2D pixel; //For debugging rectangle boxes
 
 
     private KeyValuePair<string, Animation> currentAnimation;
     private Dictionary<string, Animation> spriteAnimations = new Dictionary<string, Animation>();
 
-    public SpriteRenderer(GameObject gameObject, bool enabled, Rectangle destRectangle, bool isFacingRight) {
-        GameObject = gameObject;
-        this.enabled = enabled;
+    public SpriteRenderer(Rectangle destRectangle, bool isFacingRight) {
         this.destRectangle = destRectangle;
         this.isFacingRight = isFacingRight;
     }
@@ -84,10 +84,17 @@ public class SpriteRenderer : IComponent {
         spriteAnimations[currentAnimation.Key].updateAnimation();
     }
 
-    public void Draw(SpriteBatch spriteBatch) {
-        if(!enabled) return;
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        if (!enabled) return;
 
-        spriteAnimations[currentAnimation.Key].draw(spriteBatch, destRectangle, isFacingRight);
+        Rectangle scaledDestRectangle = new Rectangle(
+            destRectangle.X,
+            destRectangle.Y,
+            (int)(destRectangle.Width * spriteScale),
+            (int)(destRectangle.Height * spriteScale));
+
+        spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, isFacingRight);
     }
 
 }

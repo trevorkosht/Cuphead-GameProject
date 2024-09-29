@@ -13,7 +13,7 @@ public class AggravatingAcorn : BaseEnemy
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
-        base.setAnimation("aggravatingAcornAnimation");
+        sRend.setAnimation("aggravatingAcornAnimation");
         speed = 200f;  // Speed of horizontal movement
         isFalling = false;
         dropPosition = Vector2.Zero;     // Will set when ready to fall
@@ -25,28 +25,18 @@ public class AggravatingAcorn : BaseEnemy
         if (!isFalling)
         {
 
-            Vector2 direction = GameObject.position;
-            direction.Normalize();
-
 
             // Move left or right
+            sRend.isFacingRight = !movingRight;
             if (movingRight)
-            {
-                base.isFacingRight = false;
-                GameObject.X += (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-            }
+                GameObject.X += (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
             else
-            {
-                base.isFacingRight = true;
-                GameObject.X -= (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-            }
+                GameObject.X -= (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
 
             // Check for screen edges and reverse direction
             if (ReachedEdge())
-            {
                 movingRight = !movingRight;
-            }
 
             // Check if the player is underneath to trigger the fall
             if (PlayerIsUnderneath())
@@ -63,7 +53,7 @@ public class AggravatingAcorn : BaseEnemy
             // Stop falling when reaching the ground (or a certain Y position)
             if (GameObject.Y >= dropPosition.Y)
             {
-                IsActive = false;  // Deactivate after the fall
+                GameObject.Destroy();
             }
         }
     }
@@ -80,26 +70,16 @@ public class AggravatingAcorn : BaseEnemy
     private bool ReachedEdge()
     {
         // Get the screen width from the graphics device viewport
-        int screenWidth = 1280;
+        int screenWidth = 1280 - 144/2; //144 is sprite width /2 is origin
 
         // Check if the blueberry has reached the left or right edge of the screen
-        if (GameObject.X <= 2 || GameObject.X >= screenWidth)
-        {
+        if (GameObject.X < 0 || GameObject.X > screenWidth)
             return true;
-        }
         return false;
     }
 
     public override void Shoot(GameTime gameTime)
     {
         // Aggravating Acorn doesn't shoot
-    }
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        if (IsActive)
-        {
-            base.Draw(spriteBatch);
-            // Draw acorn sprite here
-        }
     }
 }

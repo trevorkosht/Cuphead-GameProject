@@ -16,7 +16,7 @@ public class BothersomeBlueberry : BaseEnemy
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
-        base.setAnimation("bothersomeBlueberryAnimation");
+        sRend.setAnimation("bothersomeBlueberryAnimation");
         respawnPosition = new Vector2(GameObject.X, GameObject.Y);
         speed = 150f; // Speed of horizontal movement
         isKnockedOut = false;
@@ -28,19 +28,15 @@ public class BothersomeBlueberry : BaseEnemy
 
         Vector2 direction = GameObject.position;
         direction.Normalize();
-        
+
 
         // Move left or right
+
+        sRend.isFacingRight = !movingRight;
         if (movingRight)
-        {
-            base.isFacingRight = false;
             GameObject.X += (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-        }
         else
-        {
-            base.isFacingRight = true;
             GameObject.X -= (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-        }
 
         // Check for edges and reverse direction if necessary
         if (ReachedEdge())
@@ -65,15 +61,5 @@ public class BothersomeBlueberry : BaseEnemy
             return true;
         }
         return false;
-    }
-
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        if (IsActive)
-        {
-            // Draw the blueberry sprite if active (not knocked out)
-            //spriteBatch.Draw(spriteTexture, position, Color.White);
-            base.Draw(spriteBatch);
-        }
     }
 }

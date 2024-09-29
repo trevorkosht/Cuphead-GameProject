@@ -47,12 +47,18 @@ public class EnemyController
             CycleToNextEnemy();
         }
 
-        currentEnemy?.Update(gameTime);
+        if (currentEnemy != null)
+        {
+            if (currentEnemy.destroyed)
+                currentEnemy = null;
+            currentEnemy?.Update(gameTime);
+        }
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        currentEnemy?.Draw(spriteBatch);
+        if (currentEnemy != null)
+            currentEnemy?.Draw(spriteBatch);
     }
 
     private void CycleToNextEnemy()

@@ -11,7 +11,7 @@ public class TerribleTulip : BaseEnemy
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
-        base.setAnimation("terribleTulipAnimation");
+        sRend.setAnimation("terribleTulipAnimation");
         shootCooldown = 3.0;
         projectiles = new List<HomingProjectile>();
         projectileTexture = storage.GetTexture("Seed"); // Get projectile texture from storage
@@ -59,11 +59,6 @@ public class TerribleTulip : BaseEnemy
     {
         if (IsActive)
         {
-            // Draw the Terrible Tulip sprite
-            //spriteBatch.Draw(spriteTexture, position, Color.White);
-            base.Draw(spriteBatch);
-
-            // Draw each active projectile
             foreach (var projectile in projectiles)
             {
                 projectile.Draw(spriteBatch);

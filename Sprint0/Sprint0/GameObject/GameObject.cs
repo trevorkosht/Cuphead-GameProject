@@ -10,6 +10,7 @@ public class GameObject
     public float rotation {  get; set; }
     public Vector2 scale { get; set; }
     public Vector2 position { get; private set; }
+    public bool destroyed { get; set; } = false;
 
     // List of components attached to this GameObjects
     private List<IComponent> components = new List<IComponent>();
@@ -56,8 +57,9 @@ public class GameObject
     public void Update(GameTime gameTime)
     {
         position = new Vector2(X, Y);
-        foreach (var component in components)
+        for (int i = 0; i < components.Count; i++)
         {
+            IComponent component = components[i];
             component.Update(gameTime);
         }
     }
@@ -65,8 +67,9 @@ public class GameObject
     // Draw each component (for visual components)
     public void Draw(SpriteBatch spriteBatch)
     {
-        foreach (var component in components)
+        for (int i = 0; i < components.Count; i++)
         {
+            IComponent component = components[i];
             component.Draw(spriteBatch);
         }
     }
@@ -81,5 +84,19 @@ public class GameObject
     public void MoveToPosition(int newX, int newY) {
         X = newX;
         Y = newY;
+    }
+
+    // Destroy the GameObject and remove all its components
+    public void Destroy()
+    {
+        // Remove all components
+        destroyed = true;
+        foreach (var component in components)
+        {
+            component.enabled = false;
+            component.GameObject = null;
+        }
+
+        components.Clear(); // Clear the list of components to remove references
     }
 }

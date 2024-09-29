@@ -9,11 +9,12 @@ public class DeadlyDaisy : BaseEnemy
     private float jumpHeight;
     private bool isJumping;
     private Vector2 velocity;
+    Vector2 pos;
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
-        base.setAnimation("deadlyDaisyAnimation");
+        sRend.setAnimation("deadlyDaisyAnimation");
         speed = 300f;  // Speed of movement towards the player
         jumpHeight = 200f;  // How high the daisy can jump
         isJumping = false;
@@ -24,23 +25,24 @@ public class DeadlyDaisy : BaseEnemy
     {
         Vector2 playerPosition = new Vector2(player.X, player.Y); // Assuming this meant the character player and not game window
 
-        // Calculate direction towards the player
         Vector2 direction = playerPosition - GameObject.position;
-        direction.Normalize();
+        float distance = direction.Length();
 
-        // Face right if the player is to the right, otherwise face left
-        if (playerPosition.X > GameObject.X)
+        // Minimum distance to prevent "teleportation" when very close to the player
+        float minDistance = 0.1f;
+
+        if (distance > minDistance)
         {
-            base.isFacingRight = false; // Face right
-        }
-        else
-        {
-            base.isFacingRight = true; // Face left
+            direction.Normalize(); // Only normalize when the distance is large enough to avoid errors
+
+            // Face right if the player is to the right, otherwise face left
+            sRend.isFacingRight = playerPosition.X < GameObject.X;
+
+            // Move towards the player
+            GameObject.X += (int)(direction.X * speed * gameTime.ElapsedGameTime.TotalSeconds);
+            GameObject.Y += (int)(direction.Y * speed * gameTime.ElapsedGameTime.TotalSeconds);
         }
 
-        // Move horizontally towards the player
-        GameObject.X += (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-        GameObject.Y += (int)(direction.Y * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
         // If the Daisy is near a ledge, simulate a jump
         if (NeedsToJump(playerPosition))
@@ -78,14 +80,5 @@ public class DeadlyDaisy : BaseEnemy
     public override void Shoot(GameTime gameTime)
     {
         // Deadly Daisy doesn't shoot
-    }
-
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        if (IsActive)
-        {
-            // Draw Deadly Daisy sprite here
-            base.Draw(spriteBatch);
-        }
     }
 }
