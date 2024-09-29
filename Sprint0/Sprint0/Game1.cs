@@ -1,5 +1,4 @@
-﻿using Cuphead.Controllers;
-using Cuphead.Items;
+﻿using Cuphead.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -19,7 +18,7 @@ namespace Sprint0
         private Texture2DStorage textureStorage;
 
         private KeyboardController keyboardController;
-        private IMouseController mouseController;
+        private MouseController mouseController;
 
         private List<GameObject> gameObjects = new List<GameObject>();
 
@@ -29,8 +28,6 @@ namespace Sprint0
         private EnemyController enemyController;
 
         private BlockController blockController;
-        private Cuphead.Items.Items items;
-        private ItemController itemControl;
         private ItemsController itemsControl;
 
 
@@ -54,7 +51,6 @@ namespace Sprint0
             GOManager.Instance.textureStorage = textureStorage;
             enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(textureStorage);
-            itemControl = new ItemController();
             itemsControl = new ItemsController(textureStorage);
 
             gameObjects.Add(player);
@@ -67,12 +63,6 @@ namespace Sprint0
             textureStorage.LoadContent(Content);
 
             _font = Content.Load<SpriteFont>("Font");
-
-
-            //item animation
-            Texture2D itemPart1 = textureStorage.GetTexture("Item1_3");
-            Texture2D itemPart2 = textureStorage.GetTexture("Item4_6");
-            items = new Items(itemPart1, itemPart2, 1);
 
             Animation seedAnimation = new Animation(textureStorage.GetTexture("Seed"), 5, 8, 144, 144);
             Animation purpleSporeAnimation = new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 16, 144, 144);
@@ -92,8 +82,6 @@ namespace Sprint0
             enemyController.Update(gameTime);
             blockController.Update(gameTime);
             itemsControl.Update(gameTime);
-            items.update(gameTime, 580, 330);
-            itemControl.Update(items);
 
             if (Keyboard.GetState().IsKeyDown(Keys.R))
                 ResetGame();
@@ -120,9 +108,9 @@ namespace Sprint0
                 gameObject.Draw(_spriteBatch);
             }
             blockController.Draw(_spriteBatch);
-            items.draw(_spriteBatch);
-            itemsControl.Draw(_spriteBatch);
+            itemsControl.Draw(gameTime, _spriteBatch);
             enemyController.Draw(_spriteBatch);
+            
             _spriteBatch.End();
             base.Draw(gameTime);
         }

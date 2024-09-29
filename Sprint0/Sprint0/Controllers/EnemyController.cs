@@ -9,10 +9,10 @@ public class EnemyController
     private List<GameObject> enemies;
     private int currentEnemyIndex;
     private GameObject currentEnemy;
-    private IKeyboardController keyboardController;
+    private KeyboardController keyboardController = new KeyboardController();
     private Texture2DStorage textureStorage;
 
-    public EnemyController(IKeyboardController keyboardController, Texture2DStorage textureStorage)
+    public EnemyController(KeyboardController keyboardController, Texture2DStorage textureStorage)
     {
         this.keyboardController = keyboardController;
         this.textureStorage = textureStorage;

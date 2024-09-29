@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using Sprint0;
 using static IController;
 
-public class MouseController : IMouseController
+public class MouseController : IController
 {
     MouseState curMS, preMS;
     public MouseController()
@@ -17,6 +17,7 @@ public class MouseController : IMouseController
         curMS = Mouse.GetState();
     }
 
+    //return if a mouse button is clicked
     public bool OnMouseClick(MouseButton mouseButton)
     {
         bool mouseDown = false;
@@ -29,6 +30,7 @@ public class MouseController : IMouseController
         return mouseDown;
     }
 
+    //return the mouse position
     public Point GetMousePosition()
     {
         return Mouse.GetState().Position;

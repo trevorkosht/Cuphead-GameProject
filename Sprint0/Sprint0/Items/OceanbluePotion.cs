@@ -20,8 +20,11 @@ namespace Cuphead.Items
 
         private Texture2D _texture;
         private Vector2 position;
-        private Rectangle source;
+        private Rectangle[] source;
         private string _itemName;
+        private const int frameRate = 5;
+        private int _frameIndex;
+        private int counter = 0;
 
         public Texture2D itemTexture
         {
@@ -38,18 +41,39 @@ namespace Cuphead.Items
             _itemName = "OceanbluePotion";
             _texture = texture;
             position = itemPosition;
-            source = new Rectangle(210, 287, 155, 208);
+            source = new Rectangle[]
+                {
+                new Rectangle(210, 287, 155, 208),
+                new Rectangle(395, 287, 155, 208),
+                new Rectangle(585, 287, 155, 208)
+                };
             enabled = true;
         }
 
         public void Update(GameTime gameTime)
         {
-            //does not animate
+
+            counter++;
+            if (counter > frameRate)
+            {
+                _frameIndex++;
+                counter = 0;
+            }
+
+            if (_frameIndex >= source.Length)
+            {
+                _frameIndex = 0;
+            }
+
+            if (_frameIndex >= source.Length)
+            {
+                _frameIndex = 0;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture, this.position, source, Color.White, 0f, Vector2.Zero, .33f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(_texture, this.position, source[_frameIndex], Color.White, 0f, Vector2.Zero, .33f, SpriteEffects.None, 0f);
         }
     }
 }
