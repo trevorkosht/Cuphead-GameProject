@@ -1,8 +1,11 @@
-﻿public class GOManager
+﻿using System.Collections.Generic;
+
+public class GOManager
 {
     private static GOManager instance;
     public GameObject Player { get; set; }
     public Texture2DStorage textureStorage { get; set; }
+    public List<GameObject> allGOs { get; set; }
 
     private GOManager() { }
 

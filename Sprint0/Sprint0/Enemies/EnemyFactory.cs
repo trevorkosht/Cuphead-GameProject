@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public static class EnemyFactory
 {
-    public static GameObject CreateEnemy(EnemyType type)
+    public static GameObject CreateEnemy(EnemyType type, int posX = 300, int posY = 300)
     {
-        GameObject enemy = new GameObject(300, 300);
+        GameObject enemy = new GameObject(posX, posY);
 
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
         BaseEnemy enemyLogic;
@@ -18,7 +18,6 @@ public static class EnemyFactory
         {
             case EnemyType.AggravatingAcorn:
                 enemyLogic = new AggravatingAcorn();
-                enemy.Y = 100;
                 enemy.AddComponent(enemyLogic);
                 spriteRenderer.addAnimation("aggravatingAcornAnimation", new Animation(textureStorage.GetTexture("AggravatingAcorn"), 5, 20, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("AggravatingAcorn"), textureStorage);

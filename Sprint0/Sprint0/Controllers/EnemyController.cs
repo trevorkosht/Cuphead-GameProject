@@ -7,7 +7,7 @@ using static IController;
 public class EnemyController
 {
     private List<GameObject> enemies;
-    private int currentEnemyIndex;
+    public int currentEnemyIndex;
     private GameObject currentEnemy;
     private KeyboardController keyboardController = new KeyboardController();
     private Texture2DStorage textureStorage;
@@ -21,7 +21,7 @@ public class EnemyController
         // Initialize the enemy list using the factory
         enemies = new List<GameObject>
         {
-            EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn),
+            EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn, 300, 100),
             EnemyFactory.CreateEnemy(EnemyType.DeadlyDaisy),
             EnemyFactory.CreateEnemy(EnemyType.MurderousMushroom),
             EnemyFactory.CreateEnemy(EnemyType.TerribleTulip),
