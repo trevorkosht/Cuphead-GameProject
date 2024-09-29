@@ -8,10 +8,9 @@ public class HealthComponent : IComponent {
     public int currentHealth { get; set; }
     public bool isDead { get; set; }
 
-    public HealthComponent(GameObject gameObject, int maxHealth, int currentHealth, bool isDead) {
-        GameObject = gameObject;
-        this.maxHealth = maxHealth;
-        this.currentHealth = currentHealth;
+    public HealthComponent(int maxHP, bool isDead) {
+        maxHealth = maxHP;
+        currentHealth = maxHealth;
         this.isDead = isDead;
     }
 

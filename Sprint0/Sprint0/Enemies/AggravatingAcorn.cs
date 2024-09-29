@@ -10,9 +10,9 @@ public class AggravatingAcorn : BaseEnemy
     private bool movingRight;            // Controls direction of movement
     private float dropThreshold = 50f;   // Threshold to detect player proximity for drop
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
+    public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
-        base.Initialize(startPosition, hitPoints, texture, storage);
+        base.Initialize(texture, storage);
         base.setAnimation("aggravatingAcornAnimation");
         speed = 200f;  // Speed of horizontal movement
         isFalling = false;
@@ -25,7 +25,7 @@ public class AggravatingAcorn : BaseEnemy
         if (!isFalling)
         {
 
-            Vector2 direction = position;
+            Vector2 direction = GameObject.position;
             direction.Normalize();
 
 
@@ -33,12 +33,12 @@ public class AggravatingAcorn : BaseEnemy
             if (movingRight)
             {
                 base.isFacingRight = false;
-                position.X += direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                GameObject.X += (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
             }
             else
             {
                 base.isFacingRight = true;
-                position.X -= direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                GameObject.X -= (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
             }
 
 
@@ -52,16 +52,16 @@ public class AggravatingAcorn : BaseEnemy
             if (PlayerIsUnderneath())
             {
                 isFalling = true;
-                dropPosition = new Vector2(position.X, position.Y + 500); // Drop to a target Y position
+                dropPosition = new Vector2(GameObject.X, GameObject.Y + 500); // Drop to a target Y position
             }
         }
         else
         {
             // Fall straight down
-            position.Y += speed * 1.5f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            GameObject.Y += (int)(speed * 1.5f * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
             // Stop falling when reaching the ground (or a certain Y position)
-            if (position.Y >= dropPosition.Y)
+            if (GameObject.Y >= dropPosition.Y)
             {
                 IsActive = false;  // Deactivate after the fall
             }
@@ -74,7 +74,7 @@ public class AggravatingAcorn : BaseEnemy
         Vector2 playerPosition = new Vector2(player.X, player.Y);
 
         // Check if the acorn's X is within the drop threshold of the player's X
-        return Math.Abs(position.X - playerPosition.X) <= dropThreshold;
+        return Math.Abs(GameObject.X - playerPosition.X) <= dropThreshold;
     }
 
     private bool ReachedEdge()
@@ -83,7 +83,7 @@ public class AggravatingAcorn : BaseEnemy
         int screenWidth = 1280;
 
         // Check if the blueberry has reached the left or right edge of the screen
-        if (position.X <= 2 || position.X >= screenWidth)
+        if (GameObject.X <= 2 || GameObject.X >= screenWidth)
         {
             return true;
         }
@@ -93,16 +93,6 @@ public class AggravatingAcorn : BaseEnemy
     public override void Shoot(GameTime gameTime)
     {
         // Aggravating Acorn doesn't shoot
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-        if (HitPoints <= 0)
-        {
-            // Handle acorn being destroyed if it gets shot
-            IsActive = false;
-        }
     }
     public override void Draw(SpriteBatch spriteBatch)
     {

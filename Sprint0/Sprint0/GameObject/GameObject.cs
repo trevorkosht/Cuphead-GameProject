@@ -9,21 +9,28 @@ public class GameObject
     public int Y;
     public float rotation {  get; set; }
     public Vector2 scale { get; set; }
+    public Vector2 position { get; private set; }
 
     // List of components attached to this GameObjects
     private List<IComponent> components = new List<IComponent>();
 
-    public GameObject(int xPosition, int yPosition, IComponent component)
+    public GameObject(int xPosition, int yPosition)
     {
         this.X = xPosition;
         this.Y = yPosition;
+    }
+
+    public GameObject(int xPosition, int yPosition, IComponent component)
+    {
+        X = xPosition;
+        Y = yPosition;
         AddComponent(component);
     }
     public GameObject(int xPosition, int yPosition, List<IComponent> components)
     {
 
-        this.X = xPosition;
-        this.Y = yPosition;
+        X = xPosition;
+        Y = yPosition;
 
         foreach (IComponent component in components)
         {
@@ -48,6 +55,7 @@ public class GameObject
     // Update each component
     public void Update(GameTime gameTime)
     {
+        position = new Vector2(X, Y);
         foreach (var component in components)
         {
             component.Update(gameTime);

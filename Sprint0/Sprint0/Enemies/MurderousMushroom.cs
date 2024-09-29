@@ -11,9 +11,9 @@ public class MurderousMushroom : BaseEnemy
     private Texture2D purpleSporeTexture;
     private Texture2D pinkSporeTexture;
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
+    public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
-        base.Initialize(startPosition, hitPoints, texture, storage);
+        base.Initialize(texture, storage);
         base.setAnimation("murderousMushroomAnimation");
         isHidden = false;
         shootCooldown = 2.0;
@@ -42,7 +42,7 @@ public class MurderousMushroom : BaseEnemy
 
                 // Shoot a spore in the direction of the player
                 Texture2D sporeTexture = shootPinkSpore ? pinkSporeTexture : purpleSporeTexture;
-                spores.Add(new SporeProjectile(position, playerPosition, sporeTexture, shootPinkSpore));
+                spores.Add(new SporeProjectile(GameObject.position, playerPosition, sporeTexture, shootPinkSpore));
 
                 shootCooldown = 2.0; // Reset the cooldown for the next spore
             }
@@ -78,18 +78,6 @@ public class MurderousMushroom : BaseEnemy
 
         // Handle shooting logic
         Shoot(gameTime);
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        if (!isHidden)
-        {
-            base.TakeDamage(damage);
-            if (HitPoints <= 0)
-            {
-                IsActive = false; // Deactivate if HP reaches 0
-            }
-        }
     }
 
     public override void Draw(SpriteBatch spriteBatch)

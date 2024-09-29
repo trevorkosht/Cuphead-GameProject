@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class AcornMaker : BaseEnemy
 {
-    private List<AggravatingAcorn> acorns;  // List to hold spawned acorns
+    private List<GameObject> acorns;  // List to hold spawned acorns
     private double spawnCooldown;           // Cooldown between acorn spawns
     private double timeSinceLastSpawn;      // Tracks time since last spawn
     private Texture2DStorage storageObject;
@@ -23,10 +23,11 @@ public class AcornMaker : BaseEnemy
         if (timeSinceLastSpawn >= spawnCooldown)
         {
             // Create a new AggravatingAcorn using the factory system
-            AggravatingAcorn newAcorn = (AggravatingAcorn)EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn, storageObject);
+            GameObject newAcorn = EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn);
 
             // Set its position near the AcornMaker
-            newAcorn.Initialize(new Vector2(position.X + 50 , position.Y - 150), 2, storageObject.GetTexture("AggravatingAcorn"), storageObject);
+            newAcorn.X += 50;
+            newAcorn.Y -= 150;
 
             // Add the acorn to the list
             acorns.Add(newAcorn);
@@ -36,13 +37,13 @@ public class AcornMaker : BaseEnemy
         }
     }
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
+    public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         // Initialize the base enemy with the starting position, hitpoints, and texture
-        base.Initialize(startPosition, hitPoints, texture, storage);
+        base.Initialize(texture, storage);
         base.setAnimation("acornMakerAnimation");
         storageObject = storage;
-        acorns = new List<AggravatingAcorn>();  // Initialize the list of acorns
+        acorns = new List<GameObject>();  // Initialize the list of acorns
         spawnCooldown = 1.5;
         timeSinceLastSpawn = 0;
     }
@@ -59,7 +60,7 @@ public class AcornMaker : BaseEnemy
         }
 
         // Remove inactive acorns
-        acorns.RemoveAll(a => !a.IsActive);
+        acorns.RemoveAll(a => !a.GetComponent<AggravatingAcorn>().IsActive);
     }
 
     public override void Draw(SpriteBatch spriteBatch)

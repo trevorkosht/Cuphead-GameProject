@@ -13,11 +13,11 @@ public class BothersomeBlueberry : BaseEnemy
 
     
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
+    public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
-        base.Initialize(startPosition, hitPoints, texture, storage);
+        base.Initialize(texture, storage);
         base.setAnimation("bothersomeBlueberryAnimation");
-        respawnPosition = startPosition;
+        respawnPosition = new Vector2(GameObject.X, GameObject.Y);
         speed = 150f; // Speed of horizontal movement
         isKnockedOut = false;
         movingRight = true; // Start by moving right
@@ -26,7 +26,7 @@ public class BothersomeBlueberry : BaseEnemy
     public override void Move(GameTime gameTime)
     {
 
-        Vector2 direction = position;
+        Vector2 direction = GameObject.position;
         direction.Normalize();
         
 
@@ -34,12 +34,12 @@ public class BothersomeBlueberry : BaseEnemy
         if (movingRight)
         {
             base.isFacingRight = false;
-            position.X += direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            GameObject.X += (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
         }
         else
         {
             base.isFacingRight = true;
-            position.X -= direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            GameObject.X -= (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
         }
 
         // Check for edges and reverse direction if necessary
@@ -60,19 +60,12 @@ public class BothersomeBlueberry : BaseEnemy
         int screenWidth = 1280;
 
         // Check if the blueberry has reached the left or right edge of the screen
-        if (position.X <= 2 || position.X >= screenWidth)
+        if (GameObject.X <= 2 || GameObject.X >= screenWidth)
         {
             return true;
         }
         return false;
     }
-
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-
-    }
-
 
     public override void Draw(SpriteBatch spriteBatch)
     {

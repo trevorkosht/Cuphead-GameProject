@@ -8,9 +8,9 @@ public class TerribleTulip : BaseEnemy
     private List<HomingProjectile> projectiles; // List of projectiles to track
     private Texture2D projectileTexture;        // Store the projectile texture
 
-    public override void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
+    public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
-        base.Initialize(startPosition, hitPoints, texture, storage);
+        base.Initialize(texture, storage);
         base.setAnimation("terribleTulipAnimation");
         shootCooldown = 3.0;
         projectiles = new List<HomingProjectile>();
@@ -29,7 +29,7 @@ public class TerribleTulip : BaseEnemy
         {
             Vector2 playerPosition = new Vector2(player.X, player.Y);
             // Create and shoot a homing projectile towards the player
-            projectiles.Add(new HomingProjectile(position, playerPosition, projectileTexture));
+            projectiles.Add(new HomingProjectile(GameObject.position, playerPosition, projectileTexture));
             shootCooldown = 3.0; // Reset the cooldown after shooting
         }
     }
@@ -52,16 +52,6 @@ public class TerribleTulip : BaseEnemy
                 projectiles.RemoveAt(i);
                 i--; // Adjust the index after removal
             }
-        }
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-        if (HitPoints <= 0)
-        {
-            // Handle the death of the tulip
-            IsActive = false;
         }
     }
 

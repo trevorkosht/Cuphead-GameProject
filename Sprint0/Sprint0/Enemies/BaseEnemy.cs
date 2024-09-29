@@ -2,11 +2,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-public abstract class BaseEnemy : IEnemy
+public abstract class BaseEnemy : IComponent
 {
+    public GameObject GameObject { get; set; }
+    public bool enabled { get; set; } = true;
     public int HitPoints { get; protected set; }
     public bool IsActive { get; set; }
-    protected Vector2 position;
 
     protected Texture2D spriteTexture;    // Holds the texture for the enemy sprite
     protected float spriteScale = 1f;     // Scaling factor for the sprite
@@ -27,17 +28,14 @@ public abstract class BaseEnemy : IEnemy
     public abstract void Shoot(GameTime gameTime);
 
     // Initialize with position, hitpoints, and the texture
-    public virtual void Initialize(Vector2 startPosition, int hitPoints, Texture2D texture, Texture2DStorage storage)
+    public virtual void Initialize(Texture2D texture, Texture2DStorage storage)
     {
-        position = startPosition;
-        HitPoints = hitPoints;
         IsActive = true;
         spriteTexture = texture;
         textureStorage = storage;
         player = GOManager.Instance.Player;
 
-        destRectangle = new Rectangle((int)position.X, (int)position.Y, 144, 144);
-
+        destRectangle = new Rectangle((int)GameObject.X, (int)GameObject.Y, 144, 144);
     }
 
     public virtual void Update(GameTime gameTime)
@@ -49,7 +47,7 @@ public abstract class BaseEnemy : IEnemy
 
 
             //TEMPORARY
-            destRectangle = new Rectangle((int)position.X, (int)position.Y, destRectangle.Width, destRectangle.Height);
+            destRectangle = new Rectangle((int)GameObject.X, (int)GameObject.Y, destRectangle.Width, destRectangle.Height);
             if(currentAnimation.Key != null) {
                 spriteAnimations[currentAnimation.Key].updateAnimation();
             }
@@ -61,21 +59,9 @@ public abstract class BaseEnemy : IEnemy
     {
         if (IsActive && spriteTexture != null)
         {
-
             if(currentAnimation.Key != null) {
                 spriteAnimations[currentAnimation.Key].draw(spriteBatch, destRectangle, isFacingRight);
-
             }
-
-        }
-    }
-
-    public virtual void TakeDamage(int damage)
-    {
-        HitPoints -= damage;
-        if (HitPoints <= 0)
-        {
-            IsActive = false;
         }
     }
 
