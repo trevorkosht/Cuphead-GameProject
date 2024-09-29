@@ -7,7 +7,6 @@ public class MurderousMushroom : BaseEnemy
 {
     private bool isHidden;
     private double shootCooldown;
-    private List<SporeProjectile> spores; // List of spores fired by the mushroom
     private Texture2D purpleSporeTexture;
     private Texture2D pinkSporeTexture;
 
@@ -17,7 +16,6 @@ public class MurderousMushroom : BaseEnemy
         sRend.setAnimation("murderousMushroomAnimation");
         isHidden = false;
         shootCooldown = 2.0;
-        spores = new List<SporeProjectile>();
 
         // Fetch the spore textures from the texture storage
         purpleSporeTexture = storage.GetTexture("PurpleSpore");
@@ -44,7 +42,10 @@ public class MurderousMushroom : BaseEnemy
 
                 // Shoot a spore in the direction of the player
                 Texture2D sporeTexture = shootPinkSpore ? pinkSporeTexture : purpleSporeTexture;
-                spores.Add(new SporeProjectile(GameObject.position, playerPosition, sporeTexture, shootPinkSpore));
+                GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new SporeProjectile(GameObject.position, playerPosition, sporeTexture, shootPinkSpore));
+
+
+                GOManager.Instance.allGOs.Add(projectile);
 
                 shootCooldown = 2.0; // Reset the cooldown for the next spore
             }
@@ -65,29 +66,7 @@ public class MurderousMushroom : BaseEnemy
     {
         base.Update(gameTime);
 
-        // Update each spore's position and behavior
-        for (int i = 0; i < spores.Count; i++)
-        {
-            spores[i].Update(gameTime);
-
-            // Remove spores that are no longer active
-            if (!spores[i].IsActive)
-            {
-                spores.RemoveAt(i);
-                i--; // Adjust the index after removal
-            }
-        }
-
         // Handle shooting logic
         Shoot(gameTime);
-    }
-
-    public override void Draw(SpriteBatch spriteBatch)
-    {
-        if (IsActive)
-            foreach (var spore in spores)
-            {
-                spore.Draw(spriteBatch);
-            }
     }
 }
