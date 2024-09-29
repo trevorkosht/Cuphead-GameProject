@@ -95,7 +95,8 @@ namespace Sprint0
         {
             gameObjects.Clear();
             player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
-            Initialize();
+            base.Initialize();
+            base.LoadContent();
         }
 
 
