@@ -6,9 +6,9 @@ using static IController;
 
 public class EnemyController
 {
-    private List<BaseEnemy> enemies;
+    private List<GameObject> enemies;
     private int currentEnemyIndex;
-    private BaseEnemy currentEnemy;
+    private GameObject currentEnemy;
     private IKeyboardController keyboardController;
     private Texture2DStorage textureStorage;
 
@@ -19,15 +19,15 @@ public class EnemyController
         currentEnemyIndex = 0;
 
         // Initialize the enemy list using the factory
-        enemies = new List<BaseEnemy>
+        enemies = new List<GameObject>
         {
-            EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn, textureStorage),
-            EnemyFactory.CreateEnemy(EnemyType.DeadlyDaisy, textureStorage),
-            EnemyFactory.CreateEnemy(EnemyType.MurderousMushroom, textureStorage),
-            EnemyFactory.CreateEnemy(EnemyType.TerribleTulip, textureStorage),
-            EnemyFactory.CreateEnemy(EnemyType.AcornMaker, textureStorage),
-            EnemyFactory.CreateEnemy(EnemyType.BothersomeBlueberry, textureStorage),
-            EnemyFactory.CreateEnemy(EnemyType.ToothyTerror, textureStorage)
+            EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn),
+            EnemyFactory.CreateEnemy(EnemyType.DeadlyDaisy),
+            EnemyFactory.CreateEnemy(EnemyType.MurderousMushroom),
+            EnemyFactory.CreateEnemy(EnemyType.TerribleTulip),
+            EnemyFactory.CreateEnemy(EnemyType.AcornMaker),
+            EnemyFactory.CreateEnemy(EnemyType.BothersomeBlueberry),
+            EnemyFactory.CreateEnemy(EnemyType.ToothyTerror)
         };
 
         currentEnemy = enemies[currentEnemyIndex];
