@@ -85,10 +85,7 @@ public class PlayerController : IComponent
                 GameObject.Y = floorY;
             }
             else
-            {
-                animator.setAnimation("Jump");
                 IsGrounded = false;
-            }
         }
     }
 

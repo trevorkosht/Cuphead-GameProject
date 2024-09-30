@@ -1,16 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Threading;
 
 public class SpreadShotProjectile : Projectile
 {
     private float speed = 500f; // Adjust speed based on game requirements
-    private float angleSpread = 60f; // Spread angle between projectiles (e.g., 180 degrees / 3)
+    private float angleSpread = 45f; // Spread angle between projectiles (e.g., 180 degrees / 3)
     private Vector2[] directions; // Array to hold the spread directions
+    bool isFacingRight;
 
     public SpreadShotProjectile(bool isFacingRight)
     {
-
+        this.isFacingRight = isFacingRight;
         // Create three directions for the spread shot (adjust based on isFacingRight)
         directions = new Vector2[]
         {
@@ -50,6 +52,7 @@ public class SpreadShotProjectile : Projectile
             // Set up the animation and texture
             spriteRenderer.addAnimation("SpreadAnimation", new Animation(textureStorage.GetTexture("Spread"), 5, 1, 144, 144));
             spriteRenderer.setAnimation("SpreadAnimation");
+            spriteRenderer.isFacingRight = isFacingRight;
 
             // Attach components to the spread shot instance
             spreadShot.AddComponent(spreadLogic);
