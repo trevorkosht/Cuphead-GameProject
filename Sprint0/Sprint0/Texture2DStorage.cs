@@ -70,14 +70,14 @@ public class Texture2DStorage
 
         //Load player animations
         Animation playerDeathAnimation = new Animation(GetTexture("PlayerDeath"), 5, 16, 144, 144);
-        Animation playerDuckAnimation = new Animation(GetTexture("PlayerDuck"), 5, 5, 144, 144);
+        Animation playerDuckAnimation = new Animation(GetTexture("PlayerDuck"), 5, 8, 144, 144);
         Animation playerDuckShootAnimation = new Animation(GetTexture("PlayerDuckShoot"), 5, 3, 144, 144);
         Animation playerHitAirAnimation = new Animation(GetTexture("PlayerHitAir"), 5, 6, 144, 144);
         Animation playerHitGroundAnimation = new Animation(GetTexture("PlayerHitGround"), 5, 6, 144, 144);
-        Animation playerIdleAnimation = new Animation(GetTexture("PlayerIdle"), 5, 5, 144, 144);
+        Animation playerIdleAnimation = new Animation(GetTexture("PlayerIdle"), 5, 8, 144, 144);
         Animation playerIntroAnimation = new Animation(GetTexture("PlayerIntro"), 5, 28, 144, 144);
-        Animation playerJumpAnimation = new Animation(GetTexture("PlayerJump"), 5, 8, 144, 144);
-        Animation playerRunAnimation = new Animation(GetTexture("PlayerRun"), 1, 16, 144, 144);
+        Animation playerJumpAnimation = new Animation(GetTexture("PlayerJump"), 2, 8, 144, 144);
+        Animation playerRunAnimation = new Animation(GetTexture("PlayerRun"),1, 16, 144, 144);
         Animation playerRunShootingDiagonalUpAnimation = new Animation(GetTexture("PlayerRunShootingDiagonalUp"), 5, 16, 144, 144);
         Animation playerRunShootingStraightAnimation = new Animation(GetTexture("PlayerRunShootingStraight"), 5, 16, 144, 144);
         Animation playerShootDiagonalDownAnimation = new Animation(GetTexture("PlayerShootDiagonalDown"), 5, 3, 144, 144);
