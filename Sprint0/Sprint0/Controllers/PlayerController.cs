@@ -18,17 +18,17 @@ public class PlayerController : IComponent
     public float timeTillNextBullet { get; set; } = .2f;
     public float timeTillNextHit { get; set; } = .4f;
 
-    public int Health { get; set; } = 100; 
+    public int Health { get; set; } = 100;
 
     private float airTime = 0f, shootTime = 0f, hitTime = 0f;
     private int floorY;
-    private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust, isShooting;
+    private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust, isShooting = false;
 
     private readonly KeyboardController keyboardController = new KeyboardController();
     private readonly MouseController mouseController = new MouseController();
 
     private const int DuckingYOffset = 50;
-    private const float InvincibilityDuration = 2f;
+    private const float InvincibilityDuration = 0.5f;
 
     private ProjectileType currentProjectileType = ProjectileType.Peashooter;
 
@@ -121,7 +121,6 @@ public class PlayerController : IComponent
             velocity.Y = JumpForce;
             IsGrounded = false;
         }
-        
     }
 
     private void UpdateFacingDirection(Vector2 input)
@@ -138,6 +137,10 @@ public class PlayerController : IComponent
 
     private void HandleDucking(bool duckRequested)
     {
+        // Prevent ducking if animator is playing hit animation
+        var animator = GameObject.GetComponent<SpriteRenderer>();
+        if (hitTime > 0) return; // Do not allow ducking if hit animation is playing
+
         if (duckRequested && IsGrounded)
         {
             if (!IsDucking)
@@ -145,7 +148,6 @@ public class PlayerController : IComponent
                 GameObject.Y = floorY + DuckingYOffset;
                 IsDucking = true;
                 isDuckingYAdjust = true; // Set flag when ducking
-
             }
         }
         else
@@ -155,12 +157,9 @@ public class PlayerController : IComponent
                 GameObject.Y = floorY;
                 IsDucking = false;
                 isDuckingYAdjust = false; // Clear flag when not ducking
-
             }
         }
     }
-
-
 
     private void HandleProjectileSwitching(KeyboardState state)
     {
@@ -187,15 +186,8 @@ public class PlayerController : IComponent
             // Optionally, you can add it to the game world or a list of active projectiles
             GOManager.Instance.allGOs.Add(newProjectile);
 
-            if (IsGrounded) {
-                if (IsDucking) animator.setAnimation("DuckShoot");
-                else if (IsRunning) animator.setAnimation("RunShootingStraight");
-                else animator.setAnimation("ShootStraight");
-            }
         }
-        isShooting = false;
     }
-
 
     private float GetBulletCooldown(int projectileType)
     {
@@ -206,18 +198,19 @@ public class PlayerController : IComponent
             2 => 1 / (25.1f / 8.85f), // Chaser
             3 => 1 / (33.14f / 11.6f), // Lobber
             4 => 1 / (35.38f / 26f), // Roundabout
-
             _ => timeTillNextBullet
         };
     }
 
     private void HandleDamageDetection()
     {
-        if(keyboardController.IsDamageRequested())
-        //if (!IsInvincible && GameObject.GetComponent<CollisionHandler>().IsCollidingWith("EnemyProjectile"))
-        //{
+        if (keyboardController.IsDamageRequested())
+        {
+            //if (!IsInvincible && GameObject.GetComponent<CollisionHandler>().IsCollidingWith("EnemyProjectile"))
+            //{
             TakeDamage(20); // Example damage value
-        //}
+            //}
+        }
     }
 
     public void TakeDamage(int damage)
@@ -245,12 +238,11 @@ public class PlayerController : IComponent
         {
             animator.setAnimation(IsGrounded ? "HitGround" : "HitAir");
         }
-        else if (IsDucking && !isShooting) {
-            animator.setAnimation("Duck");
+        else if (IsDucking)
+        {
+            animator.setAnimation(shootTime > 0 ? "DuckShoot" : "Duck");
         }
-        else if (IsDucking && isShooting) {
-            animator.setAnimation("DuckShoot");
-        }
+
         else if (!IsGrounded)
         {
             animator.setAnimation("Jump");
