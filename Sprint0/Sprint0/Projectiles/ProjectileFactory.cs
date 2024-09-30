@@ -10,13 +10,12 @@ public class ProjectileFactory
         GameObject projectile = new GameObject((int)posX, (int)posY);
         Projectile projectileLogic;
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
-        Texture2D projectileTexture = textureStorage.GetTexture("PurpleSpore"); // Default texture
         SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), false);
 
         switch (type)
         {
             case ProjectileType.Peashooter:
-                projectileLogic = new PeashooterProjectile();
+                projectileLogic = new PeashooterProjectile(isFacingRight);
                 projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
                 spriteRenderer.setAnimation("PurpleSporeAnimation");
@@ -24,7 +23,7 @@ public class ProjectileFactory
                 break;
 
             case ProjectileType.SpreadShot:
-                projectileLogic = new SpreadShotProjectile();
+                projectileLogic = new SpreadShotProjectile(isFacingRight);
                 projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
                 spriteRenderer.setAnimation("PurpleSporeAnimation");

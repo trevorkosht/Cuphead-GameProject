@@ -7,6 +7,8 @@ public class GOManager
     public Texture2DStorage textureStorage { get; set; }
     public List<GameObject> allGOs { get; set; }
 
+    public GameObject currentEnemy { get; set; }
+
     private GOManager() { }
 
     public static GOManager Instance

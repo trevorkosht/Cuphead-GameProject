@@ -8,7 +8,7 @@ public class EnemyController
 {
     private List<GameObject> enemies;
     public int currentEnemyIndex;
-    private GameObject currentEnemy;
+    public GameObject currentEnemy;
     private KeyboardController keyboardController = new KeyboardController();
     private Texture2DStorage textureStorage;
 
@@ -31,6 +31,7 @@ public class EnemyController
         };
 
         currentEnemy = enemies[currentEnemyIndex];
+        
     }
 
     public void Update(GameTime gameTime)
@@ -53,6 +54,8 @@ public class EnemyController
                 currentEnemy = null;
             currentEnemy?.Update(gameTime);
         }
+
+        GOManager.Instance.currentEnemy = currentEnemy;
     }
 
     public void Draw(SpriteBatch spriteBatch)

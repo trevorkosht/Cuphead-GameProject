@@ -1,27 +1,37 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 public class PeashooterProjectile : Projectile
 {
     private float speed = 5f;
+    private bool isFacingRight;
 
+    public PeashooterProjectile(bool isFacingRight)
+    {
+        this.isFacingRight = isFacingRight;
+    }
     public override void Update(GameTime gameTime)
     {
-        if (IsActive)
+        
+        // Move straight in the X direction based on the facing direction
+        if (isFacingRight)
         {
-            // Move straight in the X direction
-            GameObject.Move((int)speed, 0);
+            GameObject.Move((int)(speed), 0); // Move right
+        }
+        else
+        {
+            GameObject.Move((int)(-speed), 0); // Move left
+        }
 
-            // Deactivate when it goes off-screen
-            if (GameObject.X > 800) // Assuming 800 is the right boundary of the screen
-            {
-                IsActive = false;
-            }
+        // Deactivate when it goes off-screen (assuming 1200 is the right boundary of the screen)
+        if (isFacingRight && GameObject.X > 1200 || !isFacingRight && GameObject.X < 0)
+        {
+            GameObject.Destroy();
         }
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        // DO Nothing, Handled by Sprite Renderer
+        // No changes here, handled by the SpriteRenderer
     }
 }
