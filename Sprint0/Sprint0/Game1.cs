@@ -6,7 +6,6 @@ using Sprint0.Controllers;
 using System.Collections.Generic;
 using static IController;
 
-
 namespace Sprint0
 {
     public class Game1 : Game
@@ -22,16 +21,14 @@ namespace Sprint0
 
         private List<GameObject> gameObjects = new List<GameObject>();
 
-        //Example of how to make a GameObject
-        GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
+        // Create the player without ProjectileFactory as a component
+        GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController() });
 
         private EnemyController enemyController;
-
         private BlockController blockController;
         private ItemsController itemsControl;
 
         bool resetFrame;
-
 
         public Game1()
         {
@@ -43,6 +40,7 @@ namespace Sprint0
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             keyboardController = new KeyboardController();
+
         }
 
         protected override void Initialize()
@@ -77,7 +75,8 @@ namespace Sprint0
 
         protected override void Update(GameTime gameTime) //Update stuff here
         {
-            for(int i = 0; i < gameObjects.Count; i++) {
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
                 GameObject gameObject = gameObjects[i];
                 if (gameObject.destroyed) //Remove destroyed GOs
                 {
@@ -100,10 +99,10 @@ namespace Sprint0
             base.Update(gameTime);
         }
 
-        private void ResetGame()    
+        private void ResetGame()
         {
             enemyController.currentEnemyIndex = 0;
-            for(int i = 0; i < gameObjects.Count; i++)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
                 GameObject gameObject = gameObjects[i];
                 gameObject.Destroy();
@@ -111,20 +110,20 @@ namespace Sprint0
                 i--;
             }
             resetFrame = true;
-            player = new GameObject(50, 50, new List<IComponent> { new PlayerController(), new ProjectileManager() });
+            player = new GameObject(50, 50, new List<IComponent> { new PlayerController() }); // Reset player without ProjectileFactory
             Initialize();
         }
-
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.BlanchedAlmond);
             _spriteBatch.Begin(); //Draw stuff here
 
-            foreach (var gameObject in gameObjects) {
+            foreach (var gameObject in gameObjects)
+            {
                 if (resetFrame)
                 {
-                    resetFrame = false; 
+                    resetFrame = false;
                     break;
                 }
                 gameObject.Draw(_spriteBatch);
@@ -132,7 +131,7 @@ namespace Sprint0
             blockController.Draw(_spriteBatch);
             itemsControl.Draw(gameTime, _spriteBatch);
             enemyController.Draw(_spriteBatch);
-            
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }
