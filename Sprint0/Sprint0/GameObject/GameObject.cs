@@ -11,6 +11,7 @@ public class GameObject
     public Vector2 scale { get; set; }
     public Vector2 position { get; private set; }
     public bool destroyed { get; set; } = false;
+    public string type { get; set; }
 
     // List of components attached to this GameObjects
     private List<IComponent> components = new List<IComponent>();
