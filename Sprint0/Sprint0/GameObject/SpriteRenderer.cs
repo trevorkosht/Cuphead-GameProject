@@ -54,7 +54,7 @@ public class SpriteRenderer : IComponent {
     }
 
     public void setAnimation(string animationName) {
-        if (animationName == currentAnimation.Key)
+        if (animationName.Equals(currentAnimation.Key))
             return;
         if (spriteAnimations.ContainsKey(animationName)) {
             spriteAnimations[animationName].resetAnimation();

@@ -27,8 +27,10 @@ public class PlayerController : IComponent
     private readonly KeyboardController keyboardController = new KeyboardController();
     private readonly MouseController mouseController = new MouseController();
 
-    private const int DuckingYOffset = 50; 
-    private const float InvincibilityDuration = 2f; 
+    private const int DuckingYOffset = 50;
+    private const float InvincibilityDuration = 2f;
+
+    private ProjectileType currentProjectileType = ProjectileType.Peashooter;
 
     public PlayerController() { }
 
@@ -160,13 +162,29 @@ public class PlayerController : IComponent
 
 
 
+    private void HandleProjectileSwitching(KeyboardState state)
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            if (keyboardController.IsProjectileSwitchRequested(i))
+            {
+                // Map the projectile index (1-5) to the ProjectileType enum
+                currentProjectileType = (ProjectileType)(i - 1);
+                timeTillNextBullet = GetBulletCooldown(i - 1); // Adjust for zero-based index
+                break;
+            }
+        }
+    }
+
     private void HandleShooting(KeyboardState state, SpriteRenderer animator)
     {
         if (keyboardController.IsShootRequested() && shootTime <= 0 && hitTime <= 0)
         {
             isShooting = true;
             shootTime = timeTillNextBullet;
-            GameObject.GetComponent<ProjectileManager>().FireProjectile(GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+            // Fire the projectile using the currentProjectileType
+            GameObject newProjectile = ProjectileFactory.CreateProjectile(currentProjectileType, GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+            // Optionally, you can add it to the game world or a list of active projectiles
 
             if (IsGrounded)
             {
@@ -178,20 +196,8 @@ public class PlayerController : IComponent
         isShooting = false;
     }
 
-    private void HandleProjectileSwitching(KeyboardState state)
-    {
-        for (int i = 0; i <= 5; i++)
-        {
-            if (keyboardController.IsProjectileSwitchRequested(i))
-            {
-                GameObject.GetComponent<ProjectileManager>().projectileType = i;
-                timeTillNextBullet = GetBulletCooldown(i);
-                break;
-            }
-        }
-    }
 
-    private float GetBulletCooldown(int projectileType)
+private float GetBulletCooldown(int projectileType)
     {
         return projectileType switch
         {
