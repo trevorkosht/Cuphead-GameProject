@@ -11,27 +11,26 @@ namespace Sprint0.Controllers
     {
         private KeyboardController keyboardController;
 
-        private List<IComponent> Items;
+        private List<GameObject> Items;
         private Vector2 itemPosition;
 
         private int currentItemIndex;
 
         public bool enabled { get; set; } = true;
 
-        public IComponent currentItem { get; set; }
+        public GameObject currentItem { get; set; }
 
         public ItemsController(Texture2DStorage textureStorage)
         {
             itemPosition = new Vector2(400, 460);
-            Items = new List<IComponent>()
+            Items = new List<GameObject>()
             {
-                //new GameObject(100, 100, new Cuphead.Items.YellowPotion(itemPosition, textureStorage.GetTexture("Item1_3"))),
-                new Cuphead.Items.YellowPotion(itemPosition, textureStorage.GetTexture("Item1_3")),
-                new Cuphead.Items.SkybluePotion(itemPosition, textureStorage.GetTexture("Item1_3")),
-                new Cuphead.Items.RedPotion(itemPosition, textureStorage.GetTexture("Item1_3")),
-                new Cuphead.Items.BluePotion(itemPosition, textureStorage.GetTexture("Item4_6")),
-                new Cuphead.Items.OceanbluePotion(itemPosition, textureStorage.GetTexture("Item4_6")),
-                new Cuphead.Items.RedKetchupPotion(itemPosition, textureStorage.GetTexture("Item4_6"))
+                new GameObject((int)itemPosition.X, (int)itemPosition.Y, new Cuphead.Items.YellowPotion(itemPosition, textureStorage.GetTexture("Item1_3"))),
+                new GameObject((int)itemPosition.X, (int)itemPosition.Y, new Cuphead.Items.SkybluePotion(itemPosition, textureStorage.GetTexture("Item1_3"))),
+                new GameObject((int)itemPosition.X, (int)itemPosition.Y, new Cuphead.Items.RedPotion(itemPosition, textureStorage.GetTexture("Item1_3"))),
+                new GameObject((int)itemPosition.X, (int)itemPosition.Y, new Cuphead.Items.BluePotion(itemPosition, textureStorage.GetTexture("Item1_3"))),
+                new GameObject((int)itemPosition.X, (int)itemPosition.Y, new Cuphead.Items.OceanbluePotion(itemPosition, textureStorage.GetTexture("Item1_3"))),
+                new GameObject((int)itemPosition.X, (int)itemPosition.Y, new Cuphead.Items.RedKetchupPotion(itemPosition, textureStorage.GetTexture("Item1_3")))
             };
             currentItem = Items[0];
 
