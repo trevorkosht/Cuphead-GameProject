@@ -13,7 +13,7 @@ public class SpriteRenderer : IComponent {
     Texture2D pixel; //For debugging rectangle boxes
 
 
-    private KeyValuePair<string, Animation> currentAnimation;
+    public KeyValuePair<string, Animation> currentAnimation { get; set; }
     private Dictionary<string, Animation> spriteAnimations = new Dictionary<string, Animation>();
 
     public SpriteRenderer(Rectangle destRectangle, bool isFacingRight) {
@@ -59,7 +59,7 @@ public class SpriteRenderer : IComponent {
         }
     }
 
-    public void immediateSetAnimation(string animationName)
+    public void setAndResetAnimation(string animationName)
     {
         if (spriteAnimations.ContainsKey(animationName))
         {
