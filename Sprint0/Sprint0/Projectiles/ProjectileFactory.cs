@@ -33,9 +33,9 @@ public class ProjectileFactory
             case ProjectileType.Chaser:
                 projectileLogic = new ChaserProjectile();
                 projectile.AddComponent(projectileLogic);
-                spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
-                spriteRenderer.setAnimation("PurpleSporeAnimation");
-                projectileLogic.Initialize(textureStorage.GetTexture("PurpleSpore"), textureStorage);
+                spriteRenderer.addAnimation("ChaserAnimation", new Animation(textureStorage.GetTexture("Chaser"), 5, 8, 144, 144));
+                spriteRenderer.setAnimation("ChaserAnimation");
+                projectileLogic.Initialize(textureStorage.GetTexture("Chaser"), textureStorage);
                 break;
 
             case ProjectileType.Lobber:
