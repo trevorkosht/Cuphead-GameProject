@@ -14,9 +14,14 @@ public class RoundaboutProjectile : Projectile
     private float launchDuration = 1f; // Duration in seconds to fly outward before returning
     private float elapsedTime; // Tracks time since launch
 
-    public RoundaboutProjectile(bool isFacingRight)
+    public RoundaboutProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
         this.isFacingRight = isFacingRight;
+
+        if (!isFacingRight)
+        {
+            spriteRenderer.isFacingRight = false;
+        }
     }
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)

@@ -6,9 +6,13 @@ public class PeashooterProjectile : Projectile
     private float speed = 5f;
     private bool isFacingRight;
 
-    public PeashooterProjectile(bool isFacingRight)
+    public PeashooterProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
         this.isFacingRight = isFacingRight;
+        if (!isFacingRight)
+        {
+           spriteRenderer.isFacingRight = false;
+        }
     }
     public override void Update(GameTime gameTime)
     {
@@ -17,6 +21,7 @@ public class PeashooterProjectile : Projectile
         if (isFacingRight)
         {
             GameObject.Move((int)(speed), 0); // Move right
+            
         }
         else
         {

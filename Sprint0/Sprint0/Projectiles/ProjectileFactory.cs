@@ -10,28 +10,28 @@ public class ProjectileFactory
         GameObject projectile = new GameObject((int)posX+50, (int)posY+20);
         Projectile projectileLogic;
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
-        SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), false);
+        SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), true);
 
         switch (type)
         {
             case ProjectileType.Peashooter:
-                projectileLogic = new PeashooterProjectile(isFacingRight);
+                projectileLogic = new PeashooterProjectile(isFacingRight, spriteRenderer);
                 projectile.AddComponent(projectileLogic);
-                spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
-                spriteRenderer.setAnimation("PurpleSporeAnimation");
-                projectileLogic.Initialize(textureStorage.GetTexture("PurpleSpore"), textureStorage);
+                spriteRenderer.addAnimation("PeashooterAnimation", new Animation(textureStorage.GetTexture("Peashooter"), 5, 8, 144, 144));
+                spriteRenderer.setAnimation("PeashooterAnimation");
+                projectileLogic.Initialize(textureStorage.GetTexture("Peashooter"), textureStorage);
                 break;
 
             case ProjectileType.SpreadShot:
                 projectileLogic = new SpreadShotProjectile(isFacingRight);
                 projectile.AddComponent(projectileLogic);
-                spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
-                spriteRenderer.setAnimation("PurpleSporeAnimation");
-                projectileLogic.Initialize(textureStorage.GetTexture("PurpleSpore"), textureStorage);
+                spriteRenderer.addAnimation("SpreadAnimation", new Animation(textureStorage.GetTexture("Spread"), 5, 4, 144, 144));
+                spriteRenderer.setAnimation("SpreadAnimation");
+                projectileLogic.Initialize(textureStorage.GetTexture("Spread"), textureStorage);
                 break;
 
             case ProjectileType.Chaser:
-                projectileLogic = new ChaserProjectile();
+                projectileLogic = new ChaserProjectile(isFacingRight, spriteRenderer);
                 projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("ChaserAnimation", new Animation(textureStorage.GetTexture("Chaser"), 5, 8, 144, 144));
                 spriteRenderer.setAnimation("ChaserAnimation");
@@ -39,19 +39,20 @@ public class ProjectileFactory
                 break;
 
             case ProjectileType.Lobber:
-                projectileLogic = new LobberProjectile(isFacingRight);
+                projectileLogic = new LobberProjectile(isFacingRight, spriteRenderer);
                 projectile.AddComponent(projectileLogic);
-                spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
-                spriteRenderer.setAnimation("PurpleSporeAnimation");
-                projectileLogic.Initialize(textureStorage.GetTexture("PurpleSpore"), textureStorage);
+                spriteRenderer.addAnimation("LobberAnimation", new Animation(textureStorage.GetTexture("Lobber"), 5, 8, 144, 144));
+                spriteRenderer.setAnimation("LobberAnimation");
+                projectileLogic.Initialize(textureStorage.GetTexture("Lobber"), textureStorage);
                 break;
 
+
             case ProjectileType.Roundabout:
-                projectileLogic = new RoundaboutProjectile(isFacingRight);
+                projectileLogic = new RoundaboutProjectile(isFacingRight, spriteRenderer);
                 projectile.AddComponent(projectileLogic);
-                spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
-                spriteRenderer.setAnimation("PurpleSporeAnimation");
-                projectileLogic.Initialize(textureStorage.GetTexture("PurpleSpore"), textureStorage);
+                spriteRenderer.addAnimation("RoundaboutAnimation", new Animation(textureStorage.GetTexture("Roundabout"), 5, 8, 144, 144));
+                spriteRenderer.setAnimation("RoundaboutAnimation");
+                projectileLogic.Initialize(textureStorage.GetTexture("Roundabout"), textureStorage);
                 break;
 
             default:

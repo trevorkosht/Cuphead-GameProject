@@ -10,9 +10,13 @@ public class LobberProjectile : Projectile
     private int bounceCount = 0; // Track the number of bounces
     private int maxBounces = 3;  // Maximum number of bounces before destroying
 
-    public LobberProjectile(bool isFacingRight)
+    public LobberProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
         this.isFacingRight = isFacingRight;
+        if (!isFacingRight)
+        {
+            spriteRenderer.isFacingRight = false;
+        }
     }
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)

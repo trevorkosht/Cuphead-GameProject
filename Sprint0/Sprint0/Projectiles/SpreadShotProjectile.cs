@@ -42,12 +42,14 @@ public class SpreadShotProjectile : Projectile
         {
             // Create a copy of this projectile in a specific direction
             GameObject spreadShot = new GameObject(GameObject.X, GameObject.Y);
-            var spreadLogic = new SpreadShotInstance(directions[i] * speed); // Create instance with specific direction
+            
             SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(spreadShot.X, spreadShot.Y, 144, 144), false);
             spriteRenderer.spriteScale = 0.5f;
+
+            var spreadLogic = new SpreadShotInstance(directions[i] * speed, spriteRenderer);
             // Set up the animation and texture
-            spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
-            spriteRenderer.setAnimation("PurpleSporeAnimation");
+            spriteRenderer.addAnimation("SpreadAnimation", new Animation(textureStorage.GetTexture("Spread"), 5, 1, 144, 144));
+            spriteRenderer.setAnimation("SpreadAnimation");
 
             // Attach components to the spread shot instance
             spreadShot.AddComponent(spreadLogic);
@@ -70,9 +72,13 @@ public class SpreadShotInstance : Projectile
     private Vector2 direction;
     private float lifetime = 2.0f; // Projectile lifetime in seconds (for demo purposes)
 
-    public SpreadShotInstance(Vector2 direction)
+    public SpreadShotInstance(Vector2 direction, SpriteRenderer spriteRendeer)
     {
         this.direction = direction;
+        if(direction.X < 0)
+        {
+            spriteRendeer.isFacingRight = false;
+        }
     }
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)

@@ -8,7 +8,16 @@ public class ChaserProjectile : Projectile
     private float speed = 2f; // Adjust speed based on desired behavior
     private GameObject targetEnemy; // The enemy that this projectile will chase
     private Vector2 lastDirection; // Stores the last direction of movement
+    private bool isFacingRight;
 
+    public ChaserProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
+    {
+        this.isFacingRight = isFacingRight;
+        if (!isFacingRight)
+        {
+            spriteRenderer.isFacingRight = false;
+        }
+    }
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
