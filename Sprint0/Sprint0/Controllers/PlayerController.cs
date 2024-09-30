@@ -185,6 +185,7 @@ public class PlayerController : IComponent
             // Fire the projectile using the currentProjectileType
             GameObject newProjectile = ProjectileFactory.CreateProjectile(currentProjectileType, GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
             // Optionally, you can add it to the game world or a list of active projectiles
+            GOManager.Instance.allGOs.Add(newProjectile);
 
             if (IsGrounded) {
                 if (IsDucking) animator.setAnimation("DuckShoot");
