@@ -25,6 +25,7 @@ namespace Sprint0.Controllers
             itemPosition = new Vector2(400, 460);
             Items = new List<IComponent>()
             {
+                //new GameObject(100, 100, new Cuphead.Items.YellowPotion(itemPosition, textureStorage.GetTexture("Item1_3"))),
                 new Cuphead.Items.YellowPotion(itemPosition, textureStorage.GetTexture("Item1_3")),
                 new Cuphead.Items.SkybluePotion(itemPosition, textureStorage.GetTexture("Item1_3")),
                 new Cuphead.Items.RedPotion(itemPosition, textureStorage.GetTexture("Item1_3")),
