@@ -19,6 +19,7 @@ public class ProjectileFactory
                 projectileLogic = new PeashooterProjectile();
                 projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
+                spriteRenderer.setAnimation("PurpleSporeAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("PurpleSpore"), textureStorage);
                 break;
 
@@ -26,6 +27,7 @@ public class ProjectileFactory
                 projectileLogic = new SpreadShotProjectile();
                 projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
+                spriteRenderer.setAnimation("PurpleSporeAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("PurpleSpore"), textureStorage);
                 break;
 
@@ -33,6 +35,7 @@ public class ProjectileFactory
                 projectileLogic = new ChaserProjectile();
                 projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
+                spriteRenderer.setAnimation("PurpleSporeAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("PurpleSpore"), textureStorage);
                 break;
 
@@ -40,6 +43,7 @@ public class ProjectileFactory
                 projectileLogic = new LobberProjectile();
                 projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
+                spriteRenderer.setAnimation("PurpleSporeAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("PurpleSpore"), textureStorage);
                 break;
 
@@ -47,6 +51,7 @@ public class ProjectileFactory
                 projectileLogic = new RoundaboutProjectile();
                 projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
+                spriteRenderer.setAnimation("PurpleSporeAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("PurpleSpore"), textureStorage);
                 break;
 
@@ -54,6 +59,7 @@ public class ProjectileFactory
                 throw new ArgumentException("Invalid projectile type specified");
         }
 
+        projectile.AddComponent(spriteRenderer);
         projectile.AddComponent(projectileLogic);
         spriteRenderer.loadAllAnimations();
 
