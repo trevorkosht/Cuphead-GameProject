@@ -7,7 +7,6 @@ public abstract class BaseEnemy : IComponent
     public GameObject GameObject { get; set; }
     public bool enabled { get; set; } = true;
     public int HitPoints { get; protected set; }
-    public bool IsActive { get; set; }
 
     protected Texture2D spriteTexture;    // Holds the texture for the enemy sprite
     protected float spriteScale = 1f;     // Scaling factor for the sprite
@@ -23,7 +22,6 @@ public abstract class BaseEnemy : IComponent
     // Initialize with and the texture
     public virtual void Initialize(Texture2D texture, Texture2DStorage storage)
     {
-        IsActive = true;
         spriteTexture = texture;
         textureStorage = storage;
         player = GOManager.Instance.Player;
@@ -32,11 +30,8 @@ public abstract class BaseEnemy : IComponent
 
     public virtual void Update(GameTime gameTime)
     {
-        if (IsActive)
-        {
-            Move(gameTime);
-            Shoot(gameTime);
-        }
+        Move(gameTime);
+        Shoot(gameTime);
     }
 
     public virtual void Draw(SpriteBatch spriteBatch)

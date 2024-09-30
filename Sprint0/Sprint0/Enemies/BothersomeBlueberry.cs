@@ -18,25 +18,20 @@ public class BothersomeBlueberry : BaseEnemy
         base.Initialize(texture, storage);
         sRend.setAnimation("bothersomeBlueberryAnimation");
         respawnPosition = new Vector2(GameObject.X, GameObject.Y);
-        speed = 150f; // Speed of horizontal movement
+        speed = 300f; // Speed of horizontal movement
         isKnockedOut = false;
         movingRight = true; // Start by moving right
     }
 
     public override void Move(GameTime gameTime)
     {
-
-        Vector2 direction = GameObject.position;
-        direction.Normalize();
-
-
         // Move left or right
 
         sRend.isFacingRight = !movingRight;
         if (movingRight)
-            GameObject.X += (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            GameObject.X += (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
         else
-            GameObject.X -= (int)(direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            GameObject.X -= (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
         // Check for edges and reverse direction if necessary
         if (ReachedEdge())
@@ -53,7 +48,7 @@ public class BothersomeBlueberry : BaseEnemy
     private bool ReachedEdge()
     {
         // Get the screen width from the graphics device viewport
-        int screenWidth = 1280;
+        int screenWidth = 1280-144/2;
 
         // Check if the blueberry has reached the left or right edge of the screen
         if (GameObject.X <= 2 || GameObject.X >= screenWidth)
