@@ -29,7 +29,6 @@ public class GameObject
     }
     public GameObject(int xPosition, int yPosition, List<IComponent> components)
     {
-
         X = xPosition;
         Y = yPosition;
 
