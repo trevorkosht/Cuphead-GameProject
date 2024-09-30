@@ -59,7 +59,7 @@ public class SpriteRenderer : IComponent {
         }
     }
 
-    public void immediateSetAnimation(string animationName)
+    public void setAndResetAnimation(string animationName)
     {
         if (spriteAnimations.ContainsKey(animationName))
         {
