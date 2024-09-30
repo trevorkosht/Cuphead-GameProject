@@ -44,7 +44,7 @@ public class SpreadShotProjectile : Projectile
             GameObject spreadShot = new GameObject(GameObject.X, GameObject.Y);
             var spreadLogic = new SpreadShotInstance(directions[i] * speed); // Create instance with specific direction
             SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(spreadShot.X, spreadShot.Y, 144, 144), false);
-
+            spriteRenderer.spriteScale = 0.5f;
             // Set up the animation and texture
             spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
             spriteRenderer.setAnimation("PurpleSporeAnimation");
@@ -89,7 +89,7 @@ public class SpreadShotInstance : Projectile
 
         // Check if the projectile goes off-screen or exceeds lifetime (example bounds)
         lifetime -= deltaTime;
-        if (GameObject.X > 1200 || GameObject.X < 0 || GameObject.Y > 800 || GameObject.Y < 0 || lifetime <= 0)
+        if (GameObject.X > player.X + 200 || GameObject.X < 0 || GameObject.Y > 800 || GameObject.Y < 0 || GameObject.Y < player.Y - 200 || lifetime <= 0)
         {
             GameObject.Destroy();
         }

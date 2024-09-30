@@ -197,16 +197,16 @@ public class PlayerController : IComponent
     }
 
 
-private float GetBulletCooldown(int projectileType)
+    private float GetBulletCooldown(int projectileType)
     {
         return projectileType switch
         {
             0 => 1 / (25f / 8.3f), // Default
-            1 => 1 / (35.38f / 26f), // Megablast
-            2 => 1 / (41.33f / 6.2f), // Spread
-            3 => 1 / (35.38f / 26f), // Roundabout
-            4 => 1 / (17.1f / 2.85f), // Chaser
-            5 => 1 / (33.14f / 11.6f), // Lobber
+            1 => 1 / (41.33f / 6.2f), // Spread
+            2 => 1 / (25.1f / 8.85f), // Chaser
+            3 => 1 / (33.14f / 11.6f), // Lobber
+            4 => 1 / (35.38f / 26f), // Roundabout
+
             _ => timeTillNextBullet
         };
     }

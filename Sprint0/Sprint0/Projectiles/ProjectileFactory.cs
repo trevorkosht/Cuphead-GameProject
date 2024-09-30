@@ -7,7 +7,7 @@ public class ProjectileFactory
 {
     public static GameObject CreateProjectile(ProjectileType type, float posX, float posY, bool isFacingRight)
     {
-        GameObject projectile = new GameObject((int)posX, (int)posY);
+        GameObject projectile = new GameObject((int)posX+50, (int)posY+20);
         Projectile projectileLogic;
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
         SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), false);
@@ -39,7 +39,7 @@ public class ProjectileFactory
                 break;
 
             case ProjectileType.Lobber:
-                projectileLogic = new LobberProjectile();
+                projectileLogic = new LobberProjectile(isFacingRight);
                 projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
                 spriteRenderer.setAnimation("PurpleSporeAnimation");
@@ -47,7 +47,7 @@ public class ProjectileFactory
                 break;
 
             case ProjectileType.Roundabout:
-                projectileLogic = new RoundaboutProjectile();
+                projectileLogic = new RoundaboutProjectile(isFacingRight);
                 projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("PurpleSporeAnimation", new Animation(textureStorage.GetTexture("PurpleSpore"), 5, 1, 144, 144));
                 spriteRenderer.setAnimation("PurpleSporeAnimation");
@@ -58,6 +58,7 @@ public class ProjectileFactory
                 throw new ArgumentException("Invalid projectile type specified");
         }
 
+        spriteRenderer.spriteScale = 0.5f;
         projectile.AddComponent(spriteRenderer);
         projectile.AddComponent(projectileLogic);
         spriteRenderer.loadAllAnimations();
