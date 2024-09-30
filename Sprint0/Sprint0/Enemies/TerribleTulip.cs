@@ -13,7 +13,7 @@ public class TerribleTulip : BaseEnemy
     {
         base.Initialize(texture, storage);
         sRend.setAnimation("terribleTulipAnimation");
-        shootCooldown = 3.0;
+        shootCooldown = 1.0;
         projectileTexture = storage.GetTexture("Seed"); // Get projectile texture from storage
     }
 
@@ -25,7 +25,7 @@ public class TerribleTulip : BaseEnemy
     public override void Shoot(GameTime gametime)
     {
         shootCooldown -= gametime.ElapsedGameTime.TotalSeconds;
-        if (shootCooldown <= 0)
+        if (shootCooldown <= 0 && sRend.currentAnimation.Value.CurrentFrame == 7)
         {
             Vector2 playerPosition = new Vector2(player.X, player.Y);
             // Create and shoot a homing projectile towards the player
