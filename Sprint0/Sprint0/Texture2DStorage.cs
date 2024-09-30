@@ -49,6 +49,11 @@ public class Texture2DStorage
 
         //Projectile Textures
         _textures["Chaser"] = content.Load<Texture2D>(@"ProjectileTextures\Chaser");
+        _textures["Lobber"] = content.Load<Texture2D>(@"ProjectileTextures\Lobber");
+        _textures["Peashooter"] = content.Load<Texture2D>(@"ProjectileTextures\Peashooter");
+        _textures["Spread"] = content.Load<Texture2D>(@"ProjectileTextures\Spread");
+
+
 
 
         //item texture
