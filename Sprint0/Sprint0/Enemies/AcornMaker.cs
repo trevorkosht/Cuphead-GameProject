@@ -19,15 +19,13 @@ public class AcornMaker : BaseEnemy
         // Spawn new acorns periodically
         timeSinceLastSpawn += gameTime.ElapsedGameTime.TotalSeconds;
 
-        if (timeSinceLastSpawn >= spawnCooldown)
+        if (timeSinceLastSpawn >= spawnCooldown && sRend.currentAnimation.Value.CurrentFrame == 8)
         {
             // Create a new AggravatingAcorn using the factory system
-            GameObject newAcorn = EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn, GameObject.X + 50, GameObject.Y - 150);
+            GameObject newAcorn = EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn, GameObject.X + 70, GameObject.Y - 150);
 
+            //Add acorns to list of all GOs
             GOManager.Instance.allGOs.Add(newAcorn);
-
-            // Add the acorn to the list
-            //acorns.Add(newAcorn);
 
             // Reset spawn timer
             timeSinceLastSpawn = 0;
@@ -40,7 +38,8 @@ public class AcornMaker : BaseEnemy
         base.Initialize(texture, storage);
         sRend.setAnimation("acornMakerAnimation");
         spawnCooldown = 1.5;
-        timeSinceLastSpawn = 0;
+        timeSinceLastSpawn = 1.5;
+        sRend.isFacingRight = true;
     }
 
     public override void Update(GameTime gameTime)
