@@ -48,7 +48,7 @@ public class Texture2DStorage
         _textures["PlayerShootUp"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerShootUp");
 
         //Projectile Textures
-        _textures["Chaser"] = content.Load<Texture2D>(@"Projectiles\Chaser");
+        _textures["Chaser"] = content.Load<Texture2D>(@"ProjectileTextures\Chaser");
 
 
         //item texture
