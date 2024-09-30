@@ -41,14 +41,6 @@ public class SpriteRenderer : IComponent {
         isFacingRight = !isFacingRight;
     }
 
-    public void moveAnimation(int deltaX, int deltaY) {
-        destRectangle = new Rectangle(destRectangle.Location.X + deltaX, destRectangle.Location.Y + deltaY, destRectangle.Width, destRectangle.Height);
-    }
-
-    public void moveAnimation(Rectangle newDestRectangle) {
-        destRectangle = newDestRectangle;
-    }
-
     public string getAnimationName() {
         return this.currentAnimation.Key;
     }

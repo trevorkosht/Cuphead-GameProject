@@ -186,8 +186,7 @@ public class PlayerController : IComponent
             GameObject newProjectile = ProjectileFactory.CreateProjectile(currentProjectileType, GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
             // Optionally, you can add it to the game world or a list of active projectiles
 
-            if (IsGrounded)
-            {
+            if (IsGrounded) {
                 if (IsDucking) animator.setAnimation("DuckShoot");
                 else if (IsRunning) animator.setAnimation("RunShootingStraight");
                 else animator.setAnimation("ShootStraight");
@@ -245,12 +244,10 @@ private float GetBulletCooldown(int projectileType)
         {
             animator.setAnimation(IsGrounded ? "HitGround" : "HitAir");
         }
-        else if (IsDucking && !isShooting)
-        {
+        else if (IsDucking && !isShooting) {
             animator.setAnimation("Duck");
         }
-        else if(IsDucking && isShooting)
-        {
+        else if (IsDucking && isShooting) {
             animator.setAnimation("DuckShoot");
         }
         else if (!IsGrounded)

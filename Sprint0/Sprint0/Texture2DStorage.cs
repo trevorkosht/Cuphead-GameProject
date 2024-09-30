@@ -79,7 +79,7 @@ public class Texture2DStorage
         Animation playerJumpAnimation = new Animation(GetTexture("PlayerJump"), 2, 8, 144, 144);
         Animation playerRunAnimation = new Animation(GetTexture("PlayerRun"),1, 16, 144, 144);
         Animation playerRunShootingDiagonalUpAnimation = new Animation(GetTexture("PlayerRunShootingDiagonalUp"), 5, 16, 144, 144);
-        Animation playerRunShootingStraightAnimation = new Animation(GetTexture("PlayerRunShootingStraight"), 5, 16, 144, 144);
+        Animation playerRunShootingStraightAnimation = new Animation(GetTexture("PlayerRunShootingStraight"), 1, 16, 144, 144);
         Animation playerShootDiagonalDownAnimation = new Animation(GetTexture("PlayerShootDiagonalDown"), 5, 3, 144, 144);
         Animation playerShootDiagonalUpAnimation = new Animation(GetTexture("PlayerShootDiagonalUp"), 5, 3, 144, 144);
         Animation playerShootDownAnimation = new Animation(GetTexture("PlayerShootDown"), 5, 3, 144, 144);
