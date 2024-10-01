@@ -13,8 +13,8 @@ public class PlayerController : IComponent
     public float JumpForce { get; set; } = -1150f;
     public bool IsGrounded { get; set; } = false;
     public Vector2 velocity;
-    public float GroundLevel { get; set; } = 500f; // Arbitrary floor height
-    public float Gravity { get; set; } = 1200f; // Constant downward force
+    public float GroundLevel { get; set; } = 500f; 
+    public float Gravity { get; set; } = 1200f;
     public float timeTillNextBullet { get; set; } = .2f;
     public float timeTillNextHit { get; set; } = .4f;
 
@@ -60,7 +60,6 @@ public class PlayerController : IComponent
         shootTime -= deltaTime;
         hitTime -= deltaTime;
 
-        // Update invincibility state if needed
         if (IsInvincible)
         {
             hitTime -= deltaTime;
@@ -73,7 +72,7 @@ public class PlayerController : IComponent
 
     private void HandleGroundCheck(SpriteRenderer animator)
     {
-        if (!isDuckingYAdjust) // Prevent GroundCheck from interfering with ducking adjustment
+        if (!isDuckingYAdjust)
         {
             if (GameObject.Y >= GroundLevel)
             {
@@ -95,15 +94,12 @@ public class PlayerController : IComponent
         bool jumpRequested = keyboardController.IsJumpRequested();
         bool duckRequested = keyboardController.IsDuckRequested();
 
-        // Update Facing Direction
         UpdateFacingDirection(input);
 
         HandleDucking(duckRequested);
 
-        // Disable horizontal movement while ducking
         if (!IsDucking)
         {
-            // Horizontal Movement
             if (input.X != 0 && IsGrounded)
                 IsRunning = true;
             else
@@ -112,8 +108,7 @@ public class PlayerController : IComponent
             GameObject.X += (int)(input.X * Speed * deltaTime);
         }
 
-        // Handle Jump
-        if (jumpRequested && IsGrounded && !IsDucking) // Prevent jumping while ducking
+        if (jumpRequested && IsGrounded && !IsDucking)
         {
             velocity.Y = JumpForce;
             IsGrounded = false;
@@ -134,9 +129,8 @@ public class PlayerController : IComponent
 
     private void HandleDucking(bool duckRequested)
     {
-        // Prevent ducking if animator is playing hit animation
         var animator = GameObject.GetComponent<SpriteRenderer>();
-        if (hitTime > 0) return; // Do not allow ducking if hit animation is playing
+        if (hitTime > 0) return;
 
         if (duckRequested && IsGrounded)
         {
@@ -144,7 +138,7 @@ public class PlayerController : IComponent
             {
                 GameObject.Y = floorY + DuckingYOffset;
                 IsDucking = true;
-                isDuckingYAdjust = true; // Set flag when ducking
+                isDuckingYAdjust = true;
             }
         }
         else
@@ -153,7 +147,7 @@ public class PlayerController : IComponent
             {
                 GameObject.Y = floorY;
                 IsDucking = false;
-                isDuckingYAdjust = false; // Clear flag when not ducking
+                isDuckingYAdjust = false;
             }
         }
     }
@@ -164,9 +158,8 @@ public class PlayerController : IComponent
         {
             if (keyboardController.IsProjectileSwitchRequested(i))
             {
-                // Map the projectile index (1-5) to the ProjectileType enum
                 currentProjectileType = (ProjectileType)(i - 1);
-                timeTillNextBullet = GetBulletCooldown(i - 1); // Adjust for zero-based index
+                timeTillNextBullet = GetBulletCooldown(i - 1); 
                 break;
             }
         }
@@ -178,9 +171,7 @@ public class PlayerController : IComponent
         {
             isShooting = true;
             shootTime = timeTillNextBullet;
-            // Fire the projectile using the currentProjectileType
             GameObject newProjectile = ProjectileFactory.CreateProjectile(currentProjectileType, GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
-            // Optionally, you can add it to the game world or a list of active projectiles
             GOManager.Instance.allGOs.Add(newProjectile);
 
         }
@@ -203,10 +194,7 @@ public class PlayerController : IComponent
     {
         if (keyboardController.IsDamageRequested())
         {
-            //if (!IsInvincible && GameObject.GetComponent<CollisionHandler>().IsCollidingWith("EnemyProjectile"))
-            //{
             TakeDamage(20); // Example damage value
-            //}
         }
     }
 
@@ -223,7 +211,7 @@ public class PlayerController : IComponent
         if (!IsGrounded)
         {
             airTime += deltaTime;
-            velocity.Y += Gravity * deltaTime * airTime * 2; // Apply gravity
+            velocity.Y += Gravity * deltaTime * airTime * 2;
 
             GameObject.Y += (int)(velocity.Y * deltaTime);
         }

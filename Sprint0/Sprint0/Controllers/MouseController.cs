@@ -17,7 +17,6 @@ public class MouseController : IController
         curMS = Mouse.GetState();
     }
 
-    //return if a mouse button is clicked
     public bool OnMouseClick(MouseButton mouseButton)
     {
         bool mouseDown = false;
@@ -30,7 +29,6 @@ public class MouseController : IController
         return mouseDown;
     }
 
-    //return the mouse position
     public Point GetMousePosition()
     {
         return Mouse.GetState().Position;

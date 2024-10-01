@@ -18,7 +18,6 @@ public class EnemyController
         this.textureStorage = textureStorage;
         currentEnemyIndex = 0;
 
-        // Initialize the enemy list using the factory
         enemies = new List<GameObject>
         {
             EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn, 300, 100),
@@ -36,7 +35,6 @@ public class EnemyController
 
     public void Update(GameTime gameTime)
     {
-        // Update enemy based on player input
         keyboardController.Update();
 
         if (keyboardController.OnKeyDown(Keys.O))
