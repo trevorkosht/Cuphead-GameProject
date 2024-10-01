@@ -14,7 +14,6 @@ namespace Cuphead.Items
     internal class RedKetchupPotion : IComponent
     {
 
-        // Reference to the parent GameObject
         public GameObject GameObject { get; set; }
         public bool enabled { get; set; }
 

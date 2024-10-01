@@ -11,7 +11,7 @@ public class SporeProjectile : IComponent
     private Vector2 targetPosition;
     private float speed;
     private Texture2D sporeTexture;
-    private bool isPink, firstFrame; // Indicates if the spore is pink (parryable)
+    private bool isPink, firstFrame;
     Vector2 direction;
 
     public SporeProjectile(Vector2 startPosition, Vector2 targetPosition, Texture2D texture, bool isPink)

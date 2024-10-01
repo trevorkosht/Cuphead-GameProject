@@ -5,7 +5,6 @@ using System;
 public class RoundaboutProjectile : Projectile
 {
     private float speed = 3f;
-    private float gravity = 0.1f;
     private Vector2 velocity;
     private Vector2 playerLaunchPosition;
     private bool returning;

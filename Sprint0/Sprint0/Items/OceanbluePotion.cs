@@ -14,7 +14,6 @@ namespace Cuphead.Items
     internal class OceanbluePotion : IComponent
     {
 
-        // Reference to the parent GameObject
         public GameObject GameObject { get; set; }
         public bool enabled { get; set; }
 

@@ -13,7 +13,6 @@ public class GameObject
     public bool destroyed { get; set; } = false;
     public string type { get; set; }
 
-    // List of components attached to this GameObjects
     private List<IComponent> components = new List<IComponent>();
 
     public GameObject(int xPosition, int yPosition)
@@ -39,7 +38,6 @@ public class GameObject
         }
     }
 
-    // Add a component to this GameObject
     public void AddComponent(IComponent component)
     {
         components.Add(component);
@@ -47,13 +45,12 @@ public class GameObject
         component.enabled = true;
     }
 
-    // Get a component of a specific type
     public T GetComponent<T>() where T : IComponent
     {
         return components.OfType<T>().FirstOrDefault();
     }
 
-    // Update each component
+
     public void Update(GameTime gameTime)
     {
         position = new Vector2(X, Y);
@@ -64,7 +61,7 @@ public class GameObject
         }
     }
 
-    // Draw each component (for visual components)
+
     public void Draw(SpriteBatch spriteBatch)
     {
         for (int i = 0; i < components.Count; i++)
@@ -74,22 +71,22 @@ public class GameObject
         }
     }
 
-    //Move an amount relative to current position
+
     public void Move(int deltaX, int deltaY) {
         X += deltaX;
         Y += deltaY;
     }
 
-    //Moves the GameObject to the position specified by the vector
+
     public void MoveToPosition(int newX, int newY) {
         X = newX;
         Y = newY;
     }
 
-    // Destroy the GameObject and remove all its components
+
     public void Destroy()
     {
-        // Remove all components
+
         destroyed = true;
         foreach (var component in components)
         {
@@ -97,6 +94,6 @@ public class GameObject
             component.GameObject = null;
         }
 
-        components.Clear(); // Clear the list of components to remove references
+        components.Clear();
     }
 }

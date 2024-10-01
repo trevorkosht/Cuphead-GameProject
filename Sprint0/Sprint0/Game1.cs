@@ -12,12 +12,10 @@ namespace Sprint0
     {
         private static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private SpriteFont _font;
 
         private Texture2DStorage textureStorage;
 
         private KeyboardController keyboardController;
-        private MouseController mouseController;
 
         private List<GameObject> gameObjects = new List<GameObject>();
 
@@ -61,8 +59,6 @@ namespace Sprint0
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             textureStorage = new Texture2DStorage();
             textureStorage.LoadContent(Content);
-
-            _font = Content.Load<SpriteFont>("Font");
 
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);

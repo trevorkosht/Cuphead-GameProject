@@ -14,7 +14,7 @@ namespace Cuphead.Items
     internal class YellowPotion : IComponent
     {
 
-        // Reference to the parent GameObject
+
         public GameObject GameObject { get; set; }
         public bool enabled { get; set; }
 

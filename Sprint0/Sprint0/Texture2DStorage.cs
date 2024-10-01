@@ -6,7 +6,6 @@ public class Texture2DStorage
 {
     private Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>();
 
-    // Initialize the texture storage with the ContentManager
     public void LoadContent(ContentManager content)
     {
         //Enemy textures
@@ -64,13 +63,12 @@ public class Texture2DStorage
         // Add more textures as needed
     }
 
-    // Method to retrieve a texture
     public Texture2D GetTexture(string textureName)
     {
         if (_textures.ContainsKey(textureName))
             return _textures[textureName];
 
-        return null; // Handle missing textures if necessary
+        return null;
     }
 
     public void loadPlayerAnimations(SpriteRenderer spriteRenderer) {

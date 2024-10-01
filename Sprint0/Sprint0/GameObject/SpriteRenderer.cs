@@ -10,7 +10,6 @@ public class SpriteRenderer : IComponent {
     public bool isFacingRight { get; set; }
     public string animationName { get; set; }
     public float spriteScale { get; set; } = 1f;
-    Texture2D pixel; //For debugging rectangle boxes
 
 
     public KeyValuePair<string, Animation> currentAnimation { get; set; }
