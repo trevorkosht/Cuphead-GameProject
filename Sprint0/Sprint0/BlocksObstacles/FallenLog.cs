@@ -46,17 +46,16 @@ namespace Sprint0.BlocksObstacles
 
                 if (IsActive)
                 {
-                    // Draw the sprite
                     spriteBatch.Draw(
                         _blockTexture,
-                        position,                   // Position of the sprite
-                        sourceRectangle,            // Part of the texture to draw (whole image in this case)
-                        Color.White,                // Tint color
-                        0f,                         // Rotation (0 = no rotation)
-                        origin,                     // Origin point (center)
-                        spriteScale,                // Scale of the sprite
-                        SpriteEffects.None,         // Effects (flipping, etc.)
-                        0f                          // Layer depth
+                        position,                   
+                        sourceRectangle,            
+                        Color.White,                
+                        0f,                         
+                        origin,                     
+                        spriteScale,                
+                        SpriteEffects.None,         
+                        0f                          
                     );
                 }
             }
