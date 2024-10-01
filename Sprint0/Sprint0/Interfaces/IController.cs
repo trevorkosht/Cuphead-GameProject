@@ -10,5 +10,5 @@ public enum MouseButton
 {
     Left,
     Right,
-    Middle // Added middle button for more flexibility.
+    Middle
 }

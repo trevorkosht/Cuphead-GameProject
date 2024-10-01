@@ -8,16 +8,14 @@ public abstract class Projectile : IComponent
     public bool enabled { get; set; } = true;
     public bool IsActive { get; set; }
 
-    protected Texture2D spriteTexture;    // Holds the texture for the enemy sprite
-    protected float spriteScale = 1f;     // Scaling factor for the sprite
-    protected Rectangle sourceRectangle;  // Rectangle for sprite sheet animation
-    protected Vector2 origin;             // Origin point for the sprite
+    protected Texture2D spriteTexture;
+    protected float spriteScale = 1f;
+    protected Rectangle sourceRectangle;
+    protected Vector2 origin;
     protected Texture2DStorage textureStorage;
     protected GameObject player;
     protected SpriteRenderer sRend;
 
-
-    // Initialize with and the texture
     public virtual void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         IsActive = true;

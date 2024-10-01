@@ -21,7 +21,6 @@ namespace Sprint0
 
         private List<GameObject> gameObjects = new List<GameObject>();
 
-        // Create the player without ProjectileFactory as a component
         GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController() });
 
         private EnemyController enemyController;
@@ -57,7 +56,7 @@ namespace Sprint0
             gameObjects.Add(player);
         }
 
-        protected override void LoadContent() //Load sprites, fonts, etc. here
+        protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             textureStorage = new Texture2DStorage();
@@ -70,12 +69,12 @@ namespace Sprint0
             player.AddComponent(playerSpriteRenderer);
         }
 
-        protected override void Update(GameTime gameTime) //Update stuff here
+        protected override void Update(GameTime gameTime)
         {
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 GameObject gameObject = gameObjects[i];
-                if (gameObject.destroyed) //Remove destroyed GOs
+                if (gameObject.destroyed)
                 {
                     gameObjects.RemoveAt(i);
                     i--;
@@ -107,14 +106,14 @@ namespace Sprint0
                 i--;
             }
             resetFrame = true;
-            player = new GameObject(50, 50, new List<IComponent> { new PlayerController() }); // Reset player without ProjectileFactory
+            player = new GameObject(50, 50, new List<IComponent> { new PlayerController() });
             Initialize();
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.BlanchedAlmond);
-            _spriteBatch.Begin(); //Draw stuff here
+            _spriteBatch.Begin();
 
             foreach (var gameObject in gameObjects)
             {

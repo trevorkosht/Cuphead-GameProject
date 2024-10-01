@@ -17,7 +17,6 @@ public class PeashooterProjectile : Projectile
     public override void Update(GameTime gameTime)
     {
         
-        // Move straight in the X direction based on the facing direction
         if (isFacingRight)
         {
             GameObject.Move((int)(speed), 0); // Move right
@@ -28,7 +27,6 @@ public class PeashooterProjectile : Projectile
             GameObject.Move((int)(-speed), 0); // Move left
         }
 
-        // Deactivate when it goes off-screen (assuming 1200 is the right boundary of the screen)
         if (isFacingRight && GameObject.X > 1200 || !isFacingRight && GameObject.X < 0)
         {
             GameObject.Destroy();

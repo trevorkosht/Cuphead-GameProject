@@ -9,10 +9,10 @@ public class RoundaboutProjectile : Projectile
     private Vector2 velocity;
     private Vector2 playerLaunchPosition;
     private bool returning;
-    private bool isFacingRight; // Determines the launch direction
+    private bool isFacingRight;
 
-    private float launchDuration = 1f; // Duration in seconds to fly outward before returning
-    private float elapsedTime; // Tracks time since launch
+    private float launchDuration = 1f;
+    private float elapsedTime;
 
     public RoundaboutProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
@@ -28,14 +28,12 @@ public class RoundaboutProjectile : Projectile
     {
         base.Initialize(texture, storage);
 
-        // Set initial velocity with an upward angle
         velocity = new Vector2(speed, -speed / 2);
 
-        // Capture the player's position when the projectile is launched
         playerLaunchPosition = GOManager.Instance.Player.position;
 
-        returning = false; // Initially, not returning
-        elapsedTime = 0f; // Reset elapsed time
+        returning = false;
+        elapsedTime = 0f;
 
         if (!isFacingRight)
         {
@@ -47,26 +45,21 @@ public class RoundaboutProjectile : Projectile
     {
         if (IsActive)
         {
-            // Update elapsed time
             elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Check if the projectile should start returning after the launch duration
             if (!returning && elapsedTime >= launchDuration)
             {
-                returning = true; // Begin returning to the launch position
+                returning = true;
             }
 
             if (returning)
             {
-                // Calculate direction back to the launch position
                 Vector2 directionBack = Vector2.Normalize(playerLaunchPosition - GameObject.position);
-                velocity = directionBack * speed; // Adjust velocity towards launch position
+                velocity = directionBack * speed;
             }
 
-            // Move the projectile using the calculated velocity
             GameObject.Move((int)(velocity.X), (int)(velocity.Y));
 
-            // Deactivate the projectile if it returns to the launch position or goes off-screen
             if (returning && Vector2.Distance(GameObject.position, playerLaunchPosition) < 5f)
             {
                 GameObject.Destroy();
