@@ -5,7 +5,7 @@ Arrow and "wasd" keys should move CupHead and change his facing direction.
 
 The 'z' and 'n' key should cause CupHead to attack using his handgun.
 
-Number keys (1, 2, 3, 4, 5.) should be used to have CupHead use a different projectile type/item (later this will be replaced with picking up items and the type being switched)
+Number keys (1, 2, 3, 4, 5.) should be used to have CupHead switch to a different projectile type. Use n or z to see new pattern.
 
 Use 'e' to cause CupHead to become damaged.
 
