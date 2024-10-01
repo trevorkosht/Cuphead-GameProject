@@ -1,7 +1,6 @@
-using Microsoft.Xna.Framework;          // For Vector2, GameTime
-using Microsoft.Xna.Framework.Graphics; // For SpriteBatch, Texture2D
+using Microsoft.Xna.Framework;        
+using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;       // For managing spores
 
 public class MurderousMushroom : BaseEnemy
 {
@@ -17,14 +16,12 @@ public class MurderousMushroom : BaseEnemy
         isHidden = false;
         shootCooldown = 2.0;
 
-        // Fetch the spore textures from the texture storage
         purpleSporeTexture = storage.GetTexture("PurpleSpore");
         pinkSporeTexture = storage.GetTexture("PinkSpore");
     }
 
     public override void Move(GameTime gameTime)
     {
-        // Stationary, no movement needed for the mushroom
     }
 
     public override void Shoot(GameTime gameTime)
@@ -35,19 +32,17 @@ public class MurderousMushroom : BaseEnemy
             if (shootCooldown <= 0)
             {
                 Vector2 playerPosition = new Vector2(player.X, player.Y);
-                // Randomly decide between shooting a purple or pink spore
-                bool shootPinkSpore = (new Random().Next(0, 2) == 0); // 50% chance
+                bool shootPinkSpore = (new Random().Next(0, 2) == 0);
 
                 sRend.isFacingRight = player.X < GameObject.X;
 
-                // Shoot a spore in the direction of the player
                 Texture2D sporeTexture = shootPinkSpore ? pinkSporeTexture : purpleSporeTexture;
                 GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new SporeProjectile(GameObject.position, playerPosition, sporeTexture, shootPinkSpore));
 
 
                 GOManager.Instance.allGOs.Add(projectile);
 
-                shootCooldown = 2.0; // Reset the cooldown for the next spore
+                shootCooldown = 2.0; 
             }
         }
     }
@@ -66,7 +61,6 @@ public class MurderousMushroom : BaseEnemy
     {
         base.Update(gameTime);
 
-        // Handle shooting logic
         Shoot(gameTime);
     }
 }

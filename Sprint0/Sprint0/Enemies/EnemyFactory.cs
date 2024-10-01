@@ -64,9 +64,8 @@ public static class EnemyFactory
                 enemy.AddComponent(enemyLogic);
                 spriteRenderer.addAnimation("toothyTerrorAnimation", new Animation(textureStorage.GetTexture("ToothyTerror"), 5, 4, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("ToothyTerror"), textureStorage);
-                enemyHP = 9999999; // HP might not matter since it's invincible
+                enemyHP = 9999999;
                 break;
-            // Add other cases for different enemies here
             default:
                 return null;
         }
@@ -85,5 +84,4 @@ public enum EnemyType
     AcornMaker,
     BothersomeBlueberry,
     ToothyTerror
-    // Add other enemies here
 }

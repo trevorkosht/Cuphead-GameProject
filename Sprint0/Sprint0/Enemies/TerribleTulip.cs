@@ -1,12 +1,12 @@
-using Microsoft.Xna.Framework;          // For Vector2, GameTime
-using Microsoft.Xna.Framework.Graphics; // For SpriteBatch, Texture2D
+using Microsoft.Xna.Framework;        
+using Microsoft.Xna.Framework.Graphics; 
 using System;
-using System.Collections.Generic;       // For managing projectiles
+using System.Collections.Generic;   
 
 public class TerribleTulip : BaseEnemy
 {
     private double shootCooldown;
-    private Texture2D projectileTexture;        // Store the projectile texture
+    private Texture2D projectileTexture;     
     private List<GameObject> projectiles = new List<GameObject>();
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
@@ -14,12 +14,11 @@ public class TerribleTulip : BaseEnemy
         base.Initialize(texture, storage);
         sRend.setAnimation("terribleTulipAnimation");
         shootCooldown = 1.0;
-        projectileTexture = storage.GetTexture("Seed"); // Get projectile texture from storage
+        projectileTexture = storage.GetTexture("Seed");
     }
 
     public override void Move(GameTime gameTime)
     {
-        // Terrible Tulip remains stationary, so no movement
     }
 
     public override void Shoot(GameTime gametime)
@@ -28,7 +27,6 @@ public class TerribleTulip : BaseEnemy
         if (shootCooldown <= 0 && sRend.currentAnimation.Value.CurrentFrame == 7)
         {
             Vector2 playerPosition = new Vector2(player.X, player.Y);
-            // Create and shoot a homing projectile towards the player
             GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new HomingProjectile(GameObject.position));
             projectiles.Add(projectile);
             SpriteRenderer projSrend = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), true);
@@ -37,14 +35,13 @@ public class TerribleTulip : BaseEnemy
             projSrend.addAnimation("spin", new Animation(projectileTexture, 3, 12, 144, 144));
             projSrend.setAnimation("spin");
             GOManager.Instance.allGOs.Add(projectile);
-            shootCooldown = 3.0; // Reset the cooldown after shooting
+            shootCooldown = 3.0; 
         }
     }
 
     public override void Update(GameTime gameTime) {
         base.Update(gameTime);
 
-        //Logic to ensure the projectile is spinning in the proper direction relative to its motion
         int i = 0;
         while (i < projectiles.Count) {
             if (projectiles[i].GetComponent<SpriteRenderer>() == null) {
@@ -60,7 +57,6 @@ public class TerribleTulip : BaseEnemy
                 i++;
             }
         }
-        // Shoot logic handled in the Shoot method
         Shoot(gameTime);
     }
 }
