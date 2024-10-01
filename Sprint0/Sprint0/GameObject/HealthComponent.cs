@@ -33,7 +33,7 @@ public class HealthComponent : IComponent {
         }
     }
 
-    public void Update(GameTime gameTime) { /* No logic here*/ }
+    public void Update(GameTime gameTime) { /* No logic here */ }
     public void Draw(SpriteBatch spriteBatch) { /* Non-visual component */ }
 }
 

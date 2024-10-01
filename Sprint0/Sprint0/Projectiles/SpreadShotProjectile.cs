@@ -46,7 +46,7 @@ public class SpreadShotProjectile : Projectile
             spriteRenderer.spriteScale = 0.5f;
 
             var spreadLogic = new SpreadShotInstance(directions[i] * speed, spriteRenderer);
-            spriteRenderer.addAnimation("SpreadAnimation", new Animation(textureStorage.GetTexture("Spread"), 5, 1, 144, 144));
+            spriteRenderer.addAnimation("SpreadAnimation", new Animation(textureStorage.GetTexture("Spread"), 5, 4, 144, 144));
             spriteRenderer.setAnimation("SpreadAnimation");
             spriteRenderer.isFacingRight = isFacingRight;
 
