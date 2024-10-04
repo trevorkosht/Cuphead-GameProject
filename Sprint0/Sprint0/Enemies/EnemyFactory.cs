@@ -19,6 +19,7 @@ public static class EnemyFactory
             case EnemyType.AggravatingAcorn:
                 enemyLogic = new AggravatingAcorn();
                 enemy.AddComponent(enemyLogic);
+                enemy.AddComponent(new CircleCollider(80, new Vector2(-72, -60), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("aggravatingAcornAnimation", new Animation(textureStorage.GetTexture("AggravatingAcorn"), 5, 20, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("AggravatingAcorn"), textureStorage);
                 enemyHP = 50;
@@ -55,6 +56,7 @@ public static class EnemyFactory
             case EnemyType.BothersomeBlueberry:
                 enemyLogic = new BothersomeBlueberry();
                 enemy.AddComponent(enemyLogic);
+                enemy.AddComponent(new CircleCollider(40, new Vector2(-72,-60), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("bothersomeBlueberryAnimation", new Animation(textureStorage.GetTexture("BothersomeBlueberry"), 5, 12, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("BothersomeBlueberry"), textureStorage);
                 enemyHP = 50;

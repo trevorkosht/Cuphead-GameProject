@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 public class GOManager
 {
@@ -8,6 +9,8 @@ public class GOManager
     public List<GameObject> allGOs { get; set; }
 
     public GameObject currentEnemy { get; set; }
+    public bool IsDebugging = true;
+    public GraphicsDevice GraphicsDevice { get; set; }
 
     private GOManager() { }
 

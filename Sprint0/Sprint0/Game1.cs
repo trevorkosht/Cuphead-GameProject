@@ -47,6 +47,7 @@ namespace Sprint0
             GOManager.Instance.Player = player;
             GOManager.Instance.allGOs = gameObjects;
             GOManager.Instance.textureStorage = textureStorage;
+            GOManager.Instance.GraphicsDevice = GraphicsDevice;
             enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(textureStorage);
             itemsControl = new ItemsController(textureStorage);
@@ -63,6 +64,7 @@ namespace Sprint0
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
             player.AddComponent(playerSpriteRenderer);
+            player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
         }
 
         protected override void Update(GameTime gameTime)
@@ -87,6 +89,9 @@ namespace Sprint0
                 ResetGame();
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
+
+            if (keyboardController.OnKeyDown(Keys.L))
+                GOManager.Instance.IsDebugging = !GOManager.Instance.IsDebugging;
 
             base.Update(gameTime);
         }

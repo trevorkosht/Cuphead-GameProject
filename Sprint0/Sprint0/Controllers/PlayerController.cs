@@ -31,12 +31,14 @@ public class PlayerController : IComponent
     private const float InvincibilityDuration = 0.5f;
 
     private ProjectileType currentProjectileType = ProjectileType.Peashooter;
+    BoxCollider Collider;
 
     public PlayerController() { }
 
     public void Update(GameTime gameTime)
     {
         if (!enabled) return;
+        Collider = GameObject.GetComponent<BoxCollider>();
 
         keyboardController.Update();
         mouseController.Update();
@@ -139,6 +141,9 @@ public class PlayerController : IComponent
                 GameObject.Y = floorY + DuckingYOffset;
                 IsDucking = true;
                 isDuckingYAdjust = true;
+
+                Collider.bounds = new Vector2(144, 70);
+                Collider.offset = new Vector2(0, 30);
             }
         }
         else
@@ -148,6 +153,8 @@ public class PlayerController : IComponent
                 GameObject.Y = floorY;
                 IsDucking = false;
                 isDuckingYAdjust = false;
+                Collider.bounds = new Vector2(90, 144);
+                Collider.offset = new Vector2(25, 0);
             }
         }
     }
