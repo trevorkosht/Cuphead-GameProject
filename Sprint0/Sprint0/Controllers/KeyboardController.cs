@@ -29,20 +29,20 @@ public class KeyboardController : IController
     {
         float horizontal = 0;
 
-        if (curKS.IsKeyDown(Keys.A) || curKS.IsKeyDown(Keys.Left)) horizontal = -1;
-        if (curKS.IsKeyDown(Keys.D) || curKS.IsKeyDown(Keys.Right)) horizontal = (horizontal < 0) ? 0 : 1;
+        if (curKS.IsKeyDown(Keys.Left)) horizontal = -1;
+        if (curKS.IsKeyDown(Keys.Right)) horizontal = (horizontal < 0) ? 0 : 1;
 
         return new Vector2(horizontal, 0);
     }
 
     public bool IsJumpRequested()
     {
-        return curKS.IsKeyDown(Keys.W) || curKS.IsKeyDown(Keys.Up);
+        return curKS.IsKeyDown(Keys.Z);
     }
 
     public bool IsDuckRequested()
     {
-        return curKS.IsKeyDown(Keys.S) || curKS.IsKeyDown(Keys.Down);
+        return curKS.IsKeyDown(Keys.Down);
     }
 
     public bool IsDamageRequested()
@@ -52,7 +52,7 @@ public class KeyboardController : IController
 
     public bool IsShootRequested()
     {
-        return curKS.IsKeyDown(Keys.Z) || curKS.IsKeyDown(Keys.N);
+        return curKS.IsKeyDown(Keys.X);
     }
 
     public bool IsProjectileSwitchRequested(int projectileIndex)
