@@ -40,6 +40,11 @@ public class KeyboardController : IController
         return curKS.IsKeyDown(Keys.Z);
     }
 
+    public bool IsDashRequested()
+    {
+        return curKS.IsKeyDown(Keys.LeftShift);
+    }
+
     public bool IsDuckRequested()
     {
         return curKS.IsKeyDown(Keys.Down);

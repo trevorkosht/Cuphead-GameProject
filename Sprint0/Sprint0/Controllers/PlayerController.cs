@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Sprint0;
 using System;
 using static IController;
 
@@ -95,6 +96,7 @@ public class PlayerController : IComponent
         Vector2 input = keyboardController.GetMovementInput();
         bool jumpRequested = keyboardController.IsJumpRequested();
         bool duckRequested = keyboardController.IsDuckRequested();
+        bool dashRequested = keyboardController.IsDashRequested();
 
         UpdateFacingDirection(input);
 
@@ -108,6 +110,8 @@ public class PlayerController : IComponent
                 IsRunning = false;
 
             GameObject.X += (int)(input.X * Speed * deltaTime);
+            
+            HandleDash(dashRequested);
         }
 
         if (jumpRequested && IsGrounded && !IsDucking)
@@ -115,6 +119,7 @@ public class PlayerController : IComponent
             velocity.Y = JumpForce;
             IsGrounded = false;
         }
+
     }
 
     private void UpdateFacingDirection(Vector2 input)
@@ -126,6 +131,36 @@ public class PlayerController : IComponent
         else if (input.X > 0)
         {
             GameObject.GetComponent<SpriteRenderer>().isFacingRight = true;
+        }
+    }
+
+    private void HandleDash(bool dashRequested)
+    {
+        if (dashRequested)
+        {
+            if (GameObject.GetComponent<SpriteRenderer>().isFacingRight == true)
+            {
+
+                if (GameObject.X < 30)
+                {
+                    GameObject.X = 0;
+                }
+                else
+                {
+                    GameObject.X = GameObject.X + 30;
+                }
+            }
+            else
+            {
+                if (GameObject.X > 1250)
+                {
+                    GameObject.X = 1280;
+                }
+                else
+                {
+                    GameObject.X = GameObject.X - 30;
+                }
+            }
         }
     }
 
