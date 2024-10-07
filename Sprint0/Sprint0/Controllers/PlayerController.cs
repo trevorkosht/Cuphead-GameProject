@@ -225,9 +225,9 @@ public class PlayerController : IComponent
         {
             0 => 1 / (25f / 8.3f), // Default
             1 => 1 / (41.33f / 6.2f), // Spread
-            2 => 1 / (25.1f / 8.85f), // Chaser
+            2 => 1 / (25.1f / 13.85f), // Chaser
             3 => 1 / (33.14f / 11.6f), // Lobber
-            4 => 1 / (35.38f / 26f), // Roundabout
+            4 => 1 / (20.38f / 8f), // Roundabout
             _ => timeTillNextBullet
         };
     }

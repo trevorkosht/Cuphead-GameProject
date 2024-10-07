@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 public class RoundaboutProjectile : Projectile
 {
@@ -27,17 +26,13 @@ public class RoundaboutProjectile : Projectile
     {
         base.Initialize(texture, storage);
 
-        velocity = new Vector2(speed, -speed / 2);
+        // Set initial horizontal velocity
+        velocity = new Vector2(isFacingRight ? speed : -speed, 0);
 
         playerLaunchPosition = GOManager.Instance.Player.position;
 
         returning = false;
         elapsedTime = 0f;
-
-        if (!isFacingRight)
-        {
-            velocity.X = -velocity.X;
-        }
     }
 
     public override void Update(GameTime gameTime)
@@ -46,24 +41,20 @@ public class RoundaboutProjectile : Projectile
         {
             elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            // Switch to returning phase after the launch duration
             if (!returning && elapsedTime >= launchDuration)
             {
                 returning = true;
+
+                // In returning phase, move diagonally upwards while traveling back
+                velocity = new Vector2(isFacingRight ? -speed : speed, -speed / 2);
             }
 
-            if (returning)
-            {
-                Vector2 directionBack = Vector2.Normalize(playerLaunchPosition - GameObject.position);
-                velocity = directionBack * speed;
-            }
+            // Update the projectile's position based on its velocity
+            GameObject.Move((int)velocity.X, (int)velocity.Y);
 
-            GameObject.Move((int)(velocity.X), (int)(velocity.Y));
-
-            if (returning && Vector2.Distance(GameObject.position, playerLaunchPosition) < 5f)
-            {
-                GameObject.Destroy();
-            }
-            else if (GameObject.X > 1200 || GameObject.X < 0 || GameObject.Y > 800 || GameObject.Y < 0)
+            // Destroy when it goes off-screen in returning phase
+            if (returning && (GameObject.X > 1200 || GameObject.X < 0 || GameObject.Y < 0 || GameObject.Y > 800))
             {
                 GameObject.Destroy();
             }
