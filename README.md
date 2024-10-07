@@ -1,11 +1,12 @@
 # CSE-3902
 
 Player controls
-Arrow and "wasd" keys should move CupHead and change his facing direction. w causes cuphead to jump and s causes cuphead to duck.
+Left and right arrow move player left and right.
+All of the arrow key change the facing direction. only the up and down arrow key need to be held for continuously facing up/dowm.
+Left shift for dash depending on the left right facing direction.
+'z' makes the player jump. and 'x' let the player shoot projectile.
 
-The 'z' and 'n' key should cause CupHead to attack using his handgun.
-
-Number keys (1, 2, 3, 4, 5.) should be used to have CupHead switch to a different projectile type. Use n or z to see new pattern.
+Number keys (1, 2, 3, 4, 5.) should be used to have CupHead switch to a different projectile type.
 
 Use 'e' to cause CupHead to become damaged.
 
