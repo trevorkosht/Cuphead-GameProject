@@ -27,7 +27,7 @@ public class TerribleTulip : BaseEnemy
         if (shootCooldown <= 0 && sRend.currentAnimation.Value.CurrentFrame == 7)
         {
             Vector2 playerPosition = new Vector2(player.X, player.Y);
-            GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new HomingProjectile(GameObject.position));
+            GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new TullipProjectile(GameObject.position));
             projectiles.Add(projectile);
             SpriteRenderer projSrend = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), true);
             projectile.AddComponent(projSrend);
