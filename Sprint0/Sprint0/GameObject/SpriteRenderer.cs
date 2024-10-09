@@ -28,14 +28,6 @@ public class SpriteRenderer : IComponent {
         return spriteAnimations.Remove(animationName);
     }
 
-    public void loadAllAnimations() {
-        foreach (var animationKVPair in spriteAnimations) {
-            if(animationKVPair.Value.Frames.Count == 0) {
-                animationKVPair.Value.loadFrames();
-            }
-        }
-    }
-
     public void changeDirection() {
         isFacingRight = !isFacingRight;
     }

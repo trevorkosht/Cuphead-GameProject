@@ -8,7 +8,7 @@ public class BlockFactory {
         block.AddComponent(spriteRenderer);
         Animation blockTexture = new Animation(texture, 1, 1, 144, 144);
         spriteRenderer.addAnimation("texture",blockTexture);
-        spriteRenderer.loadAllAnimations();
+        //spriteRenderer.loadAllAnimations();
         spriteRenderer.setAnimation("texture");
 
         BoxCollider boxCollider = new BoxCollider(new Vector2(destRectangle.Width, destRectangle.Height), new Vector2(0, 0), GOManager.Instance.GraphicsDevice);

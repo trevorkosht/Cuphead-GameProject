@@ -111,9 +111,5 @@ public class Texture2DStorage
         spriteRenderer.addAnimation("ShootDown", playerShootDownAnimation);
         spriteRenderer.addAnimation("ShootStraight", playerShootStraightAnimation);
         spriteRenderer.addAnimation("ShootUp", playerShootUpAnimation);
-
-        spriteRenderer.loadAllAnimations();
-
-
     }
 }

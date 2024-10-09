@@ -72,7 +72,6 @@ public static class EnemyFactory
                 return null;
         }
         enemy.AddComponent(new HealthComponent(enemyHP, false));
-        spriteRenderer.loadAllAnimations();
         return enemy;
     }
 }

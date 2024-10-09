@@ -56,7 +56,6 @@ public class SpreadShotProjectile : Projectile
 
 
             GOManager.Instance.allGOs.Add(spreadShot);
-            spriteRenderer.loadAllAnimations();
         }
 
         GameObject.Destroy();

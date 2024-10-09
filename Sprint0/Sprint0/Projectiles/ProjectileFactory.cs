@@ -62,7 +62,6 @@ public class ProjectileFactory
         spriteRenderer.spriteScale = 0.5f;
         projectile.AddComponent(spriteRenderer);
         projectile.AddComponent(projectileLogic);
-        spriteRenderer.loadAllAnimations();
 
         return projectile;
     }
