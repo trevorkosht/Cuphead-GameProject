@@ -22,7 +22,7 @@ namespace Sprint0.Controllers
         public BlockController(Texture2DStorage textureStorage)
         {
             blockPosition = new Vector2(625, 600);
-            GameObject temp = BlockFactory.createBlock(new Rectangle((int)blockPosition.X, (int)blockPosition.Y, 144, 144), textureStorage.GetTexture("TreeStump_1"));
+            GameObject temp = BlockFactory.createBlock(new Rectangle((int)blockPosition.X, (int)blockPosition.Y, 288, 144), textureStorage.GetTexture("TreeStump_1"));
             blocks.Add(temp);
 
             //currentBlock = blocks[0];
