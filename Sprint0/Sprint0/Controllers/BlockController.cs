@@ -11,7 +11,7 @@ namespace Sprint0.Controllers
     {
         private KeyboardController keyboardController;
 
-        private List<IBlock> blocks;
+        private List<GameObject> blocks = new List<GameObject>();
         private Vector2 blockPosition;
         
         private int currentBlockIndex;
@@ -22,16 +22,10 @@ namespace Sprint0.Controllers
         public BlockController(Texture2DStorage textureStorage)
         {
             blockPosition = new Vector2(625, 600);
-            blocks = new List<IBlock>() 
-            { 
-                new ForestStump(blockPosition, textureStorage.GetTexture("TreeStump")),
-                new FallenLog(blockPosition, textureStorage.GetTexture("FallenLog")),
-                new FloatingPlatformSm(blockPosition, textureStorage.GetTexture("FloatingPlatformSm")),
-                new FloatingPlatformLg(blockPosition, textureStorage.GetTexture("FloatingPlatformLg")),
-                new PlatformMd(blockPosition, textureStorage.GetTexture("PlatformMd")),
-                new PlatformLg(blockPosition, textureStorage.GetTexture("PlatformLg")),
-            };
-            currentBlock = blocks[0];
+            GameObject temp = BlockFactory.createBlock(new Rectangle((int)blockPosition.X, (int)blockPosition.Y, 144, 144), textureStorage.GetTexture("TreeStump_1"));
+            blocks.Add(temp);
+
+            //currentBlock = blocks[0];
 
             this.keyboardController = new KeyboardController();
         }
@@ -59,7 +53,10 @@ namespace Sprint0.Controllers
                 }
             }
 
-            currentBlock = blocks[currentBlockIndex];
+            //currentBlock = blocks[currentBlockIndex];
+            foreach (GameObject block in blocks) {
+                block.Update(gameTime);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch) {

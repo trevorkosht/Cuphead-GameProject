@@ -28,6 +28,10 @@ public class Texture2DStorage
         _textures["FloatingPlatformSm"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
         _textures["FloatingPlatformLg"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
 
+        _textures["TreeStump_1"] = content.Load<Texture2D>(@"BlockTextures\Stump1");
+        _textures["TreeStump_2"] = content.Load<Texture2D>(@"BlockTextures\Stump2");
+        _textures["TreeStump_3"] = content.Load<Texture2D>(@"BlockTextures\Stump3");
+
         //Player Animation Textures
         _textures["PlayerDeath"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDeath");
         _textures["PlayerDuck"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDuck");

@@ -5,7 +5,7 @@ using System;
 
 public class ChaserProjectile : Projectile
 {
-    private float speed = 2f;
+    private float speed = 5f;
     private GameObject targetEnemy;
     private Vector2 lastDirection;
     private bool isFacingRight;
