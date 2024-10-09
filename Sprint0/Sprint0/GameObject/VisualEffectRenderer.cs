@@ -6,7 +6,7 @@ public class VisualEffectRenderer : IComponent {
     public Animation animation { get; set; }
     public Rectangle destRectangle { get; set; }
     public float effectScale { get; set; } = 1f;
-    public bool enabled { get; set; }
+    public bool enabled { get; set; } = true;
 
     public VisualEffectRenderer(Rectangle destRectangle, Animation animation) { 
         this.destRectangle = destRectangle;
