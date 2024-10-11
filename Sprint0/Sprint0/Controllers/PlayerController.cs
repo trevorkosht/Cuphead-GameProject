@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cuphead;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0;
@@ -18,6 +19,7 @@ public class PlayerController : IComponent
     public float Gravity { get; set; } = 1200f;
     public float timeTillNextBullet { get; set; } = .2f;
     public float timeTillNextHit { get; set; } = .4f;
+    public int timeTillNextDash { get; set; } = 1000;
 
     public int Health { get; set; } = 100;
 
@@ -27,6 +29,7 @@ public class PlayerController : IComponent
 
     private readonly KeyboardController keyboardController = new KeyboardController();
     private readonly MouseController mouseController = new MouseController();
+    private DelayGame gameDelay = new DelayGame();
 
     private const int DuckingYOffset = 50;
     private const float InvincibilityDuration = 0.5f;
@@ -34,7 +37,7 @@ public class PlayerController : IComponent
     private ProjectileType currentProjectileType = ProjectileType.Peashooter;
     BoxCollider Collider;
 
-    public PlayerController() { }
+    public PlayerController() {}
 
     public void Update(GameTime gameTime)
     {
@@ -50,7 +53,7 @@ public class PlayerController : IComponent
 
         UpdateTimers(deltaTime);
         HandleGroundCheck(animator);
-        HandleMovementAndActions(deltaTime);
+        HandleMovementAndActions(gameTime, deltaTime);
         HandleShooting(state, animator);
         HandleProjectileSwitching(state);
         HandleDamageDetection();
@@ -91,7 +94,7 @@ public class PlayerController : IComponent
         }
     }
 
-    private void HandleMovementAndActions(float deltaTime)
+    private void HandleMovementAndActions(GameTime gameTime, float deltaTime)
     {
         Vector2 input = keyboardController.GetMovementInput();
         bool jumpRequested = keyboardController.IsJumpRequested();
@@ -111,7 +114,7 @@ public class PlayerController : IComponent
 
             GameObject.X += (int)(input.X * Speed * deltaTime);
             
-            HandleDash(dashRequested);
+            HandleDash(dashRequested, gameTime);
         }
 
         if (jumpRequested && IsGrounded && !IsDucking)
@@ -134,32 +137,21 @@ public class PlayerController : IComponent
         }
     }
 
-    private void HandleDash(bool dashRequested)
+    private void HandleDash(bool dashRequested, GameTime gameTime)
     {
-        if (dashRequested)
+        if (dashRequested && gameDelay.Delay(gameTime, timeTillNextDash))
         {
             if (GameObject.GetComponent<SpriteRenderer>().isFacingRight == true)
             {
-
-                if (GameObject.X < 30)
-                {
-                    GameObject.X = 0;
-                }
-                else
-                {
-                    GameObject.X = GameObject.X + 30;
-                }
+                GameObject.X = GameObject.X + 50;
+                gameDelay.Delay(gameTime, timeTillNextDash);
+                
             }
             else
             {
-                if (GameObject.X > 1250)
-                {
-                    GameObject.X = 1280;
-                }
-                else
-                {
-                    GameObject.X = GameObject.X - 30;
-                }
+                GameObject.X = GameObject.X - 50;
+                gameDelay.Delay(gameTime, timeTillNextDash);
+
             }
         }
     }

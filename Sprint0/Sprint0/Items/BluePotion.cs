@@ -44,7 +44,7 @@ namespace Cuphead.Items
                 {
                 new Rectangle(205, 1, 153, 255),
                 new Rectangle(389, 1, 153, 255),
-                 new Rectangle(571, 1, 153, 255)
+                new Rectangle(571, 1, 153, 255)
                 };
             enabled = true;
         }

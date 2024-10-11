@@ -25,6 +25,11 @@ public class KeyboardController : IController
         return curKS.IsKeyDown(key) && !preKS.IsKeyDown(key);
     }
 
+    public KeyboardState GetPreKey()
+    {
+        return preKS;
+    }
+
     public Vector2 GetMovementInput()
     {
         float horizontal = 0;
@@ -42,7 +47,7 @@ public class KeyboardController : IController
 
     public bool IsDashRequested()
     {
-        return curKS.IsKeyDown(Keys.LeftShift);
+        return curKS.IsKeyDown(Keys.LeftShift) && !preKS.Equals(Keys.LeftShift);
     }
 
     public bool IsDuckRequested()
