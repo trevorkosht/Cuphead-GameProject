@@ -260,6 +260,30 @@
 /processorParam:TextureFormat=Color
 /build:items/Items2.png
 
+#begin PlayerAnimationTextures/PlayerDashAir.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerDashAir.png
+
+#begin PlayerAnimationTextures/PlayerDashGround.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/PlayerDashGround.png
+
 #begin PlayerAnimationTextures/PlayerDeath.png
 /importer:TextureImporter
 /processor:TextureProcessor

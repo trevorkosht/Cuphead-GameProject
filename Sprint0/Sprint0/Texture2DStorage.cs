@@ -28,11 +28,14 @@ public class Texture2DStorage
         _textures["FloatingPlatformSm"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
         _textures["FloatingPlatformLg"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
 
+        //Updated block textures
         _textures["TreeStump_1"] = content.Load<Texture2D>(@"BlockTextures\Stump1");
         _textures["TreeStump_2"] = content.Load<Texture2D>(@"BlockTextures\Stump2");
         _textures["TreeStump_3"] = content.Load<Texture2D>(@"BlockTextures\Stump3");
 
         //Player Animation Textures
+        _textures["PlayerDashAir"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDashAir");
+        _textures["PlayerDashGround"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDashGround");
         _textures["PlayerDeath"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDeath");
         _textures["PlayerDuck"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDuck");
         _textures["PlayerDuckShoot"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDuckShoot");
@@ -76,15 +79,15 @@ public class Texture2DStorage
     }
 
     public void loadPlayerAnimations(SpriteRenderer spriteRenderer) {
-
-        //Load player animations
+        Animation playerDashAirAnimation = new Animation(GetTexture("PlayerDashAir"), 5, 5, 144, 144);
+        Animation playerDashGroundAnimation = new Animation(GetTexture("PlayerDashGround"), 5, 5, 144, 144);
         Animation playerDeathAnimation = new Animation(GetTexture("PlayerDeath"), 5, 16, 144, 144);
         Animation playerDuckAnimation = new Animation(GetTexture("PlayerDuck"), 5, 8, 144, 144);
         Animation playerDuckShootAnimation = new Animation(GetTexture("PlayerDuckShoot"), 5, 3, 144, 144);
         Animation playerHitAirAnimation = new Animation(GetTexture("PlayerHitAir"), 5, 6, 144, 144);
         Animation playerHitGroundAnimation = new Animation(GetTexture("PlayerHitGround"), 5, 6, 144, 144);
         Animation playerIdleAnimation = new Animation(GetTexture("PlayerIdle"), 5, 8, 144, 144);
-        Animation playerIntroAnimation = new Animation(GetTexture("PlayerIntro"), 5, 28, 144, 144);
+        Animation playerSpawnAnimation = new Animation(GetTexture("PlayerIntro"), 5, 28, 144, 144);
         Animation playerJumpAnimation = new Animation(GetTexture("PlayerJump"), 2, 8, 144, 144);
         Animation playerRunAnimation = new Animation(GetTexture("PlayerRun"),1, 16, 144, 144);
         Animation playerRunShootingDiagonalUpAnimation = new Animation(GetTexture("PlayerRunShootingDiagonalUp"), 5, 16, 144, 144);
@@ -95,13 +98,15 @@ public class Texture2DStorage
         Animation playerShootStraightAnimation = new Animation(GetTexture("PlayerShootStraight"), 5, 3, 144, 144);
         Animation playerShootUpAnimation = new Animation(GetTexture("PlayerShootUp"), 5, 3, 144, 144);
 
+        spriteRenderer.addAnimation("DashAir", playerDashAirAnimation);
+        spriteRenderer.addAnimation("DashGround", playerDashGroundAnimation);
         spriteRenderer.addAnimation("Death", playerDeathAnimation);
         spriteRenderer.addAnimation("Duck", playerDuckAnimation);
         spriteRenderer.addAnimation("DuckShoot", playerDuckShootAnimation);
         spriteRenderer.addAnimation("HitAir", playerHitAirAnimation);
         spriteRenderer.addAnimation("HitGround", playerHitGroundAnimation);
         spriteRenderer.addAnimation("Idle", playerIdleAnimation);
-        spriteRenderer.addAnimation("Intro", playerIntroAnimation);
+        spriteRenderer.addAnimation("Spawn", playerSpawnAnimation);
         spriteRenderer.addAnimation("Jump", playerJumpAnimation);
         spriteRenderer.addAnimation("Run", playerRunAnimation);
         spriteRenderer.addAnimation("RunShootingDiagonalUp", playerRunShootingDiagonalUpAnimation);

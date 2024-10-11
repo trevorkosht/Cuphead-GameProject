@@ -18,10 +18,6 @@ public class VisualEffectRenderer : IComponent {
 
         destRectangle = new Rectangle(GameObject.X, GameObject.Y, destRectangle.Width, destRectangle.Height);
         animation.updateAnimation();
-
-        if(animation.CurrentFrame >= animation.FrameCount - 1) {
-            GameObject.Destroy();
-        }
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -34,6 +30,11 @@ public class VisualEffectRenderer : IComponent {
             (int)(destRectangle.Height * effectScale));
 
         animation.draw(spriteBatch, scaledDestRectangle, true);
+
+
+        if (animation.CurrentFrame >= animation.FrameCount - 1) {
+            GameObject.Destroy();
+        }
     }
 
 }
