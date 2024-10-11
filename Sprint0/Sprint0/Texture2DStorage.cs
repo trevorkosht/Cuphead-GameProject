@@ -60,7 +60,8 @@ public class Texture2DStorage
         _textures["Roundabout"] = content.Load<Texture2D>(@"ProjectileTextures\Roundabout");
         _textures["Spread"] = content.Load<Texture2D>(@"ProjectileTextures\Spread");
 
-
+        //Visual Effect Textures
+        _textures["Dust"] = content.Load<Texture2D>(@"VisualEffectTextures\DustEffect");
 
 
         //item texture
