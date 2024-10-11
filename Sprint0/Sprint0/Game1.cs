@@ -1,10 +1,8 @@
-﻿using Cuphead.Items;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0.Controllers;
 using System.Collections.Generic;
-using static IController;
 
 namespace Sprint0
 {
@@ -14,16 +12,17 @@ namespace Sprint0
         private SpriteBatch _spriteBatch;
 
         private Texture2DStorage textureStorage;
-
         private KeyboardController keyboardController;
 
         private List<GameObject> gameObjects = new List<GameObject>();
-
         GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController() });
 
         private EnemyController enemyController;
         private BlockController blockController;
         private ItemsController itemsControl;
+
+        private Camera camera;
+        private CameraController cameraController;
 
         bool resetFrame;
 
@@ -37,7 +36,6 @@ namespace Sprint0
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             keyboardController = new KeyboardController();
-
         }
 
         protected override void Initialize()
@@ -51,6 +49,24 @@ namespace Sprint0
             enemyController = new EnemyController(keyboardController, textureStorage);
             blockController = new BlockController(textureStorage);
             itemsControl = new ItemsController(textureStorage);
+
+            // Initialize camera and controller
+            camera = new Camera();
+            List<Vector2> railPoints = new List<Vector2>()
+            {
+                new Vector2(0, 0), 
+                new Vector2(500, 0),  
+                new Vector2(1000, 0),  
+                new Vector2(1200, 0),  
+                new Vector2(1500, 50),  
+                new Vector2(1700, 100), 
+                new Vector2(2000, 100), 
+                new Vector2(2200, 150),  
+                new Vector2(2500, 150),  
+                new Vector2(2700, 50),  
+                new Vector2(3000, 0)  
+            };
+            cameraController = new CameraController(camera, player, railPoints);
 
             gameObjects.Add(player);
         }
@@ -85,6 +101,9 @@ namespace Sprint0
             blockController.Update(gameTime);
             itemsControl.Update(gameTime);
 
+            // Update camera based on player's position and the rail
+            cameraController.Update();
+
             if (Keyboard.GetState().IsKeyDown(Keys.R))
                 ResetGame();
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
@@ -114,7 +133,9 @@ namespace Sprint0
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.BlanchedAlmond);
-            _spriteBatch.Begin();
+
+            // Begin sprite batch with camera transformation matrix
+            _spriteBatch.Begin(transformMatrix: camera.Transform);
 
             foreach (var gameObject in gameObjects)
             {
