@@ -15,8 +15,13 @@ namespace Cuphead
         //amount of time to delay
         private double delayTime = 0;
 
+        private int delayCount = 0;
+
+        private int delayFrames = 0;
+        private int frameCount = 0;
+
         //delay the game in milliseconds
-        public bool Delay(GameTime gameTime, int milliSeconds)
+        public bool DelayTime(GameTime gameTime, int milliSeconds)
         {
             if (delayFlag)
             {
@@ -30,6 +35,27 @@ namespace Cuphead
             {
                 delayFlag = true;
                 delayTime = gameTime.TotalGameTime.TotalMilliseconds + milliSeconds;
+            }
+            return false;
+        }
+
+        // delay the game based on frames
+        public bool DelayFrames(float frames)
+        {
+            if (delayFlag)
+            {
+                if (frameCount >= delayFrames)
+                {
+                    delayFlag = false;
+                    return true; 
+                }
+                frameCount++; 
+            }
+            else
+            {
+                delayFlag = true;
+                delayFrames = frames; 
+                frameCount = 0;
             }
             return false;
         }

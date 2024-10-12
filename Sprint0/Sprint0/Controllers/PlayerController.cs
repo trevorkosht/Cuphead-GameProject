@@ -25,7 +25,7 @@ public class PlayerController : IComponent
 
     private float airTime = 0f, shootTime = 0f, hitTime = 0f;
     private int floorY;
-    private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust, isShooting = false;
+    private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust, isShooting, IsDashing = false;
 
     private readonly KeyboardController keyboardController = new KeyboardController();
     private readonly MouseController mouseController = new MouseController();
@@ -139,20 +139,30 @@ public class PlayerController : IComponent
 
     private void HandleDash(bool dashRequested, GameTime gameTime)
     {
-        if (dashRequested && gameDelay.Delay(gameTime, timeTillNextDash))
+        if (dashRequested && gameDelay.DelayTime(gameTime, timeTillNextDash))
         {
+            IsDashing = true;
+            //move a direction by some amount
             if (GameObject.GetComponent<SpriteRenderer>().isFacingRight == true)
             {
-                GameObject.X = GameObject.X + 50;
-                gameDelay.Delay(gameTime, timeTillNextDash);
-                
+                for (int i = 0; i < 200; i++)
+                {
+                    GameObject.X = GameObject.X + 1;
+                    gameDelay.DelayFrames(2f);
+                }
             }
             else
             {
-                GameObject.X = GameObject.X - 50;
-                gameDelay.Delay(gameTime, timeTillNextDash);
+
+                for (int i = 0; i < 200; i++)
+                {
+                    GameObject.X = GameObject.X - 1;
+                    gameDelay.DelayFrames(2f);
+                }
 
             }
+
+            IsDashing = false;
         }
     }
 
@@ -274,7 +284,11 @@ public class PlayerController : IComponent
         {
             animator.setAnimation("ShootStraight");
         }
-        else
+        else if (IsDashing)
+        {
+            animator.setAnimation(IsGrounded ? "DashGround" : "DashAir");
+        }
+        else 
         {
             animator.setAnimation("Idle");
         }
