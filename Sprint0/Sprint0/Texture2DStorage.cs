@@ -37,11 +37,11 @@ public class Texture2DStorage
         _textures["Hill3"] = content.Load<Texture2D>(@"BlockTextures\Hills\hill-3");
 
         //Logs
-        _textures["Log1"] = content.Load<Texture2D>(@"BlockTextures\Logs\log-1");
-        _textures["Log2"] = content.Load<Texture2D>(@"BlockTextures\Logs\log-2");
-        _textures["Stump1"] = content.Load<Texture2D>(@"BlockTextures\Logs\Stump1");
-        _textures["Stump2"] = content.Load<Texture2D>(@"BlockTextures\Logs\Stump2");
-        _textures["Stump3"] = content.Load<Texture2D>(@"BlockTextures\Logs\Stump3");
+        _textures["Log1"] = content.Load<Texture2D>(@"BlockTextures\FallenTrees\log-1");
+        _textures["Log2"] = content.Load<Texture2D>(@"BlockTextures\FallenTrees\log-2");
+        _textures["Stump1"] = content.Load<Texture2D>(@"BlockTextures\FallenTrees\Stump1");
+        _textures["Stump2"] = content.Load<Texture2D>(@"BlockTextures\FallenTrees\Stump2");
+        _textures["Stump3"] = content.Load<Texture2D>(@"BlockTextures\FallenTrees\Stump3");
 
         //Platforms
         _textures["Platform1"] = content.Load<Texture2D>(@"BlockTextures\Platforms\platform-1");
