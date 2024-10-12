@@ -54,7 +54,7 @@ namespace Cuphead
             else
             {
                 delayFlag = true;
-                delayFrames = frames; 
+                delayFrames = (int)frames; 
                 frameCount = 0;
             }
             return false;
