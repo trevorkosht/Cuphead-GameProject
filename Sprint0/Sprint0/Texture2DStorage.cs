@@ -20,18 +20,52 @@ public class Texture2DStorage
         _textures["PurpleSpore"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_poison_cloud_0001");
         _textures["PinkSpore"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_poison_cloud_pink_0003");
 
-        // Block/Obstacle Textures
-        _textures["TreeStump"] = content.Load<Texture2D>(@"BlockTextures\ForestStumps");
-        _textures["FallenLog"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-6");
-        _textures["PlatformMd"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-2");
-        _textures["PlatformLg"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-1");
-        _textures["FloatingPlatformSm"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
-        _textures["FloatingPlatformLg"] = content.Load<Texture2D>(@"BlockTextures\ForestBackground-5");
+        //Level Textures
 
-        //Updated block textures
-        _textures["TreeStump_1"] = content.Load<Texture2D>(@"BlockTextures\Stump1");
-        _textures["TreeStump_2"] = content.Load<Texture2D>(@"BlockTextures\Stump2");
-        _textures["TreeStump_3"] = content.Load<Texture2D>(@"BlockTextures\Stump3");
+        //Background
+        _textures["LevelBackground"] = content.Load<Texture2D>(@"BlockTextures\Background\background-1");
+
+        //Bushes
+        _textures["Bush1"] = content.Load<Texture2D>(@"BlockTextures\Bushes\bush-1");
+
+        //Hills
+        _textures["BigHill1"] = content.Load<Texture2D>(@"BlockTextures\Hills\big-hill-1");
+        _textures["BigHill2"] = content.Load<Texture2D>(@"BlockTextures\Hills\big-hill-2");
+        _textures["BigHill3"] = content.Load<Texture2D>(@"BlockTextures\Hills\big-hill-3");
+        _textures["Hill1"] = content.Load<Texture2D>(@"BlockTextures\Hills\hill-1");
+        _textures["Hill2"] = content.Load<Texture2D>(@"BlockTextures\Hills\hill-2");
+        _textures["Hill3"] = content.Load<Texture2D>(@"BlockTextures\Hills\hill-3");
+
+        //Logs
+        _textures["Log1"] = content.Load<Texture2D>(@"BlockTextures\Logs\log-1");
+        _textures["Log2"] = content.Load<Texture2D>(@"BlockTextures\Logs\log-2");
+        _textures["Stump1"] = content.Load<Texture2D>(@"BlockTextures\Logs\Stump1");
+        _textures["Stump2"] = content.Load<Texture2D>(@"BlockTextures\Logs\Stump2");
+        _textures["Stump3"] = content.Load<Texture2D>(@"BlockTextures\Logs\Stump3");
+
+        //Platforms
+        _textures["Platform1"] = content.Load<Texture2D>(@"BlockTextures\Platforms\platform-1");
+        _textures["Platform2"] = content.Load<Texture2D>(@"BlockTextures\Platforms\platform-2");
+
+        //Rocks
+        _textures["Rock1"] = content.Load<Texture2D>(@"BlockTextures\Rocks\rock-1");
+        _textures["Rock2"] = content.Load<Texture2D>(@"BlockTextures\Rocks\rock-2");
+        _textures["Rock3"] = content.Load<Texture2D>(@"BlockTextures\Rocks\rock-3");
+        _textures["Rock4"] = content.Load<Texture2D>(@"BlockTextures\Rocks\rock-4");
+        _textures["Rock5"] = content.Load<Texture2D>(@"BlockTextures\Rocks\rock-5");
+        _textures["Rock6"] = content.Load<Texture2D>(@"BlockTextures\Rocks\rock-6");
+
+        //Trees
+        _textures["Leaves1"] = content.Load<Texture2D>(@"BlockTextures\Trees\leaves-1");
+        _textures["Leaves2"] = content.Load<Texture2D>(@"BlockTextures\Trees\leaves-2");
+        _textures["Leaves3"] = content.Load<Texture2D>(@"BlockTextures\Trees\leaves-3");
+        _textures["Tree1"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-1");
+        _textures["Tree2"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-2");
+        _textures["Tree3"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-3");
+        _textures["Tree4"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-4");
+        _textures["Tree5"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-5");
+        _textures["Tree6"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-6");
+
 
         //Player Animation Textures
         _textures["PlayerDashAir"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDashAir");
