@@ -45,13 +45,19 @@ public class BothersomeBlueberry : BaseEnemy
     {
         base.Update(gameTime);
 
-        if (isKnockedOut)
-        {
+        if (isKnockedOut) {
             respawnTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            
 
-            if (respawnTimer >= respawnDelay)
-            {
+            if (respawnTimer >= respawnDelay / 2) {
+                sRend.setAnimation("BlueberryRespawn");
+            }
+            else if (respawnTimer >= respawnDelay) {
                 Respawn();
+            }
+            else 
+            {
+                sRend.setAnimation("WaitForRespawn");
             }
         }
     }

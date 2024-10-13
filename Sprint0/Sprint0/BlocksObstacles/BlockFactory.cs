@@ -73,7 +73,7 @@ public static class BlockFactory
         block.AddComponent(spriteRenderer);
 
         // Set the frame size for the animation
-        Animation blockTexture = new Animation(texture, 1, 1, frameWidth, frameHeight);
+        Animation blockTexture = new Animation(texture, 1, 1, frameHeight, frameWidth);
         spriteRenderer.addAnimation("texture", blockTexture);
         spriteRenderer.setAnimation("texture");
 

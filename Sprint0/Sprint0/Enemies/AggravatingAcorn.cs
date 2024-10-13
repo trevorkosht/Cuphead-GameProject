@@ -36,6 +36,8 @@ public class AggravatingAcorn : BaseEnemy
 
             if (PlayerIsUnderneath())
             {
+                sRend.setAnimation("AcornDrop");
+                sRend.spriteScale = 0.8f;
                 isFalling = true;
                 dropPosition = new Vector2(GameObject.X, GameObject.Y + 500); 
             }
