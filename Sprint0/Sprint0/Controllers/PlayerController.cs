@@ -173,7 +173,7 @@ public class PlayerController : IComponent
 
     private void PerformDash(GameTime gameTime, int height)
     {   
-        qif (dashTime > 0)
+        if (dashTime > 0)
         {
             // Continue dashing within the duration
             float dashDistance = dashSpeed * deltaTime;
