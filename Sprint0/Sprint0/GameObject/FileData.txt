@@ -1,0 +1,9 @@
+Enemy,AggravatingAcorn,100,150
+Enemy,DeadlyDaisy,300,400
+Enemy,MurderousMushroom,500,600
+Item,YellowPotion,200,250
+Item,SkybluePotion,250,300
+Item,RedPotion,300,350
+Item,BluePotion,350,400
+Item,OceanbluePotion,400,450
+Item,RedKetchupPotion,450,500

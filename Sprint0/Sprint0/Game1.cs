@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0.Controllers;
+using System;
 using System.Collections.Generic;
 
 namespace Sprint0
@@ -67,7 +68,8 @@ namespace Sprint0
                 new Vector2(3000, 0)  
             };
             cameraController = new CameraController(camera, player, railPoints);
-
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            LevelLoader.LoadLevel(basePath + "\\..\\..\\.." + "\\GameObject\\FileData.txt");
             gameObjects.Add(player);
         }
 
