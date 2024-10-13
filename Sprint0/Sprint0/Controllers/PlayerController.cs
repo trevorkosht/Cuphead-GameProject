@@ -19,16 +19,20 @@ public class PlayerController : IComponent
     public float Gravity { get; set; } = 1200f;
     public float timeTillNextBullet { get; set; } = .2f;
     public float timeTillNextHit { get; set; } = .4f;
+    float dashDuration = 1f;//about 1 second
+
+    float dashSpeed = 600f;// about 600 pixel
     public int timeTillNextDash { get; set; } = 1000;
 
     public int Health { get; set; } = 100;
 
-    private float airTime = 0f, shootTime = 0f, hitTime = 0f;
+    private float airTime = 0f, shootTime = 0f, hitTime = 0f, dashTime = 0f;
     private int floorY;
     private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust, isShooting, IsDashing = false;
 
     private readonly KeyboardController keyboardController = new KeyboardController();
     private readonly MouseController mouseController = new MouseController();
+
     private DelayGame gameDelay = new DelayGame();
 
     private const int DuckingYOffset = 50;
@@ -37,7 +41,11 @@ public class PlayerController : IComponent
     private ProjectileType currentProjectileType = ProjectileType.Peashooter;
     BoxCollider Collider;
 
-    public PlayerController() {}
+    float deltaTime;
+
+    public PlayerController() 
+    {
+    }
 
     public void Update(GameTime gameTime)
     {
@@ -49,7 +57,7 @@ public class PlayerController : IComponent
 
         var state = Keyboard.GetState();
         var animator = GameObject.GetComponent<SpriteRenderer>();
-        float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         UpdateTimers(deltaTime);
         HandleGroundCheck(animator);
@@ -65,6 +73,8 @@ public class PlayerController : IComponent
     {
         shootTime -= deltaTime;
         hitTime -= deltaTime;
+        dashTime -= deltaTime;
+        dashTime -= deltaTime;
 
         if (IsInvincible)
         {
@@ -139,32 +149,44 @@ public class PlayerController : IComponent
 
     private void HandleDash(bool dashRequested, GameTime gameTime)
     {
-        if (dashRequested && gameDelay.DelayTime(gameTime, timeTillNextDash))
+        if (IsDashing)
         {
+            // Continue dashing
+            PerformDash(gameTime);
+        }
+        else if (dashRequested && !gameDelay.Delay(gameTime, timeTillNextDash))
+        {
+            // Start dash
             IsDashing = true;
-            //move a direction by some amount
-            if (GameObject.GetComponent<SpriteRenderer>().isFacingRight == true)
+            dashTime = dashDuration; // Reset dash time
+            UpdateAnimationState(GameObject.GetComponent<SpriteRenderer>());
+            PerformDash(gameTime);
+        }
+    }
+
+    private void PerformDash(GameTime gameTime)
+    {   
+        if (dashTime > 0)
+        {
+            // Continue dashing within the duration
+            float dashDistance = dashSpeed * deltaTime; // Move by this amount per frame
+
+            if (GameObject.GetComponent<SpriteRenderer>().isFacingRight)
             {
-                for (int i = 0; i < 200; i++)
-                {
-                    GameObject.X = GameObject.X + 1;
-                    gameDelay.DelayFrames(2f);
-                }
+                GameObject.X += (int)dashDistance;
             }
             else
             {
-
-                for (int i = 0; i < 200; i++)
-                {
-                    GameObject.X = GameObject.X - 1;
-                    gameDelay.DelayFrames(2f);
-                }
-
+                GameObject.X -= (int)dashDistance;
             }
-
+        }
+        else
+        {
+            // Dash duration is over, stop dashing
             IsDashing = false;
         }
     }
+
 
     private void HandleDucking(bool duckRequested)
     {
@@ -271,7 +293,10 @@ public class PlayerController : IComponent
         {
             animator.setAnimation(shootTime > 0 ? "DuckShoot" : "Duck");
         }
-
+        else if (IsDashing)
+        {
+            animator.setAnimation(IsGrounded ? "DashGround" : "DashAir");
+        }
         else if (!IsGrounded)
         {
             animator.setAnimation("Jump");
@@ -283,10 +308,6 @@ public class PlayerController : IComponent
         else if (shootTime > 0)
         {
             animator.setAnimation("ShootStraight");
-        }
-        else if (IsDashing)
-        {
-            animator.setAnimation(IsGrounded ? "DashGround" : "DashAir");
         }
         else 
         {
