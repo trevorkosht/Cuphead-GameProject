@@ -50,9 +50,8 @@ namespace Cuphead.Items
             enabled = true;
 
             // Initialize BoxCollider with bounds (width and height of the item)
-            Vector2 bounds = new Vector2(source[0].Width, source[0].Height); // Assuming the scale is 0.33f
-            Vector2 offset = Vector2.Zero; // No offset
-            collider = new BoxCollider(bounds, offset, GOManager.Instance.GraphicsDevice);
+            Vector2 bounds = new Vector2(source[0].Width, source[0].Height); // no scale
+            collider = new BoxCollider(bounds, itemPosition, GOManager.Instance.GraphicsDevice);
             collider.GameObject = this.GameObject;
         }
 

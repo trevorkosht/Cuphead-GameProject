@@ -179,7 +179,8 @@ public class PlayerController : IComponent
             // Continue dashing within the duration
             float dashDistance = dashSpeed * deltaTime;
 
-            CreateDustEffect();
+            //add the dust stuff later
+            //CreateDustEffect();
 
             if (GameObject.GetComponent<SpriteRenderer>().isFacingRight)
             {
