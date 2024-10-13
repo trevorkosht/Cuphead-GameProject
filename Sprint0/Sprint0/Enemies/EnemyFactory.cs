@@ -13,6 +13,7 @@ public static class EnemyFactory
         SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(enemy.X, enemy.Y, 144, 144), false);
         int enemyHP;
         enemy.AddComponent(spriteRenderer);
+        spriteRenderer.addAnimation("Death",new Animation(textureStorage.GetTexture("PlayerDeath"), 5, 16, 144, 144));
 
         switch (type)
         {
