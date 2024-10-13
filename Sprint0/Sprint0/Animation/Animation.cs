@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Animation {
     private List<Rectangle> frames = new List<Rectangle>();
-    private Texture2D spriteSheet;
+    public Texture2D spriteSheet { get; set; }
     private int update = 0;
     private int updatesPerFrame;
     private int frameCount;
@@ -53,10 +53,13 @@ public class Animation {
     }
 
     public void draw(SpriteBatch spriteBatch, Rectangle destRectangle, bool isFacingRight) {
-        if (isFacingRight) { 
-            spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White);
-        } else {
-            spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, (float)0.0, new Vector2(0,0), SpriteEffects.FlipHorizontally, 0);
+        if(spriteSheet != null){
+            if (isFacingRight) {
+                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White);
+            }
+            else {
+                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, (float)0.0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, 0);
+            }
         }
     }
 

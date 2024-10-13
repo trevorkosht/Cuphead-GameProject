@@ -16,7 +16,7 @@ public class VisualEffectRenderer : IComponent {
     public void Update(GameTime gameTime) {
         if (!enabled) return;
 
-        destRectangle = new Rectangle(GameObject.X, GameObject.Y, destRectangle.Width, destRectangle.Height);
+        //destRectangle = new Rectangle(GameObject.X, GameObject.Y, destRectangle.Width, destRectangle.Height);
         animation.updateAnimation();
     }
 
@@ -30,7 +30,6 @@ public class VisualEffectRenderer : IComponent {
             (int)(destRectangle.Height * effectScale));
 
         animation.draw(spriteBatch, scaledDestRectangle, true);
-
 
         if (animation.CurrentFrame >= animation.FrameCount - 1) {
             GameObject.Destroy();

@@ -32,8 +32,6 @@ public class PlayerController : IComponent
 
     private readonly KeyboardController keyboardController = new KeyboardController();
     private readonly MouseController mouseController = new MouseController();
-    private Texture2DStorage textureStorage = new Texture2DStorage();
-    //private VisualEffectFactory visualEffectFactory = new VisualEffectFactory();
 
     private DelayGame gameDelay = new DelayGame();
 
@@ -167,6 +165,7 @@ public class PlayerController : IComponent
             height = GameObject.Y;
             Gravity = 0;
             Speed = 0;
+            CreateDustEffect();
             UpdateAnimationState(GameObject.GetComponent<SpriteRenderer>());
             PerformDash(gameTime, height);
         }
@@ -174,12 +173,10 @@ public class PlayerController : IComponent
 
     private void PerformDash(GameTime gameTime, int height)
     {   
-        if (dashTime > 0)
+        qif (dashTime > 0)
         {
             // Continue dashing within the duration
             float dashDistance = dashSpeed * deltaTime;
-
-            CreateDustEffect();
 
             if (GameObject.GetComponent<SpriteRenderer>().isFacingRight)
             {
@@ -287,12 +284,13 @@ public class PlayerController : IComponent
 
     private void CreateDustEffect()
     {
-        Rectangle dustPosition = new Rectangle(GameObject.X, GameObject.Y + 10, 50, 50); // Adjust Y position as needed
+        Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
+        Rectangle dustPosition = new Rectangle(GameObject.X, GameObject.Y + 10, 144, 144); // Adjust Y position as needed
         Texture2D dustTexture = textureStorage.GetTexture("Dust");
-        GameObject dustEffect = VisualEffectFactory.createVisualEffect(dustPosition, dustTexture, updatesPerFrame: 5, frameCount: 4, scale: 0.5f);
+        GameObject dustEffect = VisualEffectFactory.createVisualEffect(dustPosition, dustTexture, updatesPerFrame: 1, frameCount: 14, scale: 1f);
 
         // Add the dust effect to your game object manager
-        GOManager.Instance.allGOs.Add(dustEffect);
+        //GOManager.Instance.allGOs.Add(dustEffect);
     }
 
     private void UpdateGravity(float deltaTime)
@@ -319,6 +317,7 @@ public class PlayerController : IComponent
         else if (IsDashing)
         {
             animator.setAnimation(IsGrounded ? "DashGround" : "DashAir");
+            
         }
         else if (!IsGrounded)
         {
