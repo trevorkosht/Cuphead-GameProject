@@ -47,7 +47,7 @@ public class KeyboardController : IController
 
     public bool IsDashRequested()
     {
-        return curKS.IsKeyDown(Keys.LeftShift) && !preKS.Equals(Keys.LeftShift);
+        return OnKeyDown(Keys.LeftShift);
     }
 
     public bool IsDuckRequested()

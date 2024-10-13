@@ -19,10 +19,10 @@ public class PlayerController : IComponent
     public float Gravity { get; set; } = 1200f;
     public float timeTillNextBullet { get; set; } = .2f;
     public float timeTillNextHit { get; set; } = .4f;
-    float dashDuration = 1f;//about 1 second
-
-    float dashSpeed = 600f;// about 600 pixel
+    public float dashDuration = 1f;//about 1 second
+    public float dashSpeed = 600f;// about 600 pixel
     public int timeTillNextDash { get; set; } = 1000;
+    public int height;
 
     public int Health { get; set; } = 100;
 
@@ -137,11 +137,11 @@ public class PlayerController : IComponent
 
     private void UpdateFacingDirection(Vector2 input)
     {
-        if (input.X < 0)
+        if (input.X < 0 && !IsDashing)
         {
             GameObject.GetComponent<SpriteRenderer>().isFacingRight = false;
         }
-        else if (input.X > 0)
+        else if (input.X > 0 && !IsDashing)
         {
             GameObject.GetComponent<SpriteRenderer>().isFacingRight = true;
         }
@@ -152,24 +152,27 @@ public class PlayerController : IComponent
         if (IsDashing)
         {
             // Continue dashing
-            PerformDash(gameTime);
+            PerformDash(gameTime, height);
         }
-        else if (dashRequested && !gameDelay.Delay(gameTime, timeTillNextDash))
+        else if (dashRequested && gameDelay.Cooldown(gameTime, 1500))
         {
             // Start dash
             IsDashing = true;
-            dashTime = dashDuration; // Reset dash time
+            dashTime = dashDuration; 
+            height = GameObject.Y;
+            Gravity = 0;
+            Speed = 0;
             UpdateAnimationState(GameObject.GetComponent<SpriteRenderer>());
-            PerformDash(gameTime);
+            PerformDash(gameTime, height);
         }
     }
 
-    private void PerformDash(GameTime gameTime)
+    private void PerformDash(GameTime gameTime, int height)
     {   
         if (dashTime > 0)
         {
             // Continue dashing within the duration
-            float dashDistance = dashSpeed * deltaTime; // Move by this amount per frame
+            float dashDistance = dashSpeed * deltaTime;
 
             if (GameObject.GetComponent<SpriteRenderer>().isFacingRight)
             {
@@ -179,11 +182,14 @@ public class PlayerController : IComponent
             {
                 GameObject.X -= (int)dashDistance;
             }
+            GameObject.Y = height;
         }
         else
         {
             // Dash duration is over, stop dashing
             IsDashing = false;
+            Gravity = 1200f;
+            Speed = 700f;
         }
     }
 
