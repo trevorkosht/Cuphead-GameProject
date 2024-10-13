@@ -80,7 +80,7 @@ namespace Cuphead.Items
         {
             spriteBatch.Draw(_texture, this.position, source[_frameIndex], Color.White, 0f, Vector2.Zero, .33f, SpriteEffects.None, 0f);
 
-            collider.Draw(spriteBatch);
+            //collider.Draw(spriteBatch);
         }
     }
 }
