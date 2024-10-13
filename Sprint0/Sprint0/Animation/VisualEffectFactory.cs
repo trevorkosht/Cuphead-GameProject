@@ -8,6 +8,7 @@ public class VisualEffectFactory {
         VisualEffectRenderer effectRenderer = new VisualEffectRenderer(destRectangle, effectAnimation);
         effectRenderer.effectScale = scale;
         effect.AddComponent(effectRenderer);
+        GOManager.Instance.allGOs.Add(effect);
         return effect;
     }
 }
