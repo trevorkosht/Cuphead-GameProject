@@ -39,7 +39,7 @@ public class LevelLoader
                     break;
 
                 case "Block":
-                    SpawnBlock(subtype, posX, posY);
+                    SpawnBlock(subtype, new Vector2(posX, posY));
                     break;
 
                 case "Item":
@@ -66,11 +66,9 @@ public class LevelLoader
         }
     }
 
-    private static void SpawnBlock(string subtype, int x, int y)
+    private static void SpawnBlock(string subtype, Vector2 position)
     {
-        // You can extend this with different block types, but for now, we'll just use a single texture.
-        Texture2D texture = GOManager.Instance.textureStorage.GetTexture(subtype);
-        GameObject block = BlockFactory.createBlock(new Rectangle(x, y, 144, 144), texture);
+        GameObject block = BlockFactory.CreateBlock(subtype, position);
         GOManager.Instance.allGOs.Add(block);
     }
 
