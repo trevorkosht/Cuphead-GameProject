@@ -45,6 +45,10 @@ public class DeadlyDaisy : BaseEnemy
         {
             Jump();
         }
+        else 
+        {
+            sRend.setAnimation("deadlyDaisyAnimation");
+        }
 
         if (isJumping)
         {
@@ -67,7 +71,8 @@ public class DeadlyDaisy : BaseEnemy
     private void Jump()
     {
         isJumping = true;
-        velocity.Y = -jumpHeight; 
+        velocity.Y = -jumpHeight;
+        sRend.setAnimation("Spawn");
     }
 
     public override void Shoot(GameTime gameTime)

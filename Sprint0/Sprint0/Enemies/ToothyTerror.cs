@@ -24,6 +24,7 @@ public class ToothyTerror : BaseEnemy
     {
         if (isJumping)
         {
+            sRend.setAnimation("Attack");
             GameObject.Y -= (int)(jumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
             jumpSpeed -= gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -35,6 +36,7 @@ public class ToothyTerror : BaseEnemy
         }
         else
         {
+            sRend.setAnimation("toothyTerrorAnimation");
             GameObject.Y += (int)(gravity * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
             if (GameObject.Y >= startYPosition)

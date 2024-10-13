@@ -26,16 +26,20 @@ public class TerribleTulip : BaseEnemy
         shootCooldown -= gametime.ElapsedGameTime.TotalSeconds;
         if (shootCooldown <= 0 && sRend.currentAnimation.Value.CurrentFrame == 7)
         {
-            Vector2 playerPosition = new Vector2(player.X, player.Y);
-            GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new TullipProjectile(GameObject.position));
-            projectiles.Add(projectile);
-            SpriteRenderer projSrend = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), true);
-            projectile.AddComponent(projSrend);
-            projSrend.spriteScale = .5f;
-            projSrend.addAnimation("spin", new Animation(projectileTexture, 3, 12, 144, 144));
-            projSrend.setAnimation("spin");
-            GOManager.Instance.allGOs.Add(projectile);
-            shootCooldown = 3.0; 
+            sRend.setAnimation("terribleTulipAnimation");
+            if(sRend.currentAnimation.Value.CurrentFrame == 7)
+            {
+                Vector2 playerPosition = new Vector2(player.X, player.Y);
+                GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new TullipProjectile(GameObject.position));
+                projectiles.Add(projectile);
+                SpriteRenderer projSrend = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), true);
+                projectile.AddComponent(projSrend);
+                projSrend.spriteScale = .5f;
+                projSrend.addAnimation("spin", new Animation(projectileTexture, 3, 12, 144, 144));
+                projSrend.setAnimation("spin");
+                GOManager.Instance.allGOs.Add(projectile);
+                shootCooldown = 3.0;
+            }
         }
     }
 
@@ -58,6 +62,10 @@ public class TerribleTulip : BaseEnemy
             }
         }
         Shoot(gameTime);
+
+        if (sRend.currentAnimation.Value.CurrentFrame == 14) {
+            sRend.setAnimation("Idle");
+        }
     }
 }
 

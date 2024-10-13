@@ -37,7 +37,7 @@ public static class EnemyFactory
                 enemyLogic = new MurderousMushroom();
                 enemy.AddComponent(enemyLogic);
                 spriteRenderer.addAnimation("murderousMushroomAnimation", new Animation(textureStorage.GetTexture("MurderousMushroom"), 5, 8, 144, 144));
-                spriteRenderer.addAnimation("Attack", new Animation(textureStorage.GetTexture("MushroomAttack"), 15, 10, 144, 144));
+                spriteRenderer.addAnimation("Attack", new Animation(textureStorage.GetTexture("MushroomAttack"), 3, 15, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("MurderousMushroom"), textureStorage);
                 enemyHP = 50;
                 break;

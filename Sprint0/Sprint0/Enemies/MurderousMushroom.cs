@@ -31,18 +31,22 @@ public class MurderousMushroom : BaseEnemy
             shootCooldown -= gameTime.ElapsedGameTime.TotalSeconds;
             if (shootCooldown <= 0)
             {
-                Vector2 playerPosition = new Vector2(player.X, player.Y);
-                bool shootPinkSpore = (new Random().Next(0, 2) == 0);
+                sRend.setAnimation("Attack");
+                if(sRend.currentAnimation.Value.CurrentFrame == 5) {
+                    Vector2 playerPosition = new Vector2(player.X, player.Y);
+                    bool shootPinkSpore = (new Random().Next(0, 2) == 0);
 
-                sRend.isFacingRight = player.X < GameObject.X;
+                    sRend.isFacingRight = player.X < GameObject.X;
 
-                Texture2D sporeTexture = shootPinkSpore ? pinkSporeTexture : purpleSporeTexture;
-                GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new SporeProjectile(GameObject.position, playerPosition, sporeTexture, shootPinkSpore));
+                    Texture2D sporeTexture = shootPinkSpore ? pinkSporeTexture : purpleSporeTexture;
+                    GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new SporeProjectile(GameObject.position, playerPosition, sporeTexture, shootPinkSpore));
 
 
-                GOManager.Instance.allGOs.Add(projectile);
+                    GOManager.Instance.allGOs.Add(projectile);
 
-                shootCooldown = 2.0; 
+                    shootCooldown = 4.0;
+                }
+
             }
         }
     }
@@ -60,7 +64,9 @@ public class MurderousMushroom : BaseEnemy
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-
         Shoot(gameTime);
+        if (sRend.currentAnimation.Value.CurrentFrame == 14) {
+            sRend.setAnimation("murderousMushroomAnimation");
+        }
     }
 }
