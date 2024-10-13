@@ -19,12 +19,14 @@ namespace Cuphead.Items
         public bool enabled { get; set; }
 
         private Texture2D _texture;
+        BoxCollider collider;
         private Vector2 position;
         private Rectangle[] source;
         private string _itemName;
         private const int frameRate = 5;
         private int _frameIndex;
         private int counter = 0;
+        private float scale = .33f;
 
         public Texture2D itemTexture
         {
@@ -48,6 +50,11 @@ namespace Cuphead.Items
                 new Rectangle(446, 175, 196, 235)
                 };
             enabled = true;
+
+            // Initialize collider
+            Vector2 bounds = new Vector2(source[0].Width * scale, source[0].Width * scale); 
+            collider = new BoxCollider(bounds, position, GOManager.Instance.GraphicsDevice);
+            collider.GameObject = this.GameObject;
         }
 
         public void Update(GameTime gameTime)
@@ -68,11 +75,15 @@ namespace Cuphead.Items
             {
                 _frameIndex = 0;
             }
+            collider.offset = position;
+            collider.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_texture, this.position, source[_frameIndex], Color.White, 0f, Vector2.Zero, .33f, SpriteEffects.None, 0f);
+
+            collider.Draw(spriteBatch);
         }
     }
 }
