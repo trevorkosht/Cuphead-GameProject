@@ -32,6 +32,8 @@ public class PlayerController : IComponent
 
     private readonly KeyboardController keyboardController = new KeyboardController();
     private readonly MouseController mouseController = new MouseController();
+    private Texture2DStorage textureStorage = new Texture2DStorage();
+    //private VisualEffectFactory visualEffectFactory = new VisualEffectFactory();
 
     private DelayGame gameDelay = new DelayGame();
 
@@ -118,10 +120,13 @@ public class PlayerController : IComponent
         if (!IsDucking)
         {
             if (input.X != 0 && IsGrounded)
+            {
                 IsRunning = true;
+            }
             else
+            {
                 IsRunning = false;
-
+            }
             GameObject.X += (int)(input.X * Speed * deltaTime);
             
             HandleDash(dashRequested, gameTime);
@@ -173,6 +178,8 @@ public class PlayerController : IComponent
         {
             // Continue dashing within the duration
             float dashDistance = dashSpeed * deltaTime;
+
+            CreateDustEffect();
 
             if (GameObject.GetComponent<SpriteRenderer>().isFacingRight)
             {
@@ -276,6 +283,16 @@ public class PlayerController : IComponent
         hitTime = InvincibilityDuration;
         IsInvincible = true;
         GameObject.GetComponent<SpriteRenderer>().setAnimation("HitGround");
+    }
+
+    private void CreateDustEffect()
+    {
+        Rectangle dustPosition = new Rectangle(GameObject.X, GameObject.Y + 10, 50, 50); // Adjust Y position as needed
+        Texture2D dustTexture = textureStorage.GetTexture("Dust");
+        GameObject dustEffect = VisualEffectFactory.createVisualEffect(dustPosition, dustTexture, updatesPerFrame: 5, frameCount: 4, scale: 0.5f);
+
+        // Add the dust effect to your game object manager
+        GOManager.Instance.allGOs.Add(dustEffect);
     }
 
     private void UpdateGravity(float deltaTime)

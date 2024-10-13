@@ -17,6 +17,7 @@ namespace Cuphead.Items
         public GameObject GameObject { get; set; }
         public bool enabled { get; set; }
 
+        private BoxCollider collider;
         private Texture2D _texture;
         private Vector2 position;
         private Rectangle[] source;
@@ -47,6 +48,12 @@ namespace Cuphead.Items
                 new Rectangle(571, 1, 153, 255)
                 };
             enabled = true;
+
+            // Initialize BoxCollider with bounds (width and height of the item)
+            Vector2 bounds = new Vector2(source[0].Width, source[0].Height); // Assuming the scale is 0.33f
+            Vector2 offset = Vector2.Zero; // No offset
+            collider = new BoxCollider(bounds, offset, GOManager.Instance.GraphicsDevice);
+            collider.GameObject = this.GameObject;
         }
 
         public void Update(GameTime gameTime)
@@ -73,6 +80,8 @@ namespace Cuphead.Items
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_texture, this.position, source[_frameIndex], Color.White, 0f, Vector2.Zero, .33f, SpriteEffects.None, 0f);
+
+            collider.Draw(spriteBatch);
         }
     }
 }
