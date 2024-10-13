@@ -63,8 +63,9 @@ public class TerribleTulip : BaseEnemy
         }
         Shoot(gameTime);
 
-        if (sRend.currentAnimation.Value.CurrentFrame == 14) {
+        if (sRend.getAnimationName().Equals("terribleTulipAnimation") && sRend.currentAnimation.Value.CurrentFrame == 14) {
             sRend.setAnimation("Idle");
+            sRend.currentAnimation.Value.CurrentFrame = 7;
         }
     }
 }
