@@ -80,4 +80,9 @@ public class SpriteRenderer : IComponent {
         spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, isFacingRight);
     }
 
+    public bool IsAnimationComplete()
+    {
+        return spriteAnimations[currentAnimation.Key].IsComplete();
+    }
+
 }

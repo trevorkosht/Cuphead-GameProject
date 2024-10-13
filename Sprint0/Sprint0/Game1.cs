@@ -16,7 +16,7 @@ namespace Sprint0
         private KeyboardController keyboardController;
 
         private List<GameObject> gameObjects = new List<GameObject>();
-        GameObject player = new GameObject(50, 50, new List<IComponent> { new PlayerController() });
+        GameObject player = new GameObject(50, 500, new List<IComponent> { new PlayerController() });
 
         private EnemyController enemyController;
         private BlockController blockController;

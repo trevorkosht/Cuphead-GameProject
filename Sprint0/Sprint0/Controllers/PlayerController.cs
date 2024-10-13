@@ -11,6 +11,8 @@ public class PlayerController : IComponent
     public GameObject GameObject { get; set; }
     public bool enabled { get; set; } = true;
 
+    private bool IsSpawning { get; set; } = true;
+
     public float Speed { get; set; } = 700f;
     public float JumpForce { get; set; } = -1150f;
     public bool IsGrounded { get; set; } = false;
@@ -49,6 +51,11 @@ public class PlayerController : IComponent
 
     public void Update(GameTime gameTime)
     {
+        if(IsSpawning)
+        {
+            HandleSpawnAnimation(gameTime);
+            return;
+        }
         if (!enabled) return;
         Collider = GameObject.GetComponent<BoxCollider>();
 
@@ -67,6 +74,18 @@ public class PlayerController : IComponent
         HandleDamageDetection();
         UpdateGravity(deltaTime);
         UpdateAnimationState(animator);
+    }
+
+    private void HandleSpawnAnimation(GameTime gameTime)
+    {
+        var animator = GameObject.GetComponent<SpriteRenderer>();
+        animator.setAnimation("Spawn");
+
+        if (animator.IsAnimationComplete())
+        {
+            IsSpawning = false;
+            animator.setAnimation("Idle");
+        }
     }
 
     private void UpdateTimers(float deltaTime)

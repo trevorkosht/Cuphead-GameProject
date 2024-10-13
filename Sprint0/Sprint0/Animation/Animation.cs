@@ -66,4 +66,9 @@ public class Animation {
     public void resetAnimation() {
         currentFrame = 0;
     }
+
+    public bool IsComplete()
+    {
+        return currentFrame >= frameCount - 1 && update >= updatesPerFrame;
+    }
 }
