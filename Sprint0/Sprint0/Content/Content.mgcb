@@ -385,6 +385,18 @@
 /processorParam:TextureFormat=Color
 /build:BlockTextures/Trees/tree-7.png
 
+#begin EnemyTextures/acorn_fall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/acorn_fall.png
+
 #begin EnemyTextures/AcornMakerSprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -409,6 +421,30 @@
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/AggravatingAcornSprite.png
 
+#begin EnemyTextures/blueberry_melt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/blueberry_melt.png
+
+#begin EnemyTextures/blueberry_respawn.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/blueberry_respawn.png
+
 #begin EnemyTextures/BothersomeBlueberrySprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -420,6 +456,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/BothersomeBlueberrySprite.png
+
+#begin EnemyTextures/daisy_spawn.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/daisy_spawn.png
 
 #begin EnemyTextures/DeadlyDaisySprite.png
 /importer:TextureImporter
@@ -457,6 +505,18 @@
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/MurderousMushroomSprite.png
 
+#begin EnemyTextures/mushroom_attack.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/mushroom_attack.png
+
 #begin EnemyTextures/mushroom_poison_cloud_0001.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -493,6 +553,18 @@
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/TerribleTulipSprite.png
 
+#begin EnemyTextures/terror_spin.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/terror_spin.png
+
 #begin EnemyTextures/ToothyTerrorSprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -504,6 +576,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/ToothyTerrorSprite.png
+
+#begin EnemyTextures/tulip_idle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/tulip_idle.png
+
+#begin EnemyTextures/waiting_for_respawn.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/waiting_for_respawn.png
 
 #begin File.spritefont
 /importer:FontDescriptionImporter

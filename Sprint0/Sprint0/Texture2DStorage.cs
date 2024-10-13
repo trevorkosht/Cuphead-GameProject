@@ -20,6 +20,15 @@ public class Texture2DStorage
         _textures["PurpleSpore"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_poison_cloud_0001");
         _textures["PinkSpore"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_poison_cloud_pink_0003");
 
+        _textures["AcornFall"] = content.Load<Texture2D>(@"EnemyTextures\acorn_fall");
+        _textures["BlueberryMelt"] = content.Load<Texture2D>(@"EnemyTextures\blueberry_melt");
+        _textures["BlueberryRespawn"] = content.Load<Texture2D>(@"EnemyTextures\blueberry_respawn");
+        _textures["BlueberryWaitingToRespawn"] = content.Load<Texture2D>(@"EnemyTextures\waiting_for_respawn");
+        _textures["DaisySpawn"] = content.Load<Texture2D>(@"EnemyTextures\daisy_spawn");
+        _textures["MushroomAttack"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_attack");
+        _textures["ToothyTerrorSpinAttack"] = content.Load<Texture2D>(@"EnemyTextures\terror_spin");
+        _textures["TulipIdle"] = content.Load<Texture2D>(@"EnemyTextures\tulip_idle");
+
         //Level Textures
 
         //Background
