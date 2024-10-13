@@ -1,6 +1,8 @@
 Enemy,AggravatingAcorn,100,150
 Enemy,DeadlyDaisy,300,400
 Enemy,MurderousMushroom,500,600
+Block,Rock1,150,350
+Block,Rock2,400,450
 Item,YellowPotion,200,250
 Item,SkybluePotion,250,300
 Item,RedPotion,300,350
