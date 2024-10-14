@@ -61,11 +61,12 @@ public class PeashooterProjectile : Projectile
                 }
             }
 
-            if (isFacingRight && GameObject.X > 1200 || !isFacingRight && GameObject.X < 0)
+            Camera camera = GOManager.Instance.Camera;
+            if (GameObject.X > camera.Position.X + 1200 || GameObject.X < camera.Position.X)
             {
                 GameObject.Destroy();
-                return;
             }
+
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.Timers;
 using System;
+using System.Collections.Generic;
 
 public class ChaserProjectile : Projectile
 {
@@ -27,15 +27,15 @@ public class ChaserProjectile : Projectile
             spriteRenderer.isFacingRight = false;
         }
     }
+
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
-        lastDirection = Vector2.UnitX;
+        lastDirection = isFacingRight ? Vector2.UnitX : -Vector2.UnitX; // Start based on facing direction
     }
 
     public override void Update(GameTime gameTime)
     {
-
         if (collided)
         {
             explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -50,19 +50,17 @@ public class ChaserProjectile : Projectile
         {
             if (IsActive)
             {
-                if (targetEnemy == null || targetEnemy.destroyed)
-                {
-                    targetEnemy = GOManager.Instance.currentEnemy;
-                }
+                // Find the closest enemy in the direction the player is facing
+                targetEnemy = FindClosestEnemy();
 
                 Vector2 direction;
 
                 if (targetEnemy != null)
                 {
                     direction = Vector2.Normalize(targetEnemy.position - GameObject.position);
-
                     lastDirection = direction;
 
+                    // Destroy the projectile if it's very close to the enemy
                     if (Vector2.Distance(GameObject.position, targetEnemy.position) < 20f)
                     {
                         GameObject.Destroy();
@@ -75,8 +73,10 @@ public class ChaserProjectile : Projectile
                     direction = lastDirection;
                 }
 
+                // Move in the direction of the target or last direction
                 GameObject.Move((int)(direction.X * speed), (int)(direction.Y * speed));
 
+                // Check for collisions with other game objects
                 collider = GameObject.GetComponent<Collider>();
                 foreach (GameObject GO in GOManager.Instance.allGOs)
                 {
@@ -91,13 +91,42 @@ public class ChaserProjectile : Projectile
                     }
                 }
 
-                if (GameObject.X > 1200 || GameObject.X < 0 || GameObject.Y > 800 || GameObject.Y < 0)
+                // Check if projectile is out of bounds
+                Camera camera = GOManager.Instance.Camera;
+                if (GameObject.X > camera.Position.X + 1200 || GameObject.X < camera.Position.X || GameObject.Y < camera.Position.Y || GameObject.Y > camera.Position.Y + 720)
                 {
                     GameObject.Destroy();
-                    return;
                 }
             }
         }
+    }
+
+    private GameObject FindClosestEnemy()
+    {
+        GameObject closestEnemy = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (var gameObject in GOManager.Instance.allGOs)
+        {
+            // Check if the game object is an enemy
+            if (gameObject.type == "Enemy")
+            {
+                Vector2 directionToEnemy = gameObject.position - GameObject.position;
+                float distance = directionToEnemy.Length();
+
+                // Filter enemies based on the direction the player is facing
+                if ((isFacingRight && directionToEnemy.X > 0) || (!isFacingRight && directionToEnemy.X < 0))
+                {
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestEnemy = gameObject;
+                    }
+                }
+            }
+        }
+
+        return closestEnemy;
     }
 
     public override void Draw(SpriteBatch spriteBatch)

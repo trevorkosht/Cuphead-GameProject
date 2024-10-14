@@ -88,12 +88,13 @@ public class RoundaboutProjectile : Projectile
                     }
                 }
 
-                // Destroy when it goes off-screen in returning phase
-                if (returning && (GameObject.X > 1200 || GameObject.X < 0 || GameObject.Y < 0 || GameObject.Y > 800))
+                Camera camera = GOManager.Instance.Camera;
+                if (returning && (GameObject.X > camera.Position.X + 1200 || GameObject.X < camera.Position.X ||  GameObject.Y < camera.Position.Y || GameObject.Y > camera.Position.Y + 720))
                 {
                     GameObject.Destroy();
-                    return;
                 }
+
+
             }
         }
     }
