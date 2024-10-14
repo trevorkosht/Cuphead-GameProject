@@ -34,7 +34,7 @@ public static class ItemFactory
         spriteRenderer.addAnimation("texture",itemTexture);
         spriteRenderer.setAnimation("texture");
         spriteRenderer.spriteScale = 1f;
-        Collider boxCollider = new BoxCollider(new Vector2(destRectangle.X, destRectangle.Y), new Vector2(0,0), GOManager.Instance.GraphicsDevice);
+        Collider boxCollider = new BoxCollider(new Vector2(destRectangle.Width, destRectangle.Height), new Vector2(0,0), GOManager.Instance.GraphicsDevice);
 
         GOManager.Instance.allGOs.Add(item);
 
