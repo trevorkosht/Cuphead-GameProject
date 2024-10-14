@@ -21,6 +21,7 @@ namespace Sprint0
 
         private Camera camera;
         private CameraController cameraController;
+        Vector2 savedPlayerLoc;
 
         bool resetFrame;
 
@@ -39,7 +40,8 @@ namespace Sprint0
         protected override void Initialize()
         {
             base.Initialize();
-
+            player.X = (int)savedPlayerLoc.X;
+            player.Y = (int)savedPlayerLoc.Y;
             GOManager.Instance.Player = player;
             GOManager.Instance.allGOs = gameObjects;
             GOManager.Instance.textureStorage = textureStorage;
@@ -98,6 +100,7 @@ namespace Sprint0
             }
 
             enemyController.Update(gameTime);
+            savedPlayerLoc = player.position;
 
             // Update camera based on player's position and the rail
             cameraController.Update();

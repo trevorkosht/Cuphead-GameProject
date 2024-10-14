@@ -15,6 +15,7 @@ public class LevelLoader
         foreach (string line in lines)
         {
             if (string.IsNullOrWhiteSpace(line)) continue;
+            if (line.Contains("//")) continue;
 
             // Split the line by comma
             string[] parts = line.Split(',');
