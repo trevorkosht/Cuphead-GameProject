@@ -9,9 +9,15 @@ public class SpreadShotProjectile : Projectile
     private float angleSpread = 45f;
     private Vector2[] directions;
     bool isFacingRight;
+    private bool collided;
+    private float explosionDuration;
+    private float explosionTimer;
 
     public SpreadShotProjectile(bool isFacingRight)
     {
+        collided = false;
+        explosionTimer = 0.0f;
+        explosionDuration = 0.5f;
         this.isFacingRight = isFacingRight;
 
         directions = new Vector2[]

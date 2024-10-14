@@ -8,12 +8,21 @@ public class RoundaboutProjectile : Projectile
     private Vector2 playerLaunchPosition;
     private bool returning;
     private bool isFacingRight;
+    private Collider collider;
+    private SpriteRenderer spriteRenderer;
+    private bool collided;
+    private float explosionDuration;
+    private float explosionTimer;
 
     private float launchDuration = 1f;
     private float elapsedTime;
 
     public RoundaboutProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
+        collided = false;
+        explosionTimer = 0.0f;
+        explosionDuration = 1.0f;
+        this.spriteRenderer = spriteRenderer;
         this.isFacingRight = isFacingRight;
 
         if (!isFacingRight)
@@ -37,26 +46,54 @@ public class RoundaboutProjectile : Projectile
 
     public override void Update(GameTime gameTime)
     {
-        if (IsActive)
+        if (collided)
         {
-            elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Switch to returning phase after the launch duration
-            if (!returning && elapsedTime >= launchDuration)
-            {
-                returning = true;
-
-                // In returning phase, move diagonally upwards while traveling back
-                velocity = new Vector2(isFacingRight ? -speed : speed, -speed / 2);
-            }
-
-            // Update the projectile's position based on its velocity
-            GameObject.Move((int)velocity.X, (int)velocity.Y);
-
-            // Destroy when it goes off-screen in returning phase
-            if (returning && (GameObject.X > 1200 || GameObject.X < 0 || GameObject.Y < 0 || GameObject.Y > 800))
+            if (explosionTimer >= explosionDuration)
             {
                 GameObject.Destroy();
+                return;
+            }
+        }
+        else
+        {
+            if (IsActive)
+            {
+                elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                // Switch to returning phase after the launch duration
+                if (!returning && elapsedTime >= launchDuration)
+                {
+                    returning = true;
+
+                    // In returning phase, move diagonally upwards while traveling back
+                    velocity = new Vector2(isFacingRight ? -speed : speed, -speed / 2);
+                }
+
+                // Update the projectile's position based on its velocity
+                GameObject.Move((int)velocity.X, (int)velocity.Y);
+
+                collider = GameObject.GetComponent<Collider>();
+                foreach (GameObject GO in GOManager.Instance.allGOs)
+                {
+                    if (GO.type != "PlayerProjectile" && GO.type != "Player")
+                    {
+                        if (collider.Intersects(GO.GetComponent<Collider>()))
+                        {
+                            spriteRenderer.setAnimation("RoundaboutExplosionAnimation");
+                            collided = true;
+                            return;
+                        }
+                    }
+                }
+
+                // Destroy when it goes off-screen in returning phase
+                if (returning && (GameObject.X > 1200 || GameObject.X < 0 || GameObject.Y < 0 || GameObject.Y > 800))
+                {
+                    GameObject.Destroy();
+                    return;
+                }
             }
         }
     }
