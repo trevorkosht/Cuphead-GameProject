@@ -37,9 +37,9 @@ Block,Tree4,17100,500
 Block,Tree5,17600,500
 Block,Tree6,18100,500
 
-Item,YellowPotion,19100,500
-Item,SkybluePotion,19600,500
-Item,RedPotion,20100,500
-Item,BluePotion,20600,500
-Item,OceanbluePotion,21100,500
-Item,RedKetchupPotion,21600,500
+Item,YellowPotion,100,500
+Item,SkybluePotion,600,500
+Item,RedPotion,1100,500
+Item,BluePotion,1600,500
+Item,OceanbluePotion,2100,500
+Item,RedKetchupPotion,2600,500

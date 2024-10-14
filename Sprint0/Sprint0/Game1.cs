@@ -19,8 +19,6 @@ namespace Sprint0
         GameObject player = new GameObject(50, 500, new List<IComponent> { new PlayerController() });
 
         private EnemyController enemyController;
-        private BlockController blockController;
-        private ItemsController itemsControl;
 
         private Camera camera;
         private CameraController cameraController;
@@ -48,8 +46,6 @@ namespace Sprint0
             GOManager.Instance.textureStorage = textureStorage;
             GOManager.Instance.GraphicsDevice = GraphicsDevice;
             enemyController = new EnemyController(keyboardController, textureStorage);
-            blockController = new BlockController(textureStorage);
-            itemsControl = new ItemsController(textureStorage);
 
             // Initialize camera and controller
             camera = new Camera();
@@ -101,8 +97,6 @@ namespace Sprint0
             }
 
             enemyController.Update(gameTime);
-            blockController.Update(gameTime);
-            itemsControl.Update(gameTime);
 
             // Update camera based on player's position and the rail
             cameraController.Update();
@@ -149,8 +143,6 @@ namespace Sprint0
                 }
                 gameObject.Draw(_spriteBatch);
             }
-            blockController.Draw(_spriteBatch);
-            itemsControl.Draw(gameTime, _spriteBatch);
             enemyController.Draw(_spriteBatch);
 
             _spriteBatch.End();
