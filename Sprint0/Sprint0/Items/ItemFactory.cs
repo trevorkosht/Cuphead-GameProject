@@ -25,7 +25,6 @@ public static class ItemFactory
                 break;
         }
 
-        Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
         GameObject item = new GameObject(destRectangle.X, destRectangle.Y);
         ItemManager itemManager = new ItemManager(type);
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
