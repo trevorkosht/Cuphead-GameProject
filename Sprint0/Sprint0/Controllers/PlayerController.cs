@@ -282,9 +282,12 @@ public class PlayerController : IComponent
             if (GameObject.GetComponent<SpriteRenderer>().isFacingRight)
             {
                 newProjectile = ProjectileFactory.CreateProjectile(currentProjectileType, GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
-            }else
+                CreateShootingEffect(true);
+            }
+            else
             {
                 newProjectile = ProjectileFactory.CreateProjectile(currentProjectileType, GameObject.X - 90, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+                CreateShootingEffect(false);
             }
             GOManager.Instance.allGOs.Add(newProjectile);
 
@@ -333,10 +336,44 @@ public class PlayerController : IComponent
         Rectangle dustPosition = new Rectangle(GameObject.X, GameObject.Y + 10, 144, 144); // Adjust Y position as needed
         Texture2D dustTexture = textureStorage.GetTexture("Dust");
         GameObject dustEffect = VisualEffectFactory.createVisualEffect(dustPosition, dustTexture, updatesPerFrame: 1, frameCount: 14, scale: 1f);
-
-        // Add the dust effect to your game object manager
-        //GOManager.Instance.allGOs.Add(dustEffect);
     }
+
+    private void CreateShootingEffect(bool isFacingRight) {
+        Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
+        Rectangle effectPosition;
+        if (isFacingRight) {
+            effectPosition = new Rectangle(GameObject.X + 100, GameObject.Y + 25, 144, 144);
+        }
+        else {
+            effectPosition = new Rectangle(GameObject.X - 25, GameObject.Y + 25, 144, 144);
+        }
+
+        Texture2D effectTexture;
+
+        switch ((int)currentProjectileType) {
+            case 0:
+                effectTexture = textureStorage.GetTexture("PeashooterSpawn");
+                break;
+            case 1:
+                effectTexture = textureStorage.GetTexture("SpreadSpawn");
+                break;
+            case 2:
+                effectTexture = textureStorage.GetTexture("ChaserSpawn");
+                break;
+            case 3:
+                effectTexture = textureStorage.GetTexture("LobberSpawn");
+                break;
+            case 4:
+                effectTexture = textureStorage.GetTexture("RoundaboutSpawn");
+                break;
+            default:
+                effectTexture = null;
+                break;
+        }
+        VisualEffectFactory.createVisualEffect(effectPosition, effectTexture, updatesPerFrame: 2, frameCount: 4, scale: 0.5f);
+    }
+
+
 
     private void UpdateGravity(float deltaTime)
     {

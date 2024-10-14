@@ -8,6 +8,8 @@ public class VisualEffectRenderer : IComponent {
     public float effectScale { get; set; } = 1f;
     public bool enabled { get; set; } = true;
 
+    private bool hasPlayed = false;
+
     public VisualEffectRenderer(Rectangle destRectangle, Animation animation) { 
         this.destRectangle = destRectangle;
         this.animation = animation;
@@ -18,6 +20,7 @@ public class VisualEffectRenderer : IComponent {
 
         //destRectangle = new Rectangle(GameObject.X, GameObject.Y, destRectangle.Width, destRectangle.Height);
         animation.updateAnimation();
+
     }
 
     public void Draw(SpriteBatch spriteBatch) {
@@ -31,7 +34,10 @@ public class VisualEffectRenderer : IComponent {
 
         animation.draw(spriteBatch, scaledDestRectangle, true);
 
-        if (animation.CurrentFrame >= animation.FrameCount - 1) {
+        if (animation.CurrentFrame == animation.FrameCount - 1) {
+            hasPlayed = true;
+        }
+        if(hasPlayed && animation.CurrentFrame == 0){
             GameObject.Destroy();
         }
     }
