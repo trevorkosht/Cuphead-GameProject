@@ -53,18 +53,22 @@ public static class BlockFactory
             Rectangle destRectangle = new Rectangle((int)position.X, (int)position.Y, size.width, size.height);
 
             // Create the block with the size and texture
-            return CreateBlock(destRectangle, texture, size.width, size.height);
+            bool collider = true;
+            if (subtype.Contains("Background") || subtype.Contains("Tree") || subtype.Contains("Leaves") || subtype.Contains("Rock") || subtype.Contains("Bush"))
+                collider = false;
+            return CreateBlock(destRectangle, texture, size.width, size.height, collider);
         }
         else
         {
             Console.WriteLine($"Warning: Block subtype '{subtype}' not found. Using default size.");
             Rectangle defaultRect = new Rectangle((int)position.X, (int)position.Y, 100, 100);
-            return CreateBlock(defaultRect, texture, 100, 100); // Use default size if not found
+            bool collider = false;
+            return CreateBlock(defaultRect, texture, 100, 100, collider); // Use default size if not found
         }
     }
 
     // Consolidated method to handle block creation, frame size, and collider size
-    public static GameObject CreateBlock(Rectangle destRectangle, Texture2D texture, int frameWidth, int frameHeight)
+    public static GameObject CreateBlock(Rectangle destRectangle, Texture2D texture, int frameWidth, int frameHeight, bool collider)
     {
         GameObject block = new GameObject(destRectangle.X, destRectangle.Y);
 
@@ -78,8 +82,11 @@ public static class BlockFactory
         spriteRenderer.setAnimation("texture");
 
         // Add a collider with the block's size
-        BoxCollider boxCollider = new BoxCollider(new Vector2(destRectangle.Width, destRectangle.Height), Vector2.Zero, GOManager.Instance.GraphicsDevice);
-        block.AddComponent(boxCollider);
+        if (collider)
+        {
+            BoxCollider boxCollider = new BoxCollider(new Vector2(destRectangle.Width, destRectangle.Height), Vector2.Zero, GOManager.Instance.GraphicsDevice);
+            block.AddComponent(boxCollider);
+        }
 
         // Add the block to the game objects list
         GOManager.Instance.allGOs.Add(block);
