@@ -18,9 +18,9 @@ public class PlayerController : IComponent
     public float Gravity { get; set; } = 1200f;
     public float timeTillNextBullet { get; set; } = .2f;
     public float timeTillNextHit { get; set; } = .4f;
-    public float dashDuration = 1f;//about 1 second
-    public float dashSpeed = 600f;// about 600 pixel
-    public int timeTillNextDash { get; set; } = 1000;
+    public float dashDuration = 0.5f;//about 1 second
+    public float dashSpeed = 1500f;// about 750 pixel
+    public int timeTillNextDash { get; set; } = 500;
     public int height;
 
     public int Health { get; set; } = 100;
@@ -188,7 +188,7 @@ public class PlayerController : IComponent
             // Continue dashing
             PerformDash(gameTime, height);
         }
-        else if (dashRequested && gameDelay.Cooldown(gameTime, 1500))
+        else if (dashRequested && gameDelay.Cooldown(gameTime, timeTillNextDash))
         {
             // Start dash
             IsDashing = true;
@@ -209,6 +209,8 @@ public class PlayerController : IComponent
             // Continue dashing within the duration
             float dashDistance = dashSpeed * deltaTime;
 
+            GameObject.GetComponent<SpriteRenderer>().spriteScale = 1 + 3*(dashDuration - dashTime)/(4*dashDuration);
+
             if (GameObject.GetComponent<SpriteRenderer>().isFacingRight)
             {
                 GameObject.X += (int)dashDistance;
@@ -222,6 +224,7 @@ public class PlayerController : IComponent
         else
         {
             // Dash duration is over, stop dashing
+            GameObject.GetComponent<SpriteRenderer>().spriteScale = 1f;
             IsDashing = false;
             Gravity = 1200f;
             Speed = 700f;
