@@ -40,8 +40,11 @@ namespace Sprint0
         protected override void Initialize()
         {
             base.Initialize();
-            player.X = (int)savedPlayerLoc.X;
-            player.Y = (int)savedPlayerLoc.Y;
+            if (savedPlayerLoc != Vector2.Zero)
+            {
+                player.X = (int)savedPlayerLoc.X;
+                player.Y = (int)savedPlayerLoc.Y;
+            }
             GOManager.Instance.Player = player;
             GOManager.Instance.allGOs = gameObjects;
             GOManager.Instance.textureStorage = textureStorage;
