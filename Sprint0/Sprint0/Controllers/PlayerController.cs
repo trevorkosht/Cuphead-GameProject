@@ -119,6 +119,10 @@ public class PlayerController : IComponent
         {
             if (GameObject.Y >= GroundLevel)
             {
+                if (!IsGrounded) {
+                    CreateDustEffect();
+                }
+
                 IsGrounded = true;
                 floorY = (int)GroundLevel;
                 airTime = 1;
@@ -373,6 +377,9 @@ public class PlayerController : IComponent
         else if (IsRunning)
         {
             animator.setAnimation(shootTime > 0 ? "RunShootingStraight" : "Run");
+            if(animator.currentAnimation.Value.CurrentFrame == 5 || animator.currentAnimation.Value.CurrentFrame == 12) {
+                CreateDustEffect();
+            }
         }
         else if (shootTime > 0)
         {
