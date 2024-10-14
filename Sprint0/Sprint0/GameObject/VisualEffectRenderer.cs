@@ -9,7 +9,7 @@ public class VisualEffectRenderer : IComponent {
     public bool enabled { get; set; } = true;
 
     private bool hasPlayed = false;
-    public float orderInLayer { get; set; } = .5f;
+    public float orderInLayer { get; set; } = 0f;
 
     public VisualEffectRenderer(Rectangle destRectangle, Animation animation) { 
         this.destRectangle = destRectangle;

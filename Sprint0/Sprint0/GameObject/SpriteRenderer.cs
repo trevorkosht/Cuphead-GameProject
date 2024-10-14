@@ -10,7 +10,7 @@ public class SpriteRenderer : IComponent {
     public bool isFacingRight { get; set; }
     public string animationName { get; set; }
     public float spriteScale { get; set; } = 1f;
-    public float orderInLayer { get; set; } = 1f;
+    public float orderInLayer { get; set; } = 0f;
 
 
     public KeyValuePair<string, Animation> currentAnimation { get; set; }
