@@ -9,9 +9,18 @@ public class LobberProjectile : Projectile
     private bool isFacingRight;
     private int bounceCount = 0;
     private int maxBounces = 3;
+    private Collider collider;
+    private SpriteRenderer spriteRenderer;
+    private bool collided;
+    private float explosionDuration;
+    private float explosionTimer;
 
     public LobberProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
+        collided = false;
+        explosionTimer = 0.0f;
+        explosionDuration = 1.0f;
+        this.spriteRenderer = spriteRenderer;
         this.isFacingRight = isFacingRight;
         if (!isFacingRight)
         {
@@ -27,26 +36,55 @@ public class LobberProjectile : Projectile
 
     public override void Update(GameTime gameTime)
     {
-        velocity.Y += gravity;
-
-        if (isFacingRight)
+        if (collided)
         {
-            GameObject.Move((int)velocity.X, (int)velocity.Y);
+            explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (explosionTimer >= explosionDuration)
+            {
+                GameObject.Destroy();
+                return;
+            }
         }
         else
         {
-            GameObject.Move((int)(-velocity.X), (int)velocity.Y);
-        }
+            velocity.Y += gravity;
 
-        if (GameObject.Y > 600)
-        {
-            velocity.Y = -velocity.Y * 0.7f;
-            bounceCount++;
-            GameObject.MoveToPosition(GameObject.X, 600);
-
-            if (bounceCount >= maxBounces)
+            if (isFacingRight)
             {
-                GameObject.Destroy();
+                GameObject.Move((int)velocity.X, (int)velocity.Y);
+            }
+            else
+            {
+                GameObject.Move((int)(-velocity.X), (int)velocity.Y);
+            }
+
+            if (GameObject.Y > 600)
+            {
+                velocity.Y = -velocity.Y * 0.7f;
+                bounceCount++;
+                GameObject.MoveToPosition(GameObject.X, 600);
+
+                if (bounceCount >= maxBounces)
+                {
+                    GameObject.Destroy();
+                    return;
+                }
+            }
+
+            collider = GameObject.GetComponent<Collider>();
+            foreach (GameObject GO in GOManager.Instance.allGOs)
+            {
+                if (GO.type != "PlayerProjectile" && GO.type != "Player")
+                {
+                    if (collider.Intersects(GO.GetComponent<Collider>()))
+                    {
+                        spriteRenderer.setAnimation("LobberExplosionAnimation");
+                        collided = true;
+                        return;
+                    }
+                }
+
             }
         }
     }

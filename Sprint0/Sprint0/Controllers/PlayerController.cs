@@ -274,7 +274,14 @@ public class PlayerController : IComponent
         {
             isShooting = true;
             shootTime = timeTillNextBullet;
-            GameObject newProjectile = ProjectileFactory.CreateProjectile(currentProjectileType, GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+            GameObject newProjectile;
+            if (GameObject.GetComponent<SpriteRenderer>().isFacingRight)
+            {
+                newProjectile = ProjectileFactory.CreateProjectile(currentProjectileType, GameObject.X, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+            }else
+            {
+                newProjectile = ProjectileFactory.CreateProjectile(currentProjectileType, GameObject.X - 90, GameObject.Y, GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+            }
             GOManager.Instance.allGOs.Add(newProjectile);
 
         }

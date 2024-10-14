@@ -19,6 +19,7 @@ public class GameObject
     {
         this.X = xPosition;
         this.Y = yPosition;
+        this.type = "";
     }
 
     public GameObject(int xPosition, int yPosition, IComponent component)

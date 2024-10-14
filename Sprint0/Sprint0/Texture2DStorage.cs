@@ -103,6 +103,20 @@ public class Texture2DStorage
         _textures["Roundabout"] = content.Load<Texture2D>(@"ProjectileTextures\Roundabout");
         _textures["Spread"] = content.Load<Texture2D>(@"ProjectileTextures\Spread");
 
+        //Projectile Explosion Textures
+        _textures["ChaserExplosion"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\chaser_hit_vfx");
+        _textures["LobberExplosion"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\lobber_hit_vfx");
+        _textures["PeashooterExplosion"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\peashooter_hit_vfx");
+        _textures["RoundaboutExplosion"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\roundabout_hit_vfx");
+        _textures["SpreadExplosion"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spread_hit_vfx");
+
+        //Projectile Spawing Textures
+        _textures["ChaserSpawn"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\chaser_spawn_vfx");
+        _textures["LobberSpawn"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\lobber_spawn_vfx");
+        _textures["PeashooterSpawn"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\peashooter_spawn_vfx");
+        _textures["RoundaboutSpawn"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\roundabout_spawn_vfx");
+        _textures["SpreadSpawn"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spread_spawn_vfx");
+
         //Visual Effect Textures
         _textures["Dust"] = content.Load<Texture2D>(@"VisualEffectTextures\DustEffect");
 

@@ -5,9 +5,18 @@ public class PeashooterProjectile : Projectile
 {
     private float speed = 5f;
     private bool isFacingRight;
+    private Collider collider;
+    private SpriteRenderer spriteRenderer;
+    private bool collided;
+    private float explosionDuration;
+    private float explosionTimer;
 
     public PeashooterProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
+        collided = false;
+        explosionTimer = 0.0f;
+        explosionDuration = 1.0f;
+        this.spriteRenderer = spriteRenderer;
         this.isFacingRight = isFacingRight;
         if (!isFacingRight)
         {
@@ -16,20 +25,47 @@ public class PeashooterProjectile : Projectile
     }
     public override void Update(GameTime gameTime)
     {
-        
-        if (isFacingRight)
+        if (collided)
         {
-            GameObject.Move((int)(speed), 0); // Move right
-            
+            explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (explosionTimer >= explosionDuration)
+            {
+                GameObject.Destroy();
+                return;
+            }
         }
         else
         {
-            GameObject.Move((int)(-speed), 0); // Move left
-        }
+            if (isFacingRight)
+            {
+                GameObject.Move((int)(speed), 0); // Move right
 
-        if (isFacingRight && GameObject.X > 1200 || !isFacingRight && GameObject.X < 0)
-        {
-            GameObject.Destroy();
+            }
+            else
+            {
+                GameObject.Move((int)(-speed), 0); // Move left
+            }
+
+            collider = GameObject.GetComponent<Collider>();
+            foreach (GameObject GO in GOManager.Instance.allGOs)
+            {
+                if (GO.type != "PlayerProjectile" && GO.type != "Player")
+                {
+                    if (collider.Intersects(GO.GetComponent<Collider>()))
+                    {
+                        spriteRenderer.setAnimation("PeashooterExplosionAnimation");
+                        collided = true;
+                        return;
+                    }
+                }
+            }
+
+            if (isFacingRight && GameObject.X > 1200 || !isFacingRight && GameObject.X < 0)
+            {
+                GameObject.Destroy();
+                return;
+            }
         }
     }
 

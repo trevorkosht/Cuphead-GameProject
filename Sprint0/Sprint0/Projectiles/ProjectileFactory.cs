@@ -7,7 +7,7 @@ public class ProjectileFactory
 {
     public static GameObject CreateProjectile(ProjectileType type, float posX, float posY, bool isFacingRight)
     {
-        GameObject projectile = new GameObject((int)posX+50, (int)posY+20);
+        GameObject projectile = new GameObject((int)posX+70, (int)posY+20);
         Projectile projectileLogic;
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
         SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), true);
@@ -17,7 +17,9 @@ public class ProjectileFactory
             case ProjectileType.Peashooter:
                 projectileLogic = new PeashooterProjectile(isFacingRight, spriteRenderer);
                 projectile.AddComponent(projectileLogic);
+                projectile.AddComponent(new BoxCollider(new Vector2(60, 20), new Vector2(10, 28), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("PeashooterAnimation", new Animation(textureStorage.GetTexture("Peashooter"), 5, 8, 144, 144));
+                spriteRenderer.addAnimation("PeashooterExplosionAnimation", new Animation(textureStorage.GetTexture("PeashooterExplosion"), 5, 6, 144, 144));
                 spriteRenderer.setAnimation("PeashooterAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("Peashooter"), textureStorage);
                 break;
@@ -33,15 +35,19 @@ public class ProjectileFactory
             case ProjectileType.Chaser:
                 projectileLogic = new ChaserProjectile(isFacingRight, spriteRenderer);
                 projectile.AddComponent(projectileLogic);
+                projectile.AddComponent(new CircleCollider(30f, new Vector2(-40, -35), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("ChaserAnimation", new Animation(textureStorage.GetTexture("Chaser"), 5, 8, 144, 144));
+                spriteRenderer.addAnimation("ChaserExplosionAnimation", new Animation(textureStorage.GetTexture("ChaserExplosion"), 5, 3, 144, 144));
                 spriteRenderer.setAnimation("ChaserAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("Chaser"), textureStorage);
                 break;
 
             case ProjectileType.Lobber:
                 projectileLogic = new LobberProjectile(isFacingRight, spriteRenderer);
-                projectile.AddComponent(projectileLogic);
+                projectile.AddComponent(projectileLogic); 
+                projectile.AddComponent(new CircleCollider(35f, new Vector2(-40, -40), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("LobberAnimation", new Animation(textureStorage.GetTexture("Lobber"), 5, 8, 144, 144));
+                spriteRenderer.addAnimation("LobberExplosionAnimation", new Animation(textureStorage.GetTexture("LobberExplosion"), 5, 6, 144, 144));
                 spriteRenderer.setAnimation("LobberAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("Lobber"), textureStorage);
                 break;
@@ -50,7 +56,9 @@ public class ProjectileFactory
             case ProjectileType.Roundabout:
                 projectileLogic = new RoundaboutProjectile(isFacingRight, spriteRenderer);
                 projectile.AddComponent(projectileLogic);
+                projectile.AddComponent(new BoxCollider(new Vector2(55, 27), new Vector2(8, 24), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("RoundaboutAnimation", new Animation(textureStorage.GetTexture("Roundabout"), 5, 8, 144, 144));
+                spriteRenderer.addAnimation("RoundaboutExplosionAnimation", new Animation(textureStorage.GetTexture("RoundaboutExplosion"), 5, 6, 144, 144));
                 spriteRenderer.setAnimation("RoundaboutAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("Roundabout"), textureStorage);
                 break;
@@ -62,6 +70,7 @@ public class ProjectileFactory
         spriteRenderer.spriteScale = 0.5f;
         projectile.AddComponent(spriteRenderer);
         projectile.AddComponent(projectileLogic);
+        projectile.type = "PlayerProjectile";
 
         return projectile;
     }

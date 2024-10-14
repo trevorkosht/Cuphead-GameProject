@@ -83,6 +83,7 @@ namespace Sprint0
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
             player.AddComponent(playerSpriteRenderer);
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
+            player.type = "Player";
         }
 
         protected override void Update(GameTime gameTime)

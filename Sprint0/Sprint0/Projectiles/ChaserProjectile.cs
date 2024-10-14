@@ -9,9 +9,18 @@ public class ChaserProjectile : Projectile
     private GameObject targetEnemy;
     private Vector2 lastDirection;
     private bool isFacingRight;
+    private Collider collider;
+    private SpriteRenderer spriteRenderer;
+    private bool collided;
+    private float explosionDuration;
+    private float explosionTimer;
 
     public ChaserProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
+        collided = false;
+        explosionTimer = 0.0f;
+        explosionDuration = 0.5f;
+        this.spriteRenderer = spriteRenderer;
         this.isFacingRight = isFacingRight;
         if (!isFacingRight)
         {
@@ -26,38 +35,67 @@ public class ChaserProjectile : Projectile
 
     public override void Update(GameTime gameTime)
     {
-        if (IsActive)
+
+        if (collided)
         {
-            if (targetEnemy == null || targetEnemy.destroyed)
+            explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (explosionTimer >= explosionDuration)
             {
-                targetEnemy = GOManager.Instance.currentEnemy;
+                GameObject.Destroy();
+                return;
             }
-
-            Vector2 direction;
-
-            if (targetEnemy != null)
+        }
+        else
+        {
+            if (IsActive)
             {
-                direction = Vector2.Normalize(targetEnemy.position - GameObject.position);
+                if (targetEnemy == null || targetEnemy.destroyed)
+                {
+                    targetEnemy = GOManager.Instance.currentEnemy;
+                }
 
-                lastDirection = direction;
+                Vector2 direction;
 
-                if (Vector2.Distance(GameObject.position, targetEnemy.position) < 20f)
+                if (targetEnemy != null)
+                {
+                    direction = Vector2.Normalize(targetEnemy.position - GameObject.position);
+
+                    lastDirection = direction;
+
+                    if (Vector2.Distance(GameObject.position, targetEnemy.position) < 20f)
+                    {
+                        GameObject.Destroy();
+                        return;
+                    }
+                }
+                else
+                {
+                    // No enemy detected, continue in the last known direction
+                    direction = lastDirection;
+                }
+
+                GameObject.Move((int)(direction.X * speed), (int)(direction.Y * speed));
+
+                collider = GameObject.GetComponent<Collider>();
+                foreach (GameObject GO in GOManager.Instance.allGOs)
+                {
+                    if (GO.type != "PlayerProjectile" && GO.type != "Player")
+                    {
+                        if (collider.Intersects(GO.GetComponent<Collider>()))
+                        {
+                            spriteRenderer.setAnimation("ChaserExplosionAnimation");
+                            collided = true;
+                            return;
+                        }
+                    }
+                }
+
+                if (GameObject.X > 1200 || GameObject.X < 0 || GameObject.Y > 800 || GameObject.Y < 0)
                 {
                     GameObject.Destroy();
                     return;
                 }
-            }
-            else
-            {
-                // No enemy detected, continue in the last known direction
-                direction = lastDirection;
-            }
-
-            GameObject.Move((int)(direction.X * speed), (int)(direction.Y * speed));
-
-            if (GameObject.X > 1200 || GameObject.X < 0 || GameObject.Y > 800 || GameObject.Y < 0)
-            {
-                GameObject.Destroy();
             }
         }
     }
