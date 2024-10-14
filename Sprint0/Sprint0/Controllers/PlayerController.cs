@@ -84,6 +84,17 @@ public class PlayerController : IComponent
         UpdateAnimationState(animator);
     }
 
+    void ForZol()
+    {
+        foreach(GameObject go in GOManager.Instance.allGOs)
+        {
+            if(go.type == "Obstacle")
+            {
+
+            }
+        }
+    }
+
     private void HandleSpawnAnimation(GameTime gameTime)
     {
         var animator = GameObject.GetComponent<SpriteRenderer>();
