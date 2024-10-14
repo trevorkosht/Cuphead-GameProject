@@ -220,7 +220,8 @@ public class PlayerController : IComponent
             // Continue dashing within the duration
             float dashDistance = dashSpeed * deltaTime;
 
-            GameObject.GetComponent<SpriteRenderer>().spriteScale = 1 + 3*(dashDuration - dashTime)/(4*dashDuration);
+
+            GameObject.GetComponent<SpriteRenderer>().spriteScale = 1 + 7*(dashDuration - dashTime)/(12*dashDuration);
 
             if (GameObject.GetComponent<SpriteRenderer>().isFacingRight)
             {
