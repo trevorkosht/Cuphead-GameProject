@@ -9,15 +9,9 @@ public class SpreadShotProjectile : Projectile
     private float angleSpread = 45f;
     private Vector2[] directions;
     bool isFacingRight;
-    private bool collided;
-    private float explosionDuration;
-    private float explosionTimer;
 
     public SpreadShotProjectile(bool isFacingRight)
     {
-        collided = false;
-        explosionTimer = 0.0f;
-        explosionDuration = 0.5f;
         this.isFacingRight = isFacingRight;
 
         directions = new Vector2[]
@@ -44,15 +38,21 @@ public class SpreadShotProjectile : Projectile
 
     public override void Update(GameTime gameTime)
     {
+        // Create bullets once per shot
         for (int i = 0; i < directions.Length; i++)
         {
             GameObject spreadShot = new GameObject(GameObject.X, GameObject.Y);
-            
+            spreadShot.type = "PlayerProjectile";
+
             SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(spreadShot.X, spreadShot.Y, 144, 144), false);
             spriteRenderer.spriteScale = 0.5f;
 
+            Collider collider = new BoxCollider(new Vector2(60, 45), new Vector2(15, 15), GOManager.Instance.GraphicsDevice);
+            spreadShot.AddComponent(collider);
+
             var spreadLogic = new SpreadShotInstance(directions[i] * speed, spriteRenderer);
             spriteRenderer.addAnimation("SpreadAnimation", new Animation(textureStorage.GetTexture("Spread"), 5, 4, 144, 144));
+            spriteRenderer.addAnimation("SpreadExplosionAnimation", new Animation(textureStorage.GetTexture("SpreadExplosion"), 5, 5, 144, 144));
             spriteRenderer.setAnimation("SpreadAnimation");
             spriteRenderer.isFacingRight = isFacingRight;
 
@@ -60,11 +60,11 @@ public class SpreadShotProjectile : Projectile
             spreadLogic.Initialize(spriteTexture, textureStorage);
             spreadShot.AddComponent(spriteRenderer);
 
-
             GOManager.Instance.allGOs.Add(spreadShot);
         }
 
-        GameObject.Destroy();
+        GameObject.Destroy(); // Destroy the parent spread shot after creating bullets
+   
     }
 }
 
@@ -72,13 +72,22 @@ public class SpreadShotInstance : Projectile
 {
     private Vector2 direction;
     private float lifetime = 2.0f;
+    private float explosionDuration;
+    private float explosionTimer;
+    private bool collided, lifetimeExpired;
+    private SpriteRenderer spriteRenderer;
 
-    public SpreadShotInstance(Vector2 direction, SpriteRenderer spriteRendeer)
+    public SpreadShotInstance(Vector2 direction, SpriteRenderer spriteRenderer)
     {
+        this.spriteRenderer = spriteRenderer;
+        explosionTimer = 0.0f;
+        explosionDuration = 0.85f;
+        collided = false;
+        lifetimeExpired = false;
         this.direction = direction;
         if(direction.X < 0)
         {
-            spriteRendeer.isFacingRight = false;
+            spriteRenderer.isFacingRight = false;
         }
     }
 
@@ -89,13 +98,45 @@ public class SpreadShotInstance : Projectile
 
     public override void Update(GameTime gameTime)
     {
-        float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        GameObject.Move((int)(direction.X * deltaTime), (int)(direction.Y * deltaTime));
+        if (GameObject == null)
+            return;
 
-        lifetime -= deltaTime;
-        if (GameObject.X > player.X + 200 || GameObject.X < 0 || GameObject.Y > 800 || GameObject.Y < 0 || GameObject.Y < player.Y - 200 || lifetime <= 0)
+        if (collided || lifetimeExpired)
         {
-            GameObject.Destroy();
+            explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (explosionTimer >= explosionDuration)
+            {
+                GameObject.Destroy();
+                return;
+            }
+        }
+        else
+        {
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            GameObject.Move((int)(direction.X * deltaTime), (int)(direction.Y * deltaTime));
+
+            lifetime -= deltaTime;
+            if (GameObject.X > player.X + 200 || GameObject.X < 0 || GameObject.Y > 800 || GameObject.Y < 0 || GameObject.Y < player.Y - 200 || lifetime <= 0)
+            {
+                spriteRenderer.setAnimation("SpreadExplosionAnimation");
+                lifetimeExpired = true;
+                return;
+            }
+
+            foreach (GameObject GO in GOManager.Instance.allGOs)
+            {
+                if (GO.type != "PlayerProjectile" && GO.type != "Player")
+                {
+                    Collider collider = GameObject.GetComponent<Collider>();
+                    if (collider.Intersects(GO.GetComponent<Collider>()))
+                    {
+                        spriteRenderer.setAnimation("SpreadExplosionAnimation");
+                        collided = true;
+                        return;
+                    }
+                }
+            }
         }
     }
 
