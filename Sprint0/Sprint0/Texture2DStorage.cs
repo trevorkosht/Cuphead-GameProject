@@ -137,8 +137,8 @@ public class Texture2DStorage
     }
 
     public void loadPlayerAnimations(SpriteRenderer spriteRenderer) {
-        Animation playerDashAirAnimation = new Animation(GetTexture("PlayerDashAir"), 5, 5, 144, 144);
-        Animation playerDashGroundAnimation = new Animation(GetTexture("PlayerDashGround"), 5, 5, 144, 144);
+        Animation playerDashAirAnimation = new Animation(GetTexture("PlayerDashAir"), 2, 5, 144, 144);
+        Animation playerDashGroundAnimation = new Animation(GetTexture("PlayerDashGround"), 2, 5, 144, 144);
         Animation playerDeathAnimation = new Animation(GetTexture("PlayerDeath"), 5, 16, 144, 144);
         Animation playerDuckAnimation = new Animation(GetTexture("PlayerDuck"), 5, 8, 144, 144);
         Animation playerDuckShootAnimation = new Animation(GetTexture("PlayerDuckShoot"), 5, 3, 144, 144);
