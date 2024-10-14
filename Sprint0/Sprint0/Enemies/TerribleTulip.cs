@@ -23,6 +23,10 @@ public class TerribleTulip : BaseEnemy
 
     public override void Shoot(GameTime gametime)
     {
+        if(GameObject.X > GOManager.Instance.Camera.Position.X + 1200)
+        {
+            return;
+        }
         shootCooldown -= gametime.ElapsedGameTime.TotalSeconds;
         if (shootCooldown <= 0 && sRend.currentAnimation.Value.CurrentFrame == 7)
         {

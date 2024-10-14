@@ -7,7 +7,6 @@ public static class EnemyFactory
     public static GameObject CreateEnemy(EnemyType type, int posX = 300, int posY = 300)
     {
         GameObject enemy = new GameObject(posX, posY);
-        enemy.type = "Enemy";
 
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
         BaseEnemy enemyLogic;
@@ -30,6 +29,7 @@ public static class EnemyFactory
             case EnemyType.DeadlyDaisy:
                 enemyLogic = new DeadlyDaisy();
                 enemy.AddComponent(enemyLogic);
+                enemy.AddComponent(new BoxCollider(new Vector2(135, 155), new Vector2(5, -5), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("deadlyDaisyAnimation", new Animation(textureStorage.GetTexture("DeadlyDaisy"), 3, 16, 144, 144));
                 spriteRenderer.addAnimation("Spawn", new Animation(textureStorage.GetTexture("DaisySpawn"), 5, 16, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("DeadlyDaisy"), textureStorage);
@@ -38,6 +38,7 @@ public static class EnemyFactory
             case EnemyType.MurderousMushroom:
                 enemyLogic = new MurderousMushroom();
                 enemy.AddComponent(enemyLogic);
+                enemy.AddComponent(new BoxCollider(new Vector2(145, 145), Vector2.Zero, GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("murderousMushroomAnimation", new Animation(textureStorage.GetTexture("MurderousMushroom"), 5, 8, 144, 144));
                 spriteRenderer.addAnimation("Attack", new Animation(textureStorage.GetTexture("MushroomAttack"), 3, 15, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("MurderousMushroom"), textureStorage);
@@ -46,6 +47,7 @@ public static class EnemyFactory
             case EnemyType.TerribleTulip:
                 enemyLogic = new TerribleTulip();
                 enemy.AddComponent(enemyLogic);
+                enemy.AddComponent(new BoxCollider(new Vector2(115, 145), new Vector2(10, 0), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("terribleTulipAnimation", new Animation(textureStorage.GetTexture("TerribleTulip"), 5, 15, 144, 144));
                 spriteRenderer.addAnimation("Idle", new Animation(textureStorage.GetTexture("TulipIdle"), 5, 30, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("TerribleTulip"), textureStorage);
@@ -54,6 +56,7 @@ public static class EnemyFactory
             case EnemyType.AcornMaker:
                 enemyLogic = new AcornMaker();
                 enemy.AddComponent(enemyLogic);
+                enemy.AddComponent(new BoxCollider(new Vector2(200, 300), new Vector2(60, 0), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("acornMakerAnimation", new Animation(textureStorage.GetTexture("AcornMaker"), 5, 16, 144, 144));
                 spriteRenderer.spriteScale = 2;
                 enemyLogic.Initialize(textureStorage.GetTexture("AcornMaker"), textureStorage);
@@ -73,6 +76,7 @@ public static class EnemyFactory
             case EnemyType.ToothyTerror:
                 enemyLogic = new ToothyTerror();
                 enemy.AddComponent(enemyLogic);
+                enemy.AddComponent(new BoxCollider(new Vector2(125, 175), new Vector2(10, 0), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("toothyTerrorAnimation", new Animation(textureStorage.GetTexture("ToothyTerror"), 5, 4, 144, 144));
                 spriteRenderer.addAnimation("Attack", new Animation(textureStorage.GetTexture("ToothyTerrorSpinAttack"), 5, 8, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("ToothyTerror"), textureStorage);
@@ -82,6 +86,7 @@ public static class EnemyFactory
                 return null;
         }
         enemy.AddComponent(new HealthComponent(enemyHP, false));
+        enemy.type = "Enemy";
         return enemy;
     }
 }

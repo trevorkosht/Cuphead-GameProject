@@ -50,7 +50,7 @@ public class PeashooterProjectile : Projectile
             collider = GameObject.GetComponent<Collider>();
             foreach (GameObject GO in GOManager.Instance.allGOs)
             {
-                if (GO.type != "PlayerProjectile" && GO.type != "Player")
+                if (GO.type != "PlayerProjectile" && GO.type != "Player" && GO.type != "ItemPickup")
                 {
                     if (collider.Intersects(GO.GetComponent<Collider>()))
                     {

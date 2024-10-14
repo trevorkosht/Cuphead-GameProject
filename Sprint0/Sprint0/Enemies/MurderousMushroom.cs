@@ -26,6 +26,11 @@ public class MurderousMushroom : BaseEnemy
 
     public override void Shoot(GameTime gameTime)
     {
+        if(GameObject.X > GOManager.Instance.Camera.Position.X + 1200)
+        {
+            return;
+        }
+
         if (!isHidden)
         {
             shootCooldown -= gameTime.ElapsedGameTime.TotalSeconds;

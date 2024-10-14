@@ -117,7 +117,8 @@ public class SpreadShotInstance : Projectile
             GameObject.Move((int)(direction.X * deltaTime), (int)(direction.Y * deltaTime));
 
             lifetime -= deltaTime;
-            if (GameObject.X > player.X + 200 || GameObject.X < 0 || GameObject.Y > 800 || GameObject.Y < 0 || GameObject.Y < player.Y - 200 || lifetime <= 0)
+            Camera camera = GOManager.Instance.Camera;
+            if (lifetime <= 0)
             {
                 spriteRenderer.setAnimation("SpreadExplosionAnimation");
                 lifetimeExpired = true;
@@ -126,7 +127,7 @@ public class SpreadShotInstance : Projectile
 
             foreach (GameObject GO in GOManager.Instance.allGOs)
             {
-                if (GO.type != "PlayerProjectile" && GO.type != "Player")
+                if (GO.type != "PlayerProjectile" && GO.type != "Player" && GO.type != "ItemPickup")
                 {
                     Collider collider = GameObject.GetComponent<Collider>();
                     if (collider.Intersects(GO.GetComponent<Collider>()))

@@ -37,14 +37,14 @@ public class EnemyController
     {
         keyboardController.Update();
 
-        if (keyboardController.OnKeyDown(Keys.O))
-        {
-            CycleToPreviousEnemy();
-        }
-        else if (keyboardController.OnKeyDown(Keys.P))
-        {
-            CycleToNextEnemy();
-        }
+        //if (keyboardController.OnKeyDown(Keys.O))
+        //{
+        //    CycleToPreviousEnemy();
+        //}
+        //else if (keyboardController.OnKeyDown(Keys.P))
+        //{
+        //    CycleToNextEnemy();
+        //}
 
         if (currentEnemy != null)
         {
@@ -58,8 +58,8 @@ public class EnemyController
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        if (currentEnemy != null)
-            currentEnemy?.Draw(spriteBatch);
+        //if (currentEnemy != null)
+        //    currentEnemy?.Draw(spriteBatch);
     }
 
     private void CycleToNextEnemy()
