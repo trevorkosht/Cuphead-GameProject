@@ -69,6 +69,6 @@ public class Animation {
 
     public bool IsComplete()
     {
-        return currentFrame >= frameCount - 1 && update >= updatesPerFrame;
+        return currentFrame >= frameCount - 2 && update >= updatesPerFrame;
     }
 }

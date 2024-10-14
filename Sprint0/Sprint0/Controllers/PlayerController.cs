@@ -27,8 +27,8 @@ public class PlayerController : IComponent
 
     private float airTime = 0f, shootTime = 0f, hitTime = 0f, dashTime = 0f;
     private int floorY;
-    private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust, isShooting, IsDashing = false;
-    private bool IsSpawning { get; set; } = true;
+    private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust, isShooting, IsDashing, IsDead = false;
+    private bool IsSpawning = true;
 
     private readonly KeyboardController keyboardController = new KeyboardController();
     private readonly MouseController mouseController = new MouseController();
@@ -54,6 +54,7 @@ public class PlayerController : IComponent
             HandleSpawnAnimation(gameTime);
             return;
         }
+
         if (!enabled) return;
         Collider = GameObject.GetComponent<BoxCollider>();
 
@@ -63,6 +64,15 @@ public class PlayerController : IComponent
         var state = Keyboard.GetState();
         var animator = GameObject.GetComponent<SpriteRenderer>();
         deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        if (IsDead)
+        {
+            if (animator.IsAnimationComplete())
+            {
+                GameObject.destroyed = true;
+            }
+            return;
+        }
 
         UpdateTimers(deltaTime);
         HandleGroundCheck(animator);
@@ -285,7 +295,7 @@ public class PlayerController : IComponent
 
     private void HandleDamageDetection()
     {
-        if (keyboardController.IsDamageRequested())
+        if (keyboardController.IsDamageRequested() && !IsInvincible && !IsDead)
         {
             TakeDamage(20); // Example damage value
         }
@@ -296,7 +306,14 @@ public class PlayerController : IComponent
         Health -= damage;
         hitTime = InvincibilityDuration;
         IsInvincible = true;
-        GameObject.GetComponent<SpriteRenderer>().setAnimation("HitGround");
+
+        if (Health <= 0)
+        {
+            IsDead = true;
+        } else
+        {
+            GameObject.GetComponent<SpriteRenderer>().setAnimation("HitGround");
+        }
     }
 
     private void CreateDustEffect()
@@ -323,6 +340,12 @@ public class PlayerController : IComponent
 
     private void UpdateAnimationState(SpriteRenderer animator)
     {
+        if (IsDead)
+        {
+            animator.setAnimation("Death");
+            return;
+        }
+
         if (hitTime > 0)
         {
             animator.setAnimation(IsGrounded ? "HitGround" : "HitAir");
