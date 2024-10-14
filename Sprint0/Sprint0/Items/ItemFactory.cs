@@ -28,13 +28,15 @@ public static class ItemFactory
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
         GameObject item = new GameObject(destRectangle.X, destRectangle.Y);
         ItemManager itemManager = new ItemManager(type);
-        item.AddComponent(itemManager);
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
         Animation itemTexture = new Animation(texture, 1, 1, 144, 144);
         spriteRenderer.addAnimation("texture",itemTexture);
         spriteRenderer.setAnimation("texture");
-        spriteRenderer.spriteScale = 1f;
-        Collider boxCollider = new BoxCollider(new Vector2(destRectangle.Width, destRectangle.Height), new Vector2(0,0), GOManager.Instance.GraphicsDevice);
+        spriteRenderer.spriteScale = 0.5f;
+        Collider boxCollider = new BoxCollider(new Vector2(spriteRenderer.spriteScale* destRectangle.Width, spriteRenderer.spriteScale*destRectangle.Height), new Vector2(0,0), GOManager.Instance.GraphicsDevice);
+        item.AddComponent(itemManager);
+        item.AddComponent(spriteRenderer);
+        item.AddComponent(boxCollider);
 
         GOManager.Instance.allGOs.Add(item);
 
