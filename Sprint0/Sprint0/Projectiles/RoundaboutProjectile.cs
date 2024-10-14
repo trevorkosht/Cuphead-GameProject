@@ -81,6 +81,11 @@ public class RoundaboutProjectile : Projectile
                     {
                         if (collider.Intersects(GO.GetComponent<Collider>()))
                         {
+                            HealthComponent enemyHealth = GO.GetComponent<HealthComponent>();
+                            if (enemyHealth != null)
+                            {
+                                enemyHealth.RemoveHealth(10); // Reduce enemy health by 10
+                            }
                             spriteRenderer.setAnimation("RoundaboutExplosionAnimation");
                             collided = true;
                             return;

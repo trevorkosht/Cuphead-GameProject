@@ -84,11 +84,19 @@ public class ChaserProjectile : Projectile
                     {
                         if (collider.Intersects(GO.GetComponent<Collider>()))
                         {
+
+                            HealthComponent enemyHealth = GO.GetComponent<HealthComponent>();
+                            if (enemyHealth != null)
+                            {
+                                enemyHealth.RemoveHealth(10); // Reduce enemy health by 10
+                            }
+
                             spriteRenderer.setAnimation("ChaserExplosionAnimation");
                             collided = true;
                             return;
                         }
                     }
+
                 }
 
                 // Check if projectile is out of bounds
