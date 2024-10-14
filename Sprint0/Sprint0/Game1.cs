@@ -51,10 +51,8 @@ namespace Sprint0
             blockController = new BlockController(textureStorage);
             itemsControl = new ItemsController(textureStorage);
 
-
+            // Initialize camera and controller
             camera = new Camera();
-            GOManager.Instance.Camera = camera;
-
             List<Vector2> railPoints = new List<Vector2>()
             {
                 new Vector2(0, 0), 

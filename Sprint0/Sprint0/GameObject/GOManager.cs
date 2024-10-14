@@ -12,7 +12,6 @@ public class GOManager
     public bool IsDebugging = true;
     public GraphicsDevice GraphicsDevice { get; set; }
 
-    public Camera Camera { get; set; }
     private GOManager() { }
 
     public static GOManager Instance

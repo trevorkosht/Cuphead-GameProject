@@ -25,7 +25,6 @@ public class ProjectileFactory
             case ProjectileType.SpreadShot:
                 projectileLogic = new SpreadShotProjectile(isFacingRight);
                 projectile.AddComponent(projectileLogic);
-                projectile.AddComponent(new BoxCollider(new Vector2(80, 80), new Vector2(-72, -60), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("SpreadAnimation", new Animation(textureStorage.GetTexture("Spread"), 5, 4, 144, 144));
                 spriteRenderer.setAnimation("SpreadAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("Spread"), textureStorage);
@@ -33,7 +32,7 @@ public class ProjectileFactory
 
             case ProjectileType.Chaser:
                 projectileLogic = new ChaserProjectile(isFacingRight, spriteRenderer);
-                projectile.AddComponent(projectileLogic);  
+                projectile.AddComponent(projectileLogic);
                 spriteRenderer.addAnimation("ChaserAnimation", new Animation(textureStorage.GetTexture("Chaser"), 5, 8, 144, 144));
                 spriteRenderer.setAnimation("ChaserAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("Chaser"), textureStorage);
@@ -42,7 +41,6 @@ public class ProjectileFactory
             case ProjectileType.Lobber:
                 projectileLogic = new LobberProjectile(isFacingRight, spriteRenderer);
                 projectile.AddComponent(projectileLogic);
-                projectile.AddComponent(new BoxCollider(new Vector2(80, 80), new Vector2(-72, -60), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("LobberAnimation", new Animation(textureStorage.GetTexture("Lobber"), 5, 8, 144, 144));
                 spriteRenderer.setAnimation("LobberAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("Lobber"), textureStorage);
@@ -52,7 +50,6 @@ public class ProjectileFactory
             case ProjectileType.Roundabout:
                 projectileLogic = new RoundaboutProjectile(isFacingRight, spriteRenderer);
                 projectile.AddComponent(projectileLogic);
-                projectile.AddComponent(new BoxCollider(new Vector2(80, 80), new Vector2(-72, -60), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("RoundaboutAnimation", new Animation(textureStorage.GetTexture("Roundabout"), 5, 8, 144, 144));
                 spriteRenderer.setAnimation("RoundaboutAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("Roundabout"), textureStorage);

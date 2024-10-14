@@ -22,7 +22,6 @@ public class ChaserProjectile : Projectile
     {
         base.Initialize(texture, storage);
         lastDirection = Vector2.UnitX;
-        GameObject.AddComponent(new BoxCollider(new Vector2(80, 80), new Vector2(-72, -60), GOManager.Instance.GraphicsDevice));
     }
 
     public override void Update(GameTime gameTime)
