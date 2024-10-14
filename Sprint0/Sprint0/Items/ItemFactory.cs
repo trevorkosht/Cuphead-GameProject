@@ -15,7 +15,7 @@ public static class ItemFactory
             case "Chaser":
                 texture = GOManager.Instance.textureStorage.GetTexture("ChaserItem");
                 break;
-            case "'Lobber":
+            case "Lobber":
                 texture = GOManager.Instance.textureStorage.GetTexture("LobberItem");
                 break;
             case "Roundabout":
