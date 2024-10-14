@@ -7,6 +7,7 @@ public static class EnemyFactory
     public static GameObject CreateEnemy(EnemyType type, int posX = 300, int posY = 300)
     {
         GameObject enemy = new GameObject(posX, posY);
+        enemy.type = "Enemy";
 
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
         BaseEnemy enemyLogic;

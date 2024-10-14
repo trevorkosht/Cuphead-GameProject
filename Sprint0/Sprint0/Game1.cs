@@ -49,6 +49,8 @@ namespace Sprint0
 
             // Initialize camera and controller
             camera = new Camera();
+            GOManager.Instance.Camera = camera;
+
             List<Vector2> railPoints = new List<Vector2>()
             {
                 new Vector2(0, 0), 

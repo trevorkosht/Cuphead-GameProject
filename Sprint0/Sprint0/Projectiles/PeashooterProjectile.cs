@@ -54,6 +54,11 @@ public class PeashooterProjectile : Projectile
                 {
                     if (collider.Intersects(GO.GetComponent<Collider>()))
                     {
+                        HealthComponent enemyHealth = GO.GetComponent<HealthComponent>();
+                        if (enemyHealth != null)
+                        {
+                            enemyHealth.RemoveHealth(10); // Reduce enemy health by 10
+                        }
                         spriteRenderer.setAnimation("PeashooterExplosionAnimation");
                         collided = true;
                         return;
@@ -61,11 +66,12 @@ public class PeashooterProjectile : Projectile
                 }
             }
 
-            if (isFacingRight && GameObject.X > 1200 || !isFacingRight && GameObject.X < 0)
+            Camera camera = GOManager.Instance.Camera;
+            if (GameObject.X > camera.Position.X + 1200 || GameObject.X < camera.Position.X)
             {
                 GameObject.Destroy();
-                return;
             }
+
         }
     }
 
