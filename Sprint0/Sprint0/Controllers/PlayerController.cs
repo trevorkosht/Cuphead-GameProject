@@ -4,7 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0;
 using System;
+using System.Numerics;
 using static IController;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 public class PlayerController : IComponent
 {
@@ -22,6 +24,8 @@ public class PlayerController : IComponent
     public float dashSpeed = 1500f;// about 750 pixel
     public int timeTillNextDash { get; set; } = 500;
     public int height;
+    public int playerHeight = 150;
+    public int playerWidth = 100;
 
     public int Health { get; set; } = 100;
 
@@ -39,12 +43,13 @@ public class PlayerController : IComponent
     private const float InvincibilityDuration = 0.5f;
 
     private ProjectileType currentProjectileType = ProjectileType.Peashooter;
-    BoxCollider Collider;
+    private BoxCollider Collider;
 
     float deltaTime;
 
     public PlayerController() 
     {
+
     }
 
     public void Update(GameTime gameTime)
@@ -73,8 +78,9 @@ public class PlayerController : IComponent
             }
             return;
         }
-
+        
         UpdateTimers(deltaTime);
+        CollisionCheck();
         HandleGroundCheck(animator);
         HandleMovementAndActions(gameTime, deltaTime);
         HandleShooting(state, animator);
@@ -84,15 +90,36 @@ public class PlayerController : IComponent
         UpdateAnimationState(animator);
     }
 
-    void ForZol()
+    //check each collision type of the player
+    public void CollisionCheck()
     {
         foreach(GameObject go in GOManager.Instance.allGOs)
         {
-            if(go.type == "Obstacle")
+            if(go.type != null)
             {
-
+                if (go.type.Contains("Platform"))
+                {
+                    HandlePlatformCollision(go);
+                }
+               
             }
         }
+    }
+
+    //
+    public void HandlePlatformCollision(GameObject platform)
+    {
+        if (GameObject.GetComponent<BoxCollider>().Intersects(platform.GetComponent<Collider>()))
+        {
+            Gravity = 0;
+            velocity = new Vector2(velocity.X, 0);
+            GameObject.Y = platform.Y+playerHeight;
+            GameObject.X = 0;
+        }
+        //else
+        //{
+        //    Gravity = 1200f;
+        //}
     }
 
     private void HandleSpawnAnimation(GameTime gameTime)
