@@ -10,9 +10,6 @@ public class PlayerController : IComponent
 {
     public GameObject GameObject { get; set; }
     public bool enabled { get; set; } = true;
-
-    private bool IsSpawning { get; set; } = true;
-
     public float Speed { get; set; } = 700f;
     public float JumpForce { get; set; } = -1150f;
     public bool IsGrounded { get; set; } = false;
@@ -31,6 +28,7 @@ public class PlayerController : IComponent
     private float airTime = 0f, shootTime = 0f, hitTime = 0f, dashTime = 0f;
     private int floorY;
     private bool IsDucking, IsRunning, IsInvincible, isDuckingYAdjust, isShooting, IsDashing = false;
+    private bool IsSpawning { get; set; } = true;
 
     private readonly KeyboardController keyboardController = new KeyboardController();
     private readonly MouseController mouseController = new MouseController();
