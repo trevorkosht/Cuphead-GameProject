@@ -122,8 +122,10 @@ public class Texture2DStorage
 
 
         //item texture
-        _textures["Item1_3"] = content.Load<Texture2D>("items/Items1");
-        _textures["Item4_6"] = content.Load<Texture2D>("items/Items2");
+        _textures["ChaserItem"] = content.Load<Texture2D>(@"Items\ChaserItem");
+        _textures["LobberItem"] = content.Load<Texture2D>(@"Items\ChaserItem");
+        _textures["RoundaboutItem"] = content.Load<Texture2D>(@"Items\ChaserItem");
+        _textures["SpreadshotItem"] = content.Load<Texture2D>(@"Items\ChaserItem");
 
         // Add more textures as needed
     }

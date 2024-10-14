@@ -74,8 +74,7 @@ public class LevelLoader
 
     private static void SpawnItem(string subtype, int x, int y)
     {
-        // Use Vector2 for position as the item factory expects it
-        Vector2 itemPosition = new Vector2(x, y);
+        Rectangle itemPosition = new Rectangle(x, y, 144, 144);
 
         // Use the ItemFactory to create the item
         GameObject item = ItemFactory.CreateItem(subtype, itemPosition);

@@ -54,7 +54,7 @@ namespace Cuphead.Items
             // Initialize collider
             Vector2 bounds = new Vector2(source[0].Width * scale, source[0].Width * scale); 
             collider = new BoxCollider(bounds, position, GOManager.Instance.GraphicsDevice);
-            collider.GameObject = this.GameObject;
+            GameObject.AddComponent(collider);
         }
 
         public void Update(GameTime gameTime)
