@@ -10,6 +10,7 @@ public class SpriteRenderer : IComponent {
     public bool isFacingRight { get; set; }
     public string animationName { get; set; }
     public float spriteScale { get; set; } = 1f;
+    public float orderInLayer { get; set; } = 1f;
 
 
     public KeyValuePair<string, Animation> currentAnimation { get; set; }
@@ -77,7 +78,7 @@ public class SpriteRenderer : IComponent {
             (int)(destRectangle.Width * spriteScale),
             (int)(destRectangle.Height * spriteScale));
 
-        spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, isFacingRight);
+        spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, isFacingRight, orderInLayer);
     }
 
     public bool IsAnimationComplete()

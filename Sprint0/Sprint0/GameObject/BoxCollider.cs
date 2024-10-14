@@ -35,7 +35,7 @@ public class BoxCollider : Collider
         // Draw a translucent red rectangle to visualize the bounds of the collider
         if (GOManager.Instance.IsDebugging)
         {
-            spriteBatch.Draw(_debugTexture, BoundingBox, Color.Red * 0.5f);
+            spriteBatch.Draw(_debugTexture, BoundingBox, null, Color.Red * 0.5f, 0f, Vector2.Zero, SpriteEffects.None, 0.0f);
         }
     }
 

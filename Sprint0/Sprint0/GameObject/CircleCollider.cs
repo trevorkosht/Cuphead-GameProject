@@ -37,7 +37,7 @@ public class CircleCollider : Collider
             (int)(Radius * 2),
             (int)(Radius * 2)
         );
-            spriteBatch.Draw(_debugTexture, circleBounds, Color.Blue * 0.5f);
+            spriteBatch.Draw(_debugTexture, circleBounds, null, Color.Blue * 0.5f, 0f, Vector2.Zero, SpriteEffects.None, 0.0f);
         }
     }
 

@@ -9,7 +9,7 @@ Enemy,BothersomeBlueberry,2600,500
 Enemy,ToothyTerror,3100,500
 
 //Platforms Collidable
-Block,Platform1,-200,400
+Block,Platform1,-500,400
 Block,Platform2,5100,500
 Block,BigHill1,5600,500
 Block,BigHill2,6100,500
@@ -29,7 +29,7 @@ Block,LevelBackground,-500,200
 Block,Bush1,500,110
 Block,Rock1,0,450
 Block,Rock2,800,450
-Block,Rock3,12100,500
+Block,Rock3,1800,500
 Block,Rock4,12600,500
 Block,Rock5,13100,500
 Block,Rock6,13600,500
@@ -47,7 +47,6 @@ Block,Tree6,18100,500
 
 
 //Items
-
 Item,Spreadshot,100,500
 Item,Chaser,600,500
 Item,Lobber,1100,500

@@ -79,6 +79,7 @@ namespace Sprint0
             textureStorage.LoadContent(Content);
 
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
+            playerSpriteRenderer.orderInLayer = .1f;
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
             player.AddComponent(playerSpriteRenderer);
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
@@ -136,7 +137,7 @@ namespace Sprint0
             GraphicsDevice.Clear(Color.BlanchedAlmond);
 
             // Begin sprite batch with camera transformation matrix
-            _spriteBatch.Begin(transformMatrix: camera.Transform);
+            _spriteBatch.Begin(SpriteSortMode.BackToFront, transformMatrix: camera.Transform);
 
             foreach (var gameObject in gameObjects)
             {

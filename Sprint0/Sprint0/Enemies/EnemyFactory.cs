@@ -11,6 +11,7 @@ public static class EnemyFactory
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
         BaseEnemy enemyLogic;
         SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(enemy.X, enemy.Y, 144, 144), false);
+        spriteRenderer.orderInLayer = .2f;
         int enemyHP;
         enemy.AddComponent(spriteRenderer);
         spriteRenderer.addAnimation("Death",new Animation(textureStorage.GetTexture("PlayerDeath"), 5, 16, 144, 144));
