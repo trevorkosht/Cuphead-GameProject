@@ -133,6 +133,7 @@ public class PlayerController : IComponent
     {
         if (Collider.Intersects(item.GetComponent<Collider>()))
         {
+            item.Destroy();
             String itemName = item.type.Remove(0, 10);
             switch (itemName)
             {
