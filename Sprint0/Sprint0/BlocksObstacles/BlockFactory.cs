@@ -56,7 +56,9 @@ public static class BlockFactory
             bool collider = true;
             if (subtype.Contains("Background") || subtype.Contains("Tree") || subtype.Contains("Leaves") || subtype.Contains("Rock") || subtype.Contains("Bush"))
                 collider = false;
-            return CreateBlock(destRectangle, texture, size.width, size.height, collider);
+            GameObject blocks = CreateBlock(destRectangle, texture, size.width, size.height, collider);
+            blocks.type = subtype;
+            return blocks;
         }
         else
         {

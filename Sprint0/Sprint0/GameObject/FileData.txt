@@ -8,6 +8,8 @@ Enemy,ToothyTerror,3100,500
 
 Block,LevelBackground,3600,500
 Block,Bush1,4100,500
+Block,Platform1,0,600
+Block,Platform1,200,500
 Block,Platform1,4600,500
 Block,Platform2,5100,500
 Block,BigHill1,5600,500
