@@ -61,7 +61,3 @@ Item,Spreadshot,100,500
 Item,Chaser,600,500
 Item,Lobber,1100,500
 Item,Roundabout,1600,500
-
-//temp for testing
-Block,Platform1,0, 600
-Block,Platform1,200, 400
