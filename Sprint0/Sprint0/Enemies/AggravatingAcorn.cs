@@ -22,7 +22,7 @@ public class AggravatingAcorn : BaseEnemy
     {
         if (!isFalling)
         {
-            sRend.isFacingRight = false; // Always face left
+            sRend.isFacingRight = true; // Always face left
 
             // Move left continuously
             GameObject.X -= (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
