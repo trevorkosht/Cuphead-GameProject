@@ -10,6 +10,7 @@ public class BothersomeBlueberry : BaseEnemy
     private float speed;
     private bool movingRight;
     private float respawnDelay = 3.0f;
+    private float turnDelay = -1.0f;
 
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
@@ -35,41 +36,36 @@ public class BothersomeBlueberry : BaseEnemy
             GameObject.X += (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
         else
             GameObject.X -= (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-
+        
         if (ReachedEdge())
         {
-            movingRight = !movingRight;
+            if(turnDelay < 0) {
+                movingRight = !movingRight;
+                turnDelay = 0.5f;
+            }
         }
+        turnDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 
 
     private bool ReachedEdge()
     {
         CircleCollider blueberryCollider = GameObject.GetComponent<CircleCollider>();
+        bool isOnPlatform = false;
 
-        foreach (GameObject GO in GOManager.Instance.allGOs)
-        {
-            // Ensure GO and its type are not null before checking its type
-            if (GO != null && GO.type != null && (GO.type.Contains("Platform") || GO.type.Contains("Block")))
-            {
+        foreach(GameObject GO in GOManager.Instance.allGOs) {
+            if (GO != null && GO.type != null /*&& (GO.type.Contains("Platform") || GO.type.Contains("Block"))*/) {
                 BoxCollider platformCollider = GO.GetComponent<BoxCollider>();
+                float leftEdge = blueberryCollider.Center.X - blueberryCollider.Radius;
+                float rightEdge = blueberryCollider.Center.X + blueberryCollider.Radius;
 
-                if (blueberryCollider.Intersects(platformCollider))
-                {
-                    // Use the CircleCollider's Center and Radius to check the platform edges
-                    float blueberryLeftEdge = blueberryCollider.Center.X - blueberryCollider.Radius;
-                    float blueberryRightEdge = blueberryCollider.Center.X + blueberryCollider.Radius;
-
-                    if (blueberryLeftEdge <= platformCollider.BoundingBox.Left ||
-                        blueberryRightEdge >= platformCollider.BoundingBox.Right)
-                    {
-                        return true; // Reached the platform's edge
-                    }
+                if (platformCollider != null && GO.Y > GameObject.Y + 50 && (platformCollider.BoundingBox.Left <= leftEdge - 50 && platformCollider.BoundingBox.Right >= rightEdge + 50)) {
+                    isOnPlatform = true;
                 }
             }
         }
 
-        return false;
+        return !isOnPlatform;
     }
 
 
