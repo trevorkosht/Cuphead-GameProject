@@ -78,6 +78,7 @@ public class DeadlyDaisy : BaseEnemy
 
         foreach (GameObject block in GOManager.Instance.allGOs)
         {
+            if(block.type is null) continue;
             if (block.type.Contains("Platform") || block.type.Contains("Block"))
             {
                 if (collider.Intersects(block.GetComponent<Collider>()))
