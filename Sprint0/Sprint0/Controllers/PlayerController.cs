@@ -22,12 +22,14 @@ public class PlayerController : IComponent
     public float timeTillNextHit { get; set; } = .4f;
     public float dashDuration = 0.5f;//about 1 second
     public float dashSpeed = 1500f;// about 750 pixel
-    public int timeTillNextDash { get; set; } = 500;
+    public int TimeTillNextDash { get; set; } = 500;
     public int height;
     public int playerHeight = 130;
     public int playerWidth = 100;
 
     public int Health { get; set; } = 100;
+    public bool[] projectileUnlock = {true, true, false, false, false, false, false };
+    public enum projectiletype{Peashooter = 1, Spreadshot = 2, Chaser = 3, Lobber = 4, Roundabout = 5}
 
     private float airTime = 0f, shootTime = 0f, hitTime = 0f, dashTime = 0f;
     private int floorY;
@@ -102,6 +104,10 @@ public class PlayerController : IComponent
                 {
                     HandlePlatformCollision(go);
                 }
+                if (go.type.Contains("Item"))
+                {
+                    HandleItemCollision(go);
+                }
                
             }
         }
@@ -121,6 +127,25 @@ public class PlayerController : IComponent
             GroundLevel = 99999;
         }
         
+    }
+
+    public void HandleItemCollision(GameObject item)
+    {
+        if (Collider.Intersects(item.GetComponent<Collider>()))
+        {
+            String itemName = item.type.Remove(0, 10);
+            switch (itemName)
+            {
+                case "Spreadshot":
+                    projectileUnlock[(int)projectiletype.Spreadshot] = true; break;
+                case "Chaser":
+                    projectileUnlock[(int)projectiletype.Spreadshot] = true; break;
+                case "Lobber":
+                    projectileUnlock[(int)projectiletype.Spreadshot] = true; break;
+                case "Roundabout":
+                    projectileUnlock[(int)projectiletype.Spreadshot] = true; break;
+            }
+        }
     }
 
     private void HandleSpawnAnimation(GameTime gameTime)
@@ -227,7 +252,7 @@ public class PlayerController : IComponent
             // Continue dashing
             PerformDash(gameTime, height);
         }
-        else if (dashRequested && gameDelay.Cooldown(gameTime, timeTillNextDash))
+        else if (dashRequested && gameDelay.Cooldown(gameTime, TimeTillNextDash))
         {
             // Start dash
             IsDashing = true;
@@ -306,7 +331,7 @@ public class PlayerController : IComponent
     {
         for (int i = 1; i <= 5; i++)
         {
-            if (keyboardController.IsProjectileSwitchRequested(i))
+            if (keyboardController.IsProjectileSwitchRequested(i) && projectileUnlock[i])
             {
                 currentProjectileType = (ProjectileType)(i - 1);
                 timeTillNextBullet = GetBulletCooldown(i - 1); 
