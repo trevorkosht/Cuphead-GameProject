@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cuphead.Controllers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -15,7 +16,7 @@ namespace Sprint0
         private KeyboardController keyboardController;
 
         private List<GameObject> gameObjects = new List<GameObject>();
-        GameObject player = new GameObject(50, 500, new List<IComponent> { new PlayerController() });
+        GameObject player = new GameObject(50, 50);
 
         private EnemyController enemyController;
 
@@ -110,6 +111,7 @@ namespace Sprint0
             player.AddComponent(playerSpriteRenderer);
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
             player.type = "Player";
+            player.AddComponent(new PlayerController2(player));
         }
 
         protected override void Update(GameTime gameTime)

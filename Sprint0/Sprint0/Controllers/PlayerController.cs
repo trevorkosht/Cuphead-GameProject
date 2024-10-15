@@ -295,7 +295,7 @@ public class PlayerController : IComponent
             }
             GameObject.X += (int)(input.X * Speed * deltaTime);
             
-            HandleDash(dashRequested, gameTime);
+            HandleDash(dashRequested, gameTime, deltaTime);
         }
 
         if (jumpRequested && IsGrounded && !IsDucking)
@@ -318,12 +318,12 @@ public class PlayerController : IComponent
         }
     }
 
-    private void HandleDash(bool dashRequested, GameTime gameTime)
+    private void HandleDash(bool dashRequested, GameTime gameTime, float deltaTime)
     {
         if (IsDashing)
         {
             // Continue dashing
-            PerformDash(gameTime, height);
+            PerformDash(gameTime, height, deltaTime);
         }
         else if (dashRequested && gameDelay.Cooldown(gameTime, TimeTillNextDash))
         {
@@ -334,12 +334,11 @@ public class PlayerController : IComponent
             Gravity = 0;
             Speed = 0;
             CreateDustEffect();
-            UpdateAnimationState(GameObject.GetComponent<SpriteRenderer>());
-            PerformDash(gameTime, height);
+            PerformDash(gameTime, height, deltaTime);
         }
     }
 
-    private void PerformDash(GameTime gameTime, int height)
+    private void PerformDash(GameTime gameTime, int height, float deltatime)
     {   
         if (dashTime > 0)
         {
