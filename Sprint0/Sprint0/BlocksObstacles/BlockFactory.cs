@@ -61,7 +61,7 @@ public static class BlockFactory
 
             // Create the block with the size, texture, and other properties
             GameObject block = CreateBlock(destRectangle, texture, blockData.width, blockData.height, collider, blockData.bounds, blockData.offset, blockData.orderInLayer);
-            block.type = subtype;
+            block.type = "Block"+subtype;
             return block;
         }
         else
