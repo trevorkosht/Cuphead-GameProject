@@ -1,12 +1,20 @@
 //Enemies
 
-Enemy,AggravatingAcorn,100,500
-Enemy,DeadlyDaisy,600,500
+Enemy,AggravatingAcorn,900,100
+Enemy,DeadlyDaisy,8000,500
 Enemy,MurderousMushroom,1100,500
-Enemy,TerribleTulip,1600,500
-Enemy,AcornMaker,2100,500
+Enemy,TerribleTulip,2250,400
+Enemy,ToothyTerror,2400,600
 Enemy,BothersomeBlueberry,2600,500
-Enemy,ToothyTerror,3100,500
+Enemy,AcornMaker,3200,375
+
+Enemy,DeadlyDaisy,4000,500
+Enemy,MurderousMushroom,4100,500
+Enemy,TerribleTulip,6250,500
+Enemy,ToothyTerror,7000,600
+Enemy,BothersomeBlueberry,10000,500
+
+
 
 //Platforms Collidable
 Block,Platform1,-500,400

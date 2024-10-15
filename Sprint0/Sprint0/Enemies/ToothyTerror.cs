@@ -1,5 +1,6 @@
-using Microsoft.Xna.Framework;         
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 public class ToothyTerror : BaseEnemy
 {
@@ -13,11 +14,13 @@ public class ToothyTerror : BaseEnemy
     {
         base.Initialize(texture, storage);
         sRend.setAnimation("toothyTerrorAnimation");
-        jumpHeight = 150f;
-        gravity = 300f;   
-        isJumping = true;  
-        jumpSpeed = 250f; 
+        jumpHeight = 450f; // Can be modified to make jumps higher
+        gravity = 300f;
+        isJumping = true;
         startYPosition = GameObject.Y;
+
+        // Set the initial jump speed based on jumpHeight and gravity
+        jumpSpeed = (float)Math.Sqrt(2 * gravity * jumpHeight);
     }
 
     public override void Move(GameTime gameTime)
@@ -25,10 +28,14 @@ public class ToothyTerror : BaseEnemy
         if (isJumping)
         {
             sRend.setAnimation("Attack");
+
+            // Move up while jumping
             GameObject.Y -= (int)(jumpSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
+            // Reduce the jump speed by gravity over time
             jumpSpeed -= gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            // If jumpSpeed reaches zero or below, the enemy starts falling
             if (jumpSpeed <= 0)
             {
                 isJumping = false;
@@ -37,13 +44,18 @@ public class ToothyTerror : BaseEnemy
         else
         {
             sRend.setAnimation("toothyTerrorAnimation");
+
+            // Move down while falling
             GameObject.Y += (int)(gravity * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
+            // When back on the ground, reset the jump
             if (GameObject.Y >= startYPosition)
             {
                 GameObject.Y = (int)startYPosition;
-                jumpSpeed = 250f;       
-                isJumping = true;          
+
+                // Reset jump speed based on jumpHeight
+                jumpSpeed = (float)Math.Sqrt(2 * gravity * jumpHeight);
+                isJumping = true;
             }
         }
     }
