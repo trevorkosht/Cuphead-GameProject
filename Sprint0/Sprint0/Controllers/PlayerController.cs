@@ -100,7 +100,7 @@ public class PlayerController : IComponent
         {
             if(go.type != null)
             {
-                if (go.type.Contains("Platform"))
+                if (go != null && go.type.Contains("Platform"))
                 {
                     HandlePlatformCollision(go);
                 }
