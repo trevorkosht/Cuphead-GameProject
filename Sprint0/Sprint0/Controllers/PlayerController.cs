@@ -100,7 +100,7 @@ public class PlayerController : IComponent
         {
             if(go.type != null)
             {
-                if (go != null && go.type.Contains("Platform"))
+                if (go.type.Contains("Platform"))
                 {
                     HandlePlatformCollision(go);
                 }
@@ -108,6 +108,7 @@ public class PlayerController : IComponent
                 {
                     HandleItemCollision(go);
                 }
+                if (go.type.Contains("Big"))
                
             }
         }
@@ -140,11 +141,11 @@ public class PlayerController : IComponent
                 case "Spreadshot":
                     projectileUnlock[(int)projectiletype.Spreadshot] = true; break;
                 case "Chaser":
-                    projectileUnlock[(int)projectiletype.Spreadshot] = true; break;
+                    projectileUnlock[(int)projectiletype.Chaser] = true; break;
                 case "Lobber":
-                    projectileUnlock[(int)projectiletype.Spreadshot] = true; break;
+                    projectileUnlock[(int)projectiletype.Lobber] = true; break;
                 case "Roundabout":
-                    projectileUnlock[(int)projectiletype.Spreadshot] = true; break;
+                    projectileUnlock[(int)projectiletype.Roundabout] = true; break;
             }
         }
     }
