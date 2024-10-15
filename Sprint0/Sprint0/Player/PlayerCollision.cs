@@ -35,7 +35,7 @@ namespace Cuphead.Player
 
                         if (go.type.Contains("Platform"))
                         {
-                            HandlePlatformCollision(location, distance);
+                            HandleHillCollision(go);
                         }
                         if (go.type.Contains("Item"))
                         {
@@ -43,15 +43,15 @@ namespace Cuphead.Player
                         }
                         if (go.type.Contains("Hill"))
                         {
-                            HandlePlatformCollision(location, distance);
+                            HandleHillCollision(go);
                         }
                         if (go.type.Contains("Log"))
                         {
-                            HandlePlatformCollision(location, distance);
+                            HandleHillCollision(go);
                         }
                         if (go.type.Contains("Stump"))
                         {
-                            HandlePlatformCollision(location, distance);
+                            HandleHillCollision(go);
                         }
                         if (go.type.Contains("Enemy"))
                         {
