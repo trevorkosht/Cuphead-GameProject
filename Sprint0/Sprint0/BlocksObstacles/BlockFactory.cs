@@ -10,8 +10,8 @@ public static class BlockFactory
 {
     { "LevelBackground", (1827, 546, new Vector2(1827, 546), Vector2.Zero, 0.95f) },
     { "Bush1", (1338, 625, new Vector2(1338, 625), Vector2.Zero, 0.9f) },
-    { "Platform1", (427, 102, new Vector2(427, 102), Vector2.Zero, 0.5f) },
-    { "Platform2", (208, 110, new Vector2(188, 110), new Vector2(10, 0), 0.501f) },
+    { "Platform1", (427, 102, new Vector2(427, 25), new Vector2(0, 10), 0.5f) },
+    { "Platform2", (208, 110, new Vector2(188, 25), new Vector2(10, 10), 0.501f) },
     { "BigHill1", (1042, 842, new Vector2(1042, 842), new Vector2(0, 35), 0.7f) },
     { "BigHill2", (998, 664, new Vector2(998, 664), Vector2.Zero, 0.701f) },
     { "BigHill3", (510, 668, new Vector2(410, 668), new Vector2(70, 35), 0.702f) },

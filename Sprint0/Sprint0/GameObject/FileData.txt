@@ -19,6 +19,7 @@ Enemy,BothersomeBlueberry,10000,500
 //Platforms Collidable
 Block,Platform1,5000,400
 Block,Platform2,500,400
+Block,Platform1,1000,400
 
 //Ground
 Block,Log2,-600,200
