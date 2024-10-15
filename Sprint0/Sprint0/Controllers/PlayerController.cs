@@ -120,7 +120,10 @@ public class PlayerController : IComponent
                 {
                     HandleStumpCollision(go);
                 }
-
+                if (go.type.Contains("Enemy"))
+                {
+                    HandleEnemyCollision(go);
+                }
 
             }
         }
@@ -205,6 +208,17 @@ public class PlayerController : IComponent
                     projectileUnlock[(int)projectiletype.Roundabout] = true; break;
             }
         }
+    }
+    public void HandleEnemyCollision(GameObject Enemy)
+    {
+        if (Collider.Intersects(Enemy.GetComponent<Collider>()))
+        {
+            if (Enemy.type.Contains("AcornMaker"))
+            {
+                GameObject.X = Enemy.X -playerWidth+40;
+            }
+        }
+
     }
 
     private void HandleSpawnAnimation(GameTime gameTime)
