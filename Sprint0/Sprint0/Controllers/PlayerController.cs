@@ -108,7 +108,7 @@ public class PlayerController : IComponent
                 {
                     HandleItemCollision(go);
                 }
-                if (go.type.Contains("Big"))
+                //if (go.type.Contains("Big"))
                
             }
         }
