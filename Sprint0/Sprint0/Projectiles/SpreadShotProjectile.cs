@@ -81,7 +81,7 @@ public class SpreadShotInstance : Projectile
     {
         this.spriteRenderer = spriteRenderer;
         explosionTimer = 0.0f;
-        explosionDuration = 0.85f;
+        explosionDuration = 0.425f;
         collided = false;
         lifetimeExpired = false;
         this.direction = direction;
