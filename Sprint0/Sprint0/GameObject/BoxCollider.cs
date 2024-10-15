@@ -25,7 +25,7 @@ public class BoxCollider : Collider
     {
         if (GameObject != null)
         {
-            
+
             BoundingBox = new Rectangle(GameObject.X + (int)offset.X, GameObject.Y + (int)offset.Y, (int)bounds.X, (int)bounds.Y);
         }
     }
@@ -59,6 +59,35 @@ public class BoxCollider : Collider
         Vector2 closestPoint = new Vector2(
             MathHelper.Clamp(circleCenter.X, BoundingBox.Left, BoundingBox.Right),
             MathHelper.Clamp(circleCenter.Y, BoundingBox.Top, BoundingBox.Bottom)
+        );
+
+        float distanceSquared = Vector2.DistanceSquared(circleCenter, closestPoint);
+        return distanceSquared < circle.Radius * circle.Radius;
+    }
+
+    public bool IntersectsAtPosition(Collider other, Vector2 checkPosition)
+    {
+        // Create a shifted bounding box at the position we're checking
+        Rectangle shiftedBoundingBox = new Rectangle((int)checkPosition.X + (int)offset.X, (int)checkPosition.Y + (int)offset.Y, BoundingBox.Width, BoundingBox.Height);
+
+        if (other is BoxCollider box)
+        {
+            return shiftedBoundingBox.Intersects(box.BoundingBox);
+        }
+        else if (other is CircleCollider circle)
+        {
+            // Handle circle collision with the shifted bounding box
+            return CheckCircleCollisionAtPosition(circle, shiftedBoundingBox);
+        }
+        return false;
+    }
+
+    private bool CheckCircleCollisionAtPosition(CircleCollider circle, Rectangle shiftedBoundingBox)
+    {
+        Vector2 circleCenter = circle.Center;
+        Vector2 closestPoint = new Vector2(
+            MathHelper.Clamp(circleCenter.X, shiftedBoundingBox.Left, shiftedBoundingBox.Right),
+            MathHelper.Clamp(circleCenter.Y, shiftedBoundingBox.Top, shiftedBoundingBox.Bottom)
         );
 
         float distanceSquared = Vector2.DistanceSquared(circleCenter, closestPoint);
