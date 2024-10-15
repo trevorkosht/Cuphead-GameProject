@@ -71,24 +71,26 @@ public class BothersomeBlueberry : BaseEnemy
 
         HealthComponent healthComponent = GameObject.GetComponent<HealthComponent>();
 
-        if (healthComponent.currentHealth < 50)
+        if (healthComponent.currentHealth <= 50)
         {
             isKnockedOut = true;
             respawnTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            healthComponent.currentHealth = 50;
 
             if (respawnTimer >= respawnDelay) {
                 healthComponent.currentHealth = healthComponent.maxHealth;
-                movingRight = true;
                 isKnockedOut = false;
                 respawnTimer = 0;
                 sRend.setAnimation("bothersomeBlueberryAnimation");
             }
             else if (respawnTimer <= 0.75) {
                 sRend.setAnimation("Melt");
+                GameObject.GetComponent<CircleCollider>().Radius = 0;
             }
             else if (respawnTimer >= respawnDelay - 1.25)
             {
                 sRend.setAnimation("Respawn");
+                GameObject.GetComponent<CircleCollider>().Radius = 40;
             }
             else
             {
