@@ -108,8 +108,20 @@ public class PlayerController : IComponent
                 {
                     HandleItemCollision(go);
                 }
-                //if (go.type.Contains("Big"))
-               
+                if (go.type.Contains("Hill"))
+                {
+                    HandleHillCollision(go);
+                }
+                if (go.type.Contains("Log"))
+                {
+                    HandleLogCollision(go);
+                }
+                if (go.type.Contains("Stump"))
+                {
+                    HandleStumpCollision(go);
+                }
+
+
             }
         }
     }
@@ -128,6 +140,51 @@ public class PlayerController : IComponent
             GroundLevel = 99999;
         }
         
+    }
+
+    public void HandleHillCollision(GameObject platform)
+    {
+        if (Collider.Intersects(platform.GetComponent<Collider>()))
+        {
+            GroundLevel = (float)platform.Y;
+            floorY = platform.Y;
+            IsGrounded = true;
+        }
+        else
+        {
+            GroundLevel = 99999;
+        }
+
+    }
+
+    public void HandleLogCollision(GameObject platform)
+    {
+        if (Collider.Intersects(platform.GetComponent<Collider>()))
+        {
+            GroundLevel = (float)platform.Y;
+            floorY = platform.Y;
+            IsGrounded = true;
+        }
+        else
+        {
+            GroundLevel = 99999;
+        }
+
+    }
+
+    public void HandleStumpCollision(GameObject platform)
+    {
+        if (Collider.Intersects(platform.GetComponent<Collider>()))
+        {
+            GroundLevel = (float)platform.Y;
+            floorY = platform.Y;
+            IsGrounded = true;
+        }
+        else
+        {
+            GroundLevel = 99999;
+        }
+
     }
 
     public void HandleItemCollision(GameObject item)
