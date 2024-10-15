@@ -24,7 +24,7 @@ public class PlayerController : IComponent
     public float dashSpeed = 1500f;// about 750 pixel
     public int timeTillNextDash { get; set; } = 500;
     public int height;
-    public int playerHeight = 150;
+    public int playerHeight = 130;
     public int playerWidth = 100;
 
     public int Health { get; set; } = 100;
@@ -82,6 +82,7 @@ public class PlayerController : IComponent
         UpdateTimers(deltaTime);
         CollisionCheck();
         HandleGroundCheck(animator);
+        CollisionCheck();
         HandleMovementAndActions(gameTime, deltaTime);
         HandleShooting(state, animator);
         HandleProjectileSwitching(state);
@@ -109,17 +110,17 @@ public class PlayerController : IComponent
     //
     public void HandlePlatformCollision(GameObject platform)
     {
-        if (GameObject.GetComponent<BoxCollider>().Intersects(platform.GetComponent<Collider>()))
+        if (Collider.Intersects(platform.GetComponent<Collider>()))
         {
-            Gravity = 0;
-            velocity = new Vector2(velocity.X, 0);
-            GameObject.Y = platform.Y+playerHeight;
-            GameObject.X = 0;
+            GroundLevel = (float)platform.Y;
+            floorY = platform.Y;
+            IsGrounded = true;
         }
-        //else
-        //{
-        //    Gravity = 1200f;
-        //}
+        else
+        {
+            GroundLevel = 99999;
+        }
+        
     }
 
     private void HandleSpawnAnimation(GameTime gameTime)
