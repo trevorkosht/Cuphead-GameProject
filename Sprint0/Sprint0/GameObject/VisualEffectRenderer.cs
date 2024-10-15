@@ -9,6 +9,7 @@ public class VisualEffectRenderer : IComponent {
     public bool enabled { get; set; } = true;
 
     private bool hasPlayed = false;
+    public float orderInLayer { get; set; } = 0f;
 
     public VisualEffectRenderer(Rectangle destRectangle, Animation animation) { 
         this.destRectangle = destRectangle;
@@ -32,7 +33,7 @@ public class VisualEffectRenderer : IComponent {
             (int)(destRectangle.Width * effectScale),
             (int)(destRectangle.Height * effectScale));
 
-        animation.draw(spriteBatch, scaledDestRectangle, true);
+        animation.draw(spriteBatch, scaledDestRectangle, true, orderInLayer);
 
         if (animation.CurrentFrame == animation.FrameCount - 1) {
             hasPlayed = true;

@@ -29,6 +29,7 @@ public static class ItemFactory
         item.type = "ItemPickup";
         ItemManager itemManager = new ItemManager(type);
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
+        spriteRenderer.orderInLayer = .15f;
         Animation itemTexture = new Animation(texture, 1, 1, 144, 144);
         spriteRenderer.addAnimation("texture",itemTexture);
         spriteRenderer.setAnimation("texture");

@@ -82,10 +82,12 @@ public static class BlockFactory
         Animation blockTexture = new Animation(texture, 1, 1, frameHeight, frameWidth);
         spriteRenderer.addAnimation("texture", blockTexture);
         spriteRenderer.setAnimation("texture");
+        spriteRenderer.orderInLayer = 1f;
 
         // Add a collider with the block's size
         if (collider)
         {
+            spriteRenderer.orderInLayer = .75f;
             BoxCollider boxCollider = new BoxCollider(new Vector2(destRectangle.Width, destRectangle.Height), Vector2.Zero, GOManager.Instance.GraphicsDevice);
             block.AddComponent(boxCollider);
         }

@@ -1,3 +1,5 @@
+//Enemies
+
 Enemy,AggravatingAcorn,100,500
 Enemy,DeadlyDaisy,600,500
 Enemy,MurderousMushroom,1100,500
@@ -6,12 +8,9 @@ Enemy,AcornMaker,2100,500
 Enemy,BothersomeBlueberry,2600,500
 Enemy,ToothyTerror,3100,500
 
-Block,LevelBackground,3600,500
-Block,Bush1,4100,500
-Block,Platform1,0,600
-Block,Platform1,200,500
-Block,Platform1,4600,500
-Block,Platform2,5100,500
+//Platforms Collidable
+Block,Platform1,-500,400
+Block,Platform2,500,400
 Block,BigHill1,5600,500
 Block,BigHill2,6100,500
 Block,BigHill3,6600,500
@@ -23,9 +22,14 @@ Block,Log2,9100,500
 Block,Stump1,9600,500
 Block,Stump2,10100,500
 Block,Stump3,10600,500
-Block,Rock1,11100,500
-Block,Rock2,11600,500
-Block,Rock3,12100,500
+
+
+//Background
+Block,LevelBackground,-500,200
+Block,Bush1,1200,110
+Block,Rock1,2500,650
+Block,Rock2,3500,0
+Block,Rock3,1800,500
 Block,Rock4,12600,500
 Block,Rock5,13100,500
 Block,Rock6,13600,500
@@ -39,6 +43,10 @@ Block,Tree4,17100,500
 Block,Tree5,17600,500
 Block,Tree6,18100,500
 
+//Foreground
+
+
+//Items
 Item,Spreadshot,100,500
 Item,Chaser,600,500
 Item,Lobber,1100,500
