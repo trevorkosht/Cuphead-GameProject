@@ -20,7 +20,10 @@ public class TullipProjectile : IComponent
         Vector2 direction = targetPosition - startPosition;
         direction.Normalize();
 
-        velocity = new Vector2(direction.X * speed, -Math.Abs(direction.Y * speed));
+        // Adjust vertical component to ensure a consistent jump
+        float verticalSpeed = -Math.Max(Math.Abs(direction.Y * speed), 2f); // Ensuring a minimum upward speed
+
+        velocity = new Vector2(direction.X * speed, verticalSpeed);
     }
 
     public void Update(GameTime gameTime)

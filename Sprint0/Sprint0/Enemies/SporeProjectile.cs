@@ -34,10 +34,7 @@ public class SporeProjectile : IComponent
 
         if (Vector2.Distance(position, GOManager.Instance.Player.position) < 10f)
             GameObject.Destroy();
-        else if(GameObject.X < 0 || GameObject.X > 1200)
-            GameObject.Destroy();
-        else if(GameObject.Y < 0 || GameObject.Y > 700)
-            GameObject.Destroy();
+
         firstFrame = true;
     }
 
