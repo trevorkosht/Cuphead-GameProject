@@ -87,7 +87,7 @@ public static class EnemyFactory
                 return null;
         }
         enemy.AddComponent(new HealthComponent(enemyHP, false));
-        enemy.type = "Enemy";
+        enemy.type = "Enemy" + type;
         return enemy;
     }
 }
