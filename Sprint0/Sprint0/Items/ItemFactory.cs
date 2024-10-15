@@ -26,7 +26,7 @@ public static class ItemFactory
         }
 
         GameObject item = new GameObject(destRectangle.X, destRectangle.Y);
-        item.type = "ItemPickup";
+        item.type = "ItemPickup" + type;
         ItemManager itemManager = new ItemManager(type);
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
         spriteRenderer.orderInLayer = .15f;
