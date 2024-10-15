@@ -24,7 +24,6 @@ namespace Cuphead.Controllers
         private PlayerMovement playerMovement;
         private PlayerProjectile playerProjectile;
 
-        private Texture2DStorage texture = new Texture2DStorage();
         private readonly KeyboardController keyboardController;
         private readonly MouseController mouseController;
         private ProjectileFactory projectileFactory;

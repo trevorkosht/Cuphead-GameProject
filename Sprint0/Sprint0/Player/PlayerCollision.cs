@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,33 +26,75 @@ namespace Cuphead.Player
             {
                 if (go.type != null)
                 {
-                    if (go.type.Contains("Platform"))
+                    if (collider.Intersects(go.GetComponent<Collider>()))
                     {
-                        HandlePlatformCollision(go);
+                        Rectangle playerBox = go.GetComponent<SpriteRenderer>().destRectangle;
+                        Rectangle box2 = go.GetComponent<SpriteRenderer>().destRectangle;
+                        String location = CollisionSide(playerBox, box2);
+                        int distance = CollisionDistance(playerBox, box2);
+
+                        if (go.type.Contains("Platform"))
+                        {
+                            HandlePlatformCollision(location, distance);
+                        }
+                        if (go.type.Contains("Item"))
+                        {
+                            HandleItemCollision(go);
+                        }
+                        if (go.type.Contains("Hill"))
+                        {
+                            HandlePlatformCollision(location, distance);
+                        }
+                        if (go.type.Contains("Log"))
+                        {
+                            HandlePlatformCollision(location, distance);
+                        }
+                        if (go.type.Contains("Stump"))
+                        {
+                            HandlePlatformCollision(location, distance);
+                        }
+                        if (go.type.Contains("Enemy"))
+                        {
+                            HandleEnemyCollision(go);
+                        }
                     }
-                    if (go.type.Contains("Item"))
-                    {
-                        HandleItemCollision(go);
-                    }
-                    if (go.type.Contains("Hill"))
-                    {
-                        HandleHillCollision(go);
-                    }
-                    if (go.type.Contains("Log"))
-                    {
-                        HandleLogCollision(go);
-                    }
-                    if (go.type.Contains("Stump"))
-                    {
-                        HandleStumpCollision(go);
-                    }
-                    if (go.type.Contains("Enemy"))
-                    {
-                        HandleEnemyCollision(go);
-                    }
+                    
 
                 }
             }
+        }
+
+        //maybe move this into collider.cs
+        private string CollisionSide(Rectangle playerBounds, Rectangle itemBounds)
+        {
+            // Determine the side of the player collider where the collision happens
+            int leftDiff = Math.Abs(playerBounds.Right - itemBounds.Left);
+            int rightDiff = Math.Abs(playerBounds.Left - itemBounds.Right);
+            int topDiff = Math.Abs(playerBounds.Bottom - itemBounds.Top);
+            int bottomDiff = Math.Abs(playerBounds.Top - itemBounds.Bottom);
+
+            // Find the smallest difference (closest side)
+            int minDiff = Math.Min(Math.Min(leftDiff, rightDiff), Math.Min(topDiff, bottomDiff));
+
+            if (minDiff == leftDiff) return "Left";
+            if (minDiff == rightDiff) return "Right";
+            if (minDiff == topDiff) return "Top";
+            return "Bottom";
+        }
+
+        //maybe move this into collider.cs
+        private int CollisionDistance(Rectangle playerBounds, Rectangle itemBounds)
+        {
+            // Determine the side of the player collider where the collision happens
+            int leftDiff = Math.Abs(playerBounds.Right - itemBounds.Left);
+            int rightDiff = Math.Abs(playerBounds.Left - itemBounds.Right);
+            int topDiff = Math.Abs(playerBounds.Bottom - itemBounds.Top);
+            int bottomDiff = Math.Abs(playerBounds.Top - itemBounds.Bottom);
+
+            // Find the smallest difference (closest side)
+            int minDiff = Math.Min(Math.Min(leftDiff, rightDiff), Math.Min(topDiff, bottomDiff));
+
+            return minDiff;
         }
 
         public void HandleGroundCheck(SpriteRenderer animator)
@@ -77,13 +120,28 @@ namespace Cuphead.Player
             }
         }
 
-        public void HandlePlatformCollision(GameObject platform)
+        public void HandlePlatformCollision(String location, int distance)
         {
-            if (collider.Intersects(platform.GetComponent<Collider>()))
+            if (location != null)
             {
-                player.GroundLevel = (float)platform.Y;
-                player.floorY = platform.Y;
-                player.IsGrounded = true;
+                if(location == "Bottom")
+                {
+                    player.GroundLevel = player.GameObject.Y + player.height;
+                    player.floorY = player.GameObject.Y + player.height;
+                    player.IsGrounded = true;
+                }
+                else if (location == "Right")
+                {
+                    player.GameObject.X = player.GameObject.X + distance + 1;
+                }
+                else if (location == "Left")
+                {
+                    player.GameObject.X = player.GameObject.X - distance - 1;
+                }
+                else
+                {
+
+                }
             }
             else
             {
