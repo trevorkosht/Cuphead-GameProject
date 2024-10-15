@@ -17,7 +17,7 @@ public class PlayerController : IComponent
     public bool IsGrounded { get; set; } = false;
     public Vector2 velocity;
     public float GroundLevel { get; set; } = 500f; 
-    public float Gravity { get; set; } = 1200f;
+    public float Gravity { get; set; } = 2000f;
     public float timeTillNextBullet { get; set; } = .2f;
     public float timeTillNextHit { get; set; } = .4f;
     public float dashDuration = 0.5f;//about 1 second
@@ -449,7 +449,8 @@ public class PlayerController : IComponent
         if (!IsGrounded)
         {
             airTime += deltaTime;
-            velocity.Y += Gravity * deltaTime * airTime * 2;
+            //velocity.Y += Gravity * deltaTime * airTime * 2;
+            velocity.Y += Gravity * deltaTime;
 
             GameObject.Y += (int)(velocity.Y * deltaTime);
         }
