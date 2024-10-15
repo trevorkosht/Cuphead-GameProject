@@ -4,12 +4,11 @@ using System;
 
 public class BothersomeBlueberry : BaseEnemy
 {
-    private Vector2 respawnPosition;
     private bool isKnockedOut;
     private double respawnTimer;
     private float speed;
     private bool movingRight;
-    private float respawnDelay = 3.0f;
+    private float respawnDelay = 5.0f;
     private float turnDelay = -1.0f;
 
 
@@ -18,11 +17,9 @@ public class BothersomeBlueberry : BaseEnemy
         base.Initialize(texture, storage);
         sRend.setAnimation("bothersomeBlueberryAnimation");
 
-        respawnPosition = new Vector2(GameObject.X, GameObject.Y);
         speed = 300f;
         isKnockedOut = false;
         movingRight = true;
-
     }
 
     public override void Move(GameTime gameTime)
@@ -68,26 +65,30 @@ public class BothersomeBlueberry : BaseEnemy
         return !isOnPlatform;
     }
 
-
-
-
-
-
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
 
-        if (isKnockedOut)
+        HealthComponent healthComponent = GameObject.GetComponent<HealthComponent>();
+
+        if (healthComponent.currentHealth < 50)
         {
+            isKnockedOut = true;
             respawnTimer += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (respawnTimer >= respawnDelay / 2)
-            {
-                sRend.setAnimation("BlueberryRespawn");
+            if (respawnTimer >= respawnDelay) {
+                healthComponent.currentHealth = healthComponent.maxHealth;
+                movingRight = true;
+                isKnockedOut = false;
+                respawnTimer = 0;
+                sRend.setAnimation("bothersomeBlueberryAnimation");
             }
-            else if (respawnTimer >= respawnDelay)
+            else if (respawnTimer <= 0.75) {
+                sRend.setAnimation("Melt");
+            }
+            else if (respawnTimer >= respawnDelay - 1.25)
             {
-                Respawn();
+                sRend.setAnimation("Respawn");
             }
             else
             {
@@ -96,23 +97,7 @@ public class BothersomeBlueberry : BaseEnemy
         }
     }
 
-    private void Respawn()
-    {
-        GameObject.X = (int)respawnPosition.X;
-        GameObject.Y = (int)respawnPosition.Y;
-
-        isKnockedOut = false;
-        movingRight = true;
-        sRend.setAnimation("bothersomeBlueberryAnimation");
-    }
-
     public override void Shoot(GameTime gameTime)
     {
-    }
-
-    public void KnockOut()
-    {
-        isKnockedOut = true;
-        respawnTimer = 0;
     }
 }

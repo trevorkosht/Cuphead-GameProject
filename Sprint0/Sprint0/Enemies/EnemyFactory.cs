@@ -72,7 +72,7 @@ public static class EnemyFactory
                 spriteRenderer.addAnimation("WaitForRespawn", new Animation(textureStorage.GetTexture("BlueberryWaitingToRespawn"), 5, 1, 144, 144));
                 spriteRenderer.addAnimation("Respawn", new Animation(textureStorage.GetTexture("BlueberryRespawn"), 5, 14, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("BothersomeBlueberry"), textureStorage);
-                enemyHP = 50;
+                enemyHP = 100;
                 break;
             case EnemyType.ToothyTerror:
                 enemyLogic = new ToothyTerror();
