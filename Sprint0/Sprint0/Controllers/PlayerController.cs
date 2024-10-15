@@ -102,6 +102,10 @@ public class PlayerController : IComponent
                 {
                     HandlePlatformCollision(go);
                 }
+                if (go.type.Contains("Items"))
+                {
+                    HandleItemCollision(go);
+                }
                
             }
         }
@@ -121,6 +125,14 @@ public class PlayerController : IComponent
             GroundLevel = 99999;
         }
         
+    }
+
+    public void HandleItemCollision(GameObject item)
+    {
+        if (Collider.Intersects(item.GetComponent<Collider>()))
+        {
+            
+        }
     }
 
     private void HandleSpawnAnimation(GameTime gameTime)
