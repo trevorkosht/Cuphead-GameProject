@@ -156,7 +156,13 @@ namespace Sprint0
                 i--;
             }
             resetFrame = true;
-            player = new GameObject(50, 50, new List<IComponent> { new PlayerController() });
+            SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
+            playerSpriteRenderer.orderInLayer = .1f;
+            textureStorage.loadPlayerAnimations(playerSpriteRenderer);
+            player.AddComponent(playerSpriteRenderer);
+            player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
+            player.type = "Player";
+            player = new GameObject(50, 50, new List<IComponent> { new PlayerController2(player) });
             Initialize();
         }
 
