@@ -107,7 +107,7 @@ namespace Cuphead.Player
                     effectTexture = null;
                     break;
             }
-            VisualEffectFactory.createVisualEffect(effectPosition, effectTexture, updatesPerFrame: 2, frameCount: 4, scale: 0.5f);
+            VisualEffectFactory.createVisualEffect(effectPosition, effectTexture, updatesPerFrame: 2, frameCount: 4, scale: 0.5f, true);
         }
 
         public void CreateDustEffect()
@@ -115,7 +115,7 @@ namespace Cuphead.Player
             Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
             Rectangle dustPosition = new Rectangle(player.GameObject.X, player.GameObject.Y + 10, 144, 144); // Adjust Y position as needed
             Texture2D dustTexture = textureStorage.GetTexture("Dust");
-            GameObject dustEffect = VisualEffectFactory.createVisualEffect(dustPosition, dustTexture, updatesPerFrame: 1, frameCount: 14, scale: 1f);
+            GameObject dustEffect = VisualEffectFactory.createVisualEffect(dustPosition, dustTexture, updatesPerFrame: 1, frameCount: 14, scale: 1f, true);
         }
     }
 }

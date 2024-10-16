@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Graphics;
 
 public class VisualEffectRenderer : IComponent {
     public GameObject GameObject {  get; set; }
@@ -10,16 +11,17 @@ public class VisualEffectRenderer : IComponent {
 
     private bool hasPlayed = false;
     public float orderInLayer { get; set; } = 0f;
+    public bool isFacingRight {  get; set; }
 
-    public VisualEffectRenderer(Rectangle destRectangle, Animation animation) { 
+    public VisualEffectRenderer(Rectangle destRectangle, Animation animation, bool isFacingRight) { 
         this.destRectangle = destRectangle;
         this.animation = animation;
+        this.isFacingRight = isFacingRight;
     }
 
     public void Update(GameTime gameTime) {
         if (!enabled) return;
 
-        //destRectangle = new Rectangle(GameObject.X, GameObject.Y, destRectangle.Width, destRectangle.Height);
         animation.updateAnimation();
 
     }
@@ -33,7 +35,7 @@ public class VisualEffectRenderer : IComponent {
             (int)(destRectangle.Width * effectScale),
             (int)(destRectangle.Height * effectScale));
 
-        animation.draw(spriteBatch, scaledDestRectangle, true, orderInLayer);
+        animation.draw(spriteBatch, scaledDestRectangle, isFacingRight, orderInLayer);
 
         if (animation.CurrentFrame == animation.FrameCount - 1) {
             hasPlayed = true;

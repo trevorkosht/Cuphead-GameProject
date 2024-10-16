@@ -2,10 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 
 public class VisualEffectFactory {
-    public static GameObject createVisualEffect(Rectangle destRectangle, Texture2D texture, int updatesPerFrame, int frameCount, float scale) {
+    public static GameObject createVisualEffect(Rectangle destRectangle, Texture2D texture, int updatesPerFrame, int frameCount, float scale, bool isFacingRight) {
         GameObject effect = new GameObject(destRectangle.X, destRectangle.Y);
         Animation effectAnimation = new Animation(texture, updatesPerFrame, frameCount, destRectangle.Height, destRectangle.Width);
-        VisualEffectRenderer effectRenderer = new VisualEffectRenderer(destRectangle, effectAnimation);
+        VisualEffectRenderer effectRenderer = new VisualEffectRenderer(destRectangle, effectAnimation, isFacingRight);
         effectRenderer.effectScale = scale;
         effect.AddComponent(effectRenderer);
         GOManager.Instance.allGOs.Add(effect);

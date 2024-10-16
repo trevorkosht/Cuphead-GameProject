@@ -42,6 +42,10 @@ public static class EnemyFactory
                 enemy.AddComponent(new BoxCollider(new Vector2(145, 145), Vector2.Zero, GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("murderousMushroomAnimation", new Animation(textureStorage.GetTexture("MurderousMushroom"), 5, 8, 144, 144));
                 spriteRenderer.addAnimation("Attack", new Animation(textureStorage.GetTexture("MushroomAttack"), 3, 15, 144, 144));
+                spriteRenderer.addAnimation("Closed", new Animation(textureStorage.GetTexture("MushroomClosed"), 3, 3, 144, 144));
+                spriteRenderer.addAnimation("Open", new Animation(textureStorage.GetTexture("MushroomOpening"), 3, 5, 144, 144));
+                spriteRenderer.addAnimation("Closing", new Animation(textureStorage.GetTexture("MushroomClosing"), 3, 5, 144, 144));
+
                 enemyLogic.Initialize(textureStorage.GetTexture("MurderousMushroom"), textureStorage);
                 enemyHP = 50;
                 break;

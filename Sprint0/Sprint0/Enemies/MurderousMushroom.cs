@@ -8,16 +8,20 @@ public class MurderousMushroom : BaseEnemy
     private double shootCooldown;
     private Texture2D purpleSporeTexture;
     private Texture2D pinkSporeTexture;
+    private Texture2D attackVFX;
+    private int closedHP;
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
         sRend.setAnimation("murderousMushroomAnimation");
+        sRend.isFacingRight = true;
         isHidden = false;
         shootCooldown = 2.0;
 
         purpleSporeTexture = storage.GetTexture("PurpleSpore");
         pinkSporeTexture = storage.GetTexture("PinkSpore");
+        attackVFX = storage.GetTexture("MushroomAttackVFX");
     }
 
     public override void Move(GameTime gameTime)
@@ -47,6 +51,16 @@ public class MurderousMushroom : BaseEnemy
                     GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new SporeProjectile(GameObject.position, playerPosition, sporeTexture, shootPinkSpore));
 
 
+                    Rectangle effectPosition = new Rectangle();
+                    if (sRend.isFacingRight) {
+                        effectPosition = new Rectangle(GameObject.X - 15, GameObject.Y + 50, 144, 144);
+                    }
+                    else {
+                        effectPosition = new Rectangle(GameObject.X + 90, GameObject.Y + 50, 144, 144);
+                    }
+
+                    VisualEffectFactory.createVisualEffect(effectPosition, attackVFX, 3, 5, 0.5f, sRend.isFacingRight);
+
                     GOManager.Instance.allGOs.Add(projectile);
 
                     shootCooldown = 4.0;
@@ -58,20 +72,48 @@ public class MurderousMushroom : BaseEnemy
 
     public void HideUnderCap()
     {
-        isHidden = true;
+        if (!sRend.getAnimationName().Equals("Attack")) {
+            if (!sRend.getAnimationName().Equals("Closed")) {
+                closedHP = GameObject.GetComponent<HealthComponent>().currentHealth;
+            }
+            closedHP = GameObject.GetComponent<HealthComponent>().currentHealth = closedHP;
+
+            if (!isHidden) {
+                sRend.setAnimation("Closing");
+            }
+            else if (sRend.currentAnimation.Value.CurrentFrame >= 4) {
+                sRend.setAnimation("Closed");
+            }
+
+            isHidden = true;
+        }
+
     }
 
     public void EmergeFromCap()
     {
-        isHidden = false;
+        sRend.setAnimation("Open");
+
+        if (sRend.currentAnimation.Value.CurrentFrame >= 4) {
+            isHidden = false;
+            sRend.setAnimation("murderousMushroomAnimation");
+        }
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        Shoot(gameTime);
-        if (sRend.currentAnimation.Value.CurrentFrame == 14) {
-            sRend.setAnimation("murderousMushroomAnimation");
+
+        if(Math.Abs((float)(GameObject.X - player.X)) >= 450) {
+            HideUnderCap();
         }
+        else if(isHidden) {
+            EmergeFromCap();
+        }
+
+        Shoot(gameTime);
+        if (sRend.getAnimationName().Equals("Attack") && sRend.currentAnimation.Value.CurrentFrame == 14) {
+            sRend.setAnimation("murderousMushroomAnimation");
+        } 
     }
 }

@@ -29,6 +29,11 @@ public class Texture2DStorage
         _textures["ToothyTerrorSpinAttack"] = content.Load<Texture2D>(@"EnemyTextures\terror_spin");
         _textures["TulipIdle"] = content.Load<Texture2D>(@"EnemyTextures\tulip_idle");
 
+        _textures["MushroomClosed"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_closed");
+        _textures["MushroomClosing"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_closing");
+        _textures["MushroomOpening"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_opening");
+        _textures["MushroomAttackVFX"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_shoot_vfx");
+
         //Level Textures
 
         //Background

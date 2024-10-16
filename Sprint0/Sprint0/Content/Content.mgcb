@@ -517,6 +517,42 @@
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/mushroom_attack.png
 
+#begin EnemyTextures/mushroom_closed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/mushroom_closed.png
+
+#begin EnemyTextures/mushroom_closing.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/mushroom_closing.png
+
+#begin EnemyTextures/mushroom_opening.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/mushroom_opening.png
+
 #begin EnemyTextures/mushroom_poison_cloud_0001.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -540,6 +576,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/mushroom_poison_cloud_pink_0003.png
+
+#begin EnemyTextures/mushroom_shoot_vfx.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/mushroom_shoot_vfx.png
 
 #begin EnemyTextures/TerribleTulipSprite.png
 /importer:TextureImporter
