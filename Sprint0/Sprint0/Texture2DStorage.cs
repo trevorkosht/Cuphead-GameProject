@@ -17,8 +17,8 @@ public class Texture2DStorage
         _textures["AggravatingAcorn"] = content.Load<Texture2D>(@"EnemyTextures\AggravatingAcornSprite");
         _textures["AcornMaker"] = content.Load<Texture2D>(@"EnemyTextures\AcornMakerSprite");
         _textures["Seed"] = content.Load<Texture2D>(@"EnemyTextures\LoberSeed");
-        _textures["PurpleSpore"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_poison_cloud_0001");
-        _textures["PinkSpore"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_poison_cloud_pink_0003");
+        _textures["PurpleSpore"] = content.Load<Texture2D>(@"EnemyTextures\purple_spore");
+        _textures["PinkSpore"] = content.Load<Texture2D>(@"EnemyTextures\pink_spore");
 
         _textures["AcornFall"] = content.Load<Texture2D>(@"EnemyTextures\acorn_fall");
         _textures["BlueberryMelt"] = content.Load<Texture2D>(@"EnemyTextures\blueberry_melt");

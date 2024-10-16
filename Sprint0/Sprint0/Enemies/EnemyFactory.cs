@@ -39,7 +39,7 @@ public static class EnemyFactory
             case EnemyType.MurderousMushroom:
                 enemyLogic = new MurderousMushroom();
                 enemy.AddComponent(enemyLogic);
-                enemy.AddComponent(new BoxCollider(new Vector2(145, 145), Vector2.Zero, GOManager.Instance.GraphicsDevice));
+                enemy.AddComponent(new BoxCollider(new Vector2(144, 144), Vector2.Zero, GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("murderousMushroomAnimation", new Animation(textureStorage.GetTexture("MurderousMushroom"), 5, 8, 144, 144));
                 spriteRenderer.addAnimation("Attack", new Animation(textureStorage.GetTexture("MushroomAttack"), 3, 15, 144, 144));
                 spriteRenderer.addAnimation("Closed", new Animation(textureStorage.GetTexture("MushroomClosed"), 3, 3, 144, 144));

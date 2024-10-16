@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;        
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using System;
 
 public class MurderousMushroom : BaseEnemy
@@ -10,6 +11,7 @@ public class MurderousMushroom : BaseEnemy
     private Texture2D pinkSporeTexture;
     private Texture2D attackVFX;
     private int closedHP;
+    private float projectileScale = 0.5f;
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
@@ -49,6 +51,12 @@ public class MurderousMushroom : BaseEnemy
 
                     Texture2D sporeTexture = shootPinkSpore ? pinkSporeTexture : purpleSporeTexture;
                     GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new SporeProjectile(GameObject.position, playerPosition, sporeTexture, shootPinkSpore));
+                    
+                    SpriteRenderer projectileRenderer = new SpriteRenderer(new Rectangle(GameObject.X, GameObject.Y, (int)(144 * projectileScale), (int)(144 * projectileScale)), false);
+                    projectile.AddComponent(projectileRenderer);
+                    projectileRenderer.addAnimation("projectile", new Animation(sporeTexture, 3, 12, 144, 144));
+                    projectileRenderer.setAnimation("projectile");
+
 
 
                     Rectangle effectPosition = new Rectangle();
@@ -83,6 +91,8 @@ public class MurderousMushroom : BaseEnemy
             }
             else if (sRend.currentAnimation.Value.CurrentFrame >= 4) {
                 sRend.setAnimation("Closed");
+                GameObject.GetComponent<BoxCollider>().bounds = new Vector2(144, 95);
+                GameObject.GetComponent<BoxCollider>().offset = new Vector2(0, 49);
             }
 
             isHidden = true;
@@ -97,6 +107,8 @@ public class MurderousMushroom : BaseEnemy
         if (sRend.currentAnimation.Value.CurrentFrame >= 4) {
             isHidden = false;
             sRend.setAnimation("murderousMushroomAnimation");
+            GameObject.GetComponent<BoxCollider>().bounds = new Vector2(144, 144);
+            GameObject.GetComponent<BoxCollider>().offset = new Vector2(0, 0);
         }
     }
 
@@ -110,6 +122,8 @@ public class MurderousMushroom : BaseEnemy
         else if(isHidden) {
             EmergeFromCap();
         }
+
+        sRend.isFacingRight = player.X <= GameObject.X;
 
         Shoot(gameTime);
         if (sRend.getAnimationName().Equals("Attack") && sRend.currentAnimation.Value.CurrentFrame == 14) {
