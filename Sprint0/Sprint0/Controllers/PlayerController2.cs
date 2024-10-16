@@ -29,6 +29,7 @@ namespace Cuphead.Controllers
         private ProjectileFactory projectileFactory;
         private BoxCollider Collider;
         float deltaTime;
+        private int shotsFired;
 
         public PlayerController2(GameObject playerObject)
         {
@@ -45,6 +46,7 @@ namespace Cuphead.Controllers
             playerMovement = new PlayerMovement(player, keyboardController, Collider, playerAnimation);
             playerProjectile = new PlayerProjectile(player, keyboardController, projectileFactory, playerAnimation);
             this.playerObject = playerObject;
+            this.shotsFired = 0;
             
             if (player.IsSpawning)
             {
@@ -82,12 +84,17 @@ namespace Cuphead.Controllers
             playerCollision.HandleGroundCheck(animator);
             playerCollision.CollisionCheck();
             playerMovement.HandleMovementAndActions(gameTime, deltaTime);
-            playerProjectile.HandleShooting(state, animator);
+            shotsFired += playerProjectile.HandleShooting(state, animator, shotsFired);
             playerProjectile.HandleProjectileSwitching(state);
             playerHealth.HandleDamageDetection();
             playerMovement.UpdateGravity(deltaTime);
             playerAnimation.UpdateAnimationState(animator);
             playerHealth.UpdateInvincible(gameTime);
+
+            if(shotsFired == 5)
+            {
+                shotsFired = 0;
+            }
         }
 
         private void UpdateTimers(float deltaTime)

@@ -13,34 +13,41 @@ namespace Cuphead.Player
         private KeyboardController keyboardController;
         private ProjectileFactory projectileFactory;
         private PlayerAnimation playerAnimator;
+        private int additionalShotHeight;
         public PlayerProjectile(PlayerState player, KeyboardController keyboardController, ProjectileFactory projectileFactory, PlayerAnimation animator)
         {
             this.player = player;
             this.keyboardController = keyboardController;
             this.projectileFactory = projectileFactory;
             this.playerAnimator = animator;
+            this.additionalShotHeight = 0;
         }
 
-        public void HandleShooting(KeyboardState state, SpriteRenderer animator)
+        public int HandleShooting(KeyboardState state, SpriteRenderer animator, int shotsFired)
         {
             if (keyboardController.IsShootRequested() && player.shootTime <= 0 && player.hitTime <= 0)
             {
                 player.isShooting = true;
                 player.shootTime = player.timeTillNextBullet;
                 GameObject newProjectile;
+
+                additionalShotHeight = AddProjectileHeight(shotsFired, player.currentProjectileType);
+
                 if (player.GameObject.GetComponent<SpriteRenderer>().isFacingRight)
                 {
-                    newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X, player.GameObject.Y, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+                    newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X, player.GameObject.Y + additionalShotHeight, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight);
                     playerAnimator.CreateShootingEffect(true);
                 }
                 else
                 {
-                    newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X - 90, player.GameObject.Y, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+                    newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X - 90, player.GameObject.Y + additionalShotHeight, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight);
                     playerAnimator.CreateShootingEffect(false);
                 }
                 GOManager.Instance.allGOs.Add(newProjectile);
 
             }
+
+            return 1;
         }
 
         public void HandleProjectileSwitching(KeyboardState state)
@@ -67,6 +74,22 @@ namespace Cuphead.Player
                 4 => 1 / (20.38f / 8f), // Roundabout
                 _ => player.timeTillNextBullet
             };
+        }
+
+        private int AddProjectileHeight(int shotsFired, ProjectileType type)
+        {
+            if ((type != ProjectileType.Peashooter && type != ProjectileType.Chaser) || shotsFired == 0 || shotsFired == 4)
+            {
+                return 0;
+            }
+            else if (shotsFired == 1 || shotsFired == 3)
+            {
+                return 10;
+            }
+            else
+            {
+                return 20;
+            }
         }
     }
 }
