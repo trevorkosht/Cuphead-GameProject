@@ -57,7 +57,7 @@ public class SporeProjectile : IComponent
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        if (firstFrame)
-            spriteBatch.Draw(sporeTexture, GameObject.position, Color.White);
+        //if (firstFrame)
+        //    spriteBatch.Draw(sporeTexture, GameObject.position, Color.White);
     }
 }
