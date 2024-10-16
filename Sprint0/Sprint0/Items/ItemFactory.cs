@@ -4,11 +4,11 @@ using System;
 
 public static class ItemFactory
 {
-    public static GameObject CreateItem(string type, Rectangle destRectangle)
+    public static GameObject CreateItem(string itemName, Rectangle destRectangle)
     {
         Texture2D texture = null;
 
-        switch (type) {
+        switch (itemName) {
             case "Spreadshot":
                 texture = GOManager.Instance.textureStorage.GetTexture("SpreadshotItem");
                 break;
@@ -27,7 +27,7 @@ public static class ItemFactory
 
         GameObject item = new GameObject(destRectangle.X, destRectangle.Y);
         item.type = "ItemPickup";
-        ItemManager itemManager = new ItemManager(type);
+        ItemManager itemManager = new ItemManager(itemName);
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
         spriteRenderer.orderInLayer = .15f;
         Animation itemTexture = new Animation(texture, 1, 1, 144, 144);
