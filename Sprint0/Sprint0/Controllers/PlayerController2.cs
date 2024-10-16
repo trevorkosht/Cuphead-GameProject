@@ -41,7 +41,7 @@ namespace Cuphead.Controllers
 
             playerAnimation = new PlayerAnimation(player);
             playerCollision = new PlayerCollision(player, Collider, playerAnimation);
-            playerHealth = new PlayerHealth(player, keyboardController);
+            playerHealth = new PlayerHealth(player, keyboardController, playerCollision);
             playerMovement = new PlayerMovement(player, keyboardController, Collider, playerAnimation);
             playerProjectile = new PlayerProjectile(player, keyboardController, projectileFactory, playerAnimation);
             this.playerObject = playerObject;
@@ -87,6 +87,7 @@ namespace Cuphead.Controllers
             playerHealth.HandleDamageDetection();
             playerMovement.UpdateGravity(deltaTime);
             playerAnimation.UpdateAnimationState(animator);
+            playerHealth.UpdateInvincible(gameTime);
         }
 
         private void UpdateTimers(float deltaTime)
@@ -95,15 +96,6 @@ namespace Cuphead.Controllers
             player.hitTime -= deltaTime;
             player.dashTime -= deltaTime;
             player.dashTime -= deltaTime;
-
-            if (player.IsInvincible)
-            {
-                player.hitTime -= deltaTime;
-                if (player.hitTime <= 0)
-                {
-                    player.IsInvincible = false;
-                }
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch) { }

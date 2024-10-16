@@ -83,7 +83,7 @@ namespace Cuphead.Player
         }
 
         //maybe move this into collider.cs
-        private int CollisionDistance(Rectangle playerBounds, Rectangle itemBounds)
+        public int CollisionDistance(Rectangle playerBounds, Rectangle itemBounds)
         {
             // Determine the side of the player collider where the collision happens
             int leftDiff = Math.Abs(playerBounds.Right - itemBounds.Left);
@@ -95,6 +95,25 @@ namespace Cuphead.Player
             int minDiff = Math.Min(Math.Min(leftDiff, rightDiff), Math.Min(topDiff, bottomDiff));
 
             return minDiff;
+        }
+
+        public bool TypeCollide(String type)
+        {
+            foreach (GameObject go in GOManager.Instance.allGOs)
+            {
+                if (go != null && go.type != null)
+                {
+                    if (go.type.Contains(type))
+                    {
+                        if (collider.Intersects(go.GetComponent<Collider>()))
+                        {
+                            return true;
+                        }
+                    }
+                    
+                }
+            }
+            return false;
         }
 
         public void HandleGroundCheck(SpriteRenderer animator)

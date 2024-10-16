@@ -50,6 +50,21 @@ namespace Cuphead
             return false;
         }
 
+        public bool Cooldown(GameTime gameTime, float milliSeconds)
+        {
+            if (gameTime.TotalGameTime.TotalMilliseconds >= coolTime)
+            {
+                coolFlag = true;
+            }
+            if (coolFlag)
+            {
+                coolFlag = false;
+                coolTime = gameTime.TotalGameTime.TotalMilliseconds + ((int)milliSeconds)*1000;
+                return true;
+            }
+            return false;
+        }
+
         //reset game time
         public void Reset()
         {
