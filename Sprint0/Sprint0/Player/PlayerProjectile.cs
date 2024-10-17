@@ -11,14 +11,13 @@ namespace Cuphead.Player
     {
         private PlayerState player;
         private KeyboardController keyboardController;
-        private ProjectileFactory projectileFactory;
+        private ProjectileFactory projectileFactory = new ProjectileFactory();
         private PlayerAnimation playerAnimator;
         private int additionalShotHeight;
-        public PlayerProjectile(PlayerState player, KeyboardController keyboardController, ProjectileFactory projectileFactory, PlayerAnimation animator)
+        public PlayerProjectile(PlayerState player, KeyboardController keyboardController, PlayerAnimation animator)
         {
             this.player = player;
             this.keyboardController = keyboardController;
-            this.projectileFactory = projectileFactory;
             this.playerAnimator = animator;
             this.additionalShotHeight = 0;
         }

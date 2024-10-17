@@ -117,5 +117,7 @@ namespace Cuphead.Player
             Texture2D dustTexture = textureStorage.GetTexture("Dust");
             GameObject dustEffect = VisualEffectFactory.createVisualEffect(dustPosition, dustTexture, updatesPerFrame: 1, frameCount: 14, scale: 1f, true);
         }
+
+
     }
 }

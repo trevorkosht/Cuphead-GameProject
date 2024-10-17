@@ -27,9 +27,11 @@ namespace Cuphead.Controllers
         private PlayerMovement playerMovement;
         private PlayerProjectile playerProjectile;
 
+        //input classes
         private readonly KeyboardController keyboardController;
         private readonly MouseController mouseController;
-        private ProjectileFactory projectileFactory;
+        
+        //other classes for player controller to work
         private BoxCollider Collider;
         float deltaTime;
         private int shotsFired;
@@ -40,22 +42,19 @@ namespace Cuphead.Controllers
 
             keyboardController = new KeyboardController();
             mouseController = new MouseController();
-            projectileFactory = new ProjectileFactory();
             Collider = player.GameObject.GetComponent<BoxCollider>();
 
+            //create the player controller helper classes
             playerAnimation = new PlayerAnimation(player);
             playerCollision = new PlayerCollision(player, Collider, playerAnimation);
             playerHealth = new PlayerHealth(player, keyboardController, playerCollision);
             playerMovement = new PlayerMovement(player, keyboardController, Collider, playerAnimation);
-            playerProjectile = new PlayerProjectile(player, keyboardController, projectileFactory, playerAnimation);
+            playerProjectile = new PlayerProjectile(player, keyboardController, playerAnimation);
             this.playerObject = playerObject;
             this.shotsFired = 0;
-            
-            if (player.IsSpawning)
-            {
-                playerAnimation.HandleSpawnAnimation();
-                return;
-            }
+
+            //set animation to spawn before spriterender updates
+            playerAnimation.HandleSpawnAnimation();
         }
 
         public void Update(GameTime gameTime)
@@ -69,8 +68,8 @@ namespace Cuphead.Controllers
             keyboardController.Update();
             mouseController.Update();
 
-            var state = Keyboard.GetState();
-            var animator = player.GameObject.GetComponent<SpriteRenderer>();
+            KeyboardState state = Keyboard.GetState();
+            SpriteRenderer animator = player.GameObject.GetComponent<SpriteRenderer>();
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 
