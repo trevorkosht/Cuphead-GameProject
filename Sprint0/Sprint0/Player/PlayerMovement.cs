@@ -155,6 +155,11 @@ namespace Cuphead.Player
                     player.GameObject.X -= (int)dashDistance;
                 }
                 player.GameObject.Y = height;
+
+                if (PlayerCollision.TypeCollide("Enemy") != null)
+                {
+                    player.IsDashing = false;
+                }
             }
             else
             {

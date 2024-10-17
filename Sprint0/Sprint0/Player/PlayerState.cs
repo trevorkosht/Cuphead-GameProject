@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using MonoGame.Extended.Collisions.Layers;
+using MonoGame.Extended.Particles.Modifiers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace Cuphead.Player
         public float JumpForce { get; set; } = -1150f;
         public bool IsGrounded { get; set; } = false;
         public float GroundLevel { get; set; } = 500f;
-        public float Gravity { get; set; } = 2000f;
+        public float Gravity { get; set; } = 3000f;
         public float timeTillNextBullet { get; set; } = .2f;
         public float timeTillNextHit { get; set; } = .4f;
         public float dashDuration = 0.5f; //about 1 second
