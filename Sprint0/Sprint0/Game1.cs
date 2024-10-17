@@ -134,6 +134,11 @@ namespace Sprint0
             // Update camera based on player's position and the rail
             cameraController.Update();
 
+            if (player.GetComponent<HealthComponent>().isDead)
+            {
+                ResetGame();
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.R))
                 ResetGame();
             if (Keyboard.GetState().IsKeyDown(Keys.Q))

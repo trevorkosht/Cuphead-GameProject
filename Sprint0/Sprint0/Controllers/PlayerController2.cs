@@ -17,7 +17,10 @@ namespace Cuphead.Controllers
         public GameObject playerObject;
         public bool enabled { get; set; } = true;
 
+        //player contains all of the players variables
         private PlayerState player;
+
+        //those 5 classes handle the 5 parts of player control
         private PlayerAnimation playerAnimation;
         private PlayerCollision playerCollision;
         private PlayerHealth playerHealth;
@@ -70,14 +73,8 @@ namespace Cuphead.Controllers
             var animator = player.GameObject.GetComponent<SpriteRenderer>();
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (player.IsDead)
-            {
-                if (animator.IsAnimationComplete())
-                {
-                    player.GameObject.destroyed = true;
-                }
-                return;
-            }
+
+            playerHealth.IsPleayerDead(animator);
 
             UpdateTimers(deltaTime);
             playerCollision.CollisionCheck();

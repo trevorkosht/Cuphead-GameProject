@@ -27,6 +27,7 @@ namespace Cuphead.Player
 
         public void HandleDamageDetection()
         {
+
             if (!player.IsInvincible && !player.IsDead)
             {
                 if (collision.TypeCollide("Enemy"))
@@ -60,6 +61,18 @@ namespace Cuphead.Player
                 {
                     player.IsInvincible = false;  // End invincibility after cooldown
                 }
+            }
+        }
+
+        public void IsPleayerDead(SpriteRenderer animator)
+        {
+            if (player.IsDead)
+            {
+                if (animator.IsAnimationComplete())
+                {
+                    player.GameObject.destroyed = true;
+                }
+                return;
             }
         }
     }
