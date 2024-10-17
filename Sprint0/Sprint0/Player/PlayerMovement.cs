@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using MonoGame.Extended.Timers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,14 @@ namespace Cuphead.Player
         private BoxCollider collider;
         private DelayGame gameDelay = new DelayGame();
         private PlayerAnimation playerAnimator;
-        public PlayerMovement(PlayerState player, KeyboardController keyboard, BoxCollider collider, PlayerAnimation playerAnimator)
+        private PlayerCollision PlayerCollision;
+        public PlayerMovement(PlayerState player, KeyboardController keyboard, PlayerAnimation playerAnimator, PlayerCollision playerCollision)
         {
             this.player = player;
             this.keyboardController = keyboard;
-            this.collider = collider;
             this.playerAnimator = playerAnimator;
+            this.collider = this.player.GameObject.GetComponent<BoxCollider>();
+            this.PlayerCollision = playerCollision;
         }
 
 
@@ -34,7 +37,9 @@ namespace Cuphead.Player
 
             HandleDucking(duckRequested);
 
-            if (!player.IsDucking)
+            HandleKnockBack(player.IsTakingDamage, gameTime, deltaTime);
+
+            if (!player.IsDucking && !player.IsKnockBacked)
             {
                 if (input.X != 0 && player.IsGrounded)
                 {
@@ -59,11 +64,11 @@ namespace Cuphead.Player
 
         private void UpdateFacingDirection(Vector2 input)
         {
-            if (input.X < 0 && !player.IsDashing)
+            if (input.X < 0 && !player.IsDashing && !player.IsKnockBacked)
             {
                 player.GameObject.GetComponent<SpriteRenderer>().isFacingRight = false;
             }
-            else if (input.X > 0 && !player.IsDashing)
+            else if (input.X > 0 && !player.IsDashing && !player.IsKnockBacked)
             {
                 player.GameObject.GetComponent<SpriteRenderer>().isFacingRight = true;
             }
@@ -158,6 +163,68 @@ namespace Cuphead.Player
                 player.IsDashing = false;
                 player.Gravity = 1200f;
                 player.Speed = 700f;
+            }
+        }
+
+        public void HandleKnockBack(bool knockBackRequested, GameTime gameTime, float deltaTime)
+        {
+            if (player.IsKnockBacked)
+            {
+                // Continue knockback
+                PerformKnockBack(gameTime, deltaTime);
+            }
+            else if (knockBackRequested && gameDelay.Cooldown(gameTime, player.InvincibilityDuration))
+            {
+                // Start knockback
+                player.IsKnockBacked = true;
+                player.knockBackTime = player.InvincibilityDuration;
+                //player.Gravity = 0;
+                player.Speed = 0;
+                playerAnimator.CreateDustEffect();
+                PerformDash(gameTime, player.height, deltaTime);
+            }
+        }
+
+        public void PerformKnockBack(GameTime gameTime, float deltaTime)
+        {
+            if (player.knockBackTime > 0)
+            {
+                float knockbackspeed = (500f * deltaTime);
+
+                int didtwice = 0;
+                if (player.knockBackTime*5 > player.knockBackDuration)
+                {
+                    if (player.GameObject.GetComponent<SpriteRenderer>().isFacingRight)
+                    {
+                        player.GameObject.X -= (int)knockbackspeed/5;
+                    }
+                    else
+                    {
+                        player.GameObject.X += (int)knockbackspeed/5;
+                    }
+
+                    player.GameObject.Y -= (int)knockbackspeed;
+                    didtwice++;
+                }
+                else
+                {
+                    player.GameObject.GetComponent<SpriteRenderer>().setAnimation("Idle");
+                }
+
+                if (didtwice>1 && PlayerCollision.TypeCollide("Block") != null)
+                {
+                    player.knockBackTime = 0;
+                    PerformKnockBack(gameTime, deltaTime);
+                }
+
+            }
+            else
+            {
+                // Dash duration is over, stop knockback
+                player.IsKnockBacked = false;
+                player.Gravity = 1200f;
+                player.Speed = 700f;
+                player.IsTakingDamage = false;
             }
         }
     }

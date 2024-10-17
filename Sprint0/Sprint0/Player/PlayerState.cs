@@ -31,6 +31,8 @@ namespace Cuphead.Player
         public bool IsDashing = false;
         public bool IsDead = false;
         public bool IsSpawning = true;
+        public bool IsKnockBacked = false;
+        public bool IsTakingDamage = false;
 
         //floats
         public float Speed { get; set; } = 700f;
@@ -40,20 +42,15 @@ namespace Cuphead.Player
         public float Gravity { get; set; } = 2000f;
         public float timeTillNextBullet { get; set; } = .2f;
         public float timeTillNextHit { get; set; } = .4f;
-
         public float dashDuration = 0.5f; //about 1 second
-
-        public float InvincibilityDuration = 1f;
-
+        public float InvincibilityDuration = 1.5f;
         public float dashSpeed = 1500f; // about 750 pixel
-
         public float airTime = 0f;
-
         public float shootTime = 0f;
-
         public float hitTime = 0f;
-
         public float dashTime = 0f;
+        public float knockBackDuration = .75f;
+        public float knockBackTime = 0f;
 
         //ints
         public int TimeTillNextDash { get; set; } = 500;

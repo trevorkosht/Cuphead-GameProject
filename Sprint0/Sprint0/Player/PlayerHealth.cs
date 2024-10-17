@@ -13,15 +13,17 @@ namespace Cuphead.Player
         private PlayerState player;
         private KeyboardController keyboardController;
         private PlayerCollision collision;
+        private PlayerMovement move;
         private DelayGame delayGame = new DelayGame();
 
-        private HealthComponent health = new HealthComponent(100);
+        private HealthComponent health = new HealthComponent(300);
 
-        public PlayerHealth(PlayerState player, KeyboardController keyboardController, PlayerCollision collision)
+        public PlayerHealth(PlayerState player, KeyboardController keyboardController, PlayerCollision collision, PlayerMovement move)
         {
             this.player = player;
             this.keyboardController = keyboardController;
             this.collision = collision;
+            this.move = move;
             player.GameObject.AddComponent(health);
         }
 
@@ -30,14 +32,16 @@ namespace Cuphead.Player
 
             if (!player.IsInvincible && !player.IsDead)
             {
-                if (collision.TypeCollide("Enemy"))
+                GameObject enemy = collision.TypeCollide("Enemy");
+                if (enemy != null)
                 {
-                    TakeDamage(35);
+                    //not sure why he take double damage
+                    TakeDamage(enemy, 50);
                 }
             }
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(GameObject enemy, int damage)
         {
             health.RemoveHealth(damage);
             player.hitTime = player.InvincibilityDuration;
@@ -49,6 +53,7 @@ namespace Cuphead.Player
             }
             else
             {
+                player.IsTakingDamage = true;
                 player.GameObject.GetComponent<SpriteRenderer>().setAnimation("HitGround");
             }
         }
@@ -75,5 +80,6 @@ namespace Cuphead.Player
                 return;
             }
         }
+
     }
 }

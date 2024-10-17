@@ -97,7 +97,7 @@ namespace Cuphead.Player
             return minDiff;
         }
 
-        public bool TypeCollide(String type)
+        public GameObject TypeCollide(String type)
         {
             foreach (GameObject go in GOManager.Instance.allGOs)
             {
@@ -107,13 +107,13 @@ namespace Cuphead.Player
                     {
                         if (collider.Intersects(go.GetComponent<Collider>()))
                         {
-                            return true;
+                            return go;
                         }
                     }
                     
                 }
             }
-            return false;
+            return null;
         }
 
         public void HandleGroundCheck(SpriteRenderer animator)

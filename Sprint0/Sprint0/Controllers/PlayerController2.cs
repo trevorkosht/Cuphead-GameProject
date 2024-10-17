@@ -47,8 +47,8 @@ namespace Cuphead.Controllers
             //create the player controller helper classes
             playerAnimation = new PlayerAnimation(player);
             playerCollision = new PlayerCollision(player, Collider, playerAnimation);
-            playerHealth = new PlayerHealth(player, keyboardController, playerCollision);
-            playerMovement = new PlayerMovement(player, keyboardController, Collider, playerAnimation);
+            playerMovement = new PlayerMovement(player, keyboardController, playerAnimation, playerCollision);
+            playerHealth = new PlayerHealth(player, keyboardController, playerCollision, playerMovement);
             playerProjectile = new PlayerProjectile(player, keyboardController, playerAnimation);
             this.playerObject = playerObject;
             this.shotsFired = 0;
@@ -99,6 +99,7 @@ namespace Cuphead.Controllers
             player.hitTime -= deltaTime;
             player.dashTime -= deltaTime;
             player.dashTime -= deltaTime;
+            player.knockBackTime -= deltaTime;
         }
 
         public void Draw(SpriteBatch spriteBatch) { }
