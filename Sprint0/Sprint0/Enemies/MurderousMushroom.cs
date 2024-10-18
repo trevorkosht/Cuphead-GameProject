@@ -88,11 +88,11 @@ public class MurderousMushroom : BaseEnemy
 
             if (!isHidden) {
                 sRend.setAnimation("Closing");
+                GameObject.GetComponent<BoxCollider>().bounds = new Vector2(144, 95);
+                GameObject.GetComponent<BoxCollider>().offset = new Vector2(0, 49);
             }
             else if (sRend.currentAnimation.Value.CurrentFrame >= 4) {
                 sRend.setAnimation("Closed");
-                GameObject.GetComponent<BoxCollider>().bounds = new Vector2(144, 95);
-                GameObject.GetComponent<BoxCollider>().offset = new Vector2(0, 49);
             }
 
             isHidden = true;
