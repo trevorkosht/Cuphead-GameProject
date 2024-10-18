@@ -37,7 +37,7 @@ namespace Cuphead.Player
 
             HandleDucking(duckRequested);
 
-            HandleKnockBack(player.IsTakingDamage, gameTime, deltaTime);
+            //HandleKnockBack(player.IsTakingDamage, gameTime, deltaTime);
 
             if (!player.IsDucking && !player.IsKnockBacked)
             {
