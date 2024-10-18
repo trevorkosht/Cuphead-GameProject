@@ -13,16 +13,17 @@ namespace Cuphead.Player
         private KeyboardController keyboardController;
         private ProjectileFactory projectileFactory = new ProjectileFactory();
         private PlayerAnimation playerAnimator;
-        private int additionalShotHeight;
+        private int additionalShotHeight, shotsFired;
         public PlayerProjectile(PlayerState player, KeyboardController keyboardController, PlayerAnimation animator)
         {
             this.player = player;
             this.keyboardController = keyboardController;
             this.playerAnimator = animator;
             this.additionalShotHeight = 0;
+            this.shotsFired = 0;
         }
 
-        public int HandleShooting(KeyboardState state, SpriteRenderer animator, int shotsFired)
+        public void HandleShooting(KeyboardState state, SpriteRenderer animator)
         {
             if (keyboardController.IsShootRequested() && player.shootTime <= 0 && player.hitTime <= 0)
             {
@@ -44,9 +45,12 @@ namespace Cuphead.Player
                 }
                 GOManager.Instance.allGOs.Add(newProjectile);
 
+                shotsFired++;
+                if(shotsFired == 5)
+                {
+                    shotsFired = 0;
+                }
             }
-
-            return 1;
         }
 
         public void HandleProjectileSwitching(KeyboardState state)

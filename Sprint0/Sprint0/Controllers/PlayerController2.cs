@@ -34,7 +34,6 @@ namespace Cuphead.Controllers
         //other classes for player controller to work
         private BoxCollider Collider;
         float deltaTime;
-        private int shotsFired;
 
         public PlayerController2(GameObject playerObject)
         {
@@ -51,7 +50,6 @@ namespace Cuphead.Controllers
             playerHealth = new PlayerHealth(player, keyboardController, playerCollision, playerMovement);
             playerProjectile = new PlayerProjectile(player, keyboardController, playerAnimation);
             this.playerObject = playerObject;
-            this.shotsFired = 0;
 
             //set animation to spawn before spriterender updates
             playerAnimation.HandleSpawnAnimation();
@@ -80,17 +78,12 @@ namespace Cuphead.Controllers
             playerCollision.HandleGroundCheck(animator);
             playerCollision.CollisionCheck();
             playerMovement.HandleMovementAndActions(gameTime, deltaTime);
-            shotsFired += playerProjectile.HandleShooting(state, animator, shotsFired);
+            playerProjectile.HandleShooting(state, animator);
             playerProjectile.HandleProjectileSwitching(state);
             playerHealth.HandleDamageDetection();
             playerMovement.UpdateGravity(deltaTime);
             playerAnimation.UpdateAnimationState(animator);
             playerHealth.UpdateInvincible(gameTime);
-
-            if(shotsFired == 5)
-            {
-                shotsFired = 0;
-            }
         }
 
         private void UpdateTimers(float deltaTime)
