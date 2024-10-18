@@ -34,6 +34,8 @@ public class Texture2DStorage
         _textures["MushroomOpening"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_opening");
         _textures["MushroomAttackVFX"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_shoot_vfx");
 
+
+
         //Level Textures
 
         //Background
@@ -115,7 +117,7 @@ public class Texture2DStorage
         _textures["RoundaboutExplosion"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\roundabout_hit_vfx");
         _textures["SpreadExplosion"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spread_hit_vfx");
 
-        //Projectile Spawing Textures
+        //Projectile Spawning Textures
         _textures["ChaserSpawn"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\chaser_spawn_vfx");
         _textures["LobberSpawn"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\lobber_spawn_vfx");
         _textures["PeashooterSpawn"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\peashooter_spawn_vfx");
@@ -124,6 +126,7 @@ public class Texture2DStorage
 
         //Visual Effect Textures
         _textures["Dust"] = content.Load<Texture2D>(@"VisualEffectTextures\DustEffect");
+                _textures["EnemyDeath"] = content.Load<Texture2D>(@"VisualEffectTextures\enemy_death");
 
 
         //item texture

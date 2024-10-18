@@ -76,22 +76,18 @@ public class DeadlyDaisy : BaseEnemy
         // Check collision with blocks from BlockFactory to see if standing on the ground
         BoxCollider collider = GameObject.GetComponent<BoxCollider>();
 
-        foreach (GameObject block in GOManager.Instance.allGOs)
+        foreach (GameObject gameObject in GOManager.Instance.allGOs)
         {
-            if (block != null)
+            if (gameObject != null && gameObject.type != null)
             {
-                if (block.type != null)
+                if (gameObject.type.Equals("Platform") || gameObject.type.Equals("Block"))
                 {
-                    if (block.type.Contains("Platform") || block.type.Contains("Block"))
+                    if (collider.Intersects(gameObject.GetComponent<Collider>()))
                     {
-                        if (collider.Intersects(block.GetComponent<Collider>()))
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
-                
-            }
+            }           
         }
         return false;
     }
