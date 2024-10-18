@@ -7,7 +7,6 @@ public class TerribleTulip : BaseEnemy
 {
     private double shootCooldown;
     private Texture2D projectileTexture;     
-    private List<GameObject> projectiles = new List<GameObject>();
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
@@ -35,11 +34,12 @@ public class TerribleTulip : BaseEnemy
             {
                 Vector2 playerPosition = new Vector2(player.X, player.Y);
                 GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new TullipProjectile(GameObject.position));
-                projectiles.Add(projectile);
-                SpriteRenderer projSrend = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), true);
+                SpriteRenderer projSrend = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), (player.X > GameObject.X));
+                CircleCollider collider = new CircleCollider(40, new Vector2(-28, -32), GOManager.Instance.GraphicsDevice);
+                projectile.AddComponent(collider);
                 projectile.AddComponent(projSrend);
                 projSrend.spriteScale = .5f;
-                projSrend.addAnimation("spin", new Animation(projectileTexture, 3, 12, 144, 144));
+                projSrend.addAnimation("spin", new Animation(projectileTexture, 2, 12, 144, 144));
                 projSrend.setAnimation("spin");
                 GOManager.Instance.allGOs.Add(projectile);
                 shootCooldown = 3.0;
@@ -50,21 +50,6 @@ public class TerribleTulip : BaseEnemy
     public override void Update(GameTime gameTime) {
         base.Update(gameTime);
 
-        int i = 0;
-        while (i < projectiles.Count) {
-            if (projectiles[i].GetComponent<SpriteRenderer>() == null) {
-                projectiles.Remove(projectiles[i]);
-            }
-            else {
-                if (projectiles[i].X > player.X) {
-                    projectiles[i].GetComponent<SpriteRenderer>().isFacingRight = false;
-                }
-                else {
-                    projectiles[i].GetComponent<SpriteRenderer>().isFacingRight = true;
-                }
-                i++;
-            }
-        }
         Shoot(gameTime);
 
         if (sRend.getAnimationName().Equals("terribleTulipAnimation") && sRend.currentAnimation.Value.CurrentFrame == 14) {

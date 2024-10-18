@@ -8,22 +8,19 @@ public class TullipProjectile : IComponent
     public bool enabled { get; set; }
 
     private Vector2 velocity;
-    private float gravity = 0.3f;
+    private int airTime = 75;
+    private float gravity = 0.5f;
     private float speed;
     private Vector2 targetPosition;
 
     public TullipProjectile(Vector2 startPosition)
     {
-        speed = 5f;
         targetPosition = GOManager.Instance.Player.position;
 
-        Vector2 direction = targetPosition - startPosition;
-        direction.Normalize();
+        float verticalSpeed = Math.Abs(((targetPosition.Y - startPosition.Y) - gravity * airTime * airTime / 2) / (airTime));
+        float horizontalSpeed = (startPosition.X - targetPosition.X) / airTime;
 
-        // Adjust vertical component to ensure a consistent jump
-        float verticalSpeed = -Math.Max(Math.Abs(direction.Y * speed), 2f); // Ensuring a minimum upward speed
-
-        velocity = new Vector2(direction.X * speed, verticalSpeed);
+        velocity = new Vector2(-horizontalSpeed, -verticalSpeed);
     }
 
     public void Update(GameTime gameTime)
@@ -32,7 +29,7 @@ public class TullipProjectile : IComponent
 
         GameObject.Move((int)velocity.X, (int)velocity.Y);
 
-        if (GameObject.Y > 600)
+        if (GameObject.GetComponent<CircleCollider>().Intersects(GOManager.Instance.Player.GetComponent<BoxCollider>()))
         {
             GameObject.Destroy();
         }
