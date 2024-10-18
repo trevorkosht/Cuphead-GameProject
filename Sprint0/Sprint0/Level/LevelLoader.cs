@@ -11,7 +11,7 @@ public class LevelLoader
         //Format for line:
         //Enemy,DeadlyDaisy,300,400
         string[] lines = File.ReadAllLines(filePath);
-        
+
         foreach (string line in lines)
         {
             if (string.IsNullOrWhiteSpace(line)) continue;
@@ -43,6 +43,14 @@ public class LevelLoader
                     SpawnBlock(subtype, new Vector2(posX, posY));
                     break;
 
+                case "Background":
+                    SpawnBackground(subtype, new Vector2(posX, posY));
+                    break;
+
+                case "Platform":
+                    SpawnPlatform(subtype, new Vector2(posX, posY));
+                    break;
+
                 case "Item":
                     SpawnItem(subtype, posX, posY);
                     break;
@@ -71,7 +79,21 @@ public class LevelLoader
     {
         GameObject block = BlockFactory.CreateBlock(subtype, position);
         GOManager.Instance.allGOs.Add(block);
+
     }
+
+    private static void SpawnBackground(string subtype, Vector2 position)
+    {
+        GameObject background = BackgroundFactory.CreateBackground(subtype, position);
+        GOManager.Instance.allGOs.Add(background);
+    }
+
+    private static void SpawnPlatform(string subtype, Vector2 position)
+    {
+        GameObject platform = PlatformFactory.CreatePlatform(subtype, position);
+        GOManager.Instance.allGOs.Add(platform);
+    }
+
 
     private static void SpawnItem(string subtype, int x, int y)
     {

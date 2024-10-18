@@ -17,9 +17,9 @@ Enemy,BothersomeBlueberry,10000,500
 
 
 //Platforms Collidable
-Block,Platform1,5000,400
-Block,Platform2,500,400
-Block,Platform1,1000,400
+Platform,Platform1,5000,400
+Platform,Platform2,500,400
+Platform,Platform1,1000,400
 
 //Ground
 Block,Log2,-600,200
@@ -45,25 +45,25 @@ Block,Stump3,10100,500
 
 
 //Background
-Block,Bush1,-1200,110
-Block,LevelBackground,-500,200
-Block,Bush1,1200,110
+Background,Bush1,-1200,110
+Background,LevelBackground,-500,200
+Background,Bush1,1200,110
 
-Block,Rock3,2200,650
-Block,Rock1,2550,350
-Block,Rock4,3000,200
-Block,Rock2,4000,0
-Block,Rock5,5000,300
-Block,Rock6,6000,200
-Block,Leaves1,3400,-400
-Block,Leaves2,6500,-100
-Block,Leaves3,8000,-100
-Block,Tree4,3600,100
-Block,Tree3,5600,200
-Block,Tree2,6500,0
-Block,Tree1,7700,200
-Block,Tree5,8600,0
-Block,Tree6,9500,-200
+Background,Rock3,2200,650
+Background,Rock1,2550,350
+Background,Rock4,3000,200
+Background,Rock2,4000,0
+Background,Rock5,5000,300
+Background,Rock6,6000,200
+Background,Leaves1,3400,-400
+Background,Leaves2,6500,-100
+Background,Leaves3,8000,-100
+Background,Tree4,3600,100
+Background,Tree3,5600,200
+Background,Tree2,6500,0
+Background,Tree1,7700,200
+Background,Tree5,8600,0
+Background,Tree6,9500,-200
 
 //Foreground
 

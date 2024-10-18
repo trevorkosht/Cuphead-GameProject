@@ -8,10 +8,6 @@ public static class BlockFactory
     // Dictionary to store block sizes based on subtype
     private static Dictionary<string, (int width, int height, Vector2 bounds, Vector2 offset, float orderInLayer)> blockSizes = new Dictionary<string, (int width, int height, Vector2 bounds, Vector2 offset, float orderInLayer)>()
 {
-    { "LevelBackground", (1827, 546, new Vector2(1827, 546), Vector2.Zero, 0.95f) },
-    { "Bush1", (1338, 625, new Vector2(1338, 625), Vector2.Zero, 0.9f) },
-    { "Platform1", (427, 102, new Vector2(427, 25), new Vector2(0, 10), 0.5f) },
-    { "Platform2", (208, 110, new Vector2(188, 25), new Vector2(10, 10), 0.501f) },
     { "BigHill1", (1042, 842, new Vector2(1042, 842), new Vector2(0, 35), 0.7f) },
     { "BigHill2", (998, 664, new Vector2(998, 664), Vector2.Zero, 0.701f) },
     { "BigHill3", (510, 668, new Vector2(410, 668), new Vector2(70, 35), 0.702f) },
@@ -23,22 +19,7 @@ public static class BlockFactory
     { "Stump1", (144, 144, new Vector2(124, 124), new Vector2(10, 10), 0.504f) },
     { "Stump2", (144, 144, new Vector2(124, 144), new Vector2(10, 0), 0.505f) },
     { "Stump3", (144, 144, new Vector2(124, 134), new Vector2(10, 5), 0.506f) },
-    { "Rock1", (526, 306, new Vector2(526, 306), Vector2.Zero, 0.801f) },
-    { "Rock2", (980, 760, new Vector2(980, 760), Vector2.Zero, 0.802f) },
-    { "Rock3", (642, 270, new Vector2(642, 270), Vector2.Zero, 0.803f) },
-    { "Rock4", (970, 682, new Vector2(970, 682), Vector2.Zero, 0.804f) },
-    { "Rock5", (650, 472, new Vector2(650, 472), Vector2.Zero, 0.805f) },
-    { "Rock6", (668, 522, new Vector2(668, 522), Vector2.Zero, 0.806f) },
-    { "Leaves1", (902, 710, new Vector2(902, 710), Vector2.Zero, 0.851f) },
-    { "Leaves2", (1564, 458, new Vector2(1564, 458), Vector2.Zero, 0.852f) },
-    { "Leaves3", (1052, 350, new Vector2(1052, 350), Vector2.Zero, 0.853f) },
-    { "Tree1", (273, 476, new Vector2(273, 476), Vector2.Zero, 0.807f) },
-    { "Tree2", (476, 682, new Vector2(476, 682), Vector2.Zero, 0.808f) },
-    { "Tree3", (259, 456, new Vector2(259, 456), Vector2.Zero, 0.809f) },
-    { "Tree4", (500, 655, new Vector2(500, 655), Vector2.Zero, 0.81f) },
-    { "Tree5", (922, 720, new Vector2(922, 720), Vector2.Zero, 0.811f) },
-    { "Tree6", (852, 1064, new Vector2(852, 1064), Vector2.Zero, 0.812f) },
-    { "Tree7", (304, 844, new Vector2(304, 844), Vector2.Zero, 0.813f) }
+
 };
 
     public static GameObject CreateBlock(string subtype, Vector2 position)
