@@ -40,17 +40,38 @@ public class Texture2DStorage
 
         //Background
         _textures["LevelBackground"] = content.Load<Texture2D>(@"BlockTextures\Background\background-1");
+        _textures["HillBackground1"] = content.Load<Texture2D>(@"BlockTextures\Background\hill-background-1");
+
+        _textures["TreeBackground1"] = content.Load<Texture2D>(@"BlockTextures\Background\tree-background-1");
+        _textures["TreeBackground2"] = content.Load<Texture2D>(@"BlockTextures\Background\tree-background-2");
+        _textures["TreeBackground3"] = content.Load<Texture2D>(@"BlockTextures\Background\tree-background-3");
+        _textures["TreeBackground4"] = content.Load<Texture2D>(@"BlockTextures\Background\tree-background-4");
+        _textures["TreeBackground5"] = content.Load<Texture2D>(@"BlockTextures\Background\tree-background-5");
+        _textures["TreeBackground6"] = content.Load<Texture2D>(@"BlockTextures\Background\tree-background-6");
+        _textures["TreeBackground7"] = content.Load<Texture2D>(@"BlockTextures\Background\tree-background-7");
+        _textures["TreeBackground8"] = content.Load<Texture2D>(@"BlockTextures\Background\tree-background-8");
+
+        _textures["Clouds"] = content.Load<Texture2D>(@"BlockTextures\Background\clouds-1");
+        _textures["SkyBackground1"] = content.Load<Texture2D>(@"BlockTextures\Background\sky-background-1");
+
+        _textures["Grass1"] = content.Load<Texture2D>(@"BlockTextures\Background\grass-1");
+        _textures["Grass2"] = content.Load<Texture2D>(@"BlockTextures\Background\grass-2");
+
 
         //Bushes
         _textures["Bush1"] = content.Load<Texture2D>(@"BlockTextures\Bushes\bush-1");
+        _textures["Bush2"] = content.Load<Texture2D>(@"BlockTextures\Bushes\bush-2");
 
         //Hills
         _textures["BigHill1"] = content.Load<Texture2D>(@"BlockTextures\Hills\big-hill-1");
         _textures["BigHill2"] = content.Load<Texture2D>(@"BlockTextures\Hills\big-hill-2");
         _textures["BigHill3"] = content.Load<Texture2D>(@"BlockTextures\Hills\big-hill-3");
+        _textures["BigHill4"] = content.Load<Texture2D>(@"BlockTextures\Hills\big-hill-4");
         _textures["Hill1"] = content.Load<Texture2D>(@"BlockTextures\Hills\hill-1");
         _textures["Hill2"] = content.Load<Texture2D>(@"BlockTextures\Hills\hill-2");
         _textures["Hill3"] = content.Load<Texture2D>(@"BlockTextures\Hills\hill-3");
+        _textures["Hill4"] = content.Load<Texture2D>(@"BlockTextures\Hills\hill-4");
+        _textures["Hill5"] = content.Load<Texture2D>(@"BlockTextures\Hills\hill-5");
 
         //Logs
         _textures["Log1"] = content.Load<Texture2D>(@"BlockTextures\FallenTrees\log-1");
@@ -81,6 +102,10 @@ public class Texture2DStorage
         _textures["Tree4"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-4");
         _textures["Tree5"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-5");
         _textures["Tree6"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-6");
+
+        //itle Screen
+        _textures["Title1"] = content.Load<Texture2D>(@"TitleScreen\title-1");
+        _textures["Title1"] = content.Load<Texture2D>(@"TitleScreen\title-2");
 
 
         //Player Animation Textures
@@ -126,7 +151,7 @@ public class Texture2DStorage
 
         //Visual Effect Textures
         _textures["Dust"] = content.Load<Texture2D>(@"VisualEffectTextures\DustEffect");
-                _textures["EnemyDeath"] = content.Load<Texture2D>(@"VisualEffectTextures\enemy_death");
+        _textures["EnemyDeath"] = content.Load<Texture2D>(@"VisualEffectTextures\enemy_death");
 
 
         //item texture
