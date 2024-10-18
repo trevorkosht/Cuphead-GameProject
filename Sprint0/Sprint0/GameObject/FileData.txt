@@ -1,75 +1,93 @@
-//Enemies
-
-Enemy,AggravatingAcorn,900,100
-Enemy,DeadlyDaisy,8000,500
-Enemy,MurderousMushroom,1100,500
-Enemy,TerribleTulip,2250,400
-Enemy,ToothyTerror,2400,600
-Enemy,BothersomeBlueberry,2600,500
-Enemy,AcornMaker,3200,375
-
-Enemy,DeadlyDaisy,4000,500
-Enemy,MurderousMushroom,4100,500
-Enemy,TerribleTulip,6250,500
-Enemy,ToothyTerror,7000,600
-Enemy,BothersomeBlueberry,10000,500
-
-
-
-//Platforms Collidable
-Platform,Platform1,5000,400
-Platform,Platform2,500,400
-Platform,Platform1,1000,400
-
-//Ground
-Block,Log2,-600,200
+// Section 1 (0000-2000)
 Block,BigHill1,-1450,600
 Block,BigHill1,-500,600
 Block,BigHill1,450,600
 Block,BigHill2,1400,500
-Block,BigHill1,2500,600
-Block,BigHill3,3500,500
-Block,BigHill1,4000,600
-Block,BigHill1,4950,600
-Block,BigHill1,5900,600
-Block,BigHill1,9500,600
 
-Block,Hill1,7100,600
-Block,Hill2,7600,600
-Block,Hill3,8100,500
-Block,Log1,8600,600
-Block,Log2,9400,400
-Block,Stump1,9600,500
-Block,Stump2,9900,500
-Block,Stump3,10100,500
+Enemy,AggravatingAcorn,900,100
+Enemy,MurderousMushroom,1200,500
 
 
-//Background
-Background,Bush1,-1200,110
+
 Background,LevelBackground,-500,200
-Background,Bush1,1200,110
 
-Background,Rock3,2200,650
+// Section 2 (2000-4000)
+Block,BigHill1,2500,600
+Block,BigHill3,3500,450
+
+Enemy,ToothyTerror,2400,600
+Enemy,BothersomeBlueberry,2800,500
+Enemy,DeadlyDaisy,3200,100
+
 Background,Rock1,2550,350
-Background,Rock4,3000,200
-Background,Rock2,4000,0
-Background,Rock5,5000,300
-Background,Rock6,6000,200
 Background,Leaves1,3400,-400
-Background,Leaves2,6500,-100
-Background,Leaves3,8000,-100
-Background,Tree4,3600,100
-Background,Tree3,5600,200
-Background,Tree2,6500,0
-Background,Tree1,7700,200
-Background,Tree5,8600,0
-Background,Tree6,9500,-200
+Background,Bush1,2100,110
 
-//Foreground
+Item,Spreadshot,2200,300
 
 
-//Items
-Item,Spreadshot,100,500
-Item,Chaser,600,500
-Item,Lobber,1100,500
-Item,Roundabout,1600,500
+// Section 3 (4000-6000)
+Block,BigHill1,4000,600
+Block,BigHill2,4950,350
+Block,Hill2,4500,500
+
+Enemy,DeadlyDaisy,4600,100
+Enemy,MurderousMushroom,4600,400
+
+Background,Rock2,4100,100
+Background,Tree1,4800,200
+
+Item,Chaser,4300,400
+
+// Section 4 (6000-8000)
+Block,BigHill1,5800,350
+Block,BigHill2,7100,500
+Block,Log1,7800,500
+
+Enemy,DeadlyDaisy,6400,100
+Enemy,ToothyTerror,6900,600
+Enemy,TerribleTulip,6000,275
+
+Background,Rock3,6200,200
+Background,Tree2,6900,150
+
+Item,Lobber,6950,400
+
+// Section 5 (8000-10000)
+Block,BigHill1,8500,600
+
+Platform,Platform1,9000,300
+Platform,Platform2,9600,600
+Platform,Platform2,9900,600
+Platform,Platform2,10200,600
+
+Enemy,DeadlyDaisy,8500,400
+Enemy,BothersomeBlueberry,8800,500
+Enemy,ToothyTerror,9500,700
+Enemy,ToothyTerror,9800,700
+Enemy,ToothyTerror,10100,700
+Enemy,TerribleTulip,9150,200
+
+
+Background,Tree3,8800,200
+Background,Leaves2,9300,-100
+
+Item,Roundabout,9400,500
+
+// Section 6 (10000-12000)
+Block,BigHill1,10500,600
+Block,BigHill3,11200,500
+Block,Hill1,11500,600
+
+
+Enemy,BothersomeBlueberry,11200,500
+Enemy,ToothyTerror,10400,700
+
+Background,Tree5,10500,300
+Background,Tree6,11200,-200
+
+// Final Section with AcornMaker "Boss"
+Block,BigHill1,12000,600
+Block,BigHill1,12900,600
+
+Enemy,AcornMaker,13000,375

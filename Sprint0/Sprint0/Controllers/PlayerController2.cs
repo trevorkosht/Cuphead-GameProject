@@ -80,7 +80,7 @@ namespace Cuphead.Controllers
             playerMovement.HandleMovementAndActions(gameTime, deltaTime);
             playerProjectile.HandleShooting(state, animator);
             playerProjectile.HandleProjectileSwitching(state);
-            playerHealth.HandleDamageDetection();
+            //playerHealth.HandleDamageDetection();
             playerMovement.UpdateGravity(deltaTime);
             playerAnimation.UpdateAnimationState(animator);
             playerHealth.UpdateInvincible(gameTime);
