@@ -31,8 +31,8 @@ public abstract class BaseEnemy : IComponent
     public virtual void Update(GameTime gameTime)
     {
         if(GameObject.GetComponent<HealthComponent>().currentHealth == 0) {
-            Rectangle destRectangle = new Rectangle(GameObject.X - 72, GameObject.Y - 72, 144, 144);
-            VisualEffectFactory.createVisualEffect(destRectangle, deathVFXTexture, 3, 9, 2f, true);
+            Rectangle destRectangle = new Rectangle(GameObject.X - 144, GameObject.Y - 144, 144, 144);
+            VisualEffectFactory.createVisualEffect(destRectangle, deathVFXTexture, 3, 9, 3f, true);
         }
 
         Move(gameTime);

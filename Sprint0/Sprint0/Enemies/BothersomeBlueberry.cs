@@ -10,6 +10,7 @@ public class BothersomeBlueberry : BaseEnemy
     private bool movingRight;
     private float respawnDelay = 5.0f;
     private float turnDelay = -1.0f;
+    private bool atEdge = false;
 
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
@@ -29,19 +30,29 @@ public class BothersomeBlueberry : BaseEnemy
 
         sRend.isFacingRight = !movingRight;
 
-        if (movingRight)
-            GameObject.X += (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-        else
-            GameObject.X -= (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
         
-        if (ReachedEdge())
+        if (atEdge)
         {
-            if(turnDelay < 0) {
+            sRend.setAnimation("Turn");
+            if(sRend.currentAnimation.Value.CurrentFrame == 6) {
                 movingRight = !movingRight;
+                sRend.setAnimation("bothersomeBlueberryAnimation");
+                atEdge = false;
                 turnDelay = 0.5f;
             }
         }
-        turnDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+        else {
+            if (movingRight)
+                GameObject.X += (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            else
+                GameObject.X -= (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+
+            if (turnDelay <= 0) {
+                atEdge = ReachedEdge();
+            }
+            turnDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
+
     }
 
 
@@ -51,7 +62,7 @@ public class BothersomeBlueberry : BaseEnemy
         bool isOnPlatform = false;
 
         foreach(GameObject GO in GOManager.Instance.allGOs) {
-            if (GO != null && GO.type != null /*&& (GO.type.Contains("Platform") || GO.type.Contains("Block"))*/) {
+            if (GO != null && GO.type != null) {
                 BoxCollider platformCollider = GO.GetComponent<BoxCollider>();
                 float leftEdge = blueberryCollider.Center.X - blueberryCollider.Radius;
                 float rightEdge = blueberryCollider.Center.X + blueberryCollider.Radius;

@@ -649,6 +649,18 @@
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/blueberry_respawn.png
 
+#begin EnemyTextures/blueberry-turn.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/blueberry-turn.png
+
 #begin EnemyTextures/BothersomeBlueberrySprite.png
 /importer:TextureImporter
 /processor:TextureProcessor

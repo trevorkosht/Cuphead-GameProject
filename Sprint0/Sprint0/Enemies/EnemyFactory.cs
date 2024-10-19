@@ -75,6 +75,7 @@ public static class EnemyFactory
                 spriteRenderer.addAnimation("Melt", new Animation(textureStorage.GetTexture("BlueberryMelt"), 5, 10, 144, 144));
                 spriteRenderer.addAnimation("WaitForRespawn", new Animation(textureStorage.GetTexture("BlueberryWaitingToRespawn"), 5, 1, 144, 144));
                 spriteRenderer.addAnimation("Respawn", new Animation(textureStorage.GetTexture("BlueberryRespawn"), 5, 14, 144, 144));
+                spriteRenderer.addAnimation("Turn", new Animation(textureStorage.GetTexture("BlueberryTurn"), 2, 7, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("BothersomeBlueberry"), textureStorage);
                 enemyHP = 100;
                 break;
