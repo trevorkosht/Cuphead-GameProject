@@ -29,19 +29,23 @@ namespace Cuphead.Player
 
         public void HandleDamageDetection()
         {
-
+            if (player.GameObject.Y > 550)
+            {
+                TakeDamage(300);
+            }
             if (!player.IsInvincible && !player.IsDead)
             {
                 GameObject enemy = collision.TypeCollide("Enemy");
                 if (enemy != null)
                 {
                     //not sure why he take double damage
-                    TakeDamage(enemy, 50);
+                    TakeDamage(50);
                 }
             }
+
         }
 
-        public void TakeDamage(GameObject enemy, int damage)
+        public void TakeDamage(int damage)
         {
             health.RemoveHealth(damage);
             player.hitTime = player.InvincibilityDuration;
