@@ -23,6 +23,8 @@ namespace Sprint0
         private Camera camera;
         private CameraController cameraController;
         Vector2 savedPlayerLoc;
+        private Vector2 startingPlayerLoc = new Vector2(0, 500);
+        private bool saveLoc = false;
 
         bool resetFrame;
 
@@ -41,10 +43,15 @@ namespace Sprint0
         protected override void Initialize()
         {
             base.Initialize();
-            if (savedPlayerLoc != Vector2.Zero)
+            if (savedPlayerLoc != Vector2.Zero && saveLoc)
             {
                 player.X = (int)savedPlayerLoc.X;
                 player.Y = (int)savedPlayerLoc.Y;
+            }
+            else
+            {
+                player.X = (int)startingPlayerLoc.X;
+                player.Y = (int)startingPlayerLoc.Y;
             }
             GOManager.Instance.Player = player;
             GOManager.Instance.allGOs = gameObjects;
@@ -133,6 +140,18 @@ namespace Sprint0
 
             // Update camera based on player's position and the rail
             cameraController.Update();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D0))
+            {
+                if (saveLoc)
+                {
+                    saveLoc = false;
+                }
+                else
+                {
+                    saveLoc = true;
+                }
+            }
 
             if (player.GetComponent<HealthComponent>().isDead)
             {
