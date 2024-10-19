@@ -8,7 +8,8 @@ public abstract class BaseEnemy : IComponent
     public bool enabled { get; set; } = true;
     public int HitPoints { get; protected set; }
 
-    protected Texture2D spriteTexture;    
+    protected Texture2D spriteTexture;
+    protected Texture2D deathVFXTexture = GOManager.Instance.textureStorage.GetTexture("EnemyDeath");
     protected float spriteScale = 1f;     
     protected Rectangle sourceRectangle; 
     protected Vector2 origin;           
@@ -31,7 +32,7 @@ public abstract class BaseEnemy : IComponent
     {
         if(GameObject.GetComponent<HealthComponent>().currentHealth == 0) {
             Rectangle destRectangle = new Rectangle(GameObject.X - 72, GameObject.Y - 72, 144, 144);
-            VisualEffectFactory.createVisualEffect(destRectangle, GOManager.Instance.textureStorage.GetTexture("EnemyDeath"), 3, 9, 2f, true);
+            VisualEffectFactory.createVisualEffect(destRectangle, deathVFXTexture, 3, 9, 2f, true);
         }
 
         Move(gameTime);
