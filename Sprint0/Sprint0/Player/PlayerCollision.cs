@@ -218,8 +218,8 @@ namespace Cuphead.Player
         {
             if (collider.Intersects(item.GetComponent<Collider>()))
             {
-                item.Destroy();
                 String itemName = item.type.Remove(0, 10);
+                item.Destroy();
                 switch (itemName)
                 {
                     case "Spreadshot":
