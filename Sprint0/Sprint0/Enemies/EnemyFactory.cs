@@ -14,7 +14,7 @@ public static class EnemyFactory
         spriteRenderer.orderInLayer = .2f;
         int enemyHP;
         enemy.AddComponent(spriteRenderer);
-        spriteRenderer.addAnimation("Death",new Animation(textureStorage.GetTexture("PlayerDeath"), 5, 16, 144, 144));
+        spriteRenderer.addAnimation("Death",new Animation(textureStorage.GetTexture("EnemyDeath"), 5, 9, 144, 144));
 
         switch (type)
         {

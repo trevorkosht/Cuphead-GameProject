@@ -35,14 +35,17 @@ public class VisualEffectRenderer : IComponent {
             (int)(destRectangle.Width * effectScale),
             (int)(destRectangle.Height * effectScale));
 
-        animation.draw(spriteBatch, scaledDestRectangle, isFacingRight, orderInLayer);
 
         if (animation.CurrentFrame == animation.FrameCount - 1) {
             hasPlayed = true;
         }
-        if(hasPlayed && animation.CurrentFrame == 0){
+        if (hasPlayed && animation.CurrentFrame == 0) {
             GameObject.Destroy();
         }
+        else {
+            animation.draw(spriteBatch, scaledDestRectangle, isFacingRight, orderInLayer);
+        }
+
     }
 
 }
