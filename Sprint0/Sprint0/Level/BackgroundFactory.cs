@@ -24,7 +24,20 @@ public static class BackgroundFactory
             { "Tree5", (922, 720, 0.1f, 0.811f) },
             { "Tree6", (852, 1064, 0.1f, 0.812f) },
             { "Tree7", (304, 844, 0.1f, 0.813f) },
-            { "Bush1", (1338, 625, 0.1f, 0.9f) }
+            { "Bush1", (1338, 625, 0.1f, 0.9f) },
+            {"Clouds", (2036, 530, 0.1f, 0f)}, //Start of new textures
+            {"SkyBackground1", (1806, 760, 0.1f, 0f)},
+            {"HillBackground1", (2048, 256, 0.1f, 0f)}, 
+            {"TreeBackground1", (2048, 594, 0.1f, 0f)},
+            {"TreeBackground2", (2046, 432, 0.1f, 0f)},
+            {"TreeBackground3", (2037, 762, 0.1f, 0f)},
+            {"TreeBackground4", (2009, 414, 0.1f, 0f)},
+            {"TreeBackground5", (2048, 756, 0.1f, 0f)},
+            {"TreeBackground6", (2046, 810, 0.1f, 0f)},
+            {"TreeBackground7", (2040, 841, 0.1f, 0f)},
+            {"TreeBackground8", (2016, 786, 0.1f, 0f)},
+            {"Bush2", (1809, 720, 0.1f, 0f) }
+
     };
 
     public static GameObject CreateBackground(string subtype, Vector2 position)

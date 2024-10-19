@@ -12,6 +12,7 @@ public class TullipProjectile : IComponent
     private float gravity = 0.5f;
     private float speed;
     private Vector2 targetPosition;
+    //private int damage = 50;
 
     public TullipProjectile(Vector2 startPosition)
     {
@@ -32,6 +33,9 @@ public class TullipProjectile : IComponent
         if (GameObject.GetComponent<CircleCollider>().Intersects(GOManager.Instance.Player.GetComponent<BoxCollider>()))
         {
             GameObject.Destroy();
+
+            //Not sure how we're handling damage right now but damage logic goes here
+            //GOManager.Instance.Player.GetComponent<HealthComponent>().RemoveHealth(damage);
         }
     }
 
