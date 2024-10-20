@@ -44,7 +44,7 @@ namespace Cuphead.Player
         public float timeTillNextBullet { get; set; } = .2f;
         public float timeTillNextHit { get; set; } = .4f;
         public float dashDuration = 0.5f; //about 1 second
-        public float InvincibilityDuration = 1.5f;
+        public float InvincibilityDuration = 1f;
         public float dashSpeed = 1500f; // about 750 pixel
         public float airTime = 0f;
         public float shootTime = 0f;
@@ -59,7 +59,7 @@ namespace Cuphead.Player
         public int playerHeight = 130;
         public int playerWidth = 100;
         public int floorY;
-        public int DuckingYOffset = 50;
+        public int DuckingYOffset = -100;
 
         public Vector2 velocity;
         public int Health { get; set; } = 100;

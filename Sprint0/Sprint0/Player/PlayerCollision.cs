@@ -22,79 +22,39 @@ namespace Cuphead.Player
 
         public void CollisionCheck()
         {
+            bool collidedObstacle = false;
             foreach (GameObject go in GOManager.Instance.allGOs)
             {
                 if (go.type != null)
                 {
                     if (collider.Intersects(go.GetComponent<Collider>()))
                     {
-                        Rectangle playerBox = go.GetComponent<SpriteRenderer>().destRectangle;
-                        Rectangle box2 = go.GetComponent<SpriteRenderer>().destRectangle;
-                        String location = CollisionSide(playerBox, box2);
-                        int distance = CollisionDistance(playerBox, box2);
-
                         if (go.type.Contains("Platform"))
                         {
-                            HandleHillCollision(go);
+                            HandlePlatformCollision(go);
+                            collidedObstacle = true;
                         }
-                        if (go.type.Contains("Item"))
+                        else if (go.type.Contains("Item"))
                         {
                             HandleItemCollision(go);
                         }
-                        if (go.type.Contains("Hill"))
+                        else if (go.type.Contains("Hill") || go.type.Contains("Log") || go.type.Contains("Stump"))
                         {
-                            HandleHillCollision(go);
+                            HandleObstacleCollision(go);
+                            collidedObstacle = true;
                         }
-                        if (go.type.Contains("Log"))
-                        {
-                            HandleHillCollision(go);
-                        }
-                        if (go.type.Contains("Stump"))
-                        {
-                            HandleHillCollision(go);
-                        }
-                        if (go.type.Contains("Enemy"))
+                        else if (go.type.Contains("Enemy"))
                         {
                             HandleEnemyCollision(go);
                         }
                     }
-                    
-
                 }
             }
-        }
-
-        //maybe move this into collider.cs
-        private string CollisionSide(Rectangle playerBounds, Rectangle itemBounds)
-        {
-            // Determine the side of the player collider where the collision happens
-            int leftDiff = Math.Abs(playerBounds.Right - itemBounds.Left);
-            int rightDiff = Math.Abs(playerBounds.Left - itemBounds.Right);
-            int topDiff = Math.Abs(playerBounds.Bottom - itemBounds.Top);
-            int bottomDiff = Math.Abs(playerBounds.Top - itemBounds.Bottom);
-
-            // Find the smallest difference (closest side)
-            int minDiff = Math.Min(Math.Min(leftDiff, rightDiff), Math.Min(topDiff, bottomDiff));
-
-            if (minDiff == leftDiff) return "Left";
-            if (minDiff == rightDiff) return "Right";
-            if (minDiff == topDiff) return "Top";
-            return "Bottom";
-        }
-
-        //maybe move this into collider.cs
-        public int CollisionDistance(Rectangle playerBounds, Rectangle itemBounds)
-        {
-            // Determine the side of the player collider where the collision happens
-            int leftDiff = Math.Abs(playerBounds.Right - itemBounds.Left);
-            int rightDiff = Math.Abs(playerBounds.Left - itemBounds.Right);
-            int topDiff = Math.Abs(playerBounds.Bottom - itemBounds.Top);
-            int bottomDiff = Math.Abs(playerBounds.Top - itemBounds.Bottom);
-
-            // Find the smallest difference (closest side)
-            int minDiff = Math.Min(Math.Min(leftDiff, rightDiff), Math.Min(topDiff, bottomDiff));
-
-            return minDiff;
+            if (!collidedObstacle)
+            {
+                player.GroundLevel = 9999; //Fall
+                player.IsGrounded = false;
+            }
         }
 
         public GameObject TypeCollide(String type)
@@ -139,67 +99,42 @@ namespace Cuphead.Player
             }
         }
 
-        public void HandlePlatformCollision(String location, int distance)
+        public void HandlePlatformCollision(GameObject platform)
         {
-            if (location != null)
+            Rectangle playerBounds = player.GameObject.GetComponent<BoxCollider>().BoundingBox;
+            Rectangle colliderBounds = platform.GetComponent<BoxCollider>().BoundingBox;
+            if (playerBounds.Bottom - 50 < colliderBounds.Top) //On top (50 for extra space in case not checked collision immeditately)
             {
-                if(location == "Bottom")
-                {
-                    player.GroundLevel = player.GameObject.Y + player.height;
-                    player.floorY = player.GameObject.Y + player.height;
-                    player.IsGrounded = true;
-                }
-                else if (location == "Right")
-                {
-                    player.GameObject.X = player.GameObject.X + distance + 1;
-                }
-                else if (location == "Left")
-                {
-                    player.GameObject.X = player.GameObject.X - distance - 1;
-                }
-                else
-                {
-
-                }
-            }
-            else
-            {
-                player.GroundLevel = 99999;
-            }
-
-        }
-
-        public void HandleHillCollision(GameObject platform)
-        {
-            if (collider.Intersects(platform.GetComponent<Collider>()))
-            {
-                player.GroundLevel = (float)platform.Y;
-                player.floorY = platform.Y;
+                player.velocity.Y = 0;
+                player.GroundLevel = colliderBounds.Top;
+                player.floorY = colliderBounds.Bottom + 100;
                 player.IsGrounded = true;
             }
-            else
-            {
-                player.GroundLevel = 99999;
-            }
 
         }
 
-        public void HandleLogCollision(GameObject platform)
+        public void HandleObstacleCollision(GameObject obstacle)
         {
-            if (collider.Intersects(platform.GetComponent<Collider>()))
+            Rectangle playerBounds = player.GameObject.GetComponent<BoxCollider>().BoundingBox;
+            Rectangle colliderBounds = obstacle.GetComponent<BoxCollider>().BoundingBox;
+            if (playerBounds.Bottom - 50 < colliderBounds.Top) //On top (50 for extra space in case not checked collision immeditately)
             {
-                player.GroundLevel = (float)platform.Y;
-                player.floorY = platform.Y;
+                player.velocity.Y = 0;
+                player.GroundLevel = colliderBounds.Top + 10;
+                player.floorY = colliderBounds.Top + 10;
                 player.IsGrounded = true;
             }
-            else
+            else if (player.GameObject.X < obstacle.X)
             {
-                player.GroundLevel = 99999;
+                player.GameObject.X = colliderBounds.Left - player.playerWidth - 5;
             }
-
+            else if (player.GameObject.X > obstacle.X)
+            {
+                player.GameObject.X = colliderBounds.Right - 25;
+            }
         }
 
-        public void HandleStumpCollision(GameObject platform)
+        public void HandleDeprecatedCollision(GameObject platform)
         {
             if (collider.Intersects(platform.GetComponent<Collider>()))
             {

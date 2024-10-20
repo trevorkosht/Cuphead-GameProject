@@ -107,7 +107,7 @@ namespace Cuphead.Player
             {
                 if (player.IsDucking)
                 {
-                    player.GameObject.Y = player.floorY;
+                    player.GameObject.Y = player.floorY + player.DuckingYOffset - 50;
                     player.IsDucking = false;
                     player.isDuckingYAdjust = false;
                     collider.bounds = new Vector2(90, 144);
@@ -123,7 +123,7 @@ namespace Cuphead.Player
                 // Continue dashing
                 PerformDash(gameTime, player.height, deltaTime);
             }
-            else if (dashRequested && gameDelay.Cooldown(gameTime, player.TimeTillNextDash))
+            else if (dashRequested && gameDelay.Cooldown(gameTime, player.TimeTillNextDash) && !player.IsInvincible)
             {
                 // Start dash
                 player.IsDashing = true;
@@ -158,7 +158,10 @@ namespace Cuphead.Player
 
                 if (PlayerCollision.TypeCollide("Enemy") != null)
                 {
+                    player.GameObject.GetComponent<SpriteRenderer>().spriteScale = 1f;
                     player.IsDashing = false;
+                    player.Gravity = 3000f;
+                    player.Speed = 700f;
                 }
             }
             else
@@ -166,7 +169,7 @@ namespace Cuphead.Player
                 // Dash duration is over, stop dashing
                 player.GameObject.GetComponent<SpriteRenderer>().spriteScale = 1f;
                 player.IsDashing = false;
-                player.Gravity = 1200f;
+                player.Gravity = 3000f;
                 player.Speed = 700f;
             }
         }
