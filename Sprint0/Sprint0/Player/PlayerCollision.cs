@@ -124,6 +124,7 @@ namespace Cuphead.Player
             Rectangle colliderBounds = obstacle.GetComponent<BoxCollider>().BoundingBox;
             if (playerBounds.Bottom - 50 < colliderBounds.Top) //On top (50 for extra space in case not checked collision immeditately)
             {
+                player.GameObject.Y = colliderBounds.Top - playerBounds.Height + 1;
                 player.velocity.Y = 0;
                 player.GroundLevel = colliderBounds.Top + 10;
                 player.floorY = colliderBounds.Top + 10;
