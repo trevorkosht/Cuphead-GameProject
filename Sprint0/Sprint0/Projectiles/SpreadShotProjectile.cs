@@ -127,7 +127,7 @@ public class SpreadShotInstance : Projectile
 
             foreach (GameObject GO in GOManager.Instance.allGOs)
             {
-                if (GO.type != "PlayerProjectile" && GO.type != "Player" && GO.type != "ItemPickup")
+                if (GO.type != "PlayerProjectile" && GO.type != "Player" && !GO.type.Contains("Item"))
                 {
                     Collider collider = GameObject.GetComponent<Collider>();
                     if (collider.Intersects(GO.GetComponent<Collider>()))
