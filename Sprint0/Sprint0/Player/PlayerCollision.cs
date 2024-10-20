@@ -29,7 +29,12 @@ namespace Cuphead.Player
                 {
                     if (collider.Intersects(go.GetComponent<Collider>()))
                     {
-                        if (go.type.Contains("Platform"))
+                        if (go.type.Contains("Slope"))
+                        {
+                            HandleSlopeCollision(go);
+                            collidedObstacle = true;
+                        }
+                        else if (go.type.Contains("Platform"))
                         {
                             HandlePlatformCollision(go);
                             collidedObstacle = true;
@@ -134,19 +139,43 @@ namespace Cuphead.Player
             }
         }
 
-        public void HandleDeprecatedCollision(GameObject platform)
+        public void HandleSlopeCollision(GameObject obstacle)
         {
-            if (collider.Intersects(platform.GetComponent<Collider>()))
-            {
-                player.GroundLevel = (float)platform.Y;
-                player.floorY = platform.Y;
-                player.IsGrounded = true;
-            }
-            else
-            {
-                player.GroundLevel = 99999;
-            }
+            var playerCollider = player.GameObject.GetComponent<BoxCollider>();
+            var obstacleCollider = obstacle.GetComponent<BoxCollider>();
 
+            // Get the player's bounding box
+            Rectangle playerBounds = playerCollider.BoundingBox;
+
+            // Get the rotated corners of the obstacle's bounding box (assuming the obstacle is sloped)
+            Vector2[] obstacleCorners = obstacleCollider.GetRotatedCorners();
+
+            // Get the top edge of the slope (assuming it's a left-to-right slope)
+            Vector2 topLeft = obstacleCorners[0]; // Top-left corner of the slope
+            Vector2 topRight = obstacleCorners[1]; // Top-right corner of the slope
+
+            // Check if the player is within the horizontal bounds of the slope's top edge
+            if (playerBounds.Bottom > Math.Min(topLeft.Y, topRight.Y) && playerBounds.Left >= topLeft.X && playerBounds.Right <= topRight.X)
+            {
+                // Calculate the player's Y position relative to the slope
+                float slopeHeightAtPlayerX = MathHelper.Lerp(topLeft.Y, topRight.Y, (playerBounds.Center.X - topLeft.X) / (topRight.X - topLeft.X));
+
+                if (playerBounds.Bottom > slopeHeightAtPlayerX)
+                {
+                    // Place the player on top of the slope
+                    player.GameObject.Y = (int)slopeHeightAtPlayerX - playerBounds.Height + 10;
+                    player.velocity.Y = 0;
+                    player.IsGrounded = true;
+                }
+            }
+            else if (playerBounds.Right < topLeft.X) // Left of the slope
+            {
+                player.GameObject.X = (int)(topLeft.X - player.playerWidth - 5);
+            }
+            else if (playerBounds.Left > topRight.X) // Right of the slope
+            {
+                player.GameObject.X = (int)(topRight.X + 5);
+            }
         }
 
         public void HandleItemCollision(GameObject item)

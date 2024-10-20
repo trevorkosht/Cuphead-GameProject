@@ -29,7 +29,7 @@ namespace Cuphead.Player
 
         public void HandleDamageDetection()
         {
-            if (player.GameObject.Y > 550)
+            if (player.GameObject.Y > 600)
             {
                 TakeDamage(300);
             }
