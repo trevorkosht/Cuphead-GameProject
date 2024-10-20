@@ -14,7 +14,7 @@ public class DeadlyDaisy : BaseEnemy
         base.Initialize(texture, storage);
         sRend.setAnimation("deadlyDaisyAnimation");
         speed = 300f;
-        jumpHeight = 200f;
+        jumpHeight = 800f;
         isJumping = false;
         velocity = Vector2.Zero;
     }
@@ -43,17 +43,19 @@ public class DeadlyDaisy : BaseEnemy
         }
 
         // Apply gravity if jumping
-        if (isJumping)
-        {
-            velocity.Y += 400f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            GameObject.Y += (int)(velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds);
+        velocity.Y += 100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        GameObject.Y += (int)(velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
-            // Check if we hit the ground
-            if (IsGrounded())
-            {
-                isJumping = false;
-                velocity.Y = 0;
-            }
+        // Check if we hit the ground
+        if (IsGrounded())
+        {
+            sRend.setAnimation("deadlyDaisyAnimation");
+            isJumping = false;
+            velocity.Y = 0;
+        }
+        else
+        {
+            sRend.setAnimation("Spawn"); // Jumping animation
         }
 
     }
@@ -68,7 +70,6 @@ public class DeadlyDaisy : BaseEnemy
     {
         isJumping = true;
         velocity.Y = -jumpHeight; // Apply upward force
-        sRend.setAnimation("Spawn"); // Jumping animation
     }
 
     private bool IsGrounded()
@@ -80,7 +81,7 @@ public class DeadlyDaisy : BaseEnemy
         {
             if (gameObject != null && gameObject.type != null)
             {
-                if (gameObject.type.Equals("Platform") || gameObject.type.Equals("Block"))
+                if (gameObject.type.Contains("Platform") || gameObject.type.Contains("Hill"))
                 {
                     if (collider.Intersects(gameObject.GetComponent<Collider>()))
                     {

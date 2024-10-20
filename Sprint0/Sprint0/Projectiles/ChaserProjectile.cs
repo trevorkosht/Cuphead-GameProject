@@ -117,7 +117,8 @@ public class ChaserProjectile : Projectile
         foreach (var gameObject in GOManager.Instance.allGOs)
         {
             // Check if the game object is an enemy
-            if (gameObject.type == "Enemy")
+            if(gameObject.type == null) continue;
+            if (gameObject.type.Contains("Enemy"))
             {
                 Vector2 directionToEnemy = gameObject.position - GameObject.position;
                 float distance = directionToEnemy.Length();
