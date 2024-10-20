@@ -43,8 +43,8 @@ public static class BlockFactory
                             !subtype.Contains("Rock") && !subtype.Contains("Bush");
 
             // Create the block with the size, texture, and other properties
-            GameObject block = CreateBlock(destRectangle, texture, blockData.width, blockData.height, collider, blockData.bounds, blockData.offset, blockData.orderInLayer);
-            block.type = "Block"+subtype;
+            GameObject block = CreateBlock(destRectangle, texture, blockData.width, blockData.height, collider, blockData.bounds, blockData.offset, blockData.orderInLayer, subtype);
+            block.type = block.type + "Block" + subtype;
             return block;
         }
         else
@@ -52,12 +52,12 @@ public static class BlockFactory
             Console.WriteLine($"Warning: Block subtype '{subtype}' not found. Using default size.");
             Rectangle defaultRect = new Rectangle((int)position.X, (int)position.Y, 100, 100);
             bool collider = false;
-            return CreateBlock(defaultRect, texture, 100, 100, collider, new Vector2(100, 100), Vector2.Zero, 0.75f); // Use default size and orderInLayer if not found
+            return CreateBlock(defaultRect, texture, 100, 100, collider, new Vector2(100, 100), Vector2.Zero, 0.75f, subtype); // Use default size and orderInLayer if not found
         }
     }
 
     // Consolidated method to handle block creation, frame size, and collider size
-    public static GameObject CreateBlock(Rectangle destRectangle, Texture2D texture, int frameWidth, int frameHeight, bool collider, Vector2 bounds, Vector2 offset, float orderInLayer)
+    public static GameObject CreateBlock(Rectangle destRectangle, Texture2D texture, int frameWidth, int frameHeight, bool collider, Vector2 bounds, Vector2 offset, float orderInLayer, string subtype)
     {
         GameObject block = new GameObject(destRectangle.X, destRectangle.Y);
 
@@ -74,7 +74,13 @@ public static class BlockFactory
         spriteRenderer.orderInLayer = orderInLayer;
 
         // Add a collider with the block's size if applicable
-        if (collider)
+        if(subtype == "BigHill2")
+        {
+            block.type = "Slope";
+            BoxCollider boxCollider = new BoxCollider(bounds, offset + new Vector2(50, 90), GOManager.Instance.GraphicsDevice, -10f * (float)(Math.PI / 180));
+            block.AddComponent(boxCollider);
+        }
+        else if (collider)
         {
             BoxCollider boxCollider = new BoxCollider(bounds, offset, GOManager.Instance.GraphicsDevice);
             block.AddComponent(boxCollider);
