@@ -31,8 +31,10 @@ public static class EnemyFactory
                 enemyLogic = new DeadlyDaisy();
                 enemy.AddComponent(enemyLogic);
                 enemy.AddComponent(new BoxCollider(new Vector2(135, 155), new Vector2(5, -5), GOManager.Instance.GraphicsDevice));
-                spriteRenderer.addAnimation("deadlyDaisyAnimation", new Animation(textureStorage.GetTexture("DeadlyDaisy"), 3, 16, 144, 144));
+                spriteRenderer.addAnimation("deadlyDaisyAnimation", new Animation(textureStorage.GetTexture("DeadlyDaisy"), 2, 16, 144, 144));
                 spriteRenderer.addAnimation("Spawn", new Animation(textureStorage.GetTexture("DaisySpawn"), 5, 16, 144, 144));
+                spriteRenderer.addAnimation("Turn", new Animation(textureStorage.GetTexture("DaisyTurn"), 1, 18, 144, 144));
+                spriteRenderer.addAnimation("Jump", new Animation(textureStorage.GetTexture("DaisyJump"), 5, 8, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("DeadlyDaisy"), textureStorage);
                 enemyHP = 50;
                 break;
@@ -71,7 +73,7 @@ public static class EnemyFactory
                 enemyLogic = new BothersomeBlueberry();
                 enemy.AddComponent(enemyLogic);
                 enemy.AddComponent(new CircleCollider(40, new Vector2(-72,-60), GOManager.Instance.GraphicsDevice));
-                spriteRenderer.addAnimation("bothersomeBlueberryAnimation", new Animation(textureStorage.GetTexture("BothersomeBlueberry"), 5, 12, 144, 144));
+                spriteRenderer.addAnimation("bothersomeBlueberryAnimation", new Animation(textureStorage.GetTexture("BothersomeBlueberry"), 3, 12, 144, 144));
                 spriteRenderer.addAnimation("Melt", new Animation(textureStorage.GetTexture("BlueberryMelt"), 5, 10, 144, 144));
                 spriteRenderer.addAnimation("WaitForRespawn", new Animation(textureStorage.GetTexture("BlueberryWaitingToRespawn"), 5, 1, 144, 144));
                 spriteRenderer.addAnimation("Respawn", new Animation(textureStorage.GetTexture("BlueberryRespawn"), 5, 14, 144, 144));

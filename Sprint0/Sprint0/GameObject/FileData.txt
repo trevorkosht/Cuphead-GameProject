@@ -17,7 +17,7 @@ Block,BigHill3,3500,450
 
 Enemy,ToothyTerror,2400,600
 Enemy,BothersomeBlueberry,2800,500
-Enemy,DeadlyDaisy,3200,100
+Enemy,DeadlyDaisy,3200,-200
 
 Background,Rock1,2550,350
 Background,Leaves1,3400,-400
@@ -31,7 +31,7 @@ Block,BigHill1,4000,600
 Block,BigHill2,4950,350
 Block,Hill2,4500,500
 
-Enemy,DeadlyDaisy,4600,100
+Enemy,DeadlyDaisy,4600,-200
 Enemy,MurderousMushroom,4600,400
 
 Background,Rock2,4100,100
@@ -44,7 +44,7 @@ Block,BigHill1,5800,350
 Block,BigHill2,7100,500
 Block,Log1,7800,500
 
-Enemy,DeadlyDaisy,6400,100
+Enemy,DeadlyDaisy,6400,-200
 Enemy,ToothyTerror,6900,600
 Enemy,TerribleTulip,6000,275
 
@@ -61,7 +61,7 @@ Platform,Platform2,9600,600
 Platform,Platform2,9900,600
 Platform,Platform2,10200,600
 
-Enemy,DeadlyDaisy,8500,400
+Enemy,DeadlyDaisy,8500,-200
 Enemy,BothersomeBlueberry,8800,500
 Enemy,ToothyTerror,9500,700
 Enemy,ToothyTerror,9800,700

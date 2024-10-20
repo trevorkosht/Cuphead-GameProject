@@ -7,12 +7,18 @@ public class DeadlyDaisy : BaseEnemy
     private float speed;
     private float jumpHeight;
     private bool isJumping;
+    private bool jumpRequested = false;
     private Vector2 velocity;
+    private bool movingRight;
+    private float turnDelay = -1.0f;
+    private bool atEdge = false;
+    private BoxCollider jumpCheckCollider;
+
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
-        sRend.setAnimation("deadlyDaisyAnimation");
+        sRend.setAnimation("Spawn");
         speed = 300f;
         jumpHeight = 800f;
         isJumping = false;
@@ -21,55 +27,112 @@ public class DeadlyDaisy : BaseEnemy
 
     public override void Move(GameTime gameTime)
     {
+        if(GameObject.Y < 0 && GameObject.X - player.X > 1500) {
+            return;
+        }
+
+        sRend.isFacingRight = !movingRight;
+
+        if (movingRight) {
+            jumpCheckCollider = new BoxCollider(new Vector2(135, 155), new Vector2(215, -5), GOManager.Instance.GraphicsDevice);
+        }
+        else {
+            jumpCheckCollider = new BoxCollider(new Vector2(135, 155), new Vector2(-215, -5), GOManager.Instance.GraphicsDevice);
+        }
+        jumpCheckCollider.GameObject = GameObject;
+        GameObject.AddComponent(jumpCheckCollider);
+
         Vector2 playerPosition = new Vector2(player.X, player.Y);
 
-        // Move towards the player horizontally only
-        Vector2 direction = new Vector2(playerPosition.X - GameObject.X, 0);
-        float distance = Math.Abs(playerPosition.X - GameObject.X);
-        float minDistance = 0.1f;
+        if (jumpRequested) {
+            //set jump anim
+            sRend.setAnimation("Jump");
 
-        if (distance > minDistance)
-        {
-            direction.Normalize();
-            sRend.isFacingRight = playerPosition.X < GameObject.X;
+            //check for frame where leaves ground, then call actual jump method
 
-            GameObject.X += (int)(direction.X * speed * gameTime.ElapsedGameTime.TotalSeconds);
+
+            //check for 
+
+            Jump(jumpCheckCollider);
+            jumpRequested = false;
         }
-
-        // Check if the DeadlyDaisy needs to jump to reach the player
-        if (NeedsToJump(playerPosition))
+        else if (IsGrounded())
         {
-            Jump();
-        }
+            if (atEdge) {
+                sRend.setAnimation("Turn");
+                if (movingRight) {
+                    GameObject.X += 1;
+                }
+                else {
+                    GameObject.X -= 1;
+                }
+                if (sRend.currentAnimation.Value.CurrentFrame == 17) {
+                    movingRight = !movingRight;
+                    sRend.setAnimation("deadlyDaisyAnimation");
+                    atEdge = false;
+                    turnDelay = 0.5f;
+                }
+            }
+            else {
+                sRend.setAnimation("deadlyDaisyAnimation");
+                if (movingRight)
+                    GameObject.X += (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                else
+                    GameObject.X -= (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
-        // Apply gravity if jumping
-        velocity.Y += 100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-        GameObject.Y += (int)(velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                if (turnDelay <= 0) {
+                    atEdge = ReachedEdge();
+                }
+                turnDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
 
-        // Check if we hit the ground
-        if (IsGrounded())
-        {
-            sRend.setAnimation("deadlyDaisyAnimation");
-            isJumping = false;
             velocity.Y = 0;
         }
-        else
-        {
-            sRend.setAnimation("Spawn"); // Jumping animation
+        if (!IsGrounded()) {
+            {
+                // Apply gravity if jumping
+                velocity.Y += 100f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                GameObject.Y += (int)(velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                movingRight = player.X > GameObject.X;
+
+                //sRend.setAnimation("Spawn"); // Jumping animation
+            }
         }
 
     }
 
-    private bool NeedsToJump(Vector2 playerPosition)
-    {
-        // The DeadlyDaisy jumps if the player is on a higher platform
-        return GameObject.Y > playerPosition.Y && !isJumping && IsGrounded();
+
+    private bool ReachedEdge() {
+        BoxCollider daisyCollider = GameObject.GetComponent<BoxCollider>();
+        bool isOnPlatform = false;
+
+        foreach (GameObject GO in GOManager.Instance.allGOs) {
+            if (GO != null && GO.type != null) {
+                BoxCollider platformCollider = GO.GetComponent<BoxCollider>();
+                float leftEdge = daisyCollider.BoundingBox.Left;
+                float rightEdge = daisyCollider.BoundingBox.Right;
+                float topEdge = daisyCollider.BoundingBox.Top;
+
+                if (platformCollider != null && platformCollider.Intersects(jumpCheckCollider)) {
+                    if(topEdge <= platformCollider.BoundingBox.Top && leftEdge > platformCollider.BoundingBox.Left && rightEdge < platformCollider.BoundingBox.Right) {
+                        jumpRequested = true;
+                        return false;
+                    }
+                }
+
+                if (platformCollider != null && GO.Y > GameObject.Y + 50 && (platformCollider.BoundingBox.Left <= leftEdge - 50 && platformCollider.BoundingBox.Right >= rightEdge + 50)) {
+                    isOnPlatform = true;
+                }
+            }
+        }
+
+        return !isOnPlatform;
     }
 
-    private void Jump()
-    {
-        isJumping = true;
-        velocity.Y = -jumpHeight; // Apply upward force
+    private void Jump(BoxCollider landingSpot) {
+
+
+        
     }
 
     private bool IsGrounded()

@@ -29,6 +29,8 @@ public class Texture2DStorage
         _textures["MushroomAttack"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_attack");
         _textures["ToothyTerrorSpinAttack"] = content.Load<Texture2D>(@"EnemyTextures\terror_spin");
         _textures["TulipIdle"] = content.Load<Texture2D>(@"EnemyTextures\tulip_idle");
+        _textures["DaisyTurn"] = content.Load<Texture2D>(@"EnemyTextures\daisy-turn");
+        _textures["DaisyJump"] = content.Load<Texture2D>(@"EnemyTextures\daisy-jump");
 
         _textures["MushroomClosed"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_closed");
         _textures["MushroomClosing"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_closing");
@@ -153,6 +155,8 @@ public class Texture2DStorage
         //Visual Effect Textures
         _textures["Dust"] = content.Load<Texture2D>(@"VisualEffectTextures\DustEffect");
         _textures["EnemyDeath"] = content.Load<Texture2D>(@"VisualEffectTextures\enemy_death");
+        _textures["TulipAttackVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\tulip-attack-vfx");
+        _textures["TulipHitVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\tulip-hit-vfx");
 
 
         //item texture

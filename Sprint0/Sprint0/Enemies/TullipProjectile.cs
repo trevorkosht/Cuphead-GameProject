@@ -12,11 +12,15 @@ public class TullipProjectile : IComponent
     private float gravity = 0.5f;
     private float speed;
     private Vector2 targetPosition;
+    private Texture2D hitVFX;
     //private int damage = 50;
 
     public TullipProjectile(Vector2 startPosition)
     {
+        hitVFX = GOManager.Instance.textureStorage.GetTexture("TulipHitVFX");
+
         targetPosition = GOManager.Instance.Player.position;
+        //targetPosition.X += 72;
 
         float verticalSpeed = Math.Abs(((targetPosition.Y - startPosition.Y) - gravity * airTime * airTime / 2) / (airTime));
         float horizontalSpeed = (startPosition.X - targetPosition.X) / airTime;
@@ -32,6 +36,8 @@ public class TullipProjectile : IComponent
 
         if (GameObject.GetComponent<CircleCollider>().Intersects(GOManager.Instance.Player.GetComponent<BoxCollider>()))
         {
+            Rectangle vfxDestRectangle = new Rectangle(GameObject.X - 148, GameObject.Y - 144, 144, 144);
+            VisualEffectFactory.createVisualEffect(vfxDestRectangle, hitVFX, 2, 23, 2.0f, true);
             GameObject.Destroy();
 
             //Not sure how we're handling damage right now but damage logic goes here
