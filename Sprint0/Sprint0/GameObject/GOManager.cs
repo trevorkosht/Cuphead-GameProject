@@ -10,7 +10,7 @@ public class GOManager
     public List<GameObject> allGOs { get; set; }
 
     public GameObject currentEnemy { get; set; }
-    public bool IsDebugging = true;
+    public bool IsDebugging = false;
     public GraphicsDevice GraphicsDevice { get; set; }
 
     public Camera Camera { get; set; }
