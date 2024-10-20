@@ -19,9 +19,9 @@ public static class BlockFactory
     { "Stump1", (144, 144, new Vector2(124, 124), new Vector2(10, 10), 0.504f) },
     { "Stump2", (144, 144, new Vector2(124, 144), new Vector2(10, 0), 0.505f) },
     { "Stump3", (144, 144, new Vector2(124, 134), new Vector2(10, 5), 0.506f) },
-    {"BigHill4", (737, 660, new Vector2(737, 660), new Vector2(0,0), 0f) }, //New textures start here
-    {"Hill4", (537, 144, new Vector2(537, 144), new Vector2(0,0), 0f) },
-    {"Hill5", (761, 177, new Vector2(761, 177), new Vector2(0,0), 0f) },
+    {"BigHill4", (737, 660, new Vector2(737, 660), new Vector2(0,0), 0.7f) }, //New textures start here
+    {"Hill4", (537, 144, new Vector2(537, 144), new Vector2(0,0), 0.7f) },
+    {"Hill5", (761, 177, new Vector2(761, 177), new Vector2(0,0), 0.71f) },
 };
 
     public static GameObject CreateBlock(string subtype, Vector2 position)
