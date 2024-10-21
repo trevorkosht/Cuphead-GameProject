@@ -78,7 +78,7 @@ public class SpreadShotInstance : Projectile
     private SpriteRenderer spriteRenderer;
     private ProjectileCollision projectileCollision;
     private const float explosionDuration = 0.425f;
-    private const string collisionAnimationName = "RoundaboutExplosionAnimation";
+    private const string collisionAnimationName = "SpreadExplosionAnimation";
 
     public SpreadShotInstance(Vector2 direction, SpriteRenderer spriteRenderer)
     {
@@ -122,7 +122,7 @@ public class SpreadShotInstance : Projectile
             Camera camera = GOManager.Instance.Camera;
             if (lifetime <= 0)
             {
-                spriteRenderer.setAnimation("SpreadExplosionAnimation");
+                spriteRenderer.setAnimation(collisionAnimationName);
                 lifetimeExpired = true;
                 return;
             }
