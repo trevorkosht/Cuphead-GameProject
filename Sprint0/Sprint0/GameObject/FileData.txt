@@ -1,4 +1,6 @@
 // Section 1 (0000-2000)
+Block,BigHill1,-1300,100
+
 Block,BigHill1,-500,600
 Block,BigHill1,450,600
 Block,BigHill2,1400,500
