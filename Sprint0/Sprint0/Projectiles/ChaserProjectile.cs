@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cuphead.Projectiles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,15 @@ public class ChaserProjectile : Projectile
     private Collider collider;
     private SpriteRenderer spriteRenderer;
     private bool collided;
-    private float explosionDuration;
     private float explosionTimer;
+    private ProjectileCollision projectileCollision;
+    private const float explosionDuration = 0.5f;
+    private const string collisionAnimationName = "ChaserExplosionAnimation";
 
     public ChaserProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
         collided = false;
-        explosionTimer = 0.0f;
-        explosionDuration = 0.5f;
+        explosionTimer = 0f;
         this.spriteRenderer = spriteRenderer;
         this.isFacingRight = isFacingRight;
         if (!isFacingRight)
@@ -36,6 +38,8 @@ public class ChaserProjectile : Projectile
 
     public override void Update(GameTime gameTime)
     {
+        if (GameObject == null)
+            return;
         if (collided)
         {
             explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -78,27 +82,8 @@ public class ChaserProjectile : Projectile
 
                 // Check for collisions with other game objects
                 collider = GameObject.GetComponent<Collider>();
-                foreach (GameObject GO in GOManager.Instance.allGOs)
-                {
-                    if (GO.type == null) continue;
-                    if (GO.type != "PlayerProjectile" && GO.type != "Player" && !GO.type.Contains("NPCProjectile") && !GO.type.Contains("Item"))
-                    {
-                        if (collider.Intersects(GO.GetComponent<Collider>()))
-                        {
-
-                            HealthComponent enemyHealth = GO.GetComponent<HealthComponent>();
-                            if (enemyHealth != null)
-                            {
-                                enemyHealth.RemoveHealth(10); // Reduce enemy health by 10
-                            }
-
-                            spriteRenderer.setAnimation("ChaserExplosionAnimation");
-                            collided = true;
-                            return;
-                        }
-                    }
-
-                }
+                projectileCollision = new ProjectileCollision(GameObject, collider, collisionAnimationName);
+                collided = projectileCollision.CollisionCheck();
 
                 // Check if projectile is out of bounds
                 Camera camera = GOManager.Instance.Camera;

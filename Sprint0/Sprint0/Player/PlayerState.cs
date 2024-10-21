@@ -63,7 +63,7 @@ namespace Cuphead.Player
 
         public Vector2 velocity;
         public int Health { get; set; } = 100;
-        public bool[] projectileUnlock = { true, true, false, false, false, false, false };
+        public bool[] projectileUnlock = { true, true, true, true, true, true, true };
         public enum projectiletype { Peashooter = 1, Spreadshot = 2, Chaser = 3, Lobber = 4, Roundabout = 5 }
         public ProjectileType currentProjectileType = ProjectileType.Peashooter;
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cuphead.Projectiles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class RoundaboutProjectile : Projectile
@@ -11,9 +12,10 @@ public class RoundaboutProjectile : Projectile
     private Collider collider;
     private SpriteRenderer spriteRenderer;
     private bool collided;
-    private float explosionDuration;
     private float explosionTimer;
-
+    private ProjectileCollision projectileCollision;
+    private const float explosionDuration = 1.0f;
+    private const string collisionAnimationName = "RoundaboutExplosionAnimation";
     private float launchDuration = 1f;
     private float elapsedTime;
 
@@ -21,7 +23,6 @@ public class RoundaboutProjectile : Projectile
     {
         collided = false;
         explosionTimer = 0.0f;
-        explosionDuration = 1.0f;
         this.spriteRenderer = spriteRenderer;
         this.isFacingRight = isFacingRight;
 
@@ -74,25 +75,10 @@ public class RoundaboutProjectile : Projectile
                 // Update the projectile's position based on its velocity
                 GameObject.Move((int)velocity.X, (int)velocity.Y);
 
+
                 collider = GameObject.GetComponent<Collider>();
-                foreach (GameObject GO in GOManager.Instance.allGOs)
-                {
-                    if (GO.type == null) continue;
-                    if (GO.type != "PlayerProjectile" && GO.type != "Player" && !GO.type.Contains("NPCProjectile") && !GO.type.Contains("Item"))
-                    {
-                        if (collider.Intersects(GO.GetComponent<Collider>()))
-                        {
-                            HealthComponent enemyHealth = GO.GetComponent<HealthComponent>();
-                            if (enemyHealth != null)
-                            {
-                                enemyHealth.RemoveHealth(10); // Reduce enemy health by 10
-                            }
-                            spriteRenderer.setAnimation("RoundaboutExplosionAnimation");
-                            collided = true;
-                            return;
-                        }
-                    }
-                }
+                projectileCollision = new ProjectileCollision(GameObject, collider, collisionAnimationName);
+                collided = projectileCollision.CollisionCheck();
 
                 Camera camera = GOManager.Instance.Camera;
                 if (returning && (GameObject.X > camera.Position.X + 1200 || GameObject.X < camera.Position.X ||  GameObject.Y < camera.Position.Y || GameObject.Y > camera.Position.Y + 720))

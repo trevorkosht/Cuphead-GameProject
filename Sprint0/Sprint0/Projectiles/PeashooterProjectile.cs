@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cuphead.Projectiles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class PeashooterProjectile : Projectile
@@ -7,15 +8,16 @@ public class PeashooterProjectile : Projectile
     private bool isFacingRight;
     private Collider collider;
     private SpriteRenderer spriteRenderer;
+    private ProjectileCollision projectileCollision;
     private bool collided;
-    private float explosionDuration;
     private float explosionTimer;
+    private const float explosionDuration = 1.0f;
+    private const string collisionAnimationName = "PeashooterExplosionAnimation";
 
     public PeashooterProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
         collided = false;
-        explosionTimer = 0.0f;
-        explosionDuration = 1.0f;
+        explosionTimer = 0f;
         this.spriteRenderer = spriteRenderer;
         this.isFacingRight = isFacingRight;
         if (!isFacingRight)
@@ -25,7 +27,8 @@ public class PeashooterProjectile : Projectile
     }
     public override void Update(GameTime gameTime)
     {
-        if (collided)
+        
+        if(collided)
         {
             explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -34,45 +37,29 @@ public class PeashooterProjectile : Projectile
                 GameObject.Destroy();
                 return;
             }
-        }
-        else
-        {
-            if (isFacingRight)
+        } else { 
+            if(GameObject != null)
             {
-                GameObject.Move((int)(speed), 0); // Move right
-
-            }
-            else
-            {
-                GameObject.Move((int)(-speed), 0); // Move left
-            }
-
-            collider = GameObject.GetComponent<Collider>();
-            foreach (GameObject GO in GOManager.Instance.allGOs)
-            {
-                if(GO.type == null) continue;
-                if (GO.type != "PlayerProjectile" && GO.type != "Player" && !GO.type.Contains("NPCProjectile") && !GO.type.Contains("Item"))
+                if (isFacingRight)
                 {
-                    if (collider.Intersects(GO.GetComponent<Collider>()))
-                    {
-                        HealthComponent enemyHealth = GO.GetComponent<HealthComponent>();
-                        if (enemyHealth != null)
-                        {
-                            enemyHealth.RemoveHealth(10); // Reduce enemy health by 10
-                        }
-                        spriteRenderer.setAnimation("PeashooterExplosionAnimation");
-                        collided = true;
-                        return;
-                    }
+                    GameObject.Move((int)(speed), 0); // Move right
+
+                }
+                else
+                {
+                    GameObject.Move((int)(-speed), 0); // Move left
                 }
             }
 
+            collider = GameObject.GetComponent<Collider>();
+            projectileCollision = new ProjectileCollision(GameObject, collider, collisionAnimationName);
+            collided = projectileCollision.CollisionCheck();
+
             Camera camera = GOManager.Instance.Camera;
-            if (GameObject.X > camera.Position.X + 1200 || GameObject.X < camera.Position.X)
+            if (GameObject.X > camera.Position.X + 1200 || GameObject.X < camera.Position.X || GameObject.Y < camera.Position.Y || GameObject.Y > camera.Position.Y + 720)
             {
                 GameObject.Destroy();
             }
-
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Cuphead.Projectiles;
 
 public class LobberProjectile : Projectile
 {
@@ -12,14 +13,15 @@ public class LobberProjectile : Projectile
     private Collider collider;
     private SpriteRenderer spriteRenderer;
     private bool collided;
-    private float explosionDuration;
     private float explosionTimer;
+    private ProjectileCollision projectileCollision;
+    private const float explosionDuration = 1.0f;
+    private const string collisionAnimationName = "LobberExplosionAnimation";
 
     public LobberProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
         collided = false;
         explosionTimer = 0.0f;
-        explosionDuration = 1.0f;
         this.spriteRenderer = spriteRenderer;
         this.isFacingRight = isFacingRight;
         if (!isFacingRight)
@@ -73,25 +75,8 @@ public class LobberProjectile : Projectile
             }
 
             collider = GameObject.GetComponent<Collider>();
-            foreach (GameObject GO in GOManager.Instance.allGOs)
-            {
-                if (GO.type == null) continue;
-                if (GO.type != "PlayerProjectile" && GO.type != "Player" && !GO.type.Contains("NPCProjectile") && !GO.type.Contains("Item"))
-                {
-                    if (collider.Intersects(GO.GetComponent<Collider>()))
-                    {
-                        HealthComponent enemyHealth = GO.GetComponent<HealthComponent>();
-                        if (enemyHealth != null)
-                        {
-                            enemyHealth.RemoveHealth(10); // Reduce enemy health by 10
-                        }
-                        spriteRenderer.setAnimation("LobberExplosionAnimation");
-                        collided = true;
-                        return;
-                    }
-                }
-
-            }
+            projectileCollision = new ProjectileCollision(GameObject, collider, collisionAnimationName);
+            collided = projectileCollision.CollisionCheck();
         }
     }
 
