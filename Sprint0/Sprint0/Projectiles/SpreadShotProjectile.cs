@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cuphead.Projectiles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Threading;
@@ -72,16 +73,17 @@ public class SpreadShotInstance : Projectile
 {
     private Vector2 direction;
     private float lifetime = .5f;
-    private float explosionDuration;
     private float explosionTimer;
     private bool collided, lifetimeExpired;
     private SpriteRenderer spriteRenderer;
+    private ProjectileCollision projectileCollision;
+    private const float explosionDuration = 0.425f;
+    private const string collisionAnimationName = "SpreadExplosionAnimation";
 
     public SpreadShotInstance(Vector2 direction, SpriteRenderer spriteRenderer)
     {
         this.spriteRenderer = spriteRenderer;
         explosionTimer = 0.0f;
-        explosionDuration = 0.425f;
         collided = false;
         lifetimeExpired = false;
         this.direction = direction;
@@ -120,30 +122,14 @@ public class SpreadShotInstance : Projectile
             Camera camera = GOManager.Instance.Camera;
             if (lifetime <= 0)
             {
-                spriteRenderer.setAnimation("SpreadExplosionAnimation");
+                spriteRenderer.setAnimation(collisionAnimationName);
                 lifetimeExpired = true;
                 return;
             }
 
-            foreach (GameObject GO in GOManager.Instance.allGOs)
-            {
-                if (GO.type == null) continue;
-                if (GO.type != "PlayerProjectile" && GO.type != "Player" && !GO.type.Contains("NPCProjectile") && !GO.type.Contains("Item"))
-                {
-                    Collider collider = GameObject.GetComponent<Collider>();
-                    if (collider.Intersects(GO.GetComponent<Collider>()))
-                    {
-                        HealthComponent enemyHealth = GO.GetComponent<HealthComponent>();
-                        if (enemyHealth != null)
-                        {
-                            enemyHealth.RemoveHealth(10); // Reduce enemy health by 10
-                        }
-                        spriteRenderer.setAnimation("SpreadExplosionAnimation");
-                        collided = true;
-                        return;
-                    }
-                }
-            }
+            Collider collider = GameObject.GetComponent<Collider>();
+            projectileCollision = new ProjectileCollision(GameObject, collider, collisionAnimationName);
+            collided = projectileCollision.CollisionCheck();
         }
     }
 
