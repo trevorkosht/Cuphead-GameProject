@@ -71,10 +71,10 @@ namespace Cuphead.Player
             return projectileType switch
             {
                 0 => 1 / (25f / 8.3f), // Default
-                1 => 1 / (41.33f / 6.2f), // Spread
-                2 => 1 / (25.1f / 13.85f), // Chaser
+                1 => 1 / (41.33f / 10.2f), // Spread
+                2 => 1 / (25f / 8.3f), // Chaser
                 3 => 1 / (33.14f / 11.6f), // Lobber
-                4 => 1 / (20.38f / 8f), // Roundabout
+                4 => 1 / (25f / 8.3f), // Roundabout
                 _ => player.timeTillNextBullet
             };
         }
