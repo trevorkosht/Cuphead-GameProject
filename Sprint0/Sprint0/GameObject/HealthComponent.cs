@@ -8,12 +8,16 @@ public class HealthComponent : IComponent
     public int maxHealth { get; set; }
     public int currentHealth { get; set; }
     public bool isDead { get; set; }
+    public bool isPlayer { get; set; }
+    public bool isDeadFull { get; set; }
+    public float timeTillDeath = 1.5f;
 
-    public HealthComponent(int maxHP, bool isDead = false)
+    public HealthComponent(int maxHP, bool isDead = false, bool isPlayer = false)
     {
         maxHealth = maxHP;
         currentHealth = maxHealth;
         this.isDead = isDead;
+        this.isPlayer = isPlayer;
     }
 
     public void AddHealth(int healthAmount)
@@ -44,9 +48,17 @@ public class HealthComponent : IComponent
     public void Update(GameTime gameTime)
     {
         // Destroy the GameObject if it is dead
-        if (isDead)
+        if (isDead && !isPlayer)
         {
             GameObject.Destroy();
+        }
+        else if (isDead && isPlayer)
+        {
+            timeTillDeath -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (timeTillDeath <= 0)
+            {
+                isDeadFull = true;
+            }
         }
     }
 

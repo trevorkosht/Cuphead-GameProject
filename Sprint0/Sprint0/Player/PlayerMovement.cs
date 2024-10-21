@@ -28,6 +28,9 @@ namespace Cuphead.Player
 
         public void HandleMovementAndActions(GameTime gameTime, float deltaTime)
         {
+
+            if (player.IsDead)
+                return;
             Vector2 input = keyboardController.GetMovementInput();
             bool jumpRequested = keyboardController.IsJumpRequested();
             bool duckRequested = keyboardController.IsDuckRequested();
@@ -89,7 +92,18 @@ namespace Cuphead.Player
         private void HandleDucking(bool duckRequested)
         {
             var animator = player.GameObject.GetComponent<SpriteRenderer>();
-            if (player.hitTime > 0) return;
+            if (player.hitTime > 0)
+            {
+                if(player.IsDucking)
+                {
+                    player.GameObject.Y = player.floorY + player.DuckingYOffset - 50;
+                    player.IsDucking = false;
+                    player.isDuckingYAdjust = false;
+                    collider.bounds = new Vector2(90, 144);
+                    collider.offset = new Vector2(25, 0);
+                }
+                return;
+            }
 
             if (duckRequested && player.IsGrounded)
             {

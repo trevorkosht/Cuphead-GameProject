@@ -18,7 +18,7 @@ namespace Cuphead.Controllers
         public bool enabled { get; set; } = true;
 
         //player contains all of the players variables
-        private PlayerState player;
+        public PlayerState player { get; set; }
 
         //those 5 classes handle the 5 parts of player control
         private PlayerAnimation playerAnimation;

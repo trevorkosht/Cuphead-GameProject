@@ -1,4 +1,5 @@
 ﻿using Cuphead.Controllers;
+using Cuphead.Player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -153,7 +154,7 @@ namespace Sprint0
                 }
             }
 
-            if (player.GetComponent<HealthComponent>().isDead)
+            if (player.GetComponent<HealthComponent>().isDeadFull)
             {
                 ResetGame();
             }
