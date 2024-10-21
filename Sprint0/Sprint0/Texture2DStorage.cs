@@ -157,6 +157,8 @@ public class Texture2DStorage
         _textures["EnemyDeath"] = content.Load<Texture2D>(@"VisualEffectTextures\enemy_death");
         _textures["TulipAttackVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\tulip-attack-vfx");
         _textures["TulipHitVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\tulip-hit-vfx");
+        _textures["SporeTrailVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spore-trail-vfx");
+        _textures["SporeExplosionVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spore-explosion-vfx");
 
 
         //item texture
@@ -179,7 +181,7 @@ public class Texture2DStorage
     public void loadPlayerAnimations(SpriteRenderer spriteRenderer) {
         Animation playerDashAirAnimation = new Animation(GetTexture("PlayerDashAir"), 2, 5, 144, 144);
         Animation playerDashGroundAnimation = new Animation(GetTexture("PlayerDashGround"), 2, 5, 144, 144);
-        Animation playerDeathAnimation = new Animation(GetTexture("PlayerDeath"), 5, 16, 144, 144);
+        Animation playerDeathAnimation = new Animation(GetTexture("PlayerDeath"), 3, 16, 144, 144);
         Animation playerDuckAnimation = new Animation(GetTexture("PlayerDuck"), 5, 8, 144, 144);
         Animation playerDuckShootAnimation = new Animation(GetTexture("PlayerDuckShoot"), 5, 3, 144, 144);
         Animation playerHitAirAnimation = new Animation(GetTexture("PlayerHitAir"), 5, 6, 144, 144);

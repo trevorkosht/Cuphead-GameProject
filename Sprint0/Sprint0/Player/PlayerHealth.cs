@@ -36,6 +36,9 @@ namespace Cuphead.Player
             if (!player.IsInvincible && !player.IsDead)
             {
                 GameObject enemy = collision.TypeCollide("Enemy");
+                if(enemy == null){
+                    enemy = collision.TypeCollide("NPCProjectile");
+                }
                 if (enemy != null)
                 {
                     //not sure why he take double damage
@@ -57,7 +60,17 @@ namespace Cuphead.Player
             else
             {
                 player.IsTakingDamage = true;
-                player.GameObject.GetComponent<SpriteRenderer>().setAnimation("HitGround");
+                SpriteRenderer sRend = player.GameObject.GetComponent<SpriteRenderer>();
+
+
+                if (player.IsGrounded) {
+                    sRend.setAnimation("HitGround");
+                }
+                else {
+                    sRend.setAnimation("HitAir");
+                }
+                
+
             }
         }
 

@@ -7,13 +7,15 @@ public class AggravatingAcorn : BaseEnemy
     private Vector2 dropPosition;
     private bool isFalling;
     private float speed;
+    private float gravity = 10f;
+    private float yVelocity = 0;
     private float dropThreshold = 50f;
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
         sRend.setAnimation("aggravatingAcornAnimation");
-        speed = 200f;
+        speed = 400f;
         isFalling = false;
         dropPosition = Vector2.Zero;
     }
@@ -39,7 +41,8 @@ public class AggravatingAcorn : BaseEnemy
         else
         {
             // Drop the acorn
-            GameObject.Y += (int)(speed * 1.5f * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            yVelocity += gravity;
+            GameObject.Y += (int)(yVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
             // Destroy when reaching the drop position
             if (GameObject.Y >= dropPosition.Y)

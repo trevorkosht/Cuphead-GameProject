@@ -32,13 +32,9 @@ public class TullipProjectile : IComponent
         velocity.Y += gravity;
         BoxCollider playerCollider = GOManager.Instance.Player.GetComponent<BoxCollider>();
         Rectangle playerBounds = playerCollider.BoundingBox;
-        GameObject.type = "Enemy";
+        GameObject.type = "NPCProjectile";
 
         GameObject.Move((int)velocity.X, (int)velocity.Y);
-
-        //if (GameObject.GetComponent<CircleCollider>().Intersects(playerCollider)) {
-        //    GOManager.Instance.Player.
-        //}
 
         bool hitPlatform = false;
         Rectangle hitPlatformBounds = new Rectangle();

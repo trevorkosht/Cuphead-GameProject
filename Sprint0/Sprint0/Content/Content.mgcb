@@ -1364,6 +1364,30 @@
 /processorParam:TextureFormat=Color
 /build:VisualEffectTextures/ProjectileVFX/roundabout_spawn_vfx.png
 
+#begin VisualEffectTextures/ProjectileVFX/spore-explosion-vfx.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:VisualEffectTextures/ProjectileVFX/spore-explosion-vfx.png
+
+#begin VisualEffectTextures/ProjectileVFX/spore-trail-vfx.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:VisualEffectTextures/ProjectileVFX/spore-trail-vfx.png
+
 #begin VisualEffectTextures/ProjectileVFX/spread_hit_vfx.png
 /importer:TextureImporter
 /processor:TextureProcessor

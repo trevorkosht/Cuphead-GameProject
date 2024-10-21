@@ -48,7 +48,7 @@ namespace Cuphead.Player
                             HandleObstacleCollision(go);
                             collidedObstacle = true;
                         }
-                        else if (go.type.Contains("Enemy"))
+                        else if (go.type.Contains("Enemy") || go.type.Contains("NPCProjectile"))
                         {
                             HandleEnemyCollision(go);
                         }

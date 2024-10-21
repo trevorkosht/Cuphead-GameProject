@@ -57,7 +57,8 @@ public class MurderousMushroom : BaseEnemy
                     projectileRenderer.addAnimation("projectile", new Animation(sporeTexture, 3, 12, 144, 144));
                     projectileRenderer.setAnimation("projectile");
 
-
+                    CircleCollider collider = new CircleCollider(30, new Vector2(-30, -35), GOManager.Instance.GraphicsDevice);
+                    projectile.AddComponent(collider);
 
                     Rectangle effectPosition = new Rectangle();
                     if (sRend.isFacingRight) {
@@ -116,7 +117,7 @@ public class MurderousMushroom : BaseEnemy
     {
         base.Update(gameTime);
 
-        if(Math.Abs((float)(GameObject.X - player.X)) >= 450) {
+        if(Math.Abs((float)(GameObject.X - player.X)) >= 600) {
             HideUnderCap();
         }
         else if(isHidden) {

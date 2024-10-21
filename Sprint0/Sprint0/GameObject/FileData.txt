@@ -5,7 +5,7 @@ Block,BigHill1,-500,600
 Block,BigHill1,450,600
 Block,BigHill2,1400,500
 
-Enemy,AggravatingAcorn,900,100
+Enemy,AggravatingAcorn,2000,100
 Enemy,MurderousMushroom,1200,500
 
 Background,SkyBackground1,-600,-100
