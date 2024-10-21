@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 public class LobberProjectile : Projectile
 {
-    private float speed = 5f;
+    private float speed = 6f;
     private float gravity = 0.2f;
     private Vector2 velocity;
     private bool isFacingRight;

@@ -71,7 +71,7 @@ public class SpreadShotProjectile : Projectile
 public class SpreadShotInstance : Projectile
 {
     private Vector2 direction;
-    private float lifetime = 2.0f;
+    private float lifetime = .5f;
     private float explosionDuration;
     private float explosionTimer;
     private bool collided, lifetimeExpired;

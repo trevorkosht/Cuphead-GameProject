@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class RoundaboutProjectile : Projectile
 {
-    private float speed = 3f;
+    private float speed = 5f;
     private Vector2 velocity;
     private Vector2 playerLaunchPosition;
     private bool returning;
