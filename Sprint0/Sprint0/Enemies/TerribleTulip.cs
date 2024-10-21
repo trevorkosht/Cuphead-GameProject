@@ -38,7 +38,7 @@ public class TerribleTulip : BaseEnemy
                 VisualEffectFactory.createVisualEffect(vfxDestRectangle, attackVFX, 2, 10, 0.75f, true);
 
                 Vector2 playerPosition = new Vector2(player.X, player.Y);
-                GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new TullipProjectile(GameObject.position));
+                GameObject projectile = new GameObject(GameObject.X, GameObject.Y - 50, new TullipProjectile(new Vector2(GameObject.X, GameObject.Y - 50)));
                 SpriteRenderer projSrend = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), (player.X > GameObject.X));
                 CircleCollider collider = new CircleCollider(40, new Vector2(-28, -32), GOManager.Instance.GraphicsDevice);
                 projectile.AddComponent(collider);
