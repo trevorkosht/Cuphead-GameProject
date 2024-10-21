@@ -1,4 +1,6 @@
 // Section 1 (0000-2000)
+Block,BigHill1,-1300,100
+
 Block,BigHill1,-500,600
 Block,BigHill1,450,600
 Block,BigHill2,1400,500
@@ -6,7 +8,7 @@ Block,BigHill2,1400,500
 Enemy,AggravatingAcorn,900,100
 Enemy,MurderousMushroom,1200,500
 
-Background,SkyBackground1,-500,-100
+Background,SkyBackground1,-600,-100
 Background,HillBackground1,-500,400
 Background,TreeBackground2,1000,200
 Background,SkyBackground1,1200,-100
@@ -28,7 +30,7 @@ Background,Rock1,2100,500
 Background,Rock2,3000,400
 Background,Leaves1,3200,-300
 
-Item,Spreadshot,2200,300
+Item,Roundabout,2200,300
 
 // Section 3 (4000-6000)
 Block,BigHill1,4000,600
@@ -92,7 +94,8 @@ Background,Leaves2,9300,-100
 Background,Clouds,9400,-300
 Background,Rock2,9100,250
 
-Item,Roundabout,9400,500
+
+Item,Spreadshot,9400,500
 
 // Section 6 (10000-12000)
 Block,BigHill1,10500,600

@@ -22,7 +22,7 @@ public class DeadlyDaisy : BaseEnemy
 
     public override void Move(GameTime gameTime)
     {
-        if(GameObject.Y < 0 && GameObject.X - player.X > 1500) {
+        if(GameObject.Y < 0 && GameObject.X - player.X > 750) {
             return;
         }
 
@@ -35,10 +35,7 @@ public class DeadlyDaisy : BaseEnemy
                 airVelocity = Vector2.Zero;
             }
 
-            if (collisionManager.jumpRequested) {
-                HandleJumpRequested();
-            }
-            else if (collisionManager.atPlatformEdge && turnDelay < 0){
+            if (collisionManager.atPlatformEdge || GameObject.X < 1250){
                 HandlePlatformEdge();
             }
             else {
@@ -59,13 +56,13 @@ public class DeadlyDaisy : BaseEnemy
             if (collisionManager.isJumping) {
                 sRend.setAnimation("Jump");
                 sRend.currentAnimation.Value.CurrentFrame = 8;
+                airVelocity.Y += gravity;
             }
             else {
                 movingRight = player.X > GameObject.X;
+                airVelocity.Y += gravity/15;
             }
 
-            // Apply gravity if in the air
-            airVelocity.Y += gravity;
         }
         turnDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -90,21 +87,38 @@ public class DeadlyDaisy : BaseEnemy
     }
 
     private void HandlePlatformEdge() {
-        sRend.setAnimation("Turn");
-
-        //Makes the sprite look a little less offset during the animation.
-        if (movingRight) {
-            GameObject.X += 1;
-        }
-        else {
-            GameObject.X -= 1;
+        if(collisionManager.foundAdjacentPlatform == true) {
+            return;
         }
 
-        if (sRend.currentAnimation.Value.CurrentFrame == 17) {
-            movingRight = !movingRight;
-            sRend.setAnimation("deadlyDaisyAnimation");
-            turnDelay = 0.5f;
+        //check for jump
+        if (!collisionManager.jumpRequested || (movingRight != player.X > GameObject.X && Math.Abs(player.X - GameObject.X) > 500) || (GameObject.X < 1250 && !movingRight)){
+            sRend.setAnimation("Turn");
+
+            //Makes the sprite look a little less offset during the animation.
+            if (movingRight) {
+                GameObject.X += 1;
+            }
+            else {
+                GameObject.X -= 1;
+            }
+
+            if (sRend.currentAnimation.Value.CurrentFrame == 17) {
+                movingRight = !movingRight;
+                sRend.setAnimation("deadlyDaisyAnimation");
+                turnDelay = 3.0f;
+            }
+
         }
+        else if(collisionManager.jumpRequested){
+            HandleJumpRequested();
+        }
+        //check if turn needed
+
+
+
+
+
     }
 
     private void HandleSlopeCollision() {
@@ -121,13 +135,10 @@ public class DeadlyDaisy : BaseEnemy
 
         // Check if the player is within the horizontal bounds of the slope's top edge
         if (daisyBounds.Bottom > Math.Min(topLeft.Y, topRight.Y) && daisyBounds.Left >= topLeft.X && daisyBounds.Right <= topRight.X) {
-            // Calculate the player's Y position relative to the slope
-            float slopeHeightAtPlayerX = MathHelper.Lerp(topLeft.Y, topRight.Y, (daisyBounds.Center.X - topLeft.X) / (topRight.X - topLeft.X));
+            float slopeHeightAtDaisyX = MathHelper.Lerp(topLeft.Y, topRight.Y, (daisyBounds.Center.X - topLeft.X) / (topRight.X - topLeft.X));
 
-            if (daisyBounds.Bottom > slopeHeightAtPlayerX) {
-                // Place the player on top of the slope
-                GameObject.Y = (int)slopeHeightAtPlayerX - daisyBounds.Height + 10;
-                collisionManager.isGrounded = true;
+            if (daisyBounds.Bottom + 20 > slopeHeightAtDaisyX) {
+                GameObject.Y = (int)slopeHeightAtDaisyX - daisyBounds.Height + 10;
             }
         }
         else if (daisyBounds.Right < topLeft.X) // Left of the slope
