@@ -124,7 +124,9 @@ namespace Cuphead.Player
             Rectangle colliderBounds = obstacle.GetComponent<BoxCollider>().BoundingBox;
             if (playerBounds.Bottom - 50 < colliderBounds.Top) //On top (50 for extra space in case not checked collision immeditately)
             {
-                player.GameObject.Y = colliderBounds.Top - playerBounds.Height + 1;
+                int duckingOffset = 1;
+                if (player.IsDucking) duckingOffset = -30;
+                player.GameObject.Y = colliderBounds.Top - playerBounds.Height + duckingOffset;
                 player.velocity.Y = 0;
                 player.GroundLevel = colliderBounds.Top + 10;
                 player.floorY = colliderBounds.Top + 10;
@@ -164,7 +166,9 @@ namespace Cuphead.Player
                 if (playerBounds.Bottom > slopeHeightAtPlayerX)
                 {
                     // Place the player on top of the slope
-                    player.GameObject.Y = (int)slopeHeightAtPlayerX - playerBounds.Height + 10;
+                    int duckingOffset = 0;
+                    if (player.IsDucking) duckingOffset = -30;
+                    player.GameObject.Y = (int)slopeHeightAtPlayerX - playerBounds.Height + 10 + duckingOffset;
                     player.velocity.Y = 0;
                     player.IsGrounded = true;
                 }
