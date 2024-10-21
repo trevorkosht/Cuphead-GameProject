@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class ChaserProjectile : Projectile
 {
-    private float speed = 5f;
+    private float speed = 9f;
     private GameObject targetEnemy;
     private Vector2 lastDirection;
     private bool isFacingRight;
