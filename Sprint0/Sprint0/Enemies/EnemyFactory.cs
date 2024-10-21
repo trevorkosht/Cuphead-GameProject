@@ -30,7 +30,7 @@ public static class EnemyFactory
             case EnemyType.DeadlyDaisy:
                 enemyLogic = new DeadlyDaisy();
                 enemy.AddComponent(enemyLogic);
-                enemy.AddComponent(new BoxCollider(new Vector2(135, 155), new Vector2(5, -5), GOManager.Instance.GraphicsDevice));
+                enemy.AddComponent(new BoxCollider(new Vector2(105, 145), new Vector2(20, 0), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("deadlyDaisyAnimation", new Animation(textureStorage.GetTexture("DeadlyDaisy"), 3, 16, 144, 144));
                 spriteRenderer.addAnimation("Spawn", new Animation(textureStorage.GetTexture("DaisySpawn"), 5, 16, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("DeadlyDaisy"), textureStorage);
