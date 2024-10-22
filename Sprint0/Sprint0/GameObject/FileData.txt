@@ -116,7 +116,7 @@ Background,HillBackground1,11500,400
 Block,BigHill1,12000,600
 Block,BigHill1,12900,600
 
-Enemy,AcornMaker,13000,375
+Enemy,AcornMaker,13000,225
 
 Background,LevelBackground,12500,200
 Background,SkyBackground1,12500,-100
