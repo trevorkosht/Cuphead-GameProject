@@ -41,7 +41,6 @@ namespace Cuphead.Player
                 }
                 if (enemy != null)
                 {
-                    //not sure why he take double damage
                     TakeDamage(50);
                 }
             }
@@ -80,7 +79,7 @@ namespace Cuphead.Player
             {
                 if (delayGame.Cooldown(gameTime, player.InvincibilityDuration))
                 {
-                    player.IsInvincible = false;  // End invincibility after cooldown
+                    player.IsInvincible = false; 
                 }
             }
         }

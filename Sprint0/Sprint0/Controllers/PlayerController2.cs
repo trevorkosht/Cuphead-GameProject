@@ -65,7 +65,7 @@ namespace Cuphead.Controllers
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 
-            playerHealth.IsPleayerDead(animator);
+            //playerHealth.IsPleayerDead(animator);
 
             UpdateTimers(deltaTime);
             playerCollision.CollisionCheck();
