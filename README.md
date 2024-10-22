@@ -29,3 +29,13 @@ I am reviewing BothersomeBlueberry,
 When collision detection got added, it was not done so in a seperate file, this causes a lot of condition statememts which upped our Cyclomatic Complexity. To solve this we can remove many of the collision conditionals to another file. 
 BothersomeBlueberry also has a decent amount of coupling, My removing the reached edge and other collision detection into a seperate file it will reduce coupling. 
 With these simple fixes BothersomeBlueberry will have increased code quality.
+
+Zol - 
+I am reviewing ChaserProjectile.cs,
+I would say most of the code is readable with the update method a bit long and complex this makes the code harder to maintain.
+The update method also have a bunch of if statement so it could add some Cyclomatic Complexity.
+The coupling isnt too bad since it is only used in the projectile factory.
+There isnt many lines of code since it only include 1 type of projectile.
+overall other then the update method the file is very well done and the update method can improve by moving some block out and makeing them methods.
+
+
