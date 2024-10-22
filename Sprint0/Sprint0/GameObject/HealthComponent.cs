@@ -10,7 +10,7 @@ public class HealthComponent : IComponent
     public bool isDead { get; set; }
     public bool isPlayer { get; set; }
     public bool isDeadFull { get; set; }
-    public float timeTillDeath = 1.5f;
+    public float timeTillDeath = 1f;
 
     public HealthComponent(int maxHP, bool isDead = false, bool isPlayer = false)
     {
