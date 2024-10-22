@@ -93,6 +93,7 @@ namespace Cuphead.Player
                     }
 
                     player.IsGrounded = true;
+                    player.HasDashed = false;
                     player.floorY = (int)player.GroundLevel;
                     player.airTime = 1;
 
@@ -114,6 +115,7 @@ namespace Cuphead.Player
                 player.GroundLevel = colliderBounds.Top;
                 player.floorY = colliderBounds.Bottom + 100;
                 player.IsGrounded = true;
+                player.HasDashed = false;
             }
 
         }
@@ -131,6 +133,7 @@ namespace Cuphead.Player
                 player.GroundLevel = colliderBounds.Top + 10;
                 player.floorY = colliderBounds.Top + 10;
                 player.IsGrounded = true;
+                player.HasDashed = false;
             }
             else if (player.GameObject.X < obstacle.X)
             {
@@ -165,6 +168,7 @@ namespace Cuphead.Player
                     player.GameObject.Y = (int)slopeHeightAtPlayerX - playerBounds.Height + 10 + duckingOffset;
                     player.velocity.Y = 0;
                     player.IsGrounded = true;
+                    player.HasDashed = false;
                 }
             }
             else if (playerBounds.Right < topLeft.X) 

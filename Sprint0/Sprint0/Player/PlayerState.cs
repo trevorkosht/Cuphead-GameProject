@@ -34,6 +34,7 @@ namespace Cuphead.Player
         public bool IsSpawning = true;
         public bool IsKnockBacked = false;
         public bool IsTakingDamage = false;
+        public bool HasDashed = false;
 
         //floats
         public float Speed { get; set; } = 700f;

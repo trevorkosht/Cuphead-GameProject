@@ -137,10 +137,11 @@ namespace Cuphead.Player
                 // Continue dashing
                 PerformDash(gameTime, player.height, deltaTime);
             }
-            else if (dashRequested && gameDelay.Cooldown(gameTime, player.TimeTillNextDash) && !player.IsInvincible)
+            else if (!player.HasDashed && dashRequested && gameDelay.Cooldown(gameTime, player.TimeTillNextDash) && !player.IsInvincible)
             {
                 // Start dash
                 player.IsDashing = true;
+                player.HasDashed = true;
                 player.dashTime = player.dashDuration;
                 player.height = player.GameObject.Y;
                 player.Gravity = 0;
