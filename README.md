@@ -49,3 +49,23 @@ This file scored worse than average on maintainability and cyclomatic complexity
 This file handles the logic for each action the player can take, like moving. The high cyclomatic complexity makes sense for this type of file since the player has many different states and animations it can be in, some of which are dependent on other states like the ducking while shooting animation. The cyclomatic complexity could be reduced by increasing the number of states that need to be handled, and making them all more specific. However this just shunts the cyclomatic complexity over to the PlayerState code, these conditional logic statements have to happen somewhere. 
 
 The maintainability of this code is a little low due to the fact that it is designed to handle a set and predetermined number of states and actions that the player could take. It could be hard to edit or add on to the methods defined here, since it could be easy to cause a bug in the player behavior, since a lot of it is handled here.
+
+Jacob - 
+Readability Code Review
+Author: Jacob Subler
+Date: 10/21/2024
+Sprint #: 3
+File Name: PlayerMovement.cs
+File Author: Zol Chen
+Review Time: 10 minutes
+Comments: There are lots of if/else statements, many of which are nested. This adds some complexity to reading the code because you have to follow long trails of conditionals to follow the logic of the class code. There are also many different methods inside the PlayerMovement class which makes it harder to locate specific code you are looking for. We could benefit from possibly breaking this class into smaller pieces to make the class length longer and the code more readable.
+
+
+Maintainability Code Review
+Author: Jacob Subler
+Date: 10/21/2024
+Sprint #: 3
+File Name: PlayerCollision.cs
+File Author: Zol Chen
+Review Time: 10 minutes
+Comments: The PlayerCollision class could benefit from reworking to improve Maintainability. There is a separate function for colliding with all the different GameObjects which significantly increases the length of the class and suggests for any future collisions to be handled, another function would need to be created and added to the switch case. We could look to consolidate the collision functions into less overall functions by grouping similar logic.
