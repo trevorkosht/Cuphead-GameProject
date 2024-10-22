@@ -64,11 +64,11 @@ public static class EnemyFactory
             case EnemyType.AcornMaker:
                 enemyLogic = new AcornMaker();
                 enemy.AddComponent(enemyLogic);
-                enemy.AddComponent(new BoxCollider(new Vector2(200, 300), new Vector2(60, 0), GOManager.Instance.GraphicsDevice));
-                spriteRenderer.addAnimation("acornMakerAnimation", new Animation(textureStorage.GetTexture("AcornMaker"), 5, 16, 144, 144));
-                spriteRenderer.spriteScale = 2;
+                enemy.AddComponent(new BoxCollider(new Vector2(300, 450), new Vector2(90, 0), GOManager.Instance.GraphicsDevice));
+                spriteRenderer.addAnimation("acornMakerAnimation", new Animation(textureStorage.GetTexture("AcornMaker"), 4, 20, 600, 600));
+                spriteRenderer.spriteScale = 3;
                 enemyLogic.Initialize(textureStorage.GetTexture("AcornMaker"), textureStorage);
-                enemyHP = 100;
+                enemyHP = 300;
                 break;
             case EnemyType.BothersomeBlueberry:
                 enemyLogic = new BothersomeBlueberry();

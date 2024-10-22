@@ -10,6 +10,7 @@ public abstract class BaseEnemy : IComponent
 
     protected Texture2D spriteTexture;
     protected Texture2D deathVFXTexture = GOManager.Instance.textureStorage.GetTexture("EnemyDeath");
+    protected Texture2D acornMakerDeath = GOManager.Instance.textureStorage.GetTexture("AcornMakerDeath");
     protected float spriteScale = 1f;     
     protected Rectangle sourceRectangle; 
     protected Vector2 origin;           
@@ -31,8 +32,15 @@ public abstract class BaseEnemy : IComponent
     public virtual void Update(GameTime gameTime)
     {
         if(GameObject.GetComponent<HealthComponent>().currentHealth == 0) {
-            Rectangle destRectangle = new Rectangle(GameObject.X - 144, GameObject.Y - 144, 144, 144);
-            VisualEffectFactory.createVisualEffect(destRectangle, deathVFXTexture, 3, 9, 3f, true);
+            if (this is AcornMaker) {
+                Rectangle destRectangle = new Rectangle(GameObject.X - 250, GameObject.Y - 250, 900, 900);
+                VisualEffectFactory.createVisualEffect(destRectangle, acornMakerDeath, 3, 18, 1.0f, true);
+            }
+            else {
+                Rectangle destRectangle = new Rectangle(GameObject.X - 144, GameObject.Y - 144, 144, 144);
+                VisualEffectFactory.createVisualEffect(destRectangle, deathVFXTexture, 3, 9, 3f, true);
+            }
+
         }
 
         Move(gameTime);

@@ -22,7 +22,7 @@ public class AcornMaker : BaseEnemy
 
         if (timeSinceLastSpawn >= spawnCooldown && sRend.currentAnimation.Value.CurrentFrame == 8)
         {
-            GameObject newAcorn = EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn, GameObject.X + 70, GameObject.Y - 150);
+            GameObject newAcorn = EnemyFactory.CreateEnemy(EnemyType.AggravatingAcorn, GameObject.X + 150, GameObject.Y - 75);
 
             GOManager.Instance.allGOs.Add(newAcorn);
 

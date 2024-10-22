@@ -601,7 +601,7 @@
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/acorn_fall.png
 
-#begin EnemyTextures/AcornMakerSprite.png
+#begin EnemyTextures/acorn-maker-death.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -611,7 +611,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:EnemyTextures/AcornMakerSprite.png
+/build:EnemyTextures/acorn-maker-death.png
+
+#begin EnemyTextures/acorn-maker.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/acorn-maker.png
 
 #begin EnemyTextures/AggravatingAcornSprite.png
 /importer:TextureImporter

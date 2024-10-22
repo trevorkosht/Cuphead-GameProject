@@ -15,7 +15,7 @@ public class Texture2DStorage
         _textures["ToothyTerror"] = content.Load<Texture2D>(@"EnemyTextures\ToothyTerrorSprite");
         _textures["BothersomeBlueberry"] = content.Load<Texture2D>(@"EnemyTextures\BothersomeBlueberrySprite");
         _textures["AggravatingAcorn"] = content.Load<Texture2D>(@"EnemyTextures\AggravatingAcornSprite");
-        _textures["AcornMaker"] = content.Load<Texture2D>(@"EnemyTextures\AcornMakerSprite");
+        _textures["AcornMaker"] = content.Load<Texture2D>(@"EnemyTextures\acorn-maker");
         _textures["Seed"] = content.Load<Texture2D>(@"EnemyTextures\LoberSeed");
         _textures["PurpleSpore"] = content.Load<Texture2D>(@"EnemyTextures\purple_spore");
         _textures["PinkSpore"] = content.Load<Texture2D>(@"EnemyTextures\pink_spore");
@@ -36,6 +36,7 @@ public class Texture2DStorage
         _textures["MushroomClosing"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_closing");
         _textures["MushroomOpening"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_opening");
         _textures["MushroomAttackVFX"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_shoot_vfx");
+        _textures["AcornMakerDeath"] = content.Load<Texture2D>(@"EnemyTextures\acorn-maker-death");
 
 
 
@@ -181,13 +182,13 @@ public class Texture2DStorage
     public void loadPlayerAnimations(SpriteRenderer spriteRenderer) {
         Animation playerDashAirAnimation = new Animation(GetTexture("PlayerDashAir"), 2, 5, 144, 144);
         Animation playerDashGroundAnimation = new Animation(GetTexture("PlayerDashGround"), 2, 5, 144, 144);
-        Animation playerDeathAnimation = new Animation(GetTexture("PlayerDeath"), 3, 16, 144, 144);
+        Animation playerDeathAnimation = new Animation(GetTexture("PlayerDeath"), 5, 16, 144, 144);
         Animation playerDuckAnimation = new Animation(GetTexture("PlayerDuck"), 5, 8, 144, 144);
         Animation playerDuckShootAnimation = new Animation(GetTexture("PlayerDuckShoot"), 5, 3, 144, 144);
         Animation playerHitAirAnimation = new Animation(GetTexture("PlayerHitAir"), 5, 6, 144, 144);
         Animation playerHitGroundAnimation = new Animation(GetTexture("PlayerHitGround"), 5, 6, 144, 144);
         Animation playerIdleAnimation = new Animation(GetTexture("PlayerIdle"), 5, 8, 144, 144);
-        Animation playerSpawnAnimation = new Animation(GetTexture("PlayerIntro"), 5, 28, 144, 144);
+        Animation playerSpawnAnimation = new Animation(GetTexture("PlayerIntro"), 3, 28, 144, 144);
         Animation playerJumpAnimation = new Animation(GetTexture("PlayerJump"), 2, 8, 144, 144);
         Animation playerRunAnimation = new Animation(GetTexture("PlayerRun"),1, 16, 144, 144);
         Animation playerRunShootingDiagonalUpAnimation = new Animation(GetTexture("PlayerRunShootingDiagonalUp"), 5, 16, 144, 144);
