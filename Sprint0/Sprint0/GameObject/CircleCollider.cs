@@ -21,14 +21,12 @@ public class CircleCollider : Collider
     {
         if (GameObject != null)
         {
-            // Center the circle collider around the GameObject's position
             Center = GameObject.position - offset;
         }
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        // Draw a translucent blue circle to visualize the collider
         if (GOManager.Instance.IsDebugging)
         {
             Rectangle circleBounds = new Rectangle(
@@ -49,7 +47,7 @@ public class CircleCollider : Collider
         }
         else if (other is BoxCollider box)
         {
-            return box.Intersects(this); // Use BoxCollider's method to check collision
+            return box.Intersects(this);
         }
         return false;
     }
@@ -74,10 +72,8 @@ public class CircleCollider : Collider
             for (int x = 0; x < diameter; x++)
             {
                 int index = y * diameter + x;
-                // Calculate the distance from the center of the texture
                 float distanceSquared = (x - radius) * (x - radius) + (y - radius) * (y - radius);
 
-                // If the pixel is within the circle, color it white, otherwise make it transparent
                 if (distanceSquared <= radiusSquared)
                 {
                     colorData[index] = Color.White;

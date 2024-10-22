@@ -57,7 +57,7 @@ namespace Cuphead.Player
             }
             if (!collidedObstacle)
             {
-                player.GroundLevel = 9999; //Fall
+                player.GroundLevel = 9999;
                 player.IsGrounded = false;
             }
         }
@@ -108,7 +108,7 @@ namespace Cuphead.Player
         {
             Rectangle playerBounds = player.GameObject.GetComponent<BoxCollider>().BoundingBox;
             Rectangle colliderBounds = platform.GetComponent<BoxCollider>().BoundingBox;
-            if (playerBounds.Bottom - 50 < colliderBounds.Top) //On top (50 for extra space in case not checked collision immeditately)
+            if (playerBounds.Bottom - 50 < colliderBounds.Top) 
             {
                 player.velocity.Y = 0;
                 player.GroundLevel = colliderBounds.Top;
@@ -122,7 +122,7 @@ namespace Cuphead.Player
         {
             Rectangle playerBounds = player.GameObject.GetComponent<BoxCollider>().BoundingBox;
             Rectangle colliderBounds = obstacle.GetComponent<BoxCollider>().BoundingBox;
-            if (playerBounds.Bottom - 50 < colliderBounds.Top) //On top (50 for extra space in case not checked collision immeditately)
+            if (playerBounds.Bottom - 50 < colliderBounds.Top) 
             {
                 int duckingOffset = 1;
                 if (player.IsDucking) duckingOffset = -30;
@@ -147,25 +147,19 @@ namespace Cuphead.Player
             var playerCollider = player.GameObject.GetComponent<BoxCollider>();
             var obstacleCollider = obstacle.GetComponent<BoxCollider>();
 
-            // Get the player's bounding box
             Rectangle playerBounds = playerCollider.BoundingBox;
 
-            // Get the rotated corners of the obstacle's bounding box (assuming the obstacle is sloped)
             Vector2[] obstacleCorners = obstacleCollider.GetRotatedCorners();
 
-            // Get the top edge of the slope (assuming it's a left-to-right slope)
-            Vector2 topLeft = obstacleCorners[0]; // Top-left corner of the slope
-            Vector2 topRight = obstacleCorners[1]; // Top-right corner of the slope
+            Vector2 topLeft = obstacleCorners[0]; 
+            Vector2 topRight = obstacleCorners[1]; 
 
-            // Check if the player is within the horizontal bounds of the slope's top edge
             if (playerBounds.Bottom > Math.Min(topLeft.Y, topRight.Y) && playerBounds.Left >= topLeft.X && playerBounds.Right <= topRight.X)
             {
-                // Calculate the player's Y position relative to the slope
                 float slopeHeightAtPlayerX = MathHelper.Lerp(topLeft.Y, topRight.Y, (playerBounds.Center.X - topLeft.X) / (topRight.X - topLeft.X));
 
                 if (playerBounds.Bottom > slopeHeightAtPlayerX)
                 {
-                    // Place the player on top of the slope
                     int duckingOffset = 0;
                     if (player.IsDucking) duckingOffset = -30;
                     player.GameObject.Y = (int)slopeHeightAtPlayerX - playerBounds.Height + 10 + duckingOffset;
@@ -173,11 +167,11 @@ namespace Cuphead.Player
                     player.IsGrounded = true;
                 }
             }
-            else if (playerBounds.Right < topLeft.X) // Left of the slope
+            else if (playerBounds.Right < topLeft.X) 
             {
                 player.GameObject.X = (int)(topLeft.X - player.playerWidth - 5);
             }
-            else if (playerBounds.Left > topRight.X) // Right of the slope
+            else if (playerBounds.Left > topRight.X) 
             {
                 player.GameObject.X = (int)(topRight.X + 5);
             }

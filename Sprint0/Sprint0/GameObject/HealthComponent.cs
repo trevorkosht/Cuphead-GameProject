@@ -41,13 +41,12 @@ public class HealthComponent : IComponent
         else
         {
             currentHealth = 0;
-            isDead = true; // Mark as dead if health reaches zero
+            isDead = true;
         }
     }
 
     public void Update(GameTime gameTime)
     {
-        // Destroy the GameObject if it is dead
         if (isDead && !isPlayer)
         {
             GameObject.Destroy();
@@ -64,6 +63,5 @@ public class HealthComponent : IComponent
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        // Non-visual component
     }
 }

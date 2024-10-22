@@ -19,7 +19,7 @@ public static class BlockFactory
     { "Stump1", (144, 144, new Vector2(124, 124), new Vector2(10, 10), 0.504f) },
     { "Stump2", (144, 144, new Vector2(124, 144), new Vector2(10, 0), 0.505f) },
     { "Stump3", (144, 144, new Vector2(124, 134), new Vector2(10, 5), 0.506f) },
-    {"BigHill4", (737, 660, new Vector2(737, 660), new Vector2(0,0), 0.7f) }, //New textures start here
+    {"BigHill4", (737, 660, new Vector2(737, 660), new Vector2(0,0), 0.7f) },
     {"Hill4", (537, 144, new Vector2(537, 144), new Vector2(0,0), 0.7f) },
     {"Hill5", (761, 177, new Vector2(761, 177), new Vector2(0,0), 0.71f) },
 };
@@ -27,23 +27,17 @@ public static class BlockFactory
 
     public static GameObject CreateBlock(string subtype, Vector2 position)
     {
-        // Get the correct texture from the texture storage
         Texture2D texture = GOManager.Instance.textureStorage.GetTexture(subtype);
 
-        // Get the block's size, bounds, offset, and orderInLayer from the dictionary
         if (blockSizes.TryGetValue(subtype, out (int width, int height, Vector2 bounds, Vector2 offset, float orderInLayer) blockData))
         {
-            // Apply the offset to the position
             Vector2 adjustedPosition = position;
 
-            // Create a destination rectangle for the block
             Rectangle destRectangle = new Rectangle((int)adjustedPosition.X, (int)adjustedPosition.Y, blockData.width, blockData.height);
 
-            // Determine if the block needs a collider
             bool collider = !subtype.Contains("Background") && !subtype.Contains("Tree") && !subtype.Contains("Leaves") &&
                             !subtype.Contains("Rock") && !subtype.Contains("Bush");
 
-            // Create the block with the size, texture, and other properties
             GameObject block = CreateBlock(destRectangle, texture, blockData.width, blockData.height, collider, blockData.bounds, blockData.offset, blockData.orderInLayer, subtype);
             block.type = block.type + "Block" + subtype;
             return block;
@@ -53,28 +47,23 @@ public static class BlockFactory
             Console.WriteLine($"Warning: Block subtype '{subtype}' not found. Using default size.");
             Rectangle defaultRect = new Rectangle((int)position.X, (int)position.Y, 100, 100);
             bool collider = false;
-            return CreateBlock(defaultRect, texture, 100, 100, collider, new Vector2(100, 100), Vector2.Zero, 0.75f, subtype); // Use default size and orderInLayer if not found
+            return CreateBlock(defaultRect, texture, 100, 100, collider, new Vector2(100, 100), Vector2.Zero, 0.75f, subtype);
         }
     }
 
-    // Consolidated method to handle block creation, frame size, and collider size
     public static GameObject CreateBlock(Rectangle destRectangle, Texture2D texture, int frameWidth, int frameHeight, bool collider, Vector2 bounds, Vector2 offset, float orderInLayer, string subtype)
     {
         GameObject block = new GameObject(destRectangle.X, destRectangle.Y);
 
-        // Create and add the sprite renderer
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
         block.AddComponent(spriteRenderer);
 
-        // Set the frame size for the animation
         Animation blockTexture = new Animation(texture, 1, 1, frameHeight, frameWidth);
         spriteRenderer.addAnimation("texture", blockTexture);
         spriteRenderer.setAnimation("texture");
 
-        // Set the sprite's orderInLayer
         spriteRenderer.orderInLayer = orderInLayer + layerBoost;
 
-        // Add a collider with the block's size if applicable
         if (subtype == "BigHill2")
         {
             block.type = "Slope";
@@ -87,7 +76,6 @@ public static class BlockFactory
             block.AddComponent(boxCollider);
         }
 
-        // Add the block to the game objects list
         GOManager.Instance.allGOs.Add(block);
         layerBoost += .0001f;
         return block;

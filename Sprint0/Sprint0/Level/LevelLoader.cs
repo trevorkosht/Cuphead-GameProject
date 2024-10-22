@@ -8,8 +8,6 @@ public class LevelLoader
 {
     public static void LoadLevel(string filePath)
     {
-        //Format for line:
-        //Enemy,DeadlyDaisy,300,400
         string[] lines = File.ReadAllLines(filePath);
 
         foreach (string line in lines)
@@ -17,7 +15,6 @@ public class LevelLoader
             if (string.IsNullOrWhiteSpace(line)) continue;
             if (line.Contains("//")) continue;
 
-            // Split the line by comma
             string[] parts = line.Split(',');
 
             if (parts.Length < 4)
@@ -26,13 +23,11 @@ public class LevelLoader
                 continue;
             }
 
-            // Parse entity type, subtype, and position
             string entityType = parts[0];
             string subtype = parts[1];
             int posX = int.Parse(parts[2]);
             int posY = int.Parse(parts[3]);
 
-            // Instantiate based on the type
             switch (entityType)
             {
                 case "Enemy":
@@ -101,7 +96,6 @@ public class LevelLoader
     {
         Rectangle itemPosition = new Rectangle(x, y, 144, 144);
 
-        // Use the ItemFactory to create the item
         GameObject item = ItemFactory.CreateItem(subtype, itemPosition);
 
         if (item != null)

@@ -110,33 +110,27 @@ public class BoxCollider : Collider
 
         foreach (Vector2 axis in axesToTest)
         {
-            // Project both shapes onto the axis
             (float minA, float maxA) = ProjectPolygon(thisCorners, axis);
             (float minB, float maxB) = ProjectPolygon(otherCorners, axis);
 
-            // Check if projections do not overlap
             if (maxA < minB || maxB < minA)
             {
-                return false; // Separating axis found, no collision
+                return false; 
             }
         }
 
-        // No separating axis found, the boxes are colliding
         return true;
     }
 
     private Vector2[] GetAxesToTest(Vector2[] thisCorners, Vector2[] otherCorners)
     {
-        // The axes we need to test are the normals of the edges of both rectangles
         Vector2[] axes = new Vector2[4];
 
-        // Get the edges of the first box
-        axes[0] = GetEdgeNormal(thisCorners[0], thisCorners[1]); // Edge from top-left to top-right
-        axes[1] = GetEdgeNormal(thisCorners[1], thisCorners[3]); // Edge from top-right to bottom-right
+        axes[0] = GetEdgeNormal(thisCorners[0], thisCorners[1]);
+        axes[1] = GetEdgeNormal(thisCorners[1], thisCorners[3]);
 
-        // Get the edges of the second box
-        axes[2] = GetEdgeNormal(otherCorners[0], otherCorners[1]); // Edge from top-left to top-right
-        axes[3] = GetEdgeNormal(otherCorners[1], otherCorners[3]); // Edge from top-right to bottom-right
+        axes[2] = GetEdgeNormal(otherCorners[0], otherCorners[1]);
+        axes[3] = GetEdgeNormal(otherCorners[1], otherCorners[3]);
 
         return axes;
     }
@@ -144,7 +138,6 @@ public class BoxCollider : Collider
     private Vector2 GetEdgeNormal(Vector2 point1, Vector2 point2)
     {
         Vector2 edge = point2 - point1;
-        // Return the perpendicular vector (normal)
         return new Vector2(-edge.Y, edge.X);
     }
 
@@ -171,7 +164,6 @@ public class BoxCollider : Collider
 
     private bool CheckCircleCollision(CircleCollider circle)
     {
-        // You may need to update this to handle rotation properly if needed
         Vector2 boxCenter = new Vector2(BoundingBox.Center.X, BoundingBox.Center.Y);
         Vector2 circleCenter = circle.Center;
         Vector2 closestPoint = new Vector2(

@@ -17,21 +17,17 @@ namespace Cuphead.Controllers
         public GameObject playerObject;
         public bool enabled { get; set; } = true;
 
-        //player contains all of the players variables
         public PlayerState player { get; set; }
 
-        //those 5 classes handle the 5 parts of player control
         private PlayerAnimation playerAnimation;
         private PlayerCollision playerCollision;
         private PlayerHealth playerHealth;
         private PlayerMovement playerMovement;
         private PlayerProjectile playerProjectile;
 
-        //input classes
         private readonly KeyboardController keyboardController;
         private readonly MouseController mouseController;
         
-        //other classes for player controller to work
         private BoxCollider Collider;
         float deltaTime;
 
@@ -43,7 +39,6 @@ namespace Cuphead.Controllers
             mouseController = new MouseController();
             Collider = player.GameObject.GetComponent<BoxCollider>();
 
-            //create the player controller helper classes
             playerAnimation = new PlayerAnimation(player);
             playerCollision = new PlayerCollision(player, Collider, playerAnimation);
             playerMovement = new PlayerMovement(player, keyboardController, playerAnimation, playerCollision);
@@ -51,7 +46,6 @@ namespace Cuphead.Controllers
             playerProjectile = new PlayerProjectile(player, keyboardController, playerAnimation);
             this.playerObject = playerObject;
 
-            //set animation to spawn before spriterender updates
             playerAnimation.HandleSpawnAnimation();
         }
 

@@ -13,7 +13,7 @@ public static class GroundFactory
 
     public static GameObject CreateGround(string subtype, Vector2 position)
     {
-        return BlockFactory.CreateBlock(subtype, position); // Reuse for now
+        return BlockFactory.CreateBlock(subtype, position);
     }
 }
 

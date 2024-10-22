@@ -26,7 +26,7 @@ public static class BackgroundFactory
             { "Bush1", (1338, 625, 0.1f, 0.9f) },
             { "Bush2", (1809, 720, 0.1f, 0.9f) },
             { "Bush3", (1052, 350, 0.1f, 0.853f) },
-            {"Clouds", (2036, 530, 0.1f, 0.91f)}, //Start of new textures
+            {"Clouds", (2036, 530, 0.1f, 0.91f)},
             {"SkyBackground1", (1806, 760, 0.1f, 0.95f)},
             {"HillBackground1", (2048, 256, 0.1f, 0.87f)}, 
             {"TreeBackground1", (2048, 594, 0.1f, 0.89f)},
