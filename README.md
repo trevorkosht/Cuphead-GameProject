@@ -27,7 +27,7 @@ CODE REVIEW:
 Trevor -
 I am reviewing BothersomeBlueberry, 
 When collision detection got added, it was not done so in a seperate file, this causes a lot of condition statememts which upped our Cyclomatic Complexity. To solve this we can remove many of the collision conditionals to another file. 
-BothersomeBlueberry also has a decent amount of coupling, My removing the reached edge and other collision detection into a seperate file it will reduce coupling. 
+BothersomeBlueberry also has a decent amount of coupling, by removing the reached edge and other collision detection into a seperate file it will reduce coupling. 
 With these simple fixes BothersomeBlueberry will have increased code quality.
 
 Zol - 
