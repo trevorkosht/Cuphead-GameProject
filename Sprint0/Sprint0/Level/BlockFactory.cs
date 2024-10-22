@@ -23,7 +23,7 @@ public static class BlockFactory
     {"Hill4", (537, 144, new Vector2(537, 144), new Vector2(0,0), 0.7f) },
     {"Hill5", (761, 177, new Vector2(761, 177), new Vector2(0,0), 0.71f) },
 };
-    static float layerBoost = 0;
+    public static float layerBoost = 0;
 
     public static GameObject CreateBlock(string subtype, Vector2 position)
     {

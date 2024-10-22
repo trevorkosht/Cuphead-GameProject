@@ -40,7 +40,7 @@ public static class BackgroundFactory
             
 
     };
-    static float layerBoost = 0;
+    public static float layerBoost = 0;
 
     public static GameObject CreateBackground(string subtype, Vector2 position)
     {

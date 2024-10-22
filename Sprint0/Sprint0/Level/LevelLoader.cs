@@ -60,6 +60,8 @@ public class LevelLoader
                     break;
             }
         }
+        BackgroundFactory.layerBoost = 0f;
+        BlockFactory.layerBoost = 0f;
     }
 
     private static void SpawnEnemy(string subtype, int x, int y)
