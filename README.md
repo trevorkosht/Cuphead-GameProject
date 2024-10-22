@@ -14,7 +14,7 @@ As long as projectiles are unlocked.
 
 Unlock shot patterns by picking up items.
 
-Use 'e' to cause CupHead to become damaged.
+CupHead will take damage from all enemies and projectiles
 
 Other controls
 Use 'q' to quit and 'r' to reset the program back to its initial state
