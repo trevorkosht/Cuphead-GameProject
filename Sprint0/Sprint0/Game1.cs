@@ -11,6 +11,8 @@ namespace Sprint0
     public class Game1 : Game
     {
         private static GraphicsDeviceManager _graphics;
+
+
         private SpriteBatch _spriteBatch;
 
         private Texture2DStorage textureStorage;
@@ -34,6 +36,9 @@ namespace Sprint0
             _graphics = new GraphicsDeviceManager(this);
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
+
+            _graphics.IsFullScreen = true;
+
             _graphics.ApplyChanges();
 
             Content.RootDirectory = "Content";
