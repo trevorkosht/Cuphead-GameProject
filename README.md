@@ -32,10 +32,6 @@ With these simple fixes BothersomeBlueberry will have increased code quality.
 
 Zol - 
 I am reviewing ChaserProjectile.cs,
-I would say most of the code is readable with the update method a bit long and complex this makes the code harder to maintain.
-The update method also have a bunch of if statement so it could add some Cyclomatic Complexity.
-The coupling isnt too bad since it is only used in the projectile factory.
-There isnt many lines of code since it only include 1 type of projectile.
-overall other then the update method the file is very well done and the update method can improve by moving some block out and makeing them methods.
+I would say most of the code is readable with the update method a bit long and complex. This makes the code harder to maintain. The update method also has a bunch of statements so it could add some Cyclomatic Complexity. The coupling isn't too bad, since it is only used in the projectile factory. There aren't many lines of code since it only includes 1 type of projectile. Overall, other than the update method, the file is very well done, and the update method can improve by moving some blocks out and making them methods.
 
 
