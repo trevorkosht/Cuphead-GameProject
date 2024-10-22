@@ -23,6 +23,7 @@ public static class BlockFactory
     {"Hill4", (537, 144, new Vector2(537, 144), new Vector2(0,0), 0.7f) },
     {"Hill5", (761, 177, new Vector2(761, 177), new Vector2(0,0), 0.71f) },
 };
+    static float layerBoost = 0;
 
     public static GameObject CreateBlock(string subtype, Vector2 position)
     {
@@ -71,10 +72,10 @@ public static class BlockFactory
         spriteRenderer.setAnimation("texture");
 
         // Set the sprite's orderInLayer
-        spriteRenderer.orderInLayer = orderInLayer;
+        spriteRenderer.orderInLayer = orderInLayer + layerBoost;
 
         // Add a collider with the block's size if applicable
-        if(subtype == "BigHill2")
+        if (subtype == "BigHill2")
         {
             block.type = "Slope";
             BoxCollider boxCollider = new BoxCollider(bounds, offset + new Vector2(50, 90), GOManager.Instance.GraphicsDevice, -10f * (float)(Math.PI / 180));
@@ -88,7 +89,7 @@ public static class BlockFactory
 
         // Add the block to the game objects list
         GOManager.Instance.allGOs.Add(block);
-
+        layerBoost += .0001f;
         return block;
     }
 }

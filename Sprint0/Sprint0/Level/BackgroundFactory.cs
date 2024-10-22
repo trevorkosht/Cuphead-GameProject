@@ -10,7 +10,7 @@ public static class BackgroundFactory
             { "LevelBackground", (1827, 546, 0.1f, 0.91f) },
             { "Rock1", (526, 306, 0.1f, 0.801f) },
             { "Rock2", (980, 760, 0.1f, 0.802f) },
-            { "Rock3", (642, 270, 0.1f, 0.2f) },
+            { "Rock3", (642, 270, 0.1f, 0.05f) },
             { "Rock4", (970, 682, 0.1f, 0.804f) },
             { "Rock5", (650, 472, 0.1f, 0.805f) },
             { "Rock6", (668, 522, 0.1f, 0.806f) },
@@ -40,6 +40,7 @@ public static class BackgroundFactory
             
 
     };
+    static float layerBoost = 0;
 
     public static GameObject CreateBackground(string subtype, Vector2 position)
     {
@@ -66,9 +67,10 @@ public static class BackgroundFactory
 
         spriteRenderer.addAnimation("texture", backgroundTexture);
         spriteRenderer.setAnimation("texture");
-        spriteRenderer.orderInLayer = orderInLayer;
+        spriteRenderer.orderInLayer = orderInLayer + layerBoost;
 
         background.AddComponent(spriteRenderer);
+        layerBoost += .0001f;
         return background;
     }
 }

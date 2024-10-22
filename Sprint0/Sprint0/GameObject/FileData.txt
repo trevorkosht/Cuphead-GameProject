@@ -59,7 +59,7 @@ Block,Log1,7800,500
 
 Enemy,DeadlyDaisy,6400,-200
 Enemy,ToothyTerror,6900,600
-Enemy,TerribleTulip,6000,275
+Enemy,TerribleTulip,6000,250
 
 Background,Rock4,6200,200
 Background,TreeBackground5,6700,100
@@ -87,7 +87,7 @@ Enemy,DeadlyDaisy,8500,-200
 Enemy,BothersomeBlueberry,8800,500
 Enemy,ToothyTerror,9550,700
 Enemy,ToothyTerror,9950,700
-Enemy,TerribleTulip,9150,200
+Enemy,TerribleTulip,9150,195
 
 Background,TreeBackground6,8800,000
 Background,Leaves2,9300,-100
