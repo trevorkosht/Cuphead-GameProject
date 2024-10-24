@@ -160,6 +160,7 @@ public class Texture2DStorage
         _textures["TulipHitVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\tulip-hit-vfx");
         _textures["SporeTrailVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spore-trail-vfx");
         _textures["SporeExplosionVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spore-explosion-vfx");
+        _textures["CoinVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\coin-vfx");
 
 
         //item texture
@@ -167,6 +168,23 @@ public class Texture2DStorage
         _textures["LobberItem"] = content.Load<Texture2D>(@"Items\LobberItem");
         _textures["RoundaboutItem"] = content.Load<Texture2D>(@"Items\RoundaboutItem");
         _textures["SpreadshotItem"] = content.Load<Texture2D>(@"Items\SpreadshotItem");
+        _textures["Coin"] = content.Load<Texture2D>(@"Items\coin");
+
+        //User interface textures
+        _textures["CardBack"] = content.Load<Texture2D>(@"UI\red-card-back");
+        _textures["CardFront"] = content.Load<Texture2D>(@"UI\red-ace-card");
+        _textures["hp1-v1"] = content.Load<Texture2D>(@"UI\hp-1-v1");
+        _textures["hp1-v2"] = content.Load<Texture2D>(@"UI\hp-1-v2");
+        _textures["hp1-v3"] = content.Load<Texture2D>(@"UI\hp-1-v3");
+        _textures["hp2"] = content.Load<Texture2D>(@"UI\hp-2");
+        _textures["hp3"] = content.Load<Texture2D>(@"UI\hp-3");
+        _textures["hp4"] = content.Load<Texture2D>(@"UI\hp-4");
+        _textures["hp5"] = content.Load<Texture2D>(@"UI\hp-5");
+        _textures["hp6"] = content.Load<Texture2D>(@"UI\hp-6");
+        _textures["hp7"] = content.Load<Texture2D>(@"UI\hp-7");
+        _textures["hp8"] = content.Load<Texture2D>(@"UI\hp-8");
+        _textures["hpDead"] = content.Load<Texture2D>(@"UI\hp-dead");
+
 
         // Add more textures as needed
     }
