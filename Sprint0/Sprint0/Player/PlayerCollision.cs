@@ -185,8 +185,7 @@ namespace Cuphead.Player
         {
             if (collider.Intersects(item.GetComponent<Collider>()))
             {
-                String itemName = item.type.Remove(0, 10);
-                item.Destroy();
+                String itemName = item.type;
                 switch (itemName)
                 {
                     case "Spreadshot":
@@ -197,7 +196,14 @@ namespace Cuphead.Player
                         player.projectileUnlock[(int)PlayerState.projectiletype.Lobber] = true; break;
                     case "Roundabout":
                         player.projectileUnlock[(int)PlayerState.projectiletype.Roundabout] = true; break;
+                    case "Coin":
+                        player.coinCount++;
+                        playerAnimator.CreateCoinEffect();
+                        break;
                 }
+
+                item.type.Remove(0, 10);
+                item.Destroy();
             }
         }
         public void HandleEnemyCollision(GameObject Enemy)

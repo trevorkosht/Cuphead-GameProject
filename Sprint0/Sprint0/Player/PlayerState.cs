@@ -61,12 +61,13 @@ namespace Cuphead.Player
         public int playerWidth = 100;
         public int floorY;
         public int DuckingYOffset = -100;
+        public int coinCount;
 
         public Vector2 velocity;
         public int Health { get; set; } = 100;
         public bool[] projectileUnlock = { true, true, false, false, false, false, false };
         public enum projectiletype { Peashooter = 1, Spreadshot = 2, Chaser = 3, Lobber = 4, Roundabout = 5 }
         public ProjectileType currentProjectileType = ProjectileType.Peashooter;
-
+        
     }
 }

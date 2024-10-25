@@ -21,6 +21,11 @@ public static class ItemFactory
             case "Roundabout":
                 texture = GOManager.Instance.textureStorage.GetTexture("RoundaboutItem");
                 break;
+            case "Coin":
+                texture = GOManager.Instance.textureStorage.GetTexture("Coin");
+                
+                
+                break;
             default:
                 break;
         }
@@ -32,8 +37,11 @@ public static class ItemFactory
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
         spriteRenderer.orderInLayer = .15f;
         Animation itemTexture = new Animation(texture, 1, 1, 144, 144);
+        Animation coinTexture = new Animation(texture, 1, 17, 144, 144);
         spriteRenderer.addAnimation("texture",itemTexture);
+        spriteRenderer.addAnimation("coinTexture", coinTexture);
         spriteRenderer.setAnimation("texture");
+        if(itemName == "Coin") { spriteRenderer.setAnimation("coinTexture"); }
         spriteRenderer.spriteScale = 0.5f;
         Collider boxCollider = new BoxCollider(new Vector2(spriteRenderer.spriteScale* destRectangle.Width, spriteRenderer.spriteScale*destRectangle.Height), new Vector2(0,0), GOManager.Instance.GraphicsDevice);
         item.AddComponent(itemManager);
