@@ -107,7 +107,7 @@ namespace Cuphead.Player
                     effectTexture = null;
                     break;
             }
-            VisualEffectFactory.createVisualEffect(effectPosition, effectTexture, updatesPerFrame: 2, frameCount: 4, scale: 0.5f, true);
+            VisualEffectFactory.createVisualEffect(effectPosition, effectTexture, updatesPerFrame: 2, frameCount: 4, scale: 0.5f, isFacingRight);
         }
 
         public void CreateDustEffect()

@@ -7,6 +7,7 @@ public static class ItemFactory
     public static GameObject CreateItem(string itemName, Rectangle destRectangle)
     {
         Texture2D texture = null;
+        Texture2D VFXTexture = null;
 
         switch (itemName) {
             case "Spreadshot":
@@ -23,8 +24,7 @@ public static class ItemFactory
                 break;
             case "Coin":
                 texture = GOManager.Instance.textureStorage.GetTexture("Coin");
-                
-                
+                VFXTexture = GOManager.Instance.textureStorage.GetTexture("CoinVFX");
                 break;
             default:
                 break;
@@ -37,12 +37,17 @@ public static class ItemFactory
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
         spriteRenderer.orderInLayer = .15f;
         Animation itemTexture = new Animation(texture, 1, 1, 144, 144);
-        Animation coinTexture = new Animation(texture, 1, 17, 144, 144);
+        Animation coinTexture = new Animation(texture, 5, 17, 144, 144);
+        Animation vfxTextureAnimation = new Animation(VFXTexture, 5, 17, 288, 288);
         spriteRenderer.addAnimation("texture",itemTexture);
         spriteRenderer.addAnimation("coinTexture", coinTexture);
         spriteRenderer.setAnimation("texture");
-        if(itemName == "Coin") { spriteRenderer.setAnimation("coinTexture"); }
         spriteRenderer.spriteScale = 0.5f;
+        if (itemName == "Coin") {
+            spriteRenderer.setAnimation("coinTexture");
+            
+        }
+ 
         Collider boxCollider = new BoxCollider(new Vector2(spriteRenderer.spriteScale* destRectangle.Width, spriteRenderer.spriteScale*destRectangle.Height), new Vector2(0,0), GOManager.Instance.GraphicsDevice);
         item.AddComponent(itemManager);
         item.AddComponent(spriteRenderer);

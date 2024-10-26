@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,34 +24,35 @@ namespace Cuphead.Player
         public void CollisionCheck()
         {
             bool collidedObstacle = false;
-            foreach (GameObject go in GOManager.Instance.allGOs)
+            List<GameObject>go = GOManager.Instance.allGOs;
+            for(int i = 0; i < go.Count; i++)
             {
-                if (go.type != null)
+                if (go[i].type != null)
                 {
-                    if (collider.Intersects(go.GetComponent<Collider>()))
+                    if (collider.Intersects(go[i].GetComponent<Collider>()))
                     {
-                        if (go.type.Contains("Slope"))
+                        if (go[i].type.Contains("Slope"))
                         {
-                            HandleSlopeCollision(go);
+                            HandleSlopeCollision(go[i]);
                             collidedObstacle = true;
                         }
-                        else if (go.type.Contains("Platform"))
+                        else if (go[i].type.Contains("Platform"))
                         {
-                            HandlePlatformCollision(go);
+                            HandlePlatformCollision(go[i]);
                             collidedObstacle = true;
                         }
-                        else if (go.type.Contains("Item"))
+                        else if (go[i].type.Contains("Item"))
                         {
-                            HandleItemCollision(go);
+                            HandleItemCollision(go[i]);
                         }
-                        else if (go.type.Contains("Hill") || go.type.Contains("Log") || go.type.Contains("Stump"))
+                        else if (go[i].type.Contains("Hill") || go[i].type.Contains("Log") || go[i].type.Contains("Stump"))
                         {
-                            HandleObstacleCollision(go);
+                            HandleObstacleCollision(go[i]);
                             collidedObstacle = true;
                         }
-                        else if (go.type.Contains("Enemy") || go.type.Contains("NPCProjectile"))
+                        else if (go[i].type.Contains("Enemy") || go[i].type.Contains("NPCProjectile"))
                         {
-                            HandleEnemyCollision(go);
+                            HandleEnemyCollision(go[i]);
                         }
                     }
                 }
@@ -181,31 +183,37 @@ namespace Cuphead.Player
             }
         }
 
-        public void HandleItemCollision(GameObject item)
-        {
+        public void HandleItemCollision(GameObject item) {
             if (collider.Intersects(item.GetComponent<Collider>()))
             {
-                String itemName = item.type;
-                switch (itemName)
-                {
+                item.type = item.type.Remove(0, 10);
+                string itemName = item.type;
+                switch (itemName) {
                     case "Spreadshot":
-                        player.projectileUnlock[(int)PlayerState.projectiletype.Spreadshot] = true; break;
-                    case "Chaser":
-                        player.projectileUnlock[(int)PlayerState.projectiletype.Chaser] = true; break;
+                        player.projectileUnlock[(int)PlayerState.projectiletype.Spreadshot] = true;  break;
                     case "Lobber":
                         player.projectileUnlock[(int)PlayerState.projectiletype.Lobber] = true; break;
                     case "Roundabout":
                         player.projectileUnlock[(int)PlayerState.projectiletype.Roundabout] = true; break;
+                    case "Chaser":
+                        player.projectileUnlock[(int)PlayerState.projectiletype.Chaser] = true; break;
                     case "Coin":
                         player.coinCount++;
-                        playerAnimator.CreateCoinEffect();
+                        Rectangle destRectangle = item.GetComponent<SpriteRenderer>().destRectangle;
+                        destRectangle.X *= 1;
+                        destRectangle.Y *= 1;
+
+                        GameObject effect = VisualEffectFactory.createVisualEffect(destRectangle, GOManager.Instance.textureStorage.GetTexture("CoinVFX"), 2, 17, 0.5f, true);
+                        effect.GetComponent<VisualEffectRenderer>().animation = new Animation(GOManager.Instance.textureStorage.GetTexture("CoinVFX"), 2, 17, 288, 288);
+                        break;
+                    default:
                         break;
                 }
 
-                item.type.Remove(0, 10);
                 item.Destroy();
             }
         }
+        
         public void HandleEnemyCollision(GameObject Enemy)
         {
             if (collider.Intersects(Enemy.GetComponent<Collider>()))

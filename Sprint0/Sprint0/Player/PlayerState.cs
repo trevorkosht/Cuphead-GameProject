@@ -61,7 +61,7 @@ namespace Cuphead.Player
         public int playerWidth = 100;
         public int floorY;
         public int DuckingYOffset = -100;
-        public int coinCount;
+        public int coinCount = 0;
 
         public Vector2 velocity;
         public int Health { get; set; } = 100;
