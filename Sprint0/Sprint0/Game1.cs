@@ -1,5 +1,6 @@
 ﻿using Cuphead.Controllers;
 using Cuphead.Player;
+using Cuphead.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,6 +15,7 @@ namespace Sprint0
 
 
         private SpriteBatch _spriteBatch;
+        private SpriteBatch _spriteBatch2;
 
         private Texture2DStorage textureStorage;
         private KeyboardController keyboardController;
@@ -28,6 +30,7 @@ namespace Sprint0
         Vector2 savedPlayerLoc;
         private Vector2 startingPlayerLoc = new Vector2(0, 500);
         private bool saveLoc = false;
+        private UI healthUI;
 
         bool resetFrame;
 
@@ -113,6 +116,7 @@ namespace Sprint0
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch2 = new SpriteBatch(GraphicsDevice);
             textureStorage = new Texture2DStorage();
             textureStorage.LoadContent(Content);
 
@@ -123,6 +127,18 @@ namespace Sprint0
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
             player.type = "Player";
             player.AddComponent(new PlayerController2(player));
+
+            Texture2D hp3Texture = textureStorage.GetTexture("hp3");
+            Texture2D hp2Texture = textureStorage.GetTexture("hp2");
+            Texture2D[] hp1FlashingTextures = {
+                textureStorage.GetTexture("hp1-v1"),
+                textureStorage.GetTexture("hp1-v2"),
+                textureStorage.GetTexture("hp1-v3")
+            };
+            Texture2D deadTexture = textureStorage.GetTexture("hpDead");
+
+            HealthComponent playerHealth = player.GetComponent<HealthComponent>();
+            healthUI = new UI(playerHealth, hp3Texture, hp2Texture, hp1FlashingTextures, deadTexture, new Vector2(50, 650), _spriteBatch2);
         }
 
         protected override void Update(GameTime gameTime)
@@ -144,6 +160,7 @@ namespace Sprint0
 
             // Update camera based on player's position and the rail
             cameraController.Update();
+            healthUI.Update(gameTime);
 
             if (Keyboard.GetState().IsKeyDown(Keys.D0))
             {
@@ -213,6 +230,10 @@ namespace Sprint0
             enemyController.Draw(_spriteBatch);
 
             _spriteBatch.End();
+
+            _spriteBatch2.Begin();
+            healthUI.Draw();
+            _spriteBatch2.End();
             base.Draw(gameTime);
         }
     }
