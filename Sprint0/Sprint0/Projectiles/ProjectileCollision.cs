@@ -44,9 +44,14 @@ namespace Cuphead.Projectiles
             if(go.type.Contains("Enemy"))
             {
                 HealthComponent enemyHealth = go.GetComponent<HealthComponent>();
-                if(enemyHealth != null)
+                if (enemyHealth != null)
                 {
                     enemyHealth.RemoveHealth(10);
+
+
+                    GameObject player = GOManager.Instance.Player;
+                    ScoreComponent scoreComponent = player.GetComponent<ScoreComponent>();
+                    scoreComponent?.AddScore(2);
                 }
             }
 

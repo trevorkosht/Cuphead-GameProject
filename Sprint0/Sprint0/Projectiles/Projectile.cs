@@ -16,6 +16,7 @@ public abstract class Projectile : IComponent
     protected GameObject player;
     protected SpriteRenderer sRend;
 
+
     public virtual void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         IsActive = true;

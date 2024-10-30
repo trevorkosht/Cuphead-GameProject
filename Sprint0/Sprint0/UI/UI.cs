@@ -6,6 +6,7 @@ namespace Cuphead.UI
     public class UI
     {
         private HealthComponent playerHealth;
+        private ScoreComponent playerScore;
         private Texture2D hp3Texture;
         private Texture2D hp2Texture;
         private Texture2D[] hp1FlashingTextures;
@@ -15,15 +16,22 @@ namespace Cuphead.UI
         private double flashingTimer;
         private int flashingIndex;
 
-        public UI(HealthComponent playerHealth, Texture2D hp3, Texture2D hp2, Texture2D[] hp1Flashing, Texture2D dead, Vector2 position, SpriteBatch spriteBatch)
+        private Texture2D cardBackTexture;
+        private Texture2D cardFrontTexture;
+
+        public UI(HealthComponent playerHealth, ScoreComponent scoreComponent, Texture2D hp3, Texture2D hp2, Texture2D[] hp1Flashing, Texture2D dead, Texture2D cardBack, Texture2D cardFront, Vector2 position, SpriteBatch spriteBatch)
         {
             this.playerHealth = playerHealth;
+            this.playerScore = scoreComponent;
             hp3Texture = hp3;
             hp2Texture = hp2;
             hp1FlashingTextures = hp1Flashing;
             deadTexture = dead;
             uiPosition = position;
             this.spriteBatch = spriteBatch;
+
+            cardBackTexture = cardBack;
+            cardFrontTexture = cardFront;
         }
 
         public void Update(GameTime gameTime)
@@ -40,6 +48,12 @@ namespace Cuphead.UI
         }
 
         public void Draw()
+        {
+            DrawHealthUI();
+            DrawScoreUI(spriteBatch);
+        }
+
+        public void DrawHealthUI()
         {
             Texture2D textureToDraw;
 
@@ -66,5 +80,30 @@ namespace Cuphead.UI
 
             spriteBatch.Draw(textureToDraw, uiPosition, Color.White);
         }
+
+        private void DrawScoreUI(SpriteBatch spriteBatch)
+        {
+            float cardFillPercent = playerScore.GetCardFillPercent();
+
+            // Define card positioning
+            Vector2 cardPosition = uiPosition + new Vector2(hp3Texture.Width + 10, 0);  // Offset right from health UI
+            float cardScale = 0.5f;  // Scale down the cards to half size
+            int cardWidth = (int)(cardBackTexture.Width * cardScale);
+            int cardHeight = (int)(cardBackTexture.Height * cardScale);
+
+            // Draw the card back proportionately, growing from bottom
+            int filledHeight = (int)(cardBackTexture.Height * cardFillPercent);
+            Rectangle cardBackSource = new Rectangle(0, cardBackTexture.Height - filledHeight, cardBackTexture.Width, filledHeight);
+            Vector2 cardBackPosition = cardPosition + new Vector2(0, cardHeight - filledHeight * cardScale);
+            spriteBatch.Draw(cardBackTexture, cardBackPosition, cardBackSource, Color.White, 0, Vector2.Zero, cardScale, SpriteEffects.None, 0);
+
+            // Draw the front of each fully flipped card
+            for (int i = 0; i < playerScore.CardFlips; i++)
+            {
+                Vector2 flippedCardPosition = cardPosition + new Vector2((i + 1) * (cardWidth + 5), 0);  // Adjust spacing between cards
+                spriteBatch.Draw(cardFrontTexture, flippedCardPosition, null, Color.White, 0, Vector2.Zero, cardScale, SpriteEffects.None, 0);
+            }
+        }
+
     }
 }

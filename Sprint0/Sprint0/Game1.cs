@@ -30,7 +30,7 @@ namespace Sprint0
         Vector2 savedPlayerLoc;
         private Vector2 startingPlayerLoc = new Vector2(0, 500);
         private bool saveLoc = false;
-        private UI healthUI;
+        private UI UI;
 
         bool resetFrame;
 
@@ -127,6 +127,8 @@ namespace Sprint0
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
             player.type = "Player";
             player.AddComponent(new PlayerController2(player));
+            ScoreComponent playerScore = new ScoreComponent();
+            player.AddComponent(playerScore);
 
             Texture2D hp3Texture = textureStorage.GetTexture("hp3");
             Texture2D hp2Texture = textureStorage.GetTexture("hp2");
@@ -137,8 +139,12 @@ namespace Sprint0
             };
             Texture2D deadTexture = textureStorage.GetTexture("hpDead");
 
+            Texture2D cardBack = textureStorage.GetTexture("CardBack");
+            Texture2D cardFront = textureStorage.GetTexture("CardFront");
+
             HealthComponent playerHealth = player.GetComponent<HealthComponent>();
-            healthUI = new UI(playerHealth, hp3Texture, hp2Texture, hp1FlashingTextures, deadTexture, new Vector2(50, 650), _spriteBatch2);
+            playerScore = player.GetComponent<ScoreComponent>();
+            UI = new UI(playerHealth, playerScore, hp3Texture, hp2Texture, hp1FlashingTextures, deadTexture, cardBack, cardFront, new Vector2(50, 650), _spriteBatch2);
         }
 
         protected override void Update(GameTime gameTime)
@@ -160,7 +166,7 @@ namespace Sprint0
 
             // Update camera based on player's position and the rail
             cameraController.Update();
-            healthUI.Update(gameTime);
+            UI.Update(gameTime);
 
             if (Keyboard.GetState().IsKeyDown(Keys.D0))
             {
@@ -232,7 +238,7 @@ namespace Sprint0
             _spriteBatch.End();
 
             _spriteBatch2.Begin();
-            healthUI.Draw();
+            UI.Draw();
             _spriteBatch2.End();
             base.Draw(gameTime);
         }
