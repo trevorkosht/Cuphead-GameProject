@@ -62,10 +62,10 @@ public class MurderousMushroom : BaseEnemy
 
                     Rectangle effectPosition = new Rectangle();
                     if (sRend.isFacingRight) {
-                        effectPosition = new Rectangle(GameObject.X - 15, GameObject.Y + 50, 144, 144);
+                        effectPosition = new Rectangle(GameObject.X - 7, GameObject.Y + 25, 72, 72);
                     }
                     else {
-                        effectPosition = new Rectangle(GameObject.X + 90, GameObject.Y + 50, 144, 144);
+                        effectPosition = new Rectangle(GameObject.X + 45, GameObject.Y + 25, 72, 72);
                     }
 
                     VisualEffectFactory.createVisualEffect(effectPosition, attackVFX, 3, 5, 0.5f, sRend.isFacingRight);
@@ -89,8 +89,8 @@ public class MurderousMushroom : BaseEnemy
 
             if (!isHidden) {
                 sRend.setAnimation("Closing");
-                GameObject.GetComponent<BoxCollider>().bounds = new Vector2(144, 95);
-                GameObject.GetComponent<BoxCollider>().offset = new Vector2(0, 49);
+                GameObject.GetComponent<BoxCollider>().bounds = new Vector2(72, 47);
+                GameObject.GetComponent<BoxCollider>().offset = new Vector2(0, 25);
             }
             else if (sRend.currentAnimation.Value.CurrentFrame >= 4) {
                 sRend.setAnimation("Closed");
@@ -108,7 +108,7 @@ public class MurderousMushroom : BaseEnemy
         if (sRend.currentAnimation.Value.CurrentFrame >= 4) {
             isHidden = false;
             sRend.setAnimation("murderousMushroomAnimation");
-            GameObject.GetComponent<BoxCollider>().bounds = new Vector2(144, 144);
+            GameObject.GetComponent<BoxCollider>().bounds = new Vector2(72, 72);
             GameObject.GetComponent<BoxCollider>().offset = new Vector2(0, 0);
         }
     }

@@ -6,7 +6,7 @@ Block,BigHill1,450,600
 Block,BigHill2,1400,500
 
 Enemy,AggravatingAcorn,2000,100
-Enemy,MurderousMushroom,1200,500
+Enemy,MurderousMushroom,1200,572
 
 Background,SkyBackground1,-600,-100
 Background,HillBackground1,-500,400
@@ -40,7 +40,7 @@ Block,BigHill2,4950,350
 Block,Hill2,4500,500
 
 Enemy,DeadlyDaisy,4600,-200
-Enemy,MurderousMushroom,4600,400
+Enemy,MurderousMushroom,4600,472
 
 Background,TreeBackground3,4100,000
 Background,Tree6,4600,-100

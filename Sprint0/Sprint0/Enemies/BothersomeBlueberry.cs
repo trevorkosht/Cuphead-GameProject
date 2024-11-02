@@ -67,7 +67,7 @@ public class BothersomeBlueberry : BaseEnemy
                 float leftEdge = blueberryCollider.Center.X - blueberryCollider.Radius;
                 float rightEdge = blueberryCollider.Center.X + blueberryCollider.Radius;
 
-                if (platformCollider != null && GO.Y > GameObject.Y + 50 && (platformCollider.BoundingBox.Left <= leftEdge - 50 && platformCollider.BoundingBox.Right >= rightEdge + 50)) {
+                if (platformCollider != null && GO.Y > GameObject.Y + 30 && (platformCollider.BoundingBox.Left <= leftEdge - 50 && platformCollider.BoundingBox.Right >= rightEdge + 50)) {
                     isOnPlatform = true;
                 }
             }
