@@ -107,9 +107,21 @@ public class Texture2DStorage
         _textures["Tree5"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-5");
         _textures["Tree6"] = content.Load<Texture2D>(@"BlockTextures\Trees\tree-6");
 
-        //itle Screen
+        //Title Screen
         _textures["Title1"] = content.Load<Texture2D>(@"TitleScreen\title-1");
         _textures["Title1"] = content.Load<Texture2D>(@"TitleScreen\title-2");
+
+        //End Game Screen
+        _textures["DeathMessage"] = content.Load<Texture2D>(@"EndGameScreen\death-message");
+        _textures["WinScreenBackground"] = content.Load<Texture2D>(@"EndGameScreen\winscreen_background");
+        _textures["WinScreenBoard"] = content.Load<Texture2D>(@"EndGameScreen\winscreen_board");
+        _textures["WinScreenLine"] = content.Load<Texture2D>(@"EndGameScreen\winscreen_line");
+        _textures["WinScreenStar"] = content.Load<Texture2D>(@"EndGameScreen\winscreen_star");
+        _textures["WinScreenUnearnedStar"] = content.Load<Texture2D>(@"EndGameScreen\winscreen_star_unearned");
+        _textures["WinScreenCircle"] = content.Load<Texture2D>(@"EndGameScreen\winscreen-circle");
+        _textures["WinScreenResultsText"] = content.Load<Texture2D>(@"EndGameScreen\winscreen-results-text");
+        _textures["WinScreenStarAppearAnimation"] = content.Load<Texture2D>(@"EndGameScreen\winscreen-star-appear");
+        _textures["WinScreenCuphead"] = content.Load<Texture2D>(@"EndGameScreen\winscren-cuphead-idle");
 
 
         //Player Animation Textures
