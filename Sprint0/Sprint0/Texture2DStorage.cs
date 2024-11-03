@@ -174,6 +174,7 @@ public class Texture2DStorage
         _textures["TulipHitVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\tulip-hit-vfx");
         _textures["SporeTrailVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spore-trail-vfx");
         _textures["SporeExplosionVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spore-explosion-vfx");
+        _textures["ParryVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\parry-vfx");
         _textures["CoinVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\coin-vfx");
 
 

@@ -1688,6 +1688,18 @@
 /processorParam:TextureFormat=Color
 /build:VisualEffectTextures/enemy_death.png
 
+#begin VisualEffectTextures/parry-vfx.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:VisualEffectTextures/parry-vfx.png
+
 #begin VisualEffectTextures/ProjectileVFX/chaser_hit_vfx.png
 /importer:TextureImporter
 /processor:TextureProcessor

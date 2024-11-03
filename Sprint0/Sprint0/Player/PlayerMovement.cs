@@ -73,7 +73,10 @@ namespace Cuphead.Player
                 player.IsGrounded = false;
             }
 
-            if (jumpRequested && !player.IsGrounded && player.CanParry) { 
+            if (jumpRequested && !player.IsGrounded && player.CanParry) {
+                Rectangle vfxDestRectangle = new Rectangle(player.parryableObject.X - 18, player.parryableObject.Y - 18,288,288);
+                VisualEffectFactory.createVisualEffect(vfxDestRectangle, GOManager.Instance.textureStorage.GetTexture("ParryVFX"), 3, 9, 0.375f, true);
+
                 player.IsParrying = true;
                 player.parryableObject.Destroy();
             }
