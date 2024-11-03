@@ -37,6 +37,8 @@ namespace Sprint0
         private bool saveLoc = false;
         private UI UI;
 
+        string basePath;
+
         bool resetFrame;
 
         public Game1()
@@ -116,8 +118,8 @@ namespace Sprint0
             };
 
             cameraController = new CameraController(camera, player, railPoints);
-            string basePath = AppDomain.CurrentDomain.BaseDirectory;
-            LevelLoader.LoadLevel(basePath + "\\..\\..\\.." + "\\GameObject\\FileData.txt");
+            basePath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\.." + "\\GameObject\\";
+            LevelLoader.LoadLevel(basePath + "FileData.txt");
             gameObjects.Add(player);
         }
 
@@ -200,8 +202,14 @@ namespace Sprint0
                 ResetGame();
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.E))
+            {
+                Console.WriteLine("Loading end screen...");
+                LevelLoader.LoadLevel(basePath +"endscreen.txt");
+            }
 
             if (keyboardController.OnKeyDown(Keys.L))
+
                 GOManager.Instance.IsDebugging = !GOManager.Instance.IsDebugging;
 
             base.Update(gameTime);
