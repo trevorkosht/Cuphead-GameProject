@@ -21,7 +21,7 @@ public static class EnemyFactory
             case EnemyType.AggravatingAcorn:
                 enemyLogic = new AggravatingAcorn();
                 enemy.AddComponent(enemyLogic);
-                enemy.AddComponent(new CircleCollider(80, new Vector2(-72, -60), GOManager.Instance.GraphicsDevice));
+                enemy.AddComponent(new CircleCollider(50, new Vector2(-72, -100), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("aggravatingAcornAnimation", new Animation(textureStorage.GetTexture("AggravatingAcorn"), 5, 20, 144, 144));
                 spriteRenderer.addAnimation("AcornDrop", new Animation(textureStorage.GetTexture("AcornFall"), 3, 14, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("AggravatingAcorn"), textureStorage);
@@ -36,6 +36,7 @@ public static class EnemyFactory
                 spriteRenderer.addAnimation("Spawn", new Animation(textureStorage.GetTexture("DaisySpawn"), 5, 16, 144, 144));
                 spriteRenderer.addAnimation("Turn", new Animation(textureStorage.GetTexture("DaisyTurn"), 1, 18, 144, 144));
                 spriteRenderer.addAnimation("Jump", new Animation(textureStorage.GetTexture("DaisyJump"), 5, 9, 144, 144));
+                spriteRenderer.addAnimation("Land", new Animation(textureStorage.GetTexture("DaisyLand"), 2, 11, 288, 288));
                 enemyLogic.Initialize(textureStorage.GetTexture("DeadlyDaisy"), textureStorage);
                 enemyHP = 1;
                 break;

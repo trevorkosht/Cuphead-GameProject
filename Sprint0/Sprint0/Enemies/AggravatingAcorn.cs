@@ -15,7 +15,7 @@ public class AggravatingAcorn : BaseEnemy
     {
         base.Initialize(texture, storage);
         sRend.setAnimation("aggravatingAcornAnimation");
-        speed = 400f;
+        speed = 550f;
         isFalling = false;
         dropPosition = Vector2.Zero;
     }
@@ -33,8 +33,9 @@ public class AggravatingAcorn : BaseEnemy
             if (PlayerIsUnderneath())
             {
                 sRend.setAnimation("AcornDrop");
-                sRend.spriteScale = 0.8f;
+                sRend.spriteScale = 0.75f;
                 isFalling = true;
+                GameObject.GetComponent<CircleCollider>().offset = new Vector2(-50, -50);
                 dropPosition = new Vector2(GameObject.X, GameObject.Y + 500); // Set the drop target position
             }
         }
