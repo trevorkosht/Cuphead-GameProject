@@ -36,6 +36,8 @@ namespace Cuphead.Player
         public bool IsTakingDamage = false;
         public bool HasDashed = false;
         public bool isFalling = false;
+        public bool CanParry = false;
+        public bool IsParrying = false;
 
         //floats
         public float Speed { get; set; } = 700f;
@@ -69,6 +71,7 @@ namespace Cuphead.Player
         public bool[] projectileUnlock = { true, true, false, false, false, false, false };
         public enum projectiletype { Peashooter = 1, Spreadshot = 2, Chaser = 3, Lobber = 4, Roundabout = 5 }
         public ProjectileType currentProjectileType = ProjectileType.Peashooter;
+        public GameObject parryableObject;
         
     }
 }

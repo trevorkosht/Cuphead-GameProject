@@ -829,18 +829,6 @@
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/daisy-jump.png
 
-#begin EnemyTextures/daisy-land.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:EnemyTextures/daisy-land.png
-
 #begin EnemyTextures/daisy-turn.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -973,6 +961,18 @@
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/purple_spore.png
 
+#begin EnemyTextures/spike-ball.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EnemyTextures/spike-ball.png
+
 #begin EnemyTextures/TerribleTulipSprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1099,6 +1099,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Items/SpreadshotItem.png
+
+#begin PlayerAnimationTextures/player-parry.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/player-parry.png
 
 #begin PlayerAnimationTextures/PlayerDashAir.png
 /importer:TextureImporter
@@ -1675,6 +1687,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:VisualEffectTextures/enemy_death.png
+
+#begin VisualEffectTextures/parry-vfx.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:VisualEffectTextures/parry-vfx.png
 
 #begin VisualEffectTextures/ProjectileVFX/chaser_hit_vfx.png
 /importer:TextureImporter

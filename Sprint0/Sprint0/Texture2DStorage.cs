@@ -16,6 +16,7 @@ public class Texture2DStorage
         _textures["BothersomeBlueberry"] = content.Load<Texture2D>(@"EnemyTextures\BothersomeBlueberrySprite");
         _textures["AggravatingAcorn"] = content.Load<Texture2D>(@"EnemyTextures\AggravatingAcornSprite");
         _textures["AcornMaker"] = content.Load<Texture2D>(@"EnemyTextures\acorn-maker");
+        _textures["SpikyBulb"] = content.Load<Texture2D>(@"EnemyTextures\spike-ball");
         _textures["Seed"] = content.Load<Texture2D>(@"EnemyTextures\LoberSeed");
         _textures["PurpleSpore"] = content.Load<Texture2D>(@"EnemyTextures\purple_spore");
         _textures["PinkSpore"] = content.Load<Texture2D>(@"EnemyTextures\pink_spore");
@@ -31,7 +32,6 @@ public class Texture2DStorage
         _textures["TulipIdle"] = content.Load<Texture2D>(@"EnemyTextures\tulip_idle");
         _textures["DaisyTurn"] = content.Load<Texture2D>(@"EnemyTextures\daisy-turn");
         _textures["DaisyJump"] = content.Load<Texture2D>(@"EnemyTextures\daisy-jump");
-        _textures["DaisyLand"] = content.Load<Texture2D>(@"EnemyTextures\daisy-land");
 
         _textures["MushroomClosed"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_closed");
         _textures["MushroomClosing"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_closing");
@@ -136,6 +136,7 @@ public class Texture2DStorage
         _textures["PlayerIdle"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerIdle");
         _textures["PlayerIntro"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerIntro");
         _textures["PlayerJump"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerJump");
+        _textures["PlayerParry"] = content.Load<Texture2D>(@"PlayerAnimationTextures\player-parry");
         _textures["PlayerRun"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerRun");
         _textures["PlayerRunShootingDiagonalUp"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerRunShootingDiagonalUp");
         _textures["PlayerRunShootingStraight"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerRunShootingStraight");
@@ -173,6 +174,7 @@ public class Texture2DStorage
         _textures["TulipHitVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\tulip-hit-vfx");
         _textures["SporeTrailVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spore-trail-vfx");
         _textures["SporeExplosionVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spore-explosion-vfx");
+        _textures["ParryVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\parry-vfx");
         _textures["CoinVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\coin-vfx");
 
 
@@ -221,6 +223,7 @@ public class Texture2DStorage
         Animation playerIdleAnimation = new Animation(GetTexture("PlayerIdle"), 5, 8, 144, 144);
         Animation playerSpawnAnimation = new Animation(GetTexture("PlayerIntro"), 3, 28, 144, 144);
         Animation playerJumpAnimation = new Animation(GetTexture("PlayerJump"), 2, 8, 144, 144);
+        Animation playerParryAnimation = new Animation(GetTexture("PlayerParry"), 2, 8, 150, 150);
         Animation playerRunAnimation = new Animation(GetTexture("PlayerRun"),1, 16, 144, 144);
         Animation playerRunShootingDiagonalUpAnimation = new Animation(GetTexture("PlayerRunShootingDiagonalUp"), 5, 16, 144, 144);
         Animation playerRunShootingStraightAnimation = new Animation(GetTexture("PlayerRunShootingStraight"), 1, 16, 144, 144);
@@ -240,6 +243,7 @@ public class Texture2DStorage
         spriteRenderer.addAnimation("Idle", playerIdleAnimation);
         spriteRenderer.addAnimation("Spawn", playerSpawnAnimation);
         spriteRenderer.addAnimation("Jump", playerJumpAnimation);
+        spriteRenderer.addAnimation("Parry", playerParryAnimation);
         spriteRenderer.addAnimation("Run", playerRunAnimation);
         spriteRenderer.addAnimation("RunShootingDiagonalUp", playerRunShootingDiagonalUpAnimation);
         spriteRenderer.addAnimation("RunShootingStraight", playerRunShootingStraightAnimation);

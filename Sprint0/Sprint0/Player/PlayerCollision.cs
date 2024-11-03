@@ -26,6 +26,7 @@ namespace Cuphead.Player
         public void CollisionCheck()
         {
             bool collidedObstacle = false;
+            player.CanParry = false;
             List<GameObject>go = GOManager.Instance.allGOs;
             for(int i = 0; i < go.Count; i++)
             {
@@ -56,6 +57,16 @@ namespace Cuphead.Player
                         {
                             HandleEnemyCollision(go[i]);
                         }
+                    }
+                    else 
+                    {
+                        if (go[i].type.Contains("SpikyBulb") && !player.CanParry) {
+                            int xDist = Math.Abs(go[i].X - player.GameObject.X);
+                            int yDist = Math.Abs(go[i].Y - player.GameObject.Y);
+                            player.CanParry = (xDist <= 95) && (yDist <= 132);
+                            player.parryableObject = go[i];
+                        }
+
                     }
                 }
             }

@@ -39,6 +39,16 @@ namespace Cuphead.Player
             if (player.hitTime > 0)
             {
                 animator.setAnimation(player.IsGrounded ? "HitGround" : "HitAir");
+                //player.IsParrying = false;
+                //player.parryableObject = null;
+            }
+            else if (player.IsParrying) {
+
+                if (animator.currentAnimation.Value.CurrentFrame == 7 && animator.animationName.Equals("Parry")) {
+                    player.IsParrying = false;
+                }
+                animator.setAnimation("Parry");
+
             }
             else if (player.IsDucking)
             {
