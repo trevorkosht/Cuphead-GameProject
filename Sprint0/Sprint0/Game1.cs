@@ -1,9 +1,12 @@
-﻿using Cuphead.Controllers;
+﻿using Cuphead;
+using Cuphead.Controllers;
 using Cuphead.Player;
 using Cuphead.UI;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 
@@ -18,12 +21,14 @@ namespace Sprint0
         private SpriteBatch _spriteBatch2;
 
         private Texture2DStorage textureStorage;
+        private SoundEffectStorage audioStorage;
         private KeyboardController keyboardController;
 
         private List<GameObject> gameObjects = new List<GameObject>();
         GameObject player = new GameObject(50, 500);
 
         private EnemyController enemyController;
+        private AudioManager audioManager;
 
         private Camera camera;
         private CameraController cameraController;
@@ -39,12 +44,13 @@ namespace Sprint0
             _graphics = new GraphicsDeviceManager(this);
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
-            _graphics.IsFullScreen = true;
+            //_graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             keyboardController = new KeyboardController();
+            audioManager = new AudioManager();
         }
 
         protected override void Initialize()
@@ -63,6 +69,7 @@ namespace Sprint0
             GOManager.Instance.Player = player;
             GOManager.Instance.allGOs = gameObjects;
             GOManager.Instance.textureStorage = textureStorage;
+            GOManager.Instance.audioManager = audioManager;
             GOManager.Instance.GraphicsDevice = GraphicsDevice;
             enemyController = new EnemyController(keyboardController, textureStorage);
 
@@ -107,6 +114,7 @@ namespace Sprint0
                 new Vector2(8500, 0),
                 new Vector2(8700, 0)
             };
+
             cameraController = new CameraController(camera, player, railPoints);
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             LevelLoader.LoadLevel(basePath + "\\..\\..\\.." + "\\GameObject\\FileData.txt");
@@ -118,7 +126,10 @@ namespace Sprint0
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _spriteBatch2 = new SpriteBatch(GraphicsDevice);
             textureStorage = new Texture2DStorage();
+            audioStorage = new SoundEffectStorage();
             textureStorage.LoadContent(Content);
+            audioStorage.LoadContent(Content);
+            audioStorage.loadAudioManager(audioManager);
 
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
             playerSpriteRenderer.orderInLayer = .1f;

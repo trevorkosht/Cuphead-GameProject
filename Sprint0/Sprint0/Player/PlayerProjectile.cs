@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,34 +26,42 @@ namespace Cuphead.Player
 
         public void HandleShooting(KeyboardState state, SpriteRenderer animator)
         {
-            if (keyboardController.IsShootRequested() && player.shootTime <= 0 && player.hitTime <= 0)
+            if (!keyboardController.IsShootRequested())
             {
-                player.isShooting = true;
-                player.shootTime = player.timeTillNextBullet;
-                GameObject newProjectile;
-
-                additionalShotHeight = AddProjectileHeight(shotsFired, player.currentProjectileType);
-
-                if (player.GameObject.GetComponent<SpriteRenderer>().isFacingRight)
+                player.isShooting = false;
+                getCurrentProjectileSFX(player.currentProjectileType).Stop();
+            }
+            else
+            {
+                getCurrentProjectileSFX(player.currentProjectileType).Play();
+                if (player.shootTime <= 0 && player.hitTime <= 0)
                 {
-                    newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X, player.GameObject.Y + additionalShotHeight, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight);
-                    playerAnimator.CreateShootingEffect(true);
-                }
-                else
-                {
-                    newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X - 90, player.GameObject.Y + additionalShotHeight, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight);
-                    playerAnimator.CreateShootingEffect(false);
-                }
-                GOManager.Instance.allGOs.Add(newProjectile);
+                    player.isShooting = true;
+                    player.shootTime = player.timeTillNextBullet;
+                    GameObject newProjectile;
 
-                shotsFired++;
-                if(shotsFired == 5)
-                {
-                    shotsFired = 0;
+                    additionalShotHeight = AddProjectileHeight(shotsFired, player.currentProjectileType);
+
+                    if (player.GameObject.GetComponent<SpriteRenderer>().isFacingRight)
+                    {
+                        newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X, player.GameObject.Y + additionalShotHeight, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+                        playerAnimator.CreateShootingEffect(true);
+                    }
+                    else
+                    {
+                        newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X - 90, player.GameObject.Y + additionalShotHeight, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+                        playerAnimator.CreateShootingEffect(false);
+                    }
+                    GOManager.Instance.allGOs.Add(newProjectile);
+
+                    shotsFired++;
+                    if (shotsFired == 5)
+                    {
+                        shotsFired = 0;
+                    }
                 }
             }
         }
-
         public void HandleProjectileSwitching(KeyboardState state)
         {
             for (int i = 1; i <= 5; i++)
@@ -93,6 +102,31 @@ namespace Cuphead.Player
             {
                 return 20;
             }
+        }
+
+        private SoundEffectInstance getCurrentProjectileSFX(ProjectileType type)
+        {
+            string currentProjectileSFXName = "PeashooterShotLoop";
+            switch (type)
+            {
+                case ProjectileType.Peashooter:
+                    currentProjectileSFXName = "PeashooterShotLoop";
+                    break;
+                case ProjectileType.SpreadShot:
+                    currentProjectileSFXName = "SpreadshotShotLoop";
+                    break;
+                case ProjectileType.Chaser:
+                    currentProjectileSFXName = "ChaserShotLoop";
+                    break;
+                case ProjectileType.Lobber:
+                    currentProjectileSFXName = "LobberShot";
+                    break;
+                case ProjectileType.Roundabout:
+                    currentProjectileSFXName = "RoundaboutShot";
+                    break;
+            }
+            
+            return GOManager.Instance.audioManager.getInstance(currentProjectileSFXName);
         }
     }
 }

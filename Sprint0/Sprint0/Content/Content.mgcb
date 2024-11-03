@@ -1304,6 +1304,90 @@
 /processorParam:TextureFormat=Color
 /build:PlayerAnimationTextures/PlayerShootUp.png
 
+#begin PlayerSFX/player_dash_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:PlayerSFX/player_dash_01.wav;PlayerSFX/PlayerDash.wav
+
+#begin PlayerSFX/player_death_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:PlayerSFX/player_death_01.wav;PlayerSFX/PlayerDeath.wav
+
+#begin PlayerSFX/player_hit_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:PlayerSFX/player_hit_01.wav;PlayerSFX/PlayerDamaged.wav
+
+#begin PlayerSFX/player_jump_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:PlayerSFX/player_jump_01.wav;PlayerSFX/PlayerJump.wav
+
+#begin PlayerSFX/player_land_ground_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:PlayerSFX/player_land_ground_01.wav;PlayerSFX/PlayerLanding.wav
+
+#begin PlayerSFX/player_map_walk_0001.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:PlayerSFX/player_map_walk_0001.wav;PlayerSFX/PlayerWalk.wav
+
+#begin ProjectileSFX/player_default_fire_loop_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ProjectileSFX/player_default_fire_loop_01.wav;ProjectileSFX/PeashooterShotLoop.wav
+
+#begin ProjectileSFX/player_shoot_hit_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ProjectileSFX/player_shoot_hit_01.wav;ProjectileSFX/PeashooterShotImpact.wav
+
+#begin ProjectileSFX/player_spreadshot_fire_loop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ProjectileSFX/player_spreadshot_fire_loop.wav;ProjectileSFX/SpreadshotShotLoop.wav
+
+#begin ProjectileSFX/player_weapon_boomerang_001.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ProjectileSFX/player_weapon_boomerang_001.wav;ProjectileSFX/RoundaboutShot.wav
+
+#begin ProjectileSFX/player_weapon_bouncer_001.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ProjectileSFX/player_weapon_bouncer_001.wav;ProjectileSFX/LobberShot.wav
+
+#begin ProjectileSFX/player_weapon_homing_impact_001.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ProjectileSFX/player_weapon_homing_impact_001.wav;ProjectileSFX/ChaserShotImpact.wav
+
+#begin ProjectileSFX/player_weapon_homing_loop_001.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ProjectileSFX/player_weapon_homing_loop_001.wav;ProjectileSFX/ChaserShotLoop.wav
+
+#begin ProjectileSFX/player_weapon_spread_001.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ProjectileSFX/player_weapon_spread_001.wav;ProjectileSFX/SpreadshotShotImpact.wav
+
 #begin ProjectileTextures/Chaser.png
 /importer:TextureImporter
 /processor:TextureProcessor

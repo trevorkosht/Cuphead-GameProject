@@ -1,5 +1,7 @@
-﻿using Cuphead.Projectiles;
+﻿using Cuphead;
+using Cuphead.Projectiles;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ public class ChaserProjectile : Projectile
     private ProjectileCollision projectileCollision;
     private const float explosionDuration = 0.5f;
     private const string collisionAnimationName = "ChaserExplosionAnimation";
+    private SoundEffectInstance impactSoundInstance;
 
     public ChaserProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
@@ -34,6 +37,7 @@ public class ChaserProjectile : Projectile
     {
         base.Initialize(texture, storage);
         lastDirection = isFacingRight ? Vector2.UnitX : -Vector2.UnitX; // Start based on facing direction
+        impactSoundInstance = GOManager.Instance.audioManager.getNewInstance("ChaserShotImpact");
     }
 
     public override void Update(GameTime gameTime)
@@ -42,6 +46,7 @@ public class ChaserProjectile : Projectile
             return;
         if (collided)
         {
+            impactSoundInstance.Play();
             explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (explosionTimer >= explosionDuration)

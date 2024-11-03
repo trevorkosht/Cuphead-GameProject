@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Cuphead;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -7,6 +8,8 @@ public class GOManager
     private static GOManager instance;
     public GameObject Player { get; set; }
     public Texture2DStorage textureStorage { get; set; }
+
+    public AudioManager audioManager { get; set; }
     public List<GameObject> allGOs { get; set; }
 
     public GameObject currentEnemy { get; set; }

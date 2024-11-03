@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended.Timers;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,11 @@ namespace Cuphead.Player
 
         public void HandleMovementAndActions(GameTime gameTime, float deltaTime)
         {
-
             if (player.IsDead)
+            {
+                GOManager.Instance.audioManager.getInstance("PlayerDeath").Play();
                 return;
+            }
             Vector2 input = keyboardController.GetMovementInput();
             bool jumpRequested = keyboardController.IsJumpRequested();
             bool duckRequested = keyboardController.IsDuckRequested();
@@ -47,20 +50,38 @@ namespace Cuphead.Player
                 if (input.X != 0 && player.IsGrounded)
                 {
                     player.IsRunning = true;
+                    GOManager.Instance.audioManager.getInstance("PlayerWalk").Play();
                 }
                 else
                 {
                     player.IsRunning = false;
+                    GOManager.Instance.audioManager.getInstance("PlayerWalk").Stop();
                 }
                 player.GameObject.X += (int)(input.X * player.Speed * deltaTime);
 
                 HandleDash(dashRequested, gameTime, deltaTime);
+
             }
 
             if (jumpRequested && player.IsGrounded && !player.IsDucking)
             {
+                if(!player.IsDead)
+                {
+                    GOManager.Instance.audioManager.getInstance("PlayerJump").Play();
+                }
                 player.velocity.Y = player.JumpForce;
                 player.IsGrounded = false;
+            }
+
+            if(!player.IsGrounded && player.velocity.Y < 0)
+            {
+                player.isFalling = true;
+            }
+
+            if(player.isFalling && player.IsGrounded)
+            {
+                player.isFalling = false;
+                GOManager.Instance.audioManager.getInstance("PlayerLanding").Play();
             }
 
         }
@@ -134,6 +155,10 @@ namespace Cuphead.Player
         {
             if (player.IsDashing)
             {
+                if(!player.IsDead)
+                {
+                    GOManager.Instance.audioManager.getInstance("PlayerDash").Play();
+                }
                 // Continue dashing
                 PerformDash(gameTime, player.height, deltaTime);
             }

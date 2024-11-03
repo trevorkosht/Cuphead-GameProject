@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ namespace Cuphead.Player
         private PlayerState player;
         private BoxCollider collider;
         private PlayerAnimation playerAnimator;
+        private Dictionary<string, SoundEffectInstance> SFXList = new Dictionary<string, SoundEffectInstance>();
 
         public PlayerCollision(PlayerState player, BoxCollider collider, PlayerAnimation playerAnimator)
         {
@@ -218,6 +220,10 @@ namespace Cuphead.Player
         {
             if (collider.Intersects(Enemy.GetComponent<Collider>()))
             {
+                if(!player.IsInvincible && !player.IsDead)
+                {
+                    GOManager.Instance.audioManager.getInstance("PlayerDamaged").Play();
+                }
                 if (Enemy.type.Contains("AcornMaker"))
                 {
                     player.GameObject.X = Enemy.X - player.playerWidth + 40;
