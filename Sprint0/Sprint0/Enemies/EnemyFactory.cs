@@ -97,6 +97,15 @@ public static class EnemyFactory
                 enemyLogic.Initialize(textureStorage.GetTexture("ToothyTerror"), textureStorage);
                 enemyHP = 9999999;
                 break;
+            case EnemyType.SpikyBulb:
+                enemyLogic = new SpikyBulb();
+                enemy.AddComponent(enemyLogic);
+                enemy.AddComponent(new CircleCollider(20, new Vector2(-35,-35), GOManager.Instance.GraphicsDevice));
+                spriteRenderer.addAnimation("SpikyBulb", new Animation(textureStorage.GetTexture("SpikyBulb"), 1, 6, 100,100));
+                spriteRenderer.spriteScale = 0.5f;
+                enemyLogic.Initialize(textureStorage.GetTexture("SpikyBulb"), textureStorage);
+                enemyHP = 9999999;
+                break;
             default:
                 return null;
         }
@@ -114,5 +123,6 @@ public enum EnemyType
     TerribleTulip,
     AcornMaker,
     BothersomeBlueberry,
-    ToothyTerror
+    ToothyTerror,
+    SpikyBulb
 }

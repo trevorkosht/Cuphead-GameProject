@@ -27,6 +27,7 @@ public class EnemyController
             EnemyFactory.CreateEnemy(EnemyType.AcornMaker),
             EnemyFactory.CreateEnemy(EnemyType.BothersomeBlueberry),
             EnemyFactory.CreateEnemy(EnemyType.ToothyTerror)
+
         };
 
         currentEnemy = enemies[currentEnemyIndex];

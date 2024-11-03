@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../../../../../OneDrive/Desktop/Updated Animations/spike-ball.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../../OneDrive/Desktop/Updated Animations/spike-ball.png;EnemyTextures/spike-ball.png
+
 #begin BlockTextures/Background/background-1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -829,18 +841,6 @@
 /processorParam:TextureFormat=Color
 /build:EnemyTextures/daisy-jump.png
 
-#begin EnemyTextures/daisy-land.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:EnemyTextures/daisy-land.png
-
 #begin EnemyTextures/daisy-turn.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1099,6 +1099,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Items/SpreadshotItem.png
+
+#begin PlayerAnimationTextures/player-parry.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/player-parry.png
 
 #begin PlayerAnimationTextures/PlayerDashAir.png
 /importer:TextureImporter

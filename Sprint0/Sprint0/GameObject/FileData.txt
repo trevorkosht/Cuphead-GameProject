@@ -5,6 +5,7 @@ Block,BigHill1,-500,600
 Block,BigHill1,450,600
 Block,BigHill2,1400,500
 
+
 Enemy,AggravatingAcorn,2000,100
 Enemy,MurderousMushroom,1200,500
 
@@ -22,6 +23,7 @@ Block,BigHill3,3500,450
 
 Enemy,ToothyTerror,2400,600
 Enemy,BothersomeBlueberry,2800,500
+Enemy,SpikyBulb,3000,500
 Enemy,DeadlyDaisy,3200,-200
 
 
@@ -63,6 +65,9 @@ Block,Log1,7800,500
 Enemy,DeadlyDaisy,6400,-200
 Enemy,ToothyTerror,6900,600
 Enemy,TerribleTulip,6000,250
+Enemy,SpikyBulb,5400,375
+Enemy,SpikyBulb,6500,300
+Enemy,SpikyBulb,8000,450
 
 Background,Rock4,6200,200
 Background,TreeBackground5,6700,100
@@ -120,6 +125,7 @@ Block,BigHill1,12000,600
 Block,BigHill1,12900,600
 
 Enemy,AcornMaker,13000,225
+Enemy,SpikyBulb,12100,575
 
 Background,LevelBackground,12500,200
 Background,SkyBackground1,12500,-100

@@ -73,6 +73,11 @@ namespace Cuphead.Player
                 player.IsGrounded = false;
             }
 
+            if (jumpRequested && !player.IsGrounded && player.CanParry && player.hitTime < 0) { 
+                player.IsParrying = true;
+                player.parryableObject.Destroy();
+            }
+
             if(!player.IsGrounded && player.velocity.Y < 0)
             {
                 player.isFalling = true;
