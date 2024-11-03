@@ -60,7 +60,7 @@ namespace Cuphead.Player
                     }
                     else 
                     {
-                        if (go[i].type.Contains("SpikyBulb")) {
+                        if (go[i].type.Contains("SpikyBulb") && !player.CanParry) {
                             int xDist = Math.Abs(go[i].X - player.GameObject.X);
                             int yDist = Math.Abs(go[i].Y - player.GameObject.Y);
                             player.CanParry = (xDist <= 95) && (yDist <= 132);

@@ -71,13 +71,13 @@ public static class EnemyFactory
                 spriteRenderer.addAnimation("acornMakerAnimation", new Animation(textureStorage.GetTexture("AcornMaker"), 4, 20, 600, 600));
                 spriteRenderer.spriteScale = 3;
                 enemyLogic.Initialize(textureStorage.GetTexture("AcornMaker"), textureStorage);
-                enemyHP = 125;
+                enemyHP = 75;
                 break;
             case EnemyType.BothersomeBlueberry:
                 enemy.Y += 65;
                 enemyLogic = new BothersomeBlueberry();
                 enemy.AddComponent(enemyLogic);
-                enemy.AddComponent(new CircleCollider(25, new Vector2(-30,-30), GOManager.Instance.GraphicsDevice));
+                enemy.AddComponent(new CircleCollider(20, new Vector2(-30,-30), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("bothersomeBlueberryAnimation", new Animation(textureStorage.GetTexture("BothersomeBlueberry"), 3, 12, 144, 144));
                 spriteRenderer.addAnimation("Melt", new Animation(textureStorage.GetTexture("BlueberryMelt"), 5, 10, 144, 144));
                 spriteRenderer.addAnimation("WaitForRespawn", new Animation(textureStorage.GetTexture("BlueberryWaitingToRespawn"), 5, 1, 144, 144));
@@ -100,7 +100,7 @@ public static class EnemyFactory
             case EnemyType.SpikyBulb:
                 enemyLogic = new SpikyBulb();
                 enemy.AddComponent(enemyLogic);
-                enemy.AddComponent(new CircleCollider(20, new Vector2(-35,-35), GOManager.Instance.GraphicsDevice));
+                enemy.AddComponent(new CircleCollider(25, new Vector2(-35,-35), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("SpikyBulb", new Animation(textureStorage.GetTexture("SpikyBulb"), 1, 6, 100,100));
                 spriteRenderer.spriteScale = 0.5f;
                 enemyLogic.Initialize(textureStorage.GetTexture("SpikyBulb"), textureStorage);
