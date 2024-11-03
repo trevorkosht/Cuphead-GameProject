@@ -91,7 +91,6 @@ public class LevelLoader
         GOManager.Instance.allGOs.Add(platform);
     }
 
-
     private static void SpawnItem(string subtype, int x, int y)
     {
         Rectangle itemPosition = new Rectangle(x, y, 144, 144);
@@ -102,5 +101,10 @@ public class LevelLoader
         {
             GOManager.Instance.allGOs.Add(item);
         }
+    }
+    private static void SpawnEnd(string subtype, Vector2 position)
+    {
+        GameObject endElement = EndingFactory.CreateElement(subtype, position);
+        GOManager.Instance.allGOs.Add(endElement);
     }
 }
