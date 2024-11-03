@@ -31,6 +31,7 @@ public class Texture2DStorage
         _textures["TulipIdle"] = content.Load<Texture2D>(@"EnemyTextures\tulip_idle");
         _textures["DaisyTurn"] = content.Load<Texture2D>(@"EnemyTextures\daisy-turn");
         _textures["DaisyJump"] = content.Load<Texture2D>(@"EnemyTextures\daisy-jump");
+        _textures["DaisyLand"] = content.Load<Texture2D>(@"EnemyTextures\daisy-land");
 
         _textures["MushroomClosed"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_closed");
         _textures["MushroomClosing"] = content.Load<Texture2D>(@"EnemyTextures\mushroom_closing");
