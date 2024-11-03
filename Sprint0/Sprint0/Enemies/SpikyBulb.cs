@@ -18,8 +18,6 @@ public class SpikyBulb : BaseEnemy {
     public override void Move(GameTime gameTime) {
         yVelocity += -springStrength * (GameObject.Y - springOriginY);
         GameObject.Y += (int)yVelocity;
-
-        //bounce up and down like a spring
     }
 
 }
