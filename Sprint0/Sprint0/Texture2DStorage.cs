@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 public class Texture2DStorage
@@ -174,7 +175,9 @@ public class Texture2DStorage
         _textures["TulipHitVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\tulip-hit-vfx");
         _textures["SporeTrailVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spore-trail-vfx");
         _textures["SporeExplosionVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\ProjectileVFX\spore-explosion-vfx");
+        _textures["ParryVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\parry-vfx");
         _textures["CoinVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\coin-vfx");
+        _textures["PropVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\acorn-prop-vfx");
 
 
         //item texture
@@ -206,9 +209,17 @@ public class Texture2DStorage
     public Texture2D GetTexture(string textureName)
     {
         if (_textures.ContainsKey(textureName))
+        {
             return _textures[textureName];
+        }
+        else
+        {
+            Console.WriteLine(textureName + " does not exist");
+            return null;
+        }
+            
 
-        return null;
+        
     }
 
     public void loadPlayerAnimations(SpriteRenderer spriteRenderer) {
@@ -217,8 +228,8 @@ public class Texture2DStorage
         Animation playerDeathAnimation = new Animation(GetTexture("PlayerDeath"), 5, 16, 144, 144);
         Animation playerDuckAnimation = new Animation(GetTexture("PlayerDuck"), 5, 8, 144, 144);
         Animation playerDuckShootAnimation = new Animation(GetTexture("PlayerDuckShoot"), 5, 3, 144, 144);
-        Animation playerHitAirAnimation = new Animation(GetTexture("PlayerHitAir"), 5, 6, 144, 144);
-        Animation playerHitGroundAnimation = new Animation(GetTexture("PlayerHitGround"), 5, 6, 144, 144);
+        Animation playerHitAirAnimation = new Animation(GetTexture("PlayerHitAir"), 3, 6, 144, 144);
+        Animation playerHitGroundAnimation = new Animation(GetTexture("PlayerHitGround"), 3, 6, 144, 144);
         Animation playerIdleAnimation = new Animation(GetTexture("PlayerIdle"), 5, 8, 144, 144);
         Animation playerSpawnAnimation = new Animation(GetTexture("PlayerIntro"), 3, 28, 144, 144);
         Animation playerJumpAnimation = new Animation(GetTexture("PlayerJump"), 2, 8, 144, 144);

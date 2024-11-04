@@ -40,24 +40,24 @@ public class SoundEffectStorage
 
     public void loadProjectileSounds(ContentManager content)
     {
-        _audios["PeashooterShotLoop"] = content.Load<SoundEffect>(@"ProjectileSFX\PeashooterShotLoop");
-        _audios["PeashooterShotImpact"] = content.Load<SoundEffect>(@"ProjectileSFX\PeashooterShotImpact");
-        _audios["SpreadshotShotLoop"] = content.Load<SoundEffect>(@"ProjectileSFX\SpreadshotShotLoop");
-        _audios["SpreadshotShotImpact"] = content.Load<SoundEffect>(@"ProjectileSFX\SpreadshotShotImpact");
-        _audios["ChaserShotLoop"] = content.Load<SoundEffect>(@"ProjectileSFX\ChaserShotLoop");
-        _audios["ChaserShotImpact"] = content.Load<SoundEffect>(@"ProjectileSFX\ChaserShotImpact");
-        _audios["LobberShot"] = content.Load<SoundEffect>(@"ProjectileSFX\LobberShot");
-        _audios["RoundaboutShot"] = content.Load<SoundEffect>(@"ProjectileSFX\RoundaboutShot");
+        _audios["PeashooterShotLoop"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerProjectileSFX\PeashooterShotLoop");
+        _audios["PeashooterShotImpact"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerProjectileSFX\PeashooterShotImpact");
+        _audios["SpreadshotShotLoop"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerProjectileSFX\SpreadshotShotLoop");
+        _audios["SpreadshotShotImpact"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerProjectileSFX\SpreadshotShotImpact");
+        _audios["ChaserShotLoop"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerProjectileSFX\ChaserShotLoop");
+        _audios["ChaserShotImpact"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerProjectileSFX\ChaserShotImpact");
+        _audios["LobberShot"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerProjectileSFX\LobberShot");
+        _audios["RoundaboutShot"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerProjectileSFX\RoundaboutShot");
     }
 
     public void loadPlayerSounds(ContentManager content)
     {
-        _audios["PlayerDash"] = content.Load<SoundEffect>(@"PlayerSFX\PlayerDash");
-        _audios["PlayerDeath"] = content.Load<SoundEffect>(@"PlayerSFX\PlayerDeath");
-        _audios["PlayerDamaged"] = content.Load<SoundEffect>(@"PlayerSFX\PlayerDamaged");
-        _audios["PlayerJump"] = content.Load<SoundEffect>(@"PlayerSFX\PlayerJump");
-        _audios["PlayerLanding"] = content.Load<SoundEffect>(@"PlayerSFX\PlayerLanding");
-        _audios["PlayerWalk"] = content.Load<SoundEffect>(@"PlayerSFX\PlayerWalk");
+        _audios["PlayerDash"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerMovementSFX\PlayerDash");
+        _audios["PlayerDeath"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerMovementSFX\PlayerDeath");
+        _audios["PlayerDamaged"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerMovementSFX\PlayerDamaged");
+        _audios["PlayerJump"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerMovementSFX\PlayerJump");
+        _audios["PlayerLanding"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerMovementSFX\PlayerLanding");
+        _audios["PlayerWalk"] = content.Load<SoundEffect>(@"SFX\PlayerSFX\PlayerMovementSFX\PlayerWalk");
     }
 
     public void loadEnemySounds(ContentManager content)

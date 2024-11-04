@@ -46,10 +46,14 @@ public class LevelLoader
                     SpawnPlatform(subtype, new Vector2(posX, posY));
                     break;
 
+                case "End":
+                    SpawnEnd(subtype, new Vector2(posX, posY));
+                    break;
+
                 case "Item":
                     SpawnItem(subtype, posX, posY);
                     break;
-
+               
                 default:
                     Console.WriteLine($"Unknown entity type: {entityType}");
                     break;
@@ -106,5 +110,10 @@ public class LevelLoader
     {
         GameObject endElement = EndingFactory.CreateElement(subtype, position);
         GOManager.Instance.allGOs.Add(endElement);
+
+        if (endElement != null)
+        {
+            GOManager.Instance.allGOs.Add(endElement);
+        }
     }
 }
