@@ -72,7 +72,7 @@ Enemy,ToothyTerror,6900,600
 Enemy,TerribleTulip,6000,250
 Enemy,SpikyBulb,5400,375
 Enemy,SpikyBulb,6500,300
-Enemy,SpikyBulb,8000,450
+Enemy,SpikyBulb,8000
 
 Background,Rock4,6200,200
 Background,TreeBackground5,6700,100
@@ -101,6 +101,7 @@ Enemy,BothersomeBlueberry,8800,500
 Enemy,ToothyTerror,9550,700
 Enemy,ToothyTerror,9950,700
 Enemy,TerribleTulip,9150,195
+Enemy,AggravatingAcorn,9500,100
 
 Background,TreeBackground6,8800,000
 Background,Leaves2,9300,-100
@@ -117,6 +118,7 @@ Block,Hill1,11500,600
 
 Enemy,BothersomeBlueberry,11200,500
 Enemy,ToothyTerror,10350,700
+Enemy,AggravatingAcorn,11500,100
 
 Background,TreeBackground6,10500,000
 Background,Tree4,11200,000

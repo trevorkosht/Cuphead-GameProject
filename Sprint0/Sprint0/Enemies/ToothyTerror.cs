@@ -15,7 +15,7 @@ public class ToothyTerror : BaseEnemy
         base.Initialize(texture, storage);
         sRend.setAnimation("toothyTerrorAnimation");
         jumpHeight = 450f; // Can be modified to make jumps higher
-        gravity = 300f;
+        gravity = 400f;
         isJumping = true;
         startYPosition = GameObject.Y;
 
@@ -44,6 +44,10 @@ public class ToothyTerror : BaseEnemy
         else
         {
             sRend.setAnimation("toothyTerrorAnimation");
+            if (Math.Abs(GameObject.X - player.X) <= 1000)
+            {
+                GOManager.Instance.audioManager.getInstance("ToothyTerrorBite").Play();
+            }
 
             // Move down while falling
             GameObject.Y += (int)(gravity * (float)gameTime.ElapsedGameTime.TotalSeconds);
@@ -51,6 +55,10 @@ public class ToothyTerror : BaseEnemy
             // When back on the ground, reset the jump
             if (GameObject.Y >= startYPosition)
             {
+                if (Math.Abs(GameObject.X - player.X) <= 1000)
+                {
+                    GOManager.Instance.audioManager.getInstance("ToothyTerrorUp").Play();
+                }
                 GameObject.Y = (int)startYPosition;
 
                 // Reset jump speed based on jumpHeight

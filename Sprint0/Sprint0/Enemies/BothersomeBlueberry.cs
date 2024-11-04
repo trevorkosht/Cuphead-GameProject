@@ -30,6 +30,10 @@ public class BothersomeBlueberry : BaseEnemy
 
         sRend.isFacingRight = !movingRight;
 
+        if (Math.Abs(GameObject.X - player.X) <= 1000)
+        {
+            GOManager.Instance.audioManager.getInstance("BothersomeBlueberryIdle").Play();
+        }
         
         if (atEdge)
         {
@@ -84,6 +88,11 @@ public class BothersomeBlueberry : BaseEnemy
 
         if (healthComponent.currentHealth <= 50)
         {
+            if(!isKnockedOut)
+            {
+                GOManager.Instance.audioManager.getInstance("BothersomeBlueberryIdle").Stop();
+                GOManager.Instance.audioManager.getInstance("BothersomeBlueberryDeath").Play();
+            }
             isKnockedOut = true;
             respawnTimer += gameTime.ElapsedGameTime.TotalSeconds;
             healthComponent.currentHealth = 50;
@@ -100,6 +109,10 @@ public class BothersomeBlueberry : BaseEnemy
             }
             else if (respawnTimer >= respawnDelay - 1.25)
             {
+                if (Math.Abs(GameObject.X - player.X) <= 1000)
+                {
+                    GOManager.Instance.audioManager.getInstance("BothersomeBlueberryRevive").Play();
+                }
                 sRend.setAnimation("Respawn");
                 GameObject.GetComponent<CircleCollider>().Radius = 40;
             }

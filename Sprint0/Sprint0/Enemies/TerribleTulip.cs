@@ -31,6 +31,7 @@ public class TerribleTulip : BaseEnemy
         shootCooldown -= gametime.ElapsedGameTime.TotalSeconds;
         if (shootCooldown <= 0 && sRend.currentAnimation.Value.CurrentFrame == 7)
         {
+            GOManager.Instance.audioManager.getInstance("TerribleTulipShoot").Play();
             sRend.setAnimation("terribleTulipAnimation");
             if(sRend.currentAnimation.Value.CurrentFrame == 7)
             {

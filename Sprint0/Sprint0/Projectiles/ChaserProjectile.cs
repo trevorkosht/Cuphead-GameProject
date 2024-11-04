@@ -57,6 +57,7 @@ public class ChaserProjectile : Projectile
         }
         else
         {
+            impactSoundInstance.Stop();
             if (IsActive)
             {
                 // Find the closest enemy in the direction the player is facing

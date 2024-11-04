@@ -1417,7 +1417,13 @@
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:SFX/EnemySFX/AggravatingAcornSFX/platforming_forest_acorn_fly_loop.wav;SFX/EnemySFX/AggravatingAcornSFX/AggravatingAcornFlyLoop.wav
+/build:SFX/EnemySFX/AggravatingAcornSFX/platforming_forest_acorn_fly_loop.wav;SFX/EnemySFX/AggravatingAcornSFX/AggravatingAcornIdle.wav
+
+#begin SFX/EnemySFX/AggravatingAcornSFX/platforming_ladybug_death_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/AggravatingAcornSFX/platforming_ladybug_death_01.wav;SFX/EnemySFX/AggravatingAcornSFX/AggravatingAcornDeath.wav
 
 #begin SFX/EnemySFX/BothersomeBlueberrySFX/platforming_ball_runner_death_01.wav
 /importer:WavImporter
@@ -1425,11 +1431,125 @@
 /processorParam:Quality=Best
 /build:SFX/EnemySFX/BothersomeBlueberrySFX/platforming_ball_runner_death_01.wav;SFX/EnemySFX/BothersomeBlueberrySFX/BothersomeBlueberryDeath.wav
 
-#begin SFX/EnemySFX/BothersomeBlueberrySFX/platforming_ball_runner_idle_01.wav
+#begin SFX/EnemySFX/BothersomeBlueberrySFX/platforming_blobrunner_01.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:SFX/EnemySFX/BothersomeBlueberrySFX/platforming_ball_runner_idle_01.wav;SFX/EnemySFX/BothersomeBlueberrySFX/BothersomeBlueberryIdle.wav
+/build:SFX/EnemySFX/BothersomeBlueberrySFX/platforming_blobrunner_01.wav;SFX/EnemySFX/BothersomeBlueberrySFX/BothersomeBlueberryIdle.wav
+
+#begin SFX/EnemySFX/BothersomeBlueberrySFX/platforming_blobrunner_reform_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/BothersomeBlueberrySFX/platforming_blobrunner_reform_01.wav;SFX/EnemySFX/BothersomeBlueberrySFX/BothersomeBlueberryRevive.wav
+
+#begin SFX/EnemySFX/DeadlyDaisySFX/platforming_flowergrunt_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/DeadlyDaisySFX/platforming_flowergrunt_01.wav;SFX/EnemySFX/DeadlyDaisySFX/DeadlyDaisyIdle.wav
+
+#begin SFX/EnemySFX/DeadlyDaisySFX/platforming_flowergrunt_death_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/DeadlyDaisySFX/platforming_flowergrunt_death_01.wav;SFX/EnemySFX/DeadlyDaisySFX/DeadlyDaisyDeath.wav
+
+#begin SFX/EnemySFX/DeadlyDaisySFX/platforming_flowergrunt_float_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/DeadlyDaisySFX/platforming_flowergrunt_float_01.wav;SFX/EnemySFX/DeadlyDaisySFX/DeadlyDaisyFloat.wav
+
+#begin SFX/EnemySFX/DeadlyDaisySFX/platforming_flowergrunt_float_land_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/DeadlyDaisySFX/platforming_flowergrunt_float_land_01.wav;SFX/EnemySFX/DeadlyDaisySFX/DeadlyDaisyLanding.wav
+
+#begin SFX/EnemySFX/MurderousMushroomSFX/platforming_flowergrunt_death_07.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/MurderousMushroomSFX/platforming_flowergrunt_death_07.wav;SFX/EnemySFX/MurderousMushroomSFX/MurderousMushroomDeath.wav
+
+#begin SFX/EnemySFX/MurderousMushroomSFX/platforming_forest_mushroom_shoot_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/MurderousMushroomSFX/platforming_forest_mushroom_shoot_01.wav;SFX/EnemySFX/MurderousMushroomSFX/MurderousMushroomShoot.wav
+
+#begin SFX/EnemySFX/MurderousMushroomSFX/player_weapon_bouncer_002.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/MurderousMushroomSFX/player_weapon_bouncer_002.wav;SFX/EnemySFX/MurderousMushroomSFX/MurderousMushroomUp.wav
+
+#begin SFX/EnemySFX/SpikyBulbSFX/player_parry_power_up_hit_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/SpikyBulbSFX/player_parry_power_up_hit_01.wav;SFX/EnemySFX/SpikyBulbSFX/SpikyBulbDeath.wav
+
+#begin SFX/EnemySFX/TerribleTulipSFX/platforming_flowergrunt_death_06.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/TerribleTulipSFX/platforming_flowergrunt_death_06.wav;SFX/EnemySFX/TerribleTulipSFX/TerribleTulipDeath.wav
+
+#begin SFX/EnemySFX/TerribleTulipSFX/platforming_forest_lobber_projectile_explosion_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/TerribleTulipSFX/platforming_forest_lobber_projectile_explosion_01.wav;SFX/EnemySFX/TerribleTulipSFX/TerribleTulipProjectileExplosion.wav
+
+#begin SFX/EnemySFX/TerribleTulipSFX/platforming_forest_lobber_shoot_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/TerribleTulipSFX/platforming_forest_lobber_shoot_01.wav;SFX/EnemySFX/TerribleTulipSFX/TerribleTulipShoot.wav
+
+#begin SFX/EnemySFX/ToothyTerrorSFX/platforming_flowergrunt_death_10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/ToothyTerrorSFX/platforming_flowergrunt_death_10.wav;SFX/EnemySFX/ToothyTerrorSFX/ToothyTerrorDeath.wav
+
+#begin SFX/EnemySFX/ToothyTerrorSFX/platforming_forest_chomper_bite_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/ToothyTerrorSFX/platforming_forest_chomper_bite_01.wav;SFX/EnemySFX/ToothyTerrorSFX/ToothyTerrorBite.wav
+
+#begin SFX/EnemySFX/ToothyTerrorSFX/platforming_forest_chomper_up_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/EnemySFX/ToothyTerrorSFX/platforming_forest_chomper_up_01.wav;SFX/EnemySFX/ToothyTerrorSFX/ToothyTerrorUp.wav
+
+#begin SFX/ItemSFX/coin_pickup_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/ItemSFX/coin_pickup_01.wav;SFX/ItemSFX/CoinPickup.wav
+
+#begin SFX/ItemSFX/platfotming_shrimp_jump_05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/ItemSFX/platfotming_shrimp_jump_05.wav;SFX/ItemSFX/ProjectileItemPickup.wav
+
+#begin SFX/LevelSFX/16 Forest Follies.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SFX/LevelSFX/16 Forest Follies.mp3;SFX/LevelSFX/ForestFolliesBackgroundMusic.mp3
+
+#begin SFX/LevelSFX/Cuphead_level_intro.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/LevelSFX/Cuphead_level_intro.wav;SFX/LevelSFX/Intro.wav
 
 #begin SFX/PlayerSFX/PlayerMovementSFX/player_dash_01.wav
 /importer:WavImporter
@@ -1466,6 +1586,24 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:SFX/PlayerSFX/PlayerMovementSFX/player_map_walk_0001.wav;SFX/PlayerSFX/PlayerMovementSFX/PlayerWalk.wav
+
+#begin SFX/PlayerSFX/PlayerMovementSFX/player_parry_slap_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/PlayerSFX/PlayerMovementSFX/player_parry_slap_01.wav;SFX/PlayerSFX/PlayerMovementSFX/PlayerParry.wav
+
+#begin SFX/PlayerSFX/PlayerProjectileSFX/platforming_flowergrunt_death_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/PlayerSFX/PlayerProjectileSFX/platforming_flowergrunt_death_04.wav;SFX/PlayerSFX/PlayerProjectileSFX/LobberShotImpact.wav
+
+#begin SFX/PlayerSFX/PlayerProjectileSFX/platforming_ladybug_death_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/PlayerSFX/PlayerProjectileSFX/platforming_ladybug_death_01.wav;SFX/PlayerSFX/PlayerProjectileSFX/RoundaboutShotImpact.wav
 
 #begin SFX/PlayerSFX/PlayerProjectileSFX/player_default_fire_loop_01.wav
 /importer:WavImporter
@@ -1509,11 +1647,35 @@
 /processorParam:Quality=Best
 /build:SFX/PlayerSFX/PlayerProjectileSFX/player_weapon_homing_loop_001.wav;SFX/PlayerSFX/PlayerProjectileSFX/ChaserShotLoop.wav
 
-#begin SFX/PlayerSFX/PlayerProjectileSFX/player_weapon_spread_001.wav
+#begin SFX/PlayerSFX/PlayerProjectileSFX/player_weapon_spread_death_001.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:SFX/PlayerSFX/PlayerProjectileSFX/player_weapon_spread_001.wav;SFX/PlayerSFX/PlayerProjectileSFX/SpreadshotShotImpact.wav
+/build:SFX/PlayerSFX/PlayerProjectileSFX/player_weapon_spread_death_001.wav;SFX/PlayerSFX/PlayerProjectileSFX/SpreadshotShotImpact.wav
+
+#begin TextAnimations/intro-text-animation.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TextAnimations/intro-text-animation.png
+
+#begin TextAnimations/victory-text-animation.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TextAnimations/victory-text-animation.png
 
 #begin TitleScreen/title-1.png
 /importer:TextureImporter

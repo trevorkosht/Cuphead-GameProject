@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
 
@@ -126,6 +127,9 @@ namespace Sprint0
             basePath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\.." + "\\GameObject\\";
             LevelLoader.LoadLevel(basePath + "FileData.txt");
             gameObjects.Add(player);
+            GOManager.Instance.audioManager.getInstance("Intro").Play();
+            MediaPlayer.Play(GOManager.Instance.audioManager.backgroundMusic);
+            MediaPlayer.Volume = 0.3f;
         }
 
         protected override void LoadContent()
@@ -243,10 +247,13 @@ namespace Sprint0
             }
             resetFrame = true;
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
+            audioManager.Dispose();
+            audioStorage.loadAudioManager(audioManager);
             playerSpriteRenderer.orderInLayer = .1f;
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
             player.AddComponent(playerSpriteRenderer);
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
+            player.AddComponent(audioManager);
             player.type = "Player";
             player = new GameObject(0, 500, new List<IComponent> { new PlayerController2(player) });
             Initialize();
