@@ -33,10 +33,23 @@ public abstract class BaseEnemy : IComponent
     {
         if(GameObject.GetComponent<HealthComponent>().currentHealth == 0) {
             if (this is AcornMaker) {
+                GOManager.Instance.audioManager.getInstance("AcornMakerIdle").Stop();
+                GOManager.Instance.audioManager.getInstance("AcornMakerDeath").Play();
                 Rectangle destRectangle = new Rectangle(GameObject.X - 250, GameObject.Y - 250, 900, 900);
                 VisualEffectFactory.createVisualEffect(destRectangle, acornMakerDeath, 3, 18, 1.0f, true);
             }
             else {
+                string objectClassName = this.GetType().Name;
+                if (objectClassName == "AggravatingAcorn" || objectClassName == "BothersomeBlueberry")
+                {
+                    GOManager.Instance.audioManager.getInstance(objectClassName + "Idle").Stop();
+                }
+                if(objectClassName == "DeadlyDaisy")
+                {
+                    GOManager.Instance.audioManager.getInstance("DeadlyDaisyFloat").Stop();
+                }
+                GOManager.Instance.audioManager.getInstance(objectClassName + "Death").Play();
+                
                 Rectangle destRectangle = new Rectangle(GameObject.X - 144, GameObject.Y - 144, 144, 144);
                 VisualEffectFactory.createVisualEffect(destRectangle, deathVFXTexture, 3, 9, 3f, true);
             }

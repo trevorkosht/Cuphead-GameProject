@@ -74,6 +74,9 @@ namespace Cuphead.Player
             }
 
             if (jumpRequested && !player.IsGrounded && player.CanParry) {
+                GOManager.Instance.audioManager.getInstance("PlayerParry").Play();
+                GOManager.Instance.audioManager.getInstance("SpikyBulbDeath").Play();
+
                 Rectangle vfxDestRectangle = new Rectangle(player.parryableObject.X - 18, player.parryableObject.Y - 18,288,288);
                 VisualEffectFactory.createVisualEffect(vfxDestRectangle, GOManager.Instance.textureStorage.GetTexture("ParryVFX"), 3, 9, 0.375f, true);
 

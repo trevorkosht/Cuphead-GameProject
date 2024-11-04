@@ -24,6 +24,10 @@ public class AggravatingAcorn : BaseEnemy
     {
         if (!isFalling)
         {
+            if (Math.Abs(GameObject.X - player.X) <= 1000)
+            {
+                GOManager.Instance.audioManager.getInstance("AggravatingAcornIdle").Play();
+            }
             sRend.isFacingRight = true; // Always face left
 
             // Move left continuously
@@ -32,6 +36,8 @@ public class AggravatingAcorn : BaseEnemy
             // Check if player is underneath and start dropping
             if (PlayerIsUnderneath())
             {
+                GOManager.Instance.audioManager.getInstance("AggravatingAcornIdle").Stop();
+                GOManager.Instance.audioManager.getInstance("AggravatingAcornDrop").Play();
                 sRend.setAnimation("AcornDrop");
                 sRend.spriteScale = 0.75f;
                 isFalling = true;

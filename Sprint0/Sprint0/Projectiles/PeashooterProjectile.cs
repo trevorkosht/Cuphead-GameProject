@@ -1,5 +1,6 @@
 ﻿using Cuphead.Projectiles;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -14,6 +15,7 @@ public class PeashooterProjectile : Projectile
     private float explosionTimer;
     private const float explosionDuration = 1.0f;
     private const string collisionAnimationName = "PeashooterExplosionAnimation";
+    private SoundEffectInstance impactSoundInstance;
     private Vector2 direction;
 
     public PeashooterProjectile(bool isFacingRight, SpriteRenderer spriteRenderer, float angleInDegrees)
@@ -29,11 +31,19 @@ public class PeashooterProjectile : Projectile
         float angleInRadians = MathHelper.ToRadians(angleInDegrees);
         direction = new Vector2((float)Math.Cos(angleInRadians), (float)Math.Sin(angleInRadians));
     }
+
+    public override void Initialize(Texture2D texture, Texture2DStorage storage)
+    {
+        base.Initialize(texture, storage);
+        impactSoundInstance = GOManager.Instance.audioManager.getNewInstance("PeashooterShotImpact");
+
+    }
     public override void Update(GameTime gameTime)
     {
         
         if(collided)
         {
+            impactSoundInstance.Play();
             explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (explosionTimer >= explosionDuration)

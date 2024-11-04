@@ -1,5 +1,6 @@
 ﻿using Cuphead.Projectiles;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 public class RoundaboutProjectile : Projectile
@@ -18,6 +19,7 @@ public class RoundaboutProjectile : Projectile
     private const string collisionAnimationName = "RoundaboutExplosionAnimation";
     private float launchDuration = 1f;
     private float elapsedTime;
+    private SoundEffectInstance impactSoundInstance;
 
     public RoundaboutProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
@@ -43,12 +45,14 @@ public class RoundaboutProjectile : Projectile
 
         returning = false;
         elapsedTime = 0f;
+        impactSoundInstance = GOManager.Instance.audioManager.getNewInstance("RoundaboutShotImpact");
     }
 
     public override void Update(GameTime gameTime)
     {
         if (collided)
         {
+            impactSoundInstance.Play();
             explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (explosionTimer >= explosionDuration)
@@ -59,6 +63,7 @@ public class RoundaboutProjectile : Projectile
         }
         else
         {
+            impactSoundInstance.Stop();
             if (IsActive)
             {
                 elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
