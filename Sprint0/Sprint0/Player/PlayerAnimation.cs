@@ -36,11 +36,9 @@ namespace Cuphead.Player
                 return;
             }
 
-            if (player.hitTime > 0)
+            if (player.hitTime > 0.6)
             {
                 animator.setAnimation(player.IsGrounded ? "HitGround" : "HitAir");
-                //player.IsParrying = false;
-                //player.parryableObject = null;
             }
             else if (player.IsParrying) {
 
