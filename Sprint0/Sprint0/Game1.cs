@@ -208,11 +208,12 @@ namespace Sprint0
                 ResetGame();
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
-            if (Keyboard.GetState().IsKeyDown(Keys.E))
+            if (Keyboard.GetState().IsKeyDown(Keys.E) || (player.position.X > 13500))
             {
                 if (!endGame)
                 {
-                    //I dont know why 3 times is needed but 3 times is needed
+                    //I dont know why 3 times is needed but 4 times is needed
+                    loadend = new LoadEnd(texts, (int)player.position.X, 0);
                     loadend = new LoadEnd(texts, (int)player.position.X, 0);
                     loadend = new LoadEnd(texts, (int)player.position.X, 0);
                     loadend = new LoadEnd(texts, (int)player.position.X, 0);

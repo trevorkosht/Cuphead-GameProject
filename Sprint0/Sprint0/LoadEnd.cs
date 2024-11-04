@@ -21,7 +21,7 @@ namespace Cuphead
             this.offsety = offsety;
 
             text.UpdateText("TIME..............\nHP BONUS..........\nPARRY...............\nGOLD COINS  ....\nSKILL LEVEL......");
-            text.UpdatePos(new Vector2(220+offsetx, 220+offsety));
+            text.UpdatePos(new Vector2(300+offsetx, 300+offsety));
 
             addelement("WinScreenBackground", new Vector2(-500, -500));
             addelement("WinScreenBoard", new Vector2(200, 200));
