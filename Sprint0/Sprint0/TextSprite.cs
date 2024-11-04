@@ -28,7 +28,7 @@ public class TextSprite : ISprite
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.DrawString(font, text, position, Color.White, 1f, Vector2.Zero, 1f, SpriteEffects.None, 0.0001f);
+        spriteBatch.DrawString(font, text, position, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0.0001f);
     }
 
     //will not be used since gametime is useless
