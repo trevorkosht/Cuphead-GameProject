@@ -1040,6 +1040,13 @@
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont;Font.spritefont
 
+#begin Font/Winter.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font/Winter.spritefont
+
 #begin Items/ChaserItem.png
 /importer:TextureImporter
 /processor:TextureProcessor

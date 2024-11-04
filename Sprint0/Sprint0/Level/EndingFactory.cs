@@ -9,15 +9,15 @@ public static class EndingFactory
     private static Dictionary<string, (int width, int height, float orderInLayer)> EndSizes = new Dictionary<string, (int width, int height, float orderInLayer)>()
     {
             { "DeathMessage", (500, 546, 0.91f) },
-            { "WinScreenBackground", (1000, 1500, 0.001f) },
-            { "WinScreenBoard", (980, 760, 0.002f) },
-            { "WinScreenResultsText", (902, 710, 0.002f) },
-            { "WinScreenCuphead", (273, 476, 0.002f) },
-            { "WinScreenUnearnedStar", (650, 472, 0.002f) },
-            { "WinScreenStarAppearAnimation", (1564, 458, 0.003f) },
-            { "WinScreenLine", (642, 270, 0.003f) },
-            { "WinScreenStar", (970, 682, 0.004f) },
-            { "WinScreenCircle", (668, 522, 0.009f) },
+            { "WinScreenBackground", (1580, 1493, 0.09f) },
+            { "WinScreenBoard", (565, 460, 0.08f) },
+            { "WinScreenResultsText", (800, 150, 0.07f) },
+            { "WinScreenCuphead", (450, 450, 0.06f) },
+            { "WinScreenUnearnedStar", (27, 27, 0.005f) },
+            { "WinScreenStarAppearAnimation", (45, 50, 0.04f) },
+            { "WinScreenLine", (358, 3, 0.03f) },
+            { "WinScreenStar", (27, 27, 0.02f) },
+            { "WinScreenCircle", (100, 89, 0.01f) },
     };
 
     public static GameObject CreateElement(string subtype, Vector2 position)

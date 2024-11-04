@@ -40,7 +40,11 @@ namespace Sprint0
 
         string basePath;
 
+        TextSprite texts;
+        SpriteFont font;
+
         bool resetFrame;
+        bool endGame = false;
 
         public Game1()
         {
@@ -160,6 +164,9 @@ namespace Sprint0
             playerScore = player.GetComponent<ScoreComponent>();
             UI = new UI(playerHealth, playerScore, hp3Texture, hp2Texture, hp1FlashingTextures, deadTexture, cardBack, cardFront, new Vector2(50, 650), _spriteBatch2);
 
+            font = Content.Load<SpriteFont>("Font/Winter");
+            texts = new TextSprite(font, "",new Vector2(0, 0), Color.White); 
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -206,7 +213,15 @@ namespace Sprint0
                 Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.E))
             {
-                loadend = new LoadEnd();
+                if (!endGame)
+                {
+                    //I dont know why 3 times is needed but 3 times is needed
+                    loadend = new LoadEnd(texts);
+                    loadend = new LoadEnd(texts);
+                    loadend = new LoadEnd(texts);
+                    endGame = true;
+                }
+                
             }
 
             if (keyboardController.OnKeyDown(Keys.L))
@@ -254,6 +269,8 @@ namespace Sprint0
                 gameObject.Draw(_spriteBatch);
             }
             enemyController.Draw(_spriteBatch);
+
+            texts.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
