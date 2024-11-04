@@ -36,6 +36,9 @@ namespace Sprint0
         private Vector2 startingPlayerLoc = new Vector2(0, 500);
         private bool saveLoc = false;
         private UI UI;
+        private LoadEnd loadend;
+
+        string basePath;
 
         bool resetFrame;
 
@@ -116,8 +119,8 @@ namespace Sprint0
             };
 
             cameraController = new CameraController(camera, player, railPoints);
-            string basePath = AppDomain.CurrentDomain.BaseDirectory;
-            LevelLoader.LoadLevel(basePath + "\\..\\..\\.." + "\\GameObject\\FileData.txt");
+            basePath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\.." + "\\GameObject\\";
+            LevelLoader.LoadLevel(basePath + "FileData.txt");
             gameObjects.Add(player);
         }
 
@@ -156,6 +159,7 @@ namespace Sprint0
             HealthComponent playerHealth = player.GetComponent<HealthComponent>();
             playerScore = player.GetComponent<ScoreComponent>();
             UI = new UI(playerHealth, playerScore, hp3Texture, hp2Texture, hp1FlashingTextures, deadTexture, cardBack, cardFront, new Vector2(50, 650), _spriteBatch2);
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -200,8 +204,13 @@ namespace Sprint0
                 ResetGame();
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.E))
+            {
+                loadend = new LoadEnd();
+            }
 
             if (keyboardController.OnKeyDown(Keys.L))
+
                 GOManager.Instance.IsDebugging = !GOManager.Instance.IsDebugging;
 
             base.Update(gameTime);
