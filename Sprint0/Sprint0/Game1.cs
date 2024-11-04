@@ -196,14 +196,7 @@ namespace Sprint0
 
             if (Keyboard.GetState().IsKeyDown(Keys.D0))
             {
-                if (saveLoc)
-                {
-                    saveLoc = false;
-                }
-                else
-                {
                     saveLoc = true;
-                }
             }
 
             if (player.GetComponent<HealthComponent>().isDeadFull)

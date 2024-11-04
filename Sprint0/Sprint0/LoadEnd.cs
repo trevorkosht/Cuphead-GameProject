@@ -15,15 +15,13 @@ namespace Cuphead
         int offsetx;
         int offsety;
 
-        List<GameObject> all = new List<GameObject>();
-
         public LoadEnd(TextSprite text, int offsetx, int offsety)
         {
             this.offsetx = offsetx;
             this.offsety = offsety;
 
             text.UpdateText("TIME..............\nHP BONUS..........\nPARRY...............\nGOLD COINS  ....\nSKILL LEVEL......");
-            text.UpdatePos(new Vector2(220, 220));
+            text.UpdatePos(new Vector2(220+offsetx, 220+offsety));
 
             addelement("WinScreenBackground", new Vector2(-500, -500));
             addelement("WinScreenBoard", new Vector2(200, 200));
@@ -32,19 +30,13 @@ namespace Cuphead
             addelement("WinScreenLine", new Vector2(300, 500));
 
 
-            all.Add(EndingFactory.CreateElement("WinScreenUnearnedStar", new Vector2(-300, 0)));
+            addelement("WinScreenUnearnedStar", new Vector2(-300, 0));
 
-            all.Add(EndingFactory.CreateElement("WinScreenStarAppearAnimation", new Vector2(-300, 0)));
+            addelement("WinScreenStarAppearAnimation", new Vector2(-300, 0));
 
-            all.Add(EndingFactory.CreateElement("WinScreenStar", new Vector2(-300, 0)));
+            addelement("WinScreenStar", new Vector2(-300, 0));
 
-            all.Add(EndingFactory.CreateElement("WinScreenCircle", new Vector2(-300, 0)));
-
-            foreach (GameObject obj in all)
-            {
-                GOManager.Instance.allGOs.Add(obj);
-            }
-
+            addelement("WinScreenCircle", new Vector2(-300, 0));
 
         }
 
