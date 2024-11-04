@@ -10,16 +10,30 @@ public class SpreadShotProjectile : Projectile
     private float angleSpread = 45f;
     private Vector2[] directions;
     bool isFacingRight;
+    private Vector2 direction;
+    private float rotation;
+    private float[] rotations;
+    private Vector2 offset;
 
-    public SpreadShotProjectile(bool isFacingRight)
+    public SpreadShotProjectile(bool isFacingRight, float angleInDegrees, Vector2 offset)
     {
         this.isFacingRight = isFacingRight;
+        this.offset = offset;
+        float angleInRadians = MathHelper.ToRadians(angleInDegrees);
+        rotation = angleInDegrees;
+        direction = new Vector2((float)Math.Cos(angleInRadians), (float)Math.Sin(angleInRadians));
 
         directions = new Vector2[]
         {
-            new Vector2((float)Math.Cos(MathHelper.ToRadians(-angleSpread)), (float)Math.Sin(MathHelper.ToRadians(-angleSpread))),
-            new Vector2(1, 0), 
-            new Vector2((float)Math.Cos(MathHelper.ToRadians(angleSpread)), (float)Math.Sin(MathHelper.ToRadians(angleSpread)))
+            new Vector2((float)Math.Cos(MathHelper.ToRadians(-angleSpread + angleInDegrees)), (float)Math.Sin(MathHelper.ToRadians(-angleSpread + angleInDegrees))),
+            new Vector2((float)Math.Cos(angleInRadians), (float)Math.Sin(angleInRadians)),
+            new Vector2((float)Math.Cos(MathHelper.ToRadians(angleSpread + angleInDegrees)), (float)Math.Sin(MathHelper.ToRadians(angleSpread + angleInDegrees)))
+        };
+        rotations = new float[]
+        {
+            -angleSpread + angleInDegrees,
+            angleInDegrees,
+            angleSpread + angleInDegrees
         };
 
         // Flip the direction vectors horizontally if facing left
@@ -30,6 +44,8 @@ public class SpreadShotProjectile : Projectile
                 directions[i].X = -directions[i].X;
             }
         }
+
+        this.offset = offset;
     }
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
@@ -45,17 +61,20 @@ public class SpreadShotProjectile : Projectile
             GameObject spreadShot = new GameObject(GameObject.X, GameObject.Y);
             spreadShot.type = "PlayerProjectile";
 
-            SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(spreadShot.X, spreadShot.Y, 144, 144), false);
+            float rotFacingDir = rotations[i];
+            if (!isFacingRight)
+                rotFacingDir = -180 - rotations[i];
+            SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(spreadShot.X, spreadShot.Y, 144, 144), false, rotFacingDir);
             spriteRenderer.spriteScale = 0.5f;
 
-            Collider collider = new BoxCollider(new Vector2(60, 45), new Vector2(15, 15), GOManager.Instance.GraphicsDevice);
+            Collider collider = new BoxCollider(new Vector2(60, 45), new Vector2(15 + offset.X, 15 + offset.Y), GOManager.Instance.GraphicsDevice, MathHelper.ToRadians(rotFacingDir));
             spreadShot.AddComponent(collider);
 
             var spreadLogic = new SpreadShotInstance(directions[i] * speed, spriteRenderer);
             spriteRenderer.addAnimation("SpreadAnimation", new Animation(textureStorage.GetTexture("Spread"), 5, 4, 144, 144));
             spriteRenderer.addAnimation("SpreadExplosionAnimation", new Animation(textureStorage.GetTexture("SpreadExplosion"), 5, 5, 144, 144));
             spriteRenderer.setAnimation("SpreadAnimation");
-            spriteRenderer.isFacingRight = isFacingRight;
+            spriteRenderer.isFacingRight = true;
 
             spreadShot.AddComponent(spreadLogic);
             spreadLogic.Initialize(spriteTexture, textureStorage);

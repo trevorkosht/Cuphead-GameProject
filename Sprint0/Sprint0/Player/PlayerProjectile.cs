@@ -41,15 +41,29 @@ namespace Cuphead.Player
                     GameObject newProjectile;
 
                     additionalShotHeight = AddProjectileHeight(shotsFired, player.currentProjectileType);
-
+                    float angle = 0f;
+                    player.ShootUp = false;
+                    player.ShootDown = false;
+                    if (keyboardController.IsAimUp() && !player.IsDucking)
+                    {
+                        player.ShootUp = true;
+                        angle = -90f;
+                        if (player.IsRunning)
+                            angle = -35f;
+                    }
+                    else if (keyboardController.IsAimDown() && player.isFalling)
+                    {
+                        angle = 90f;
+                        player.ShootDown = true;
+                    }
                     if (player.GameObject.GetComponent<SpriteRenderer>().isFacingRight)
                     {
-                        newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X, player.GameObject.Y + additionalShotHeight, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+                        newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X, player.GameObject.Y + additionalShotHeight, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight, angle);
                         playerAnimator.CreateShootingEffect(true);
                     }
                     else
                     {
-                        newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X - 90, player.GameObject.Y + additionalShotHeight, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight);
+                        newProjectile = ProjectileFactory.CreateProjectile(player.currentProjectileType, player.GameObject.X - 90, player.GameObject.Y + additionalShotHeight, player.GameObject.GetComponent<SpriteRenderer>().isFacingRight, angle);
                         playerAnimator.CreateShootingEffect(false);
                     }
                     GOManager.Instance.allGOs.Add(newProjectile);
@@ -79,7 +93,7 @@ namespace Cuphead.Player
         {
             return projectileType switch
             {
-                0 => 1 / (25f / 8.3f), // Default
+                0 => 1 / (25f / 5f), // Default
                 1 => 1 / (41.33f / 10.2f), // Spread
                 2 => 1 / (25f / 8.3f), // Chaser
                 3 => 1 / (33.14f / 11.6f), // Lobber

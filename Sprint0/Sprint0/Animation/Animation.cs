@@ -52,13 +52,13 @@ public class Animation {
         }
     }
 
-    public void draw(SpriteBatch spriteBatch, Rectangle destRectangle, bool isFacingRight, float orderInLayer) {
+    public void draw(SpriteBatch spriteBatch, Rectangle destRectangle, bool isFacingRight, float orderInLayer, float rotation) {
         if(spriteSheet != null){
             if (isFacingRight) {
-                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, (float)0.0, new Vector2(0, 0), SpriteEffects.None, orderInLayer);
+                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, rotation, new Vector2(0, 0), SpriteEffects.None, orderInLayer);
             }
             else {
-                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, (float)0.0, new Vector2(0, 0), SpriteEffects.FlipHorizontally, orderInLayer);
+                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, rotation, new Vector2(0, 0), SpriteEffects.FlipHorizontally, orderInLayer);
             }
         }
     }

@@ -38,6 +38,8 @@ namespace Cuphead.Player
         public bool isFalling = false;
         public bool CanParry = false;
         public bool IsParrying = false;
+        public bool ShootUp = false;
+        public bool ShootDown = false;
 
         //floats
         public float Speed { get; set; } = 700f;

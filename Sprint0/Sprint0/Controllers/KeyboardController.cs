@@ -64,6 +64,14 @@ public class KeyboardController : IController
     {
         return curKS.IsKeyDown(Keys.X);
     }
+    public bool IsAimUp()
+    {
+        return curKS.IsKeyDown(Keys.Up);
+    }
+    public bool IsAimDown()
+    {
+        return curKS.IsKeyDown(Keys.Down);
+    }
 
     public bool IsProjectileSwitchRequested(int projectileIndex)
     {

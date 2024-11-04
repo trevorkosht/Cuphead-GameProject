@@ -11,14 +11,16 @@ public class SpriteRenderer : IComponent {
     public string animationName { get; set; }
     public float spriteScale { get; set; } = 1f;
     public float orderInLayer { get; set; } = 0f;
+    public float rotation { get; set; } = 0f;
 
 
     public KeyValuePair<string, Animation> currentAnimation { get; set; }
     private Dictionary<string, Animation> spriteAnimations = new Dictionary<string, Animation>();
 
-    public SpriteRenderer(Rectangle destRectangle, bool isFacingRight) {
+    public SpriteRenderer(Rectangle destRectangle, bool isFacingRight, float rotationAngleInDegrees = 0) {
         this.destRectangle = destRectangle;
         this.isFacingRight = isFacingRight;
+        rotation = MathHelper.ToRadians(rotationAngleInDegrees);
     }
 
     public void addAnimation(string animationName, Animation animation) {
@@ -78,7 +80,7 @@ public class SpriteRenderer : IComponent {
             (int)(destRectangle.Width * spriteScale),
             (int)(destRectangle.Height * spriteScale));
 
-        spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, isFacingRight, orderInLayer);
+        spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, isFacingRight, orderInLayer, rotation);
     }
 
     public bool IsAnimationComplete()
