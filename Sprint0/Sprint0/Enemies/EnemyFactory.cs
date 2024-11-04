@@ -60,7 +60,7 @@ public static class EnemyFactory
                 enemy.AddComponent(enemyLogic);
                 enemy.AddComponent(new BoxCollider(new Vector2(115, 145), new Vector2(10, 0), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("terribleTulipAnimation", new Animation(textureStorage.GetTexture("TerribleTulip"), 5, 15, 144, 144));
-                spriteRenderer.addAnimation("Idle", new Animation(textureStorage.GetTexture("TulipIdle"), 5, 30, 144, 144));
+                spriteRenderer.addAnimation("Idle", new Animation(textureStorage.GetTexture("TulipIdle"), 2, 30, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("TerribleTulip"), textureStorage);
                 enemyHP = 4;
                 break;

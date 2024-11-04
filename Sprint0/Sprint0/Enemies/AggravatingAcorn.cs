@@ -15,7 +15,7 @@ public class AggravatingAcorn : BaseEnemy
     {
         base.Initialize(texture, storage);
         sRend.setAnimation("aggravatingAcornAnimation");
-        speed = 550f;
+        speed = 700f;
         isFalling = false;
         dropPosition = Vector2.Zero;
     }
@@ -44,8 +44,6 @@ public class AggravatingAcorn : BaseEnemy
                 GameObject.GetComponent<CircleCollider>().offset = new Vector2(-50, -50);
                 dropPosition = new Vector2(GameObject.X, GameObject.Y + 500); // Set the drop target position
                 VisualEffectFactory.createVisualEffect(new Rectangle(GameObject.X - 10, GameObject.Y - 160, 144, 160), GOManager.Instance.textureStorage.GetTexture("PropVFX"), 3, 6, 0.9f, true);
-
-                System.Diagnostics.Debug.WriteLine("propellor dropped, Xpos = " + GameObject.X + " at time t = " + gameTime.TotalGameTime.TotalMilliseconds + "ms");
             }
         }
         else
@@ -57,7 +55,6 @@ public class AggravatingAcorn : BaseEnemy
             // Destroy when reaching the drop position
             if (GameObject.Y >= dropPosition.Y)
             {
-                System.Diagnostics.Debug.WriteLine("game object destroyed Xpos = " + GameObject.X + " at time t = " + gameTime.TotalGameTime.TotalMilliseconds + "ms");
                 GameObject.Destroy();
             }
         }

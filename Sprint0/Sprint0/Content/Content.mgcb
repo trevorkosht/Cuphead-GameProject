@@ -1653,6 +1653,30 @@
 /processorParam:Quality=Best
 /build:SFX/PlayerSFX/PlayerProjectileSFX/player_weapon_spread_death_001.wav;SFX/PlayerSFX/PlayerProjectileSFX/SpreadshotShotImpact.wav
 
+#begin TextAnimations/intro-text-animation.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TextAnimations/intro-text-animation.png
+
+#begin TextAnimations/victory-text-animation.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TextAnimations/victory-text-animation.png
+
 #begin TitleScreen/title-1.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -15,7 +15,7 @@ public class ToothyTerror : BaseEnemy
         base.Initialize(texture, storage);
         sRend.setAnimation("toothyTerrorAnimation");
         jumpHeight = 450f; // Can be modified to make jumps higher
-        gravity = 300f;
+        gravity = 400f;
         isJumping = true;
         startYPosition = GameObject.Y;
 
