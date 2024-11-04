@@ -1,4 +1,9 @@
 // Section 1 (0000-2000)
+Item,Spreadshot,0,500
+Item,Roundabout,0,300
+Item,Chaser,0,400
+Item,Lobber,0,400
+
 Block,BigHill1,-1300,100
 
 Block,BigHill1,-500,600

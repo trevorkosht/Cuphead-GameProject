@@ -25,7 +25,7 @@ namespace Cuphead.Controllers
         private PlayerMovement playerMovement;
         private PlayerProjectile playerProjectile;
 
-        private readonly KeyboardController keyboardController;
+        public readonly KeyboardController keyboardController;
         private readonly MouseController mouseController;
         
         private BoxCollider Collider;

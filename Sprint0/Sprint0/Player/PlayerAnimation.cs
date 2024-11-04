@@ -65,7 +65,10 @@ namespace Cuphead.Player
             }
             else if (player.IsRunning)
             {
-                animator.setAnimation(player.shootTime > 0 ? "RunShootingStraight" : "Run");
+                if(player.shootTime > 0)
+                    animator.setAnimation(player.ShootUp ? "RunShootingDiagonalUp" : "RunShootingStraight"); 
+                else
+                animator.setAnimation("Run");
                 if (animator.currentAnimation.Value.CurrentFrame == 5 || animator.currentAnimation.Value.CurrentFrame == 12)
                 {
                     CreateDustEffect();
@@ -73,7 +76,7 @@ namespace Cuphead.Player
             }
             else if (player.shootTime > 0)
             {
-                animator.setAnimation("ShootStraight");
+                animator.setAnimation(player.ShootUp ? "ShootUp" : "ShootStraight");
             }
             else
             {
@@ -85,7 +88,37 @@ namespace Cuphead.Player
         {
             Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
             Rectangle effectPosition;
-            if (isFacingRight)
+            if (player.ShootUp)
+            {
+                if (player.IsRunning)
+                {
+                    if (isFacingRight)
+                    {
+                        effectPosition = new Rectangle(player.GameObject.X + 120, player.GameObject.Y - 15, 144, 144);
+                    }
+                    else
+                    {
+                        effectPosition = new Rectangle(player.GameObject.X - 45, player.GameObject.Y - 15, 144, 144);
+                    }
+                }
+                else
+                {
+                    if (isFacingRight)
+                    {
+                        effectPosition = new Rectangle(player.GameObject.X + 70, player.GameObject.Y - 40, 144, 144);
+                    }
+                    else
+                    {
+                        effectPosition = new Rectangle(player.GameObject.X + 5, player.GameObject.Y - 40, 144, 144);
+                    }
+                }
+            }
+            else if (player.ShootDown)
+            {
+                effectPosition = new Rectangle(player.GameObject.X + 30, player.GameObject.Y + 100, 144, 144);
+
+            }
+            else if (isFacingRight)
             {
                 effectPosition = new Rectangle(player.GameObject.X + 100, player.GameObject.Y + 25, 144, 144);
             }

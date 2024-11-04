@@ -1,6 +1,7 @@
 ﻿using Cuphead.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 public class PeashooterProjectile : Projectile
 {
@@ -13,17 +14,20 @@ public class PeashooterProjectile : Projectile
     private float explosionTimer;
     private const float explosionDuration = 1.0f;
     private const string collisionAnimationName = "PeashooterExplosionAnimation";
+    private Vector2 direction;
 
-    public PeashooterProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
+    public PeashooterProjectile(bool isFacingRight, SpriteRenderer spriteRenderer, float angleInDegrees)
     {
         collided = false;
         explosionTimer = 0f;
         this.spriteRenderer = spriteRenderer;
         this.isFacingRight = isFacingRight;
-        if (!isFacingRight)
-        {
-           spriteRenderer.isFacingRight = false;
-        }
+        //if (!isFacingRight)
+        //{
+        //   spriteRenderer.isFacingRight = false;
+        //}
+        float angleInRadians = MathHelper.ToRadians(angleInDegrees);
+        direction = new Vector2((float)Math.Cos(angleInRadians), (float)Math.Sin(angleInRadians));
     }
     public override void Update(GameTime gameTime)
     {
@@ -42,12 +46,12 @@ public class PeashooterProjectile : Projectile
             {
                 if (isFacingRight)
                 {
-                    GameObject.Move((int)(speed), 0); // Move right
+                    GameObject.Move((int)(direction.X * speed), (int)(direction.Y * speed)); // Move right
 
                 }
                 else
                 {
-                    GameObject.Move((int)(-speed), 0); // Move left
+                    GameObject.Move((int)(direction.X * -speed), (int)(direction.Y * speed)); // Move left
                 }
             }
 
