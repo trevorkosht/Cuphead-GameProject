@@ -9,7 +9,7 @@ public static class EndingFactory
     private static Dictionary<string, (int width, int height, float orderInLayer)> EndSizes = new Dictionary<string, (int width, int height, float orderInLayer)>()
     {
             { "DeathMessage", (500, 546, 0.91f) },
-            { "WinScreenBackground", (526, 306, 0.001f) },
+            { "WinScreenBackground", (1000, 1500, 0.001f) },
             { "WinScreenBoard", (980, 760, 0.002f) },
             { "WinScreenResultsText", (902, 710, 0.002f) },
             { "WinScreenCuphead", (273, 476, 0.002f) },
@@ -22,6 +22,7 @@ public static class EndingFactory
 
     public static GameObject CreateElement(string subtype, Vector2 position)
     {
+        Console.WriteLine(subtype);
         Texture2D texture = GOManager.Instance.textureStorage.GetTexture(subtype);
 
         if (EndSizes.TryGetValue(subtype, out (int width, int height, float orderInLayer) endData))
@@ -31,8 +32,8 @@ public static class EndingFactory
             SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
             Animation backgroundTexture = new Animation(texture, 1, 1, destRectangle.Height, destRectangle.Width);
 
-            spriteRenderer.addAnimation("end", backgroundTexture);
-            spriteRenderer.setAnimation("end");
+            spriteRenderer.addAnimation("End", backgroundTexture);
+            spriteRenderer.setAnimation("End");
             EndScreen.AddComponent(spriteRenderer);
             return EndScreen;
         }

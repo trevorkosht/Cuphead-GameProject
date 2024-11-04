@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 public class Texture2DStorage
@@ -207,9 +208,17 @@ public class Texture2DStorage
     public Texture2D GetTexture(string textureName)
     {
         if (_textures.ContainsKey(textureName))
+        {
             return _textures[textureName];
+        }
+        else
+        {
+            Console.WriteLine(textureName + " does not exist");
+            return null;
+        }
+            
 
-        return null;
+        
     }
 
     public void loadPlayerAnimations(SpriteRenderer spriteRenderer) {

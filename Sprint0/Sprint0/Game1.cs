@@ -36,6 +36,7 @@ namespace Sprint0
         private Vector2 startingPlayerLoc = new Vector2(0, 500);
         private bool saveLoc = false;
         private UI UI;
+        private LoadEnd loadend;
 
         string basePath;
 
@@ -158,6 +159,7 @@ namespace Sprint0
             HealthComponent playerHealth = player.GetComponent<HealthComponent>();
             playerScore = player.GetComponent<ScoreComponent>();
             UI = new UI(playerHealth, playerScore, hp3Texture, hp2Texture, hp1FlashingTextures, deadTexture, cardBack, cardFront, new Vector2(50, 650), _spriteBatch2);
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -204,8 +206,7 @@ namespace Sprint0
                 Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.E))
             {
-                Console.WriteLine("Loading end screen...");
-                LevelLoader.LoadLevel(basePath +"endscreen.txt");
+                loadend = new LoadEnd();
             }
 
             if (keyboardController.OnKeyDown(Keys.L))
