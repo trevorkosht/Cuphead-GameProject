@@ -34,6 +34,7 @@ public static class EndingFactory
 
             spriteRenderer.addAnimation("End", backgroundTexture);
             spriteRenderer.setAnimation("End");
+            spriteRenderer.orderInLayer = endData.orderInLayer;
             EndScreen.AddComponent(spriteRenderer);
             return EndScreen;
         }

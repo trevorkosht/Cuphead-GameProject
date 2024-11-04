@@ -213,10 +213,7 @@ namespace Sprint0
                 if (!endGame)
                 {
                     //I dont know why 3 times is needed but 4 times is needed
-                    loadend = new LoadEnd(texts, (int)player.position.X, 0);
-                    loadend = new LoadEnd(texts, (int)player.position.X, 0);
-                    loadend = new LoadEnd(texts, (int)player.position.X, 0);
-                    loadend = new LoadEnd(texts, (int)player.position.X, 0);
+                    loadend = new LoadEnd(gameTime, texts, (int)player.position.X, 0);
                     endGame = true;
                 }
                 
