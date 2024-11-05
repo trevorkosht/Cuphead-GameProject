@@ -130,6 +130,7 @@ namespace Sprint0
             GOManager.Instance.audioManager.getInstance("Intro").Play();
             MediaPlayer.Play(GOManager.Instance.audioManager.backgroundMusic);
             MediaPlayer.Volume = 0.3f;
+            MediaPlayer.IsRepeating = true;
         }
 
         protected override void LoadContent()
