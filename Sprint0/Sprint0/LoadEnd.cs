@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cuphead.Player;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace Cuphead
             int seconds = (int)time.TotalGameTime.TotalSeconds;
             int min = seconds/60;
             seconds = seconds % 60;
+            String health = GOManager.Instance.Player.GetComponent<HealthComponent>().currentHealth/100 + "/3";
             if (seconds < 10)
             {
                 displayTime = min + ":0" + seconds;
@@ -34,7 +36,13 @@ namespace Cuphead
             {
                 displayTime = min + ":" + seconds;
             }
-            Text = "TIME.............."+displayTime+"\nHP BONUS..........\nPARRY...............\nGOLD COINS  ....\nSKILL LEVEL......\n\n       GRADE....  A";
+            Text = "TIME.............." + displayTime +
+                "\nHP BONUS.........." + health +
+                "\nPARRY..............." +
+                "\nGOLD COINS  ...." + "5/5"+
+                "\nSKILL LEVEL......" +
+                "\n\n       GRADE....  A";
+
 
             text.UpdateText(Text);
             text.UpdatePos(new Vector2(250+offsetx, 250+offsety));
@@ -49,11 +57,13 @@ namespace Cuphead
             addelement("WinScreenUnearnedStar", new Vector2(560, 445));
             addelement("WinScreenUnearnedStar", new Vector2(590, 445));
 
-            addelement("WinScreenStarAppearAnimation", new Vector2(-300, 0));
+            addelement("WinScreenStarAppearAnimation", new Vector2(560, 445));
+            addelement("WinScreenStarAppearAnimation", new Vector2(590, 445));
 
-            addelement("WinScreenStar", new Vector2(-300, 0));
+            addelement("WinScreenStar", new Vector2(560, 445));
+            addelement("WinScreenStar", new Vector2(590, 445));
 
-            addelement("WinScreenCircle", new Vector2(-300, 0));
+            addelement("WinScreenCircle", new Vector2(700, 400));
 
         }
 
