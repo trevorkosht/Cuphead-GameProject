@@ -29,6 +29,18 @@ public class DeadlyDaisy : BaseEnemy
         sRend.isFacingRight = !movingRight;
         collisionManager = GameObject.GetComponent<DaisyCollisionManager>();
 
+        if (sRend.getAnimationName() == "Spawn") 
+        { 
+            if(collisionManager.isGrounded)
+            {
+                GOManager.Instance.audioManager.getInstance("DeadlyDaisyLanding").Play();
+            } else
+            {
+                if (GameObject.Y > 0 && GameObject.Y < 100)
+                GOManager.Instance.audioManager.getInstance("DeadlyDaisyFloat").Play();
+            }
+        }
+
         if (collisionManager.isGrounded) {
             if(!collisionManager.isJumping || turnDelay < 1.5){
                 collisionManager.isJumping = false;

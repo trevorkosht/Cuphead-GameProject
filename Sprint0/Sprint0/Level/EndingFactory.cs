@@ -6,18 +6,18 @@ using System.Reflection.Metadata;
 
 public static class EndingFactory
 {
-    private static Dictionary<string, (int width, int height, float orderInLayer)> EndSizes = new Dictionary<string, (int width, int height, float orderInLayer)>()
+    private static Dictionary<string, (int width, int height, float orderInLayer, int frameAmount)> EndSizes = new Dictionary<string, (int width, int height, float orderInLayer, int frameAmount)>()
     {
-            { "DeathMessage", (500, 546, 0.91f) },
-            { "WinScreenBackground", (1000, 1500, 0.001f) },
-            { "WinScreenBoard", (980, 760, 0.002f) },
-            { "WinScreenResultsText", (902, 710, 0.002f) },
-            { "WinScreenCuphead", (273, 476, 0.002f) },
-            { "WinScreenUnearnedStar", (650, 472, 0.002f) },
-            { "WinScreenStarAppearAnimation", (1564, 458, 0.003f) },
-            { "WinScreenLine", (642, 270, 0.003f) },
-            { "WinScreenStar", (970, 682, 0.004f) },
-            { "WinScreenCircle", (668, 522, 0.009f) },
+            { "DeathMessage", (500, 546, 0.91f, 1) },
+            { "WinScreenBackground", (1580, 1493, 0.1f, 1) },
+            { "WinScreenBoard", (565, 460, 0.099f, 1) },
+            { "WinScreenResultsText", (800, 150, 0.098f, 3) },
+            { "WinScreenCuphead", (450, 450, 0.097f, 12) },
+            { "WinScreenUnearnedStar", (27, 27, 0.096f, 1) },
+            { "WinScreenStarAppearAnimation", (45, 50, 0.095f, 8) },
+            { "WinScreenLine", (358, 3, 0.094f, 1) },
+            { "WinScreenStar", (27, 27, 0.093f, 1) },
+            { "WinScreenCircle", (100, 89, 0.092f, 12) },
     };
 
     public static GameObject CreateElement(string subtype, Vector2 position)
@@ -25,15 +25,16 @@ public static class EndingFactory
         Console.WriteLine(subtype);
         Texture2D texture = GOManager.Instance.textureStorage.GetTexture(subtype);
 
-        if (EndSizes.TryGetValue(subtype, out (int width, int height, float orderInLayer) endData))
+        if (EndSizes.TryGetValue(subtype, out (int width, int height, float orderInLayer, int frameAmount) endData))
         {
             Rectangle destRectangle = new Rectangle((int)position.X, (int)position.Y, endData.width, endData.height);
             GameObject EndScreen = new GameObject(destRectangle.X, destRectangle.Y);
             SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
-            Animation backgroundTexture = new Animation(texture, 1, 1, destRectangle.Height, destRectangle.Width);
+            Animation backgroundTexture = new Animation(texture, 1, endData.frameAmount, destRectangle.Height, destRectangle.Width);
 
             spriteRenderer.addAnimation("End", backgroundTexture);
             spriteRenderer.setAnimation("End");
+            spriteRenderer.orderInLayer = endData.orderInLayer;
             EndScreen.AddComponent(spriteRenderer);
             return EndScreen;
         }

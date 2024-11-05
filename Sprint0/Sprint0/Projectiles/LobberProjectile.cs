@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Cuphead.Projectiles;
+using Microsoft.Xna.Framework.Audio;
 
 public class LobberProjectile : Projectile
 {
@@ -17,6 +18,7 @@ public class LobberProjectile : Projectile
     private ProjectileCollision projectileCollision;
     private const float explosionDuration = 1.0f;
     private const string collisionAnimationName = "LobberExplosionAnimation";
+    private SoundEffectInstance impactSoundInstance;
 
     public LobberProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
     {
@@ -34,12 +36,14 @@ public class LobberProjectile : Projectile
     {
         base.Initialize(texture, storage);
         velocity = new Vector2(speed, -speed);
+        impactSoundInstance = GOManager.Instance.audioManager.getNewInstance("LobberShotImpact");
     }
 
     public override void Update(GameTime gameTime)
     {
         if (collided)
         {
+            impactSoundInstance.Play();
             explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (explosionTimer >= explosionDuration)
@@ -50,6 +54,7 @@ public class LobberProjectile : Projectile
         }
         else
         {
+            impactSoundInstance.Stop();
             velocity.Y += gravity;
 
             if (isFacingRight)

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
 
@@ -40,7 +41,11 @@ namespace Sprint0
 
         string basePath;
 
+        TextSprite texts;
+        SpriteFont font;
+
         bool resetFrame;
+        bool endGame = false;
 
         public Game1()
         {
@@ -122,6 +127,9 @@ namespace Sprint0
             basePath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\.." + "\\GameObject\\";
             LevelLoader.LoadLevel(basePath + "FileData.txt");
             gameObjects.Add(player);
+            GOManager.Instance.audioManager.getInstance("Intro").Play();
+            MediaPlayer.Play(GOManager.Instance.audioManager.backgroundMusic);
+            MediaPlayer.Volume = 0.3f;
         }
 
         protected override void LoadContent()
@@ -160,6 +168,9 @@ namespace Sprint0
             playerScore = player.GetComponent<ScoreComponent>();
             UI = new UI(playerHealth, playerScore, hp3Texture, hp2Texture, hp1FlashingTextures, deadTexture, cardBack, cardFront, new Vector2(50, 650), _spriteBatch2);
 
+            font = Content.Load<SpriteFont>("Font/Winter");
+            texts = new TextSprite(font, "",new Vector2(0, 0), Color.White); 
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -185,14 +196,7 @@ namespace Sprint0
 
             if (Keyboard.GetState().IsKeyDown(Keys.D0))
             {
-                if (saveLoc)
-                {
-                    saveLoc = false;
-                }
-                else
-                {
                     saveLoc = true;
-                }
             }
 
             if (player.GetComponent<HealthComponent>().isDeadFull)
@@ -204,9 +208,15 @@ namespace Sprint0
                 ResetGame();
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
-            if (Keyboard.GetState().IsKeyDown(Keys.E))
+            if (Keyboard.GetState().IsKeyDown(Keys.E) || (player.position.X > 13500))
             {
-                loadend = new LoadEnd();
+                if (!endGame)
+                {
+                    //I dont know why 3 times is needed but 4 times is needed
+                    loadend = new LoadEnd(gameTime, texts, (int)player.position.X, 0);
+                    endGame = true;
+                }
+                
             }
 
             if (keyboardController.OnKeyDown(Keys.L))
@@ -228,10 +238,13 @@ namespace Sprint0
             }
             resetFrame = true;
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
+            audioManager.Dispose();
+            audioStorage.loadAudioManager(audioManager);
             playerSpriteRenderer.orderInLayer = .1f;
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
             player.AddComponent(playerSpriteRenderer);
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
+            player.AddComponent(audioManager);
             player.type = "Player";
             player = new GameObject(0, 500, new List<IComponent> { new PlayerController2(player) });
             Initialize();
@@ -254,6 +267,8 @@ namespace Sprint0
                 gameObject.Draw(_spriteBatch);
             }
             enemyController.Draw(_spriteBatch);
+
+            texts.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

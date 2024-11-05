@@ -211,6 +211,7 @@ namespace Cuphead.Player
                     case "Chaser":
                         player.projectileUnlock[(int)PlayerState.projectiletype.Chaser] = true; break;
                     case "Coin":
+                        GOManager.Instance.audioManager.getInstance("CoinPickup").Play();
                         player.coinCount++;
                         Rectangle destRectangle = item.GetComponent<SpriteRenderer>().destRectangle;
                         destRectangle.X *= 1;
@@ -221,6 +222,10 @@ namespace Cuphead.Player
                         break;
                     default:
                         break;
+                }
+                if(itemName != "Coin")
+                {
+                    GOManager.Instance.audioManager.getInstance("ProjectileItemPickup").Play();
                 }
 
                 item.Destroy();

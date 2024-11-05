@@ -42,6 +42,7 @@ public class MurderousMushroom : BaseEnemy
             shootCooldown -= gameTime.ElapsedGameTime.TotalSeconds;
             if (shootCooldown <= 0)
             {
+                GOManager.Instance.audioManager.getInstance("MurderousMushroomShoot").Play();
                 sRend.setAnimation("Attack");
                 if(sRend.currentAnimation.Value.CurrentFrame == 5) {
                     Vector2 playerPosition = new Vector2(player.X, player.Y);
@@ -104,6 +105,7 @@ public class MurderousMushroom : BaseEnemy
     public void EmergeFromCap()
     {
         sRend.setAnimation("Open");
+        GOManager.Instance.audioManager.getInstance("MurderousMushroomUp").Play();
 
         if (sRend.currentAnimation.Value.CurrentFrame >= 4) {
             isHidden = false;

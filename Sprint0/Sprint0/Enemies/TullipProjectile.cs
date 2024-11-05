@@ -48,6 +48,7 @@ public class TullipProjectile : IComponent
 
         }
         if (hitPlatform) {
+            GOManager.Instance.audioManager.getInstance("TerribleTulipProjectileExplosion").Play();
             Rectangle vfxDestRectangle = new Rectangle((int)GameObject.GetComponent<CircleCollider>().Center.X - 144,  hitPlatformBounds.Top - 288,144, 144);
             VisualEffectFactory.createVisualEffect(vfxDestRectangle, hitVFX, 2, 23, 2.0f, true);
             GameObject.Destroy(); 

@@ -1,5 +1,6 @@
 ﻿using Cuphead.Projectiles;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Threading;
@@ -98,6 +99,7 @@ public class SpreadShotInstance : Projectile
     private ProjectileCollision projectileCollision;
     private const float explosionDuration = 0.425f;
     private const string collisionAnimationName = "SpreadExplosionAnimation";
+    private SoundEffectInstance impactSoundInstance;
 
     public SpreadShotInstance(Vector2 direction, SpriteRenderer spriteRenderer)
     {
@@ -115,6 +117,7 @@ public class SpreadShotInstance : Projectile
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
+        impactSoundInstance = GOManager.Instance.audioManager.getNewInstance("SpreadshotShotImpact");
     }
 
     public override void Update(GameTime gameTime)
@@ -124,6 +127,10 @@ public class SpreadShotInstance : Projectile
 
         if (collided || lifetimeExpired)
         {
+            if(collided)
+            {
+                impactSoundInstance.Play();
+            }
             explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (explosionTimer >= explosionDuration)
@@ -134,6 +141,7 @@ public class SpreadShotInstance : Projectile
         }
         else
         {
+            impactSoundInstance.Stop();
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             GameObject.Move((int)(direction.X * deltaTime), (int)(direction.Y * deltaTime));
 
