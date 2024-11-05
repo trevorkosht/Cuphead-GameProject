@@ -38,10 +38,9 @@ namespace Cuphead.Projectiles
             }
             return false;
         }
-
         private void HandleCollision(GameObject go)
         {
-            if(go.type.Contains("Enemy"))
+            if (go.type.Contains("Enemy"))
             {
                 HealthComponent enemyHealth = go.GetComponent<HealthComponent>();
                 if (enemyHealth != null)
@@ -57,6 +56,45 @@ namespace Cuphead.Projectiles
 
             SpriteRenderer spriteRenderer = projectile.GetComponent<SpriteRenderer>();
             spriteRenderer.setAnimation(collisionAnimationName);
+        }
+        public int LobberCollisionCheck()
+        {
+            foreach (GameObject go in GOManager.Instance.allGOs)
+            {
+                if (go != null && collider.Intersects(go.GetComponent<Collider>()))
+                {
+                    if (!nonCollidables.Any(go.type.Contains))
+                    {
+                        return LobberHandleCollision(go);
+                    }
+                }
+            }
+            return -1;
+        }
+        private int LobberHandleCollision(GameObject go)
+        {
+            if (go.type.Contains("Enemy"))
+            {
+                HealthComponent enemyHealth = go.GetComponent<HealthComponent>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.RemoveHealth(1);
+
+
+                    GameObject player = GOManager.Instance.Player;
+                    ScoreComponent scoreComponent = player.GetComponent<ScoreComponent>();
+                    scoreComponent?.AddScore(2);
+                }
+                SpriteRenderer spriteRenderer = projectile.GetComponent<SpriteRenderer>();
+                spriteRenderer.setAnimation(collisionAnimationName);
+                return 1;
+            }
+            else if (go.type.Contains("Block") || go.type.Contains("Platform"))
+            {
+                return 0;
+            }
+            else
+                return -1;
         }
     }
 }

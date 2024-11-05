@@ -2,27 +2,30 @@
 using Microsoft.Xna.Framework;
 using Cuphead.Projectiles;
 using Microsoft.Xna.Framework.Audio;
+using System;
+using System.Diagnostics;
 
 public class LobberProjectile : Projectile
 {
-    private float speed = 6f;
+    private float speedX = 6f, speedY = 10f, flipTime = .2f, timeToFlip = 0;
     private float gravity = 0.2f;
     private Vector2 velocity;
-    private bool isFacingRight;
-    private int bounceCount = 0;
-    private int maxBounces = 3;
+    private bool isFacingRight, flipped = false;
+    private float timeAlive = 0;
+    private float duration = 4f;
     private Collider collider;
     private SpriteRenderer spriteRenderer;
-    private bool collided;
+    private int collided;
     private float explosionTimer;
     private ProjectileCollision projectileCollision;
     private const float explosionDuration = 1.0f;
     private const string collisionAnimationName = "LobberExplosionAnimation";
     private SoundEffectInstance impactSoundInstance;
+    private Vector2 direction;
 
-    public LobberProjectile(bool isFacingRight, SpriteRenderer spriteRenderer)
+    public LobberProjectile(bool isFacingRight, SpriteRenderer spriteRenderer, float angleInDegrees)
     {
-        collided = false;
+        collided = -1;
         explosionTimer = 0.0f;
         this.spriteRenderer = spriteRenderer;
         this.isFacingRight = isFacingRight;
@@ -30,18 +33,24 @@ public class LobberProjectile : Projectile
         {
             spriteRenderer.isFacingRight = false;
         }
+        float angleInRadians = MathHelper.ToRadians(angleInDegrees);
+        direction = new Vector2((float)Math.Cos(angleInRadians), (float)Math.Sin(angleInRadians));
     }
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
         base.Initialize(texture, storage);
-        velocity = new Vector2(speed, -speed);
+        velocity = new Vector2(speedX * direction.X, speedY * direction.Y);
+        if (!isFacingRight)
+            velocity.X *= -1;
+        speedY -= 2;
         impactSoundInstance = GOManager.Instance.audioManager.getNewInstance("LobberShotImpact");
     }
 
     public override void Update(GameTime gameTime)
     {
-        if (collided)
+        timeAlive += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        if (collided == 1)
         {
             impactSoundInstance.Play();
             explosionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -56,32 +65,40 @@ public class LobberProjectile : Projectile
         {
             impactSoundInstance.Stop();
             velocity.Y += gravity;
+            velocity.X += -velocity.X * 2 / 1000;
+            speedY -= 10f / 1000f;
 
-            if (isFacingRight)
+            GameObject.Move((int)velocity.X, (int)velocity.Y);
+
+            if (collided == 0)
             {
-                GameObject.Move((int)velocity.X, (int)velocity.Y);
+                velocity.Y = -speedY;
+                timeToFlip += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if(!flipped && timeToFlip >= flipTime)
+                {
+                    velocity.X *= -1;
+                    flipped = true;
+                }
+
+                GameObject.Move(0, -2);
+                //GameObject.MoveToPosition(GameObject.X, 600);
+
+                if (timeAlive >= duration)
+                {
+                    collided = 1;
+                    spriteRenderer.setAnimation(collisionAnimationName);
+                    return;
+                }
             }
             else
             {
-                GameObject.Move((int)(-velocity.X), (int)velocity.Y);
-            }
-
-            if (GameObject.Y > 600)
-            {
-                velocity.Y = -velocity.Y * 0.7f;
-                bounceCount++;
-                GameObject.MoveToPosition(GameObject.X, 600);
-
-                if (bounceCount >= maxBounces)
-                {
-                    GameObject.Destroy();
-                    return;
-                }
+                timeToFlip = 0;
+                flipped = false;
             }
 
             collider = GameObject.GetComponent<Collider>();
             projectileCollision = new ProjectileCollision(GameObject, collider, collisionAnimationName);
-            collided = projectileCollision.CollisionCheck();
+            collided = projectileCollision.LobberCollisionCheck();
         }
     }
 

@@ -24,6 +24,17 @@ public class ProjectileFactory
             else if (angle > 89)
                 projectile.Y += 60;
         }
+        else if (type == ProjectileType.Lobber)
+        {
+            tempAngle = 0;
+            projectile.Y += -80;
+            if (angle < -89f)
+                projectile.Y += -40;
+            else if (angle < 0)
+                projectile.Y += -20;
+            else if (angle > 89)
+                projectile.Y += 60;
+        }
         else
         {
             if (!isFacingRight && angle > -89f)
@@ -111,7 +122,7 @@ public class ProjectileFactory
                 break;
 
             case ProjectileType.Lobber:
-                projectileLogic = new LobberProjectile(isFacingRight, spriteRenderer);
+                projectileLogic = new LobberProjectile(isFacingRight, spriteRenderer, angle);
                 projectile.AddComponent(projectileLogic); 
                 projectile.AddComponent(new CircleCollider(35f, new Vector2(-40 - offset.X, -40 - offset.Y), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("LobberAnimation", new Animation(textureStorage.GetTexture("Lobber"), 5, 8, 144, 144));
