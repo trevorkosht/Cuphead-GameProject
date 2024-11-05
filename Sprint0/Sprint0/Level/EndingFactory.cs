@@ -14,10 +14,10 @@ public static class EndingFactory
             { "WinScreenResultsText", (800, 150, 0.098f, 3) },
             { "WinScreenCuphead", (450, 450, 0.097f, 12) },
             { "WinScreenUnearnedStar", (27, 27, 0.096f, 1) },
-            { "WinScreenStarAppearAnimation", (45, 50, 0.095f, 8) },
+            { "WinScreenStarAppearAnimation", (50, 50, 0.095f, 8) },
             { "WinScreenLine", (358, 3, 0.094f, 1) },
             { "WinScreenStar", (27, 27, 0.093f, 1) },
-            { "WinScreenCircle", (100, 89, 0.092f, 12) },
+            { "WinScreenCircle", (90, 90, 0.092f, 12) },
     };
 
     public static GameObject CreateElement(string subtype, Vector2 position)
