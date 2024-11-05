@@ -8,7 +8,7 @@ using System.Threading;
 public class SpreadShotProjectile : Projectile
 {
     private float speed = 500f;
-    private float angleSpread = 45f;
+    private float angleSpread = 30f;
     private Vector2[] directions;
     bool isFacingRight;
     private Vector2 direction;

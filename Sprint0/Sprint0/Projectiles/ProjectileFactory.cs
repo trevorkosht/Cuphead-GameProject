@@ -13,58 +13,70 @@ public class ProjectileFactory
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
         float tempAngle = angle;
         Vector2 offset = new Vector2();
-
-        if (!isFacingRight && angle > -89f)
+        if (type == ProjectileType.Chaser)
         {
-            tempAngle = -180 - angle;
-            projectile.Y += 70;
-            projectile.X += 70;
-            offset = new Vector2(-70, -75);
-        }
-        if (angle < 0 && angle > -89f)
-        {
-            projectile.Y += 60;
-            offset.Y += -25;
-            if (isFacingRight)
-                offset.Y += -15;
-            else
-                offset.Y += 15;
-            offset.X += 25;
-        }
-        else if (angle < -89f)
-        {
-            offset.Y += -60;
-        }
-        if (angle > -89f)
-        {
-            float radians = MathHelper.ToRadians(angle);
-            Vector2 offset2 = new Vector2(
-                (float)(Math.Cos(radians) * 72 - 72),
-                (float)(Math.Sin(radians) * 72 - 72)
-            );
-            projectile.X += (int)offset2.X;
-            projectile.Y += (int)offset2.Y;
+            tempAngle = 0;
+            projectile.Y += -80;
+            if (angle < -89f)
+                projectile.Y += -40;
+            else if (angle < 0)
+                projectile.Y += -20;
+            else if (angle > 89)
+                projectile.Y += 60;
         }
         else
         {
-            projectile.Y += -70;
-            if (!isFacingRight)
-                projectile.X += 20;
-        }
-        if (angle > 89)
-        {
-            projectile.X += 110;
-            if (isFacingRight)
+            if (!isFacingRight && angle > -89f)
             {
-                offset.X += -74;
+                tempAngle = -180 - angle;
+                projectile.Y += 70;
+                projectile.X += 70;
+                offset = new Vector2(-70, -75);
+            }
+            if (angle < 0 && angle > -89f)
+            {
+                projectile.Y += 60;
+                offset.Y += -25;
+                if (isFacingRight)
+                    offset.Y += -15;
+                else
+                    offset.Y += 15;
+                offset.X += 25;
+            }
+            else if (angle < -89f)
+            {
+                offset.Y += -60;
+            }
+            if (angle > -89f)
+            {
+                float radians = MathHelper.ToRadians(angle);
+                Vector2 offset2 = new Vector2(
+                    (float)(Math.Cos(radians) * 72 - 72),
+                    (float)(Math.Sin(radians) * 72 - 72)
+                );
+                projectile.X += (int)offset2.X;
+                projectile.Y += (int)offset2.Y;
             }
             else
             {
-                offset.Y += 74;
+                projectile.Y += -70;
+                if (!isFacingRight)
+                    projectile.X += 20;
+            }
+            if (angle > 89)
+            {
+                projectile.X += 110;
+                if (isFacingRight)
+                {
+                    offset.X += -74;
+                }
+                else
+                {
+                    offset.Y += 74;
+                }
             }
         }
-        if (type == ProjectileType.Chaser)
-            tempAngle = 0;
+
 
         SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), true, tempAngle);
 
@@ -109,7 +121,7 @@ public class ProjectileFactory
                 break;
 
             case ProjectileType.Roundabout:
-                projectileLogic = new RoundaboutProjectile(isFacingRight, spriteRenderer);
+                projectileLogic = new RoundaboutProjectile(isFacingRight, spriteRenderer, angle);
                 projectile.AddComponent(projectileLogic);
                 projectile.AddComponent(new BoxCollider(new Vector2(55, 27), new Vector2(8 + offset.X, 24 + offset.Y), GOManager.Instance.GraphicsDevice));
                 spriteRenderer.addAnimation("RoundaboutAnimation", new Animation(textureStorage.GetTexture("Roundabout"), 5, 8, 144, 144));
