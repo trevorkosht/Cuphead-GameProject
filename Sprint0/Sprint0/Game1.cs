@@ -124,7 +124,7 @@ namespace Sprint0
             };
 
             cameraController = new CameraController(camera, player, railPoints);
-            basePath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\.." + "\\GameObject\\";
+            basePath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\.." + "\\GameObjects\\";
             LevelLoader.LoadLevel(basePath + "FileData.txt");
             gameObjects.Add(player);
             GOManager.Instance.audioManager.getInstance("Intro").Play();
@@ -211,8 +211,7 @@ namespace Sprint0
             if (Keyboard.GetState().IsKeyDown(Keys.E) || (player.position.X > 13500))
             {
                 if (!endGame)
-                {
-                    //I dont know why 3 times is needed but 4 times is needed
+                { 
                     loadend = new LoadEnd(gameTime, texts, (int)player.position.X, 0);
                     endGame = true;
                 }
