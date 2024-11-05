@@ -124,7 +124,7 @@ namespace Sprint0
             };
 
             cameraController = new CameraController(camera, player, railPoints);
-            basePath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\.." + "\\GameObject\\";
+            basePath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\.." + "\\GameObjects\\";
             LevelLoader.LoadLevel(basePath + "FileData.txt");
             gameObjects.Add(player);
             GOManager.Instance.audioManager.getInstance("Intro").Play();
