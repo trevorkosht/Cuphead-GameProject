@@ -48,7 +48,7 @@ namespace Cuphead.Player
                     player.IsParrying = false;
                 }
                 else if (currentFrame >= 1 && currentFrame < 4) {
-                    player.velocity.Y = 0;
+                    player.velocity.Y = -600;
                 }
                 animator.setAnimation("Parry");
 

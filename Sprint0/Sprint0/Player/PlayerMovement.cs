@@ -80,6 +80,7 @@ namespace Cuphead.Player
                 Rectangle vfxDestRectangle = new Rectangle(player.parryableObject.X - 18, player.parryableObject.Y - 18,288,288);
                 VisualEffectFactory.createVisualEffect(vfxDestRectangle, GOManager.Instance.textureStorage.GetTexture("ParryVFX"), 3, 9, 0.375f, true);
 
+                GOManager.Instance.Player.GetComponent<ScoreComponent>().AddScore(10);
                 player.IsParrying = true;
                 player.parryableObject.Destroy();
             }
