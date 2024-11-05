@@ -63,6 +63,8 @@ public class ProjectileFactory
                 offset.Y += 74;
             }
         }
+        if (type == ProjectileType.Chaser)
+            tempAngle = 0;
 
         SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y, 144, 144), true, tempAngle);
 
@@ -105,7 +107,6 @@ public class ProjectileFactory
                 spriteRenderer.setAnimation("LobberAnimation");
                 projectileLogic.Initialize(textureStorage.GetTexture("Lobber"), textureStorage);
                 break;
-
 
             case ProjectileType.Roundabout:
                 projectileLogic = new RoundaboutProjectile(isFacingRight, spriteRenderer);
