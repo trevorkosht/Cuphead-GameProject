@@ -60,7 +60,7 @@ namespace Cuphead.Player
                     }
                     else 
                     {
-                        if (go[i].type.Contains("SpikyBulb") && !player.CanParry) {
+                        if ((go[i].type.Contains("NPCProjectile") && go[i].GetComponent<SpriteRenderer>() != null && go[i].GetComponent<SpriteRenderer>().animationName.Equals("pinkSpore")) || go[i].type.Contains("SpikyBulb") && !player.CanParry) {
                             int xDist = Math.Abs(go[i].X - player.GameObject.X - 16);
                             int yDist = Math.Abs(go[i].Y - player.GameObject.Y - 52);
                             player.CanParry = (xDist <= 95) && (yDist <= 135);

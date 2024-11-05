@@ -55,8 +55,16 @@ public class MurderousMushroom : BaseEnemy
                     
                     SpriteRenderer projectileRenderer = new SpriteRenderer(new Rectangle(GameObject.X, GameObject.Y, (int)(144 * projectileScale), (int)(144 * projectileScale)), false);
                     projectile.AddComponent(projectileRenderer);
-                    projectileRenderer.addAnimation("projectile", new Animation(sporeTexture, 3, 12, 144, 144));
-                    projectileRenderer.setAnimation("projectile");
+
+                    if (shootPinkSpore) {
+                        projectileRenderer.addAnimation("pinkSpore", new Animation(sporeTexture, 3, 12, 144, 144));
+                        projectileRenderer.setAnimation("pinkSpore");
+                    }
+                    else {
+                        projectileRenderer.addAnimation("purpleSpore", new Animation(sporeTexture, 3, 12, 144, 144));
+                        projectileRenderer.setAnimation("purpleSpore");
+                    }
+
 
                     CircleCollider collider = new CircleCollider(30, new Vector2(-30, -35), GOManager.Instance.GraphicsDevice);
                     projectile.AddComponent(collider);
