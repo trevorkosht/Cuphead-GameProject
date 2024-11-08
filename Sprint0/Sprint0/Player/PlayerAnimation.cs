@@ -1,24 +1,35 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Animations;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Microsoft.Xna.Framework;
 namespace Cuphead.Player
 {
     internal class PlayerAnimation
     {
-        private PlayerState player;
+        private readonly PlayerState player;
+        private readonly Dictionary<string, IAnimationState> animationStates;
+
         public PlayerAnimation(PlayerState player)
         {
             this.player = player;
+            animationStates = new Dictionary<string, IAnimationState>
+            {
+                { "Spawn", new SpawnAnimation(player) },
+                { "Death", new DeathAnimation(player) },
+                { "Hit", new HitAnimation(player) },
+                { "Parry", new ParryAnimation(player) },
+                { "Duck", new DuckAnimation(player) },
+                { "Dash", new DashAnimation(player) },
+                { "Jump", new JumpAnimation(player) },
+                { "Run", new RunAnimation(player) },
+                { "Shoot", new ShootAnimation(player) },
+                { "Idle", new IdleAnimation(player) }
+            };
         }
 
         public void HandleSpawnAnimation()
         {
-            SpriteRenderer animator = player.GameObject.GetComponent<SpriteRenderer>();
+            var animator = player.GameObject.GetComponent<SpriteRenderer>();
             animator.setAnimation("Spawn");
 
             if (animator.IsAnimationComplete())
@@ -30,147 +41,65 @@ namespace Cuphead.Player
 
         public void UpdateAnimationState(SpriteRenderer animator)
         {
-            if (player.IsDead)
-            {
-                animator.setAnimation("Death");
-                return;
-            }
-
-            if (player.hitTime > 0.6)
-            {
-                animator.setAnimation(player.IsGrounded ? "HitGround" : "HitAir");
-                player.IsParrying = false;
-            }
-            else if (player.IsParrying) {
-                int currentFrame = animator.currentAnimation.Value.CurrentFrame;
-
-                if (currentFrame == 7 && animator.animationName.Equals("Parry")) {
-                    player.IsParrying = false;
-                }
-                else if (currentFrame >= 1 && currentFrame < 4) {
-                    player.velocity.Y = -600;
-                }
-                animator.setAnimation("Parry");
-
-            }
-            else if (player.IsDucking)
-            {
-                animator.setAnimation(player.shootTime > 0 ? "DuckShoot" : "Duck");
-            }
-            else if (player.IsDashing)
-            {
-                animator.setAnimation(player.IsGrounded ? "DashGround" : "DashAir");
-
-            }
-            else if (!player.IsGrounded)
-            {
-                animator.setAnimation("Jump");
-            }
-            else if (player.IsRunning)
-            {
-                if(player.shootTime > 0)
-                    animator.setAnimation(player.ShootUp ? "RunShootingDiagonalUp" : "RunShootingStraight"); 
-                else
-                animator.setAnimation("Run");
-                if (animator.currentAnimation.Value.CurrentFrame == 5 || animator.currentAnimation.Value.CurrentFrame == 12)
-                {
-                    CreateDustEffect();
-                }
-            }
-            else if (player.shootTime > 0)
-            {
-                animator.setAnimation(player.ShootUp ? "ShootUp" : "ShootStraight");
-            }
-            else
-            {
-                animator.setAnimation("Idle");
-            }
+            string animationState = GetAnimationState();
+            animationStates[animationState].Play(animator);
         }
 
+        private string GetAnimationState()
+        {
+            if (player.IsDead) return "Death";
+            if (player.hitTime > 0.6) return "Hit";
+            if (player.IsParrying) return "Parry";
+            if (player.IsDucking) return "Duck";
+            if (player.IsDashing) return "Dash";
+            if (!player.IsGrounded) return "Jump";
+            if (player.IsRunning) return "Run";
+            if (player.shootTime > 0) return "Shoot";
+            return "Idle";
+        }
         public void CreateShootingEffect(bool isFacingRight)
         {
-            Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
-            Rectangle effectPosition;
-            if (player.ShootUp)
-            {
-                if (player.IsRunning)
-                {
-                    if (isFacingRight)
-                    {
-                        effectPosition = new Rectangle(player.GameObject.X + 120, player.GameObject.Y - 15, 144, 144);
-                    }
-                    else
-                    {
-                        effectPosition = new Rectangle(player.GameObject.X - 45, player.GameObject.Y - 15, 144, 144);
-                    }
-                }
-                else
-                {
-                    if (isFacingRight)
-                    {
-                        effectPosition = new Rectangle(player.GameObject.X + 70, player.GameObject.Y - 40, 144, 144);
-                    }
-                    else
-                    {
-                        effectPosition = new Rectangle(player.GameObject.X + 5, player.GameObject.Y - 40, 144, 144);
-                    }
-                }
-            }
-            else if (player.ShootDown)
-            {
-                effectPosition = new Rectangle(player.GameObject.X + 30, player.GameObject.Y + 100, 144, 144);
+            var textureStorage = GOManager.Instance.textureStorage;
+            var effectPosition = CalculateEffectPosition(isFacingRight);
+            var effectTexture = GetProjectileTexture(textureStorage);
 
-            }
-            else if (isFacingRight)
-            {
-                effectPosition = new Rectangle(player.GameObject.X + 100, player.GameObject.Y + 25, 144, 144);
-            }
-            else
-            {
-                effectPosition = new Rectangle(player.GameObject.X - 25, player.GameObject.Y + 25, 144, 144);
-            }
-
-            Texture2D effectTexture;
-
-            switch ((int)player.currentProjectileType)
-            {
-                case 0:
-                    effectTexture = textureStorage.GetTexture("PeashooterSpawn");
-                    break;
-                case 1:
-                    effectTexture = textureStorage.GetTexture("SpreadSpawn");
-                    break;
-                case 2:
-                    effectTexture = textureStorage.GetTexture("ChaserSpawn");
-                    break;
-                case 3:
-                    effectTexture = textureStorage.GetTexture("LobberSpawn");
-                    break;
-                case 4:
-                    effectTexture = textureStorage.GetTexture("RoundaboutSpawn");
-                    break;
-                default:
-                    effectTexture = null;
-                    break;
-            }
             VisualEffectFactory.createVisualEffect(effectPosition, effectTexture, updatesPerFrame: 2, frameCount: 4, scale: 0.5f, isFacingRight);
         }
 
+        private Rectangle CalculateEffectPosition(bool isFacingRight)
+        {
+            if (player.ShootUp)
+            {
+                return player.IsRunning
+                    ? new Rectangle(player.GameObject.X + (isFacingRight ? 120 : -45), player.GameObject.Y - 15, 144, 144)
+                    : new Rectangle(player.GameObject.X + (isFacingRight ? 70 : 5), player.GameObject.Y - 40, 144, 144);
+            }
+            else if (player.ShootDown)
+            {
+                return new Rectangle(player.GameObject.X + 30, player.GameObject.Y + 100, 144, 144);
+            }
+            else
+            {
+                return new Rectangle(player.GameObject.X + (isFacingRight ? 100 : -25), player.GameObject.Y + 25, 144, 144);
+            }
+        }
+
+        private Texture2D GetProjectileTexture(Texture2DStorage textureStorage) =>
+            player.currentProjectileType switch
+            {
+                ProjectileType.Peashooter => textureStorage.GetTexture("PeashooterSpawn"),
+                ProjectileType.SpreadShot => textureStorage.GetTexture("SpreadSpawn"),
+                ProjectileType.Chaser => textureStorage.GetTexture("ChaserSpawn"),
+                ProjectileType.Lobber => textureStorage.GetTexture("LobberSpawn"),
+                ProjectileType.Roundabout => textureStorage.GetTexture("RoundaboutSpawn"),
+                _ => null
+            };
         public void CreateDustEffect()
         {
             Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
-            Rectangle dustPosition = new Rectangle(player.GameObject.X, player.GameObject.Y + 10, 144, 144); // Adjust Y position as needed
+            var dustPosition = new Rectangle(player.GameObject.X, player.GameObject.Y + 10, 144, 144);
             Texture2D dustTexture = textureStorage.GetTexture("Dust");
-            GameObject dustEffect = VisualEffectFactory.createVisualEffect(dustPosition, dustTexture, updatesPerFrame: 1, frameCount: 14, scale: 1f, true);
+            VisualEffectFactory.createVisualEffect(dustPosition, dustTexture, updatesPerFrame: 1, frameCount: 14, scale: 1f, true);
         }
-
-        public void CreateCoinEffect()
-        {
-            Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
-            Rectangle coinPosition = new Rectangle(player.GameObject.X, player.GameObject.Y + 10, 144, 144); // Adjust Y position as needed
-            Texture2D coinTexture = textureStorage.GetTexture("CoinVFX");
-            GameObject coinEffect = VisualEffectFactory.createVisualEffect(coinPosition, coinTexture, updatesPerFrame: 1, frameCount: 14, scale: 1f, true);
-        }
-
     }
 }
