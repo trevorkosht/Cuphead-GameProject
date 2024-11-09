@@ -13,6 +13,7 @@
         {
             string animation = player.IsGrounded ? "DashGround" : "DashAir";
             animator.setAnimation(animation);
+            animator.spriteScale = 1.6f;
         }
     }
 }
