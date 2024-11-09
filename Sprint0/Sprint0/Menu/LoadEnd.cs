@@ -9,15 +9,15 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cuphead
+namespace Cuphead.Menu
 {
     internal class LoadEnd
     {
         int offsetx;
         int offsety;
 
-        String Text;
-        String displayTime;
+        string Text;
+        string displayTime;
 
         public LoadEnd(GameTime time, TextSprite text, int offsetx, int offsety)
         {
@@ -25,9 +25,9 @@ namespace Cuphead
             this.offsety = offsety;
 
             int seconds = (int)time.TotalGameTime.TotalSeconds;
-            int min = seconds/60;
+            int min = seconds / 60;
             seconds = seconds % 60;
-            String health = GOManager.Instance.Player.GetComponent<HealthComponent>().currentHealth/100 + "/3";
+            string health = GOManager.Instance.Player.GetComponent<HealthComponent>().currentHealth / 100 + "/3";
             if (seconds < 10)
             {
                 displayTime = min + ":0" + seconds;
@@ -39,13 +39,13 @@ namespace Cuphead
             Text = "TIME.............." + displayTime +
                 "\nHP BONUS.........." + health +
                 "\nPARRY..............." +
-                "\nGOLD COINS  ...." + "5/5"+
+                "\nGOLD COINS  ...." + "5/5" +
                 "\nSKILL LEVEL......" +
                 "\n\n       GRADE....  A";
 
 
             text.UpdateText(Text);
-            text.UpdatePos(new Vector2(250+offsetx, 250+offsety));
+            text.UpdatePos(new Vector2(250 + offsetx, 250 + offsety));
 
             addelement("WinScreenBackground", new Vector2(-500, -500));
             addelement("WinScreenBoard", new Vector2(150, 200));
@@ -67,7 +67,7 @@ namespace Cuphead
 
         }
 
-        private void addelement(String obj, Vector2 pos)
+        private void addelement(string obj, Vector2 pos)
         {
             pos.X = pos.X + offsetx;
             pos.Y = pos.Y + offsety;

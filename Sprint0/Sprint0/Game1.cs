@@ -1,5 +1,6 @@
 ﻿using Cuphead;
 using Cuphead.Controllers;
+using Cuphead.Menu;
 using Cuphead.Player;
 using Cuphead.UI;
 using Microsoft.Xna.Framework;
@@ -46,6 +47,7 @@ namespace Sprint0
 
         bool resetFrame;
         bool endGame = false;
+        bool paused = true;
 
         public Game1()
         {

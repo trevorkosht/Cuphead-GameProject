@@ -9,14 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
-namespace Cuphead
+namespace Cuphead.Menu
 {
     internal class LoadEnd2
     {
         public LoadEnd2()
         {
             List<GameObject> all = new List<GameObject>();
-            Dictionary<String, Vector2> location = new Dictionary<String, Vector2>()
+            Dictionary<string, Vector2> location = new Dictionary<string, Vector2>()
             {
                 {"WinScreenBackground", new Vector2(-500, -500) },
                 {"WinScreenBoard", new Vector2(-500, -500) },
@@ -30,10 +30,6 @@ namespace Cuphead
                 {"WinScreenResultsText", new Vector2(-500, -500) },
                 {"WinScreenResultsText", new Vector2(-500, -500) },
                 {"WinScreenResultsText", new Vector2(-500, -500) },
-
-
-
-
 
             };
 
