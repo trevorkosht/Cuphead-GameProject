@@ -137,7 +137,7 @@ public class Texture2DStorage
         _textures["PlayerIdle"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerIdle");
         _textures["PlayerIntro"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerIntro");
         _textures["PlayerJump"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerJump");
-        _textures["PlayerParry"] = content.Load<Texture2D>(@"PlayerAnimationTextures\player-parry");
+        _textures["PlayerParry"] = content.Load<Texture2D>(@"PlayerAnimationTextures\player-parry-pink");
         _textures["PlayerRun"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerRun");
         _textures["PlayerRunShootingDiagonalUp"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerRunShootingDiagonalUp");
         _textures["PlayerRunShootingStraight"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerRunShootingStraight");
@@ -233,7 +233,7 @@ public class Texture2DStorage
         Animation playerIdleAnimation = new Animation(GetTexture("PlayerIdle"), 5, 8, 144, 144);
         Animation playerSpawnAnimation = new Animation(GetTexture("PlayerIntro"), 3, 28, 144, 144);
         Animation playerJumpAnimation = new Animation(GetTexture("PlayerJump"), 2, 8, 144, 144);
-        Animation playerParryAnimation = new Animation(GetTexture("PlayerParry"), 2, 8, 150, 150);
+        Animation playerParryAnimation = new Animation(GetTexture("PlayerParry"), 2, 8, 144, 144);
         Animation playerRunAnimation = new Animation(GetTexture("PlayerRun"),1, 16, 144, 144);
         Animation playerRunShootingDiagonalUpAnimation = new Animation(GetTexture("PlayerRunShootingDiagonalUp"), 1, 16, 144, 144);
         Animation playerRunShootingStraightAnimation = new Animation(GetTexture("PlayerRunShootingStraight"), 1, 16, 144, 144);

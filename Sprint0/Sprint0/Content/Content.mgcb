@@ -1107,6 +1107,18 @@
 /processorParam:TextureFormat=Color
 /build:Items/SpreadshotItem.png
 
+#begin PlayerAnimationTextures/player-parry-pink.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerAnimationTextures/player-parry-pink.png
+
 #begin PlayerAnimationTextures/player-parry.png
 /importer:TextureImporter
 /processor:TextureProcessor

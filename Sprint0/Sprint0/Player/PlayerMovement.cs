@@ -1,24 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using MonoGame.Extended.Timers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Cuphead.Player
-{
-    internal class PlayerMovement
-    {
+namespace Cuphead.Player {
+    internal class PlayerMovement {
         private PlayerState player;
         private KeyboardController keyboardController;
         private BoxCollider collider;
         private DelayGame gameDelay = new DelayGame();
         private PlayerAnimation playerAnimator;
         private PlayerCollision PlayerCollision;
-        public PlayerMovement(PlayerState player, KeyboardController keyboard, PlayerAnimation playerAnimator, PlayerCollision playerCollision)
-        {
+        public PlayerMovement(PlayerState player, KeyboardController keyboard, PlayerAnimation playerAnimator, PlayerCollision playerCollision) {
             this.player = player;
             this.keyboardController = keyboard;
             this.playerAnimator = playerAnimator;
@@ -27,10 +17,8 @@ namespace Cuphead.Player
         }
 
 
-        public void HandleMovementAndActions(GameTime gameTime, float deltaTime)
-        {
-            if (player.IsDead)
-            {
+        public void HandleMovementAndActions(GameTime gameTime, float deltaTime) {
+            if (player.IsDead) {
                 GOManager.Instance.audioManager.getInstance("PlayerDeath").Play();
                 return;
             }
@@ -45,15 +33,12 @@ namespace Cuphead.Player
 
             //HandleKnockBack(player.IsTakingDamage, gameTime, deltaTime);
 
-            if (!player.IsDucking && !player.IsKnockBacked)
-            {
-                if (input.X != 0 && player.IsGrounded)
-                {
+            if (!player.IsDucking && !player.IsKnockBacked) {
+                if (input.X != 0 && player.IsGrounded) {
                     player.IsRunning = true;
                     GOManager.Instance.audioManager.getInstance("PlayerWalk").Play();
                 }
-                else
-                {
+                else {
                     player.IsRunning = false;
                     GOManager.Instance.audioManager.getInstance("PlayerWalk").Stop();
                 }
@@ -63,10 +48,8 @@ namespace Cuphead.Player
 
             }
 
-            if (jumpRequested && player.IsGrounded && !player.IsDucking)
-            {
-                if(!player.IsDead)
-                {
+            if (jumpRequested && player.IsGrounded && !player.IsDucking) {
+                if (!player.IsDead) {
                     GOManager.Instance.audioManager.getInstance("PlayerJump").Play();
                 }
                 player.velocity.Y = player.JumpForce;
@@ -77,43 +60,36 @@ namespace Cuphead.Player
                 GOManager.Instance.audioManager.getInstance("PlayerParry").Play();
                 GOManager.Instance.audioManager.getInstance("SpikyBulbDeath").Play();
 
-                Rectangle vfxDestRectangle = new Rectangle(player.parryableObject.X - 18, player.parryableObject.Y - 18,288,288);
-                VisualEffectFactory.createVisualEffect(vfxDestRectangle, GOManager.Instance.textureStorage.GetTexture("ParryVFX"), 3, 9, 0.375f, true);
+                Rectangle vfxDestRectangle = new Rectangle(player.parryableObject.X - 30, player.parryableObject.Y - 30, 288, 288);
+                VisualEffectFactory.createVisualEffect(vfxDestRectangle, GOManager.Instance.textureStorage.GetTexture("ParryVFX"), 3, 9, 0.625f, true);
 
                 GOManager.Instance.Player.GetComponent<ScoreComponent>().AddScore(10);
                 player.IsParrying = true;
                 player.parryableObject.Destroy();
             }
 
-            if(!player.IsGrounded && player.velocity.Y < 0)
-            {
+            if (!player.IsGrounded && player.velocity.Y < 0) {
                 player.isFalling = true;
             }
 
-            if(player.isFalling && player.IsGrounded)
-            {
+            if (player.isFalling && player.IsGrounded) {
                 player.isFalling = false;
                 GOManager.Instance.audioManager.getInstance("PlayerLanding").Play();
             }
 
         }
 
-        private void UpdateFacingDirection(Vector2 input)
-        {
-            if (input.X < 0 && !player.IsDashing && !player.IsKnockBacked)
-            {
+        private void UpdateFacingDirection(Vector2 input) {
+            if (input.X < 0 && !player.IsDashing && !player.IsKnockBacked) {
                 player.GameObject.GetComponent<SpriteRenderer>().isFacingRight = false;
             }
-            else if (input.X > 0 && !player.IsDashing && !player.IsKnockBacked)
-            {
+            else if (input.X > 0 && !player.IsDashing && !player.IsKnockBacked) {
                 player.GameObject.GetComponent<SpriteRenderer>().isFacingRight = true;
             }
         }
 
-        public void UpdateGravity(float deltaTime)
-        {
-            if (!player.IsGrounded)
-            {
+        public void UpdateGravity(float deltaTime) {
+            if (!player.IsGrounded) {
                 player.airTime += deltaTime;
                 //velocity.Y += Gravity * deltaTime * airTime * 2;
                 player.velocity.Y += player.Gravity * deltaTime;
@@ -122,13 +98,10 @@ namespace Cuphead.Player
             }
         }
 
-        private void HandleDucking(bool duckRequested)
-        {
+        private void HandleDucking(bool duckRequested) {
             var animator = player.GameObject.GetComponent<SpriteRenderer>();
-            if (player.hitTime > 0)
-            {
-                if(player.IsDucking)
-                {
+            if (player.hitTime > 0) {
+                if (player.IsDucking) {
                     player.GameObject.Y = player.floorY + player.DuckingYOffset - 50;
                     player.IsDucking = false;
                     player.isDuckingYAdjust = false;
@@ -138,10 +111,8 @@ namespace Cuphead.Player
                 return;
             }
 
-            if (duckRequested && player.IsGrounded)
-            {
-                if (!player.IsDucking)
-                {
+            if (duckRequested && player.IsGrounded) {
+                if (!player.IsDucking) {
                     player.GameObject.Y = player.floorY + player.DuckingYOffset;
                     player.IsDucking = true;
                     player.isDuckingYAdjust = true;
@@ -150,10 +121,8 @@ namespace Cuphead.Player
                     collider.offset = new Vector2(0, 30);
                 }
             }
-            else
-            {
-                if (player.IsDucking)
-                {
+            else {
+                if (player.IsDucking) {
                     player.GameObject.Y = player.floorY + player.DuckingYOffset - 50;
                     player.IsDucking = false;
                     player.isDuckingYAdjust = false;
@@ -163,19 +132,15 @@ namespace Cuphead.Player
             }
         }
 
-        private void HandleDash(bool dashRequested, GameTime gameTime, float deltaTime)
-        {
-            if (player.IsDashing)
-            {
-                if(!player.IsDead)
-                {
+        private void HandleDash(bool dashRequested, GameTime gameTime, float deltaTime) {
+            if (player.IsDashing) {
+                if (!player.IsDead) {
                     GOManager.Instance.audioManager.getInstance("PlayerDash").Play();
                 }
                 // Continue dashing
                 PerformDash(gameTime, player.height, deltaTime);
             }
-            else if (!player.HasDashed && dashRequested && gameDelay.Cooldown(gameTime, player.TimeTillNextDash) && !player.IsInvincible)
-            {
+            else if (!player.HasDashed && dashRequested && gameDelay.Cooldown(gameTime, player.TimeTillNextDash) && !player.IsInvincible) {
                 // Start dash
                 player.IsDashing = true;
                 player.HasDashed = true;
@@ -188,36 +153,30 @@ namespace Cuphead.Player
             }
         }
 
-        private void PerformDash(GameTime gameTime, int height, float deltaTime)
-        {
-            if (player.dashTime > 0)
-            {
+        private void PerformDash(GameTime gameTime, int height, float deltaTime) {
+            if (player.dashTime > 0) {
                 // Continue dashing within the duration
                 float dashDistance = player.dashSpeed * deltaTime;
 
 
                 player.GameObject.GetComponent<SpriteRenderer>().spriteScale = 1 + 7 * (player.dashDuration - player.dashTime) / (12 * player.dashDuration);
 
-                if (player.GameObject.GetComponent<SpriteRenderer>().isFacingRight)
-                {
+                if (player.GameObject.GetComponent<SpriteRenderer>().isFacingRight) {
                     player.GameObject.X += (int)dashDistance;
                 }
-                else
-                {
+                else {
                     player.GameObject.X -= (int)dashDistance;
                 }
                 player.GameObject.Y = height;
 
-                if (PlayerCollision.TypeCollide("Enemy") != null)
-                {
+                if (PlayerCollision.TypeCollide("Enemy") != null) {
                     player.GameObject.GetComponent<SpriteRenderer>().spriteScale = 1f;
                     player.IsDashing = false;
                     player.Gravity = 3000f;
                     player.Speed = 700f;
                 }
             }
-            else
-            {
+            else {
                 // Dash duration is over, stop dashing
                 player.GameObject.GetComponent<SpriteRenderer>().spriteScale = 1f;
                 player.IsDashing = false;
@@ -226,15 +185,12 @@ namespace Cuphead.Player
             }
         }
 
-        public void HandleKnockBack(bool knockBackRequested, GameTime gameTime, float deltaTime)
-        {
-            if (player.IsKnockBacked)
-            {
+        public void HandleKnockBack(bool knockBackRequested, GameTime gameTime, float deltaTime) {
+            if (player.IsKnockBacked) {
                 // Continue knockback
                 PerformKnockBack(gameTime, deltaTime);
             }
-            else if (knockBackRequested && gameDelay.Cooldown(gameTime, player.InvincibilityDuration))
-            {
+            else if (knockBackRequested && gameDelay.Cooldown(gameTime, player.InvincibilityDuration)) {
                 // Start knockback
                 player.IsKnockBacked = true;
                 player.knockBackTime = player.InvincibilityDuration;
@@ -245,41 +201,33 @@ namespace Cuphead.Player
             }
         }
 
-        public void PerformKnockBack(GameTime gameTime, float deltaTime)
-        {
-            if (player.knockBackTime > 0)
-            {
+        public void PerformKnockBack(GameTime gameTime, float deltaTime) {
+            if (player.knockBackTime > 0) {
                 float knockbackspeed = (500f * deltaTime);
 
                 int didtwice = 0;
-                if (player.knockBackTime*5 > player.knockBackDuration)
-                {
-                    if (player.GameObject.GetComponent<SpriteRenderer>().isFacingRight)
-                    {
-                        player.GameObject.X -= (int)knockbackspeed/5;
+                if (player.knockBackTime * 5 > player.knockBackDuration) {
+                    if (player.GameObject.GetComponent<SpriteRenderer>().isFacingRight) {
+                        player.GameObject.X -= (int)knockbackspeed / 5;
                     }
-                    else
-                    {
-                        player.GameObject.X += (int)knockbackspeed/5;
+                    else {
+                        player.GameObject.X += (int)knockbackspeed / 5;
                     }
 
                     player.GameObject.Y -= (int)knockbackspeed;
                     didtwice++;
                 }
-                else
-                {
+                else {
                     player.GameObject.GetComponent<SpriteRenderer>().setAnimation("Idle");
                 }
 
-                if (didtwice>1 && PlayerCollision.TypeCollide("Block") != null)
-                {
+                if (didtwice > 1 && PlayerCollision.TypeCollide("Block") != null) {
                     player.knockBackTime = 0;
                     PerformKnockBack(gameTime, deltaTime);
                 }
 
             }
-            else
-            {
+            else {
                 // Dash duration is over, stop knockback
                 player.IsKnockBacked = false;
                 player.Gravity = 1200f;
