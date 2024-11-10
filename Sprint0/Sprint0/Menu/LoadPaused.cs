@@ -8,5 +8,6 @@ namespace Cuphead.Menu
 {
     internal class LoadPaused
     {
+
     }
 }

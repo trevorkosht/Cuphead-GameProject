@@ -1,4 +1,5 @@
 ﻿using Cuphead.Menu;
+using Cuphead.Player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,6 +14,7 @@ namespace Cuphead.Controllers
     {
         private readonly MouseController mouseController;
         private readonly GameTime gameTime;
+        private PlayerState playerState;
         private readonly TextSprite textSprite;
         
         private LoadStart loadstart;
@@ -37,22 +39,33 @@ namespace Cuphead.Controllers
         public GameObject GameObject { get; set; }
         public bool enabled { get; set; }
 
-        public MenuController(GameTime gameTime, MouseController mouseController, TextSprite textSprite, int playerX, int playerY)
+        public MenuController(GameTime gameTime, MouseController mouseController,PlayerState player, TextSprite textSprite)
         {
             this.mouseController = mouseController;
             this.gameTime = gameTime;
+            this.playerState = player;
             this.textSprite = textSprite;
 
             this.loadstart = new LoadStart();
             this.loadpaused = new LoadPaused();
             this.loaddeath = new LoadDeath();
-            this.loadend = new LoadEnd(gameTime, this.textSprite, playerX, playerY);
+            this.loadend = new LoadEnd(gameTime, player, textSprite);
 
-            screen = 0;
+            screen = screens.start;
 
         }
 
         public void Update(GameTime gameTime)
+        {
+            
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+
+        }
+
+        private void loadScreen()
         {
             switch (screen)
             {
@@ -62,12 +75,16 @@ namespace Cuphead.Controllers
                 case screens.start:
                     //loadstart.load();
                     break;
+                case screens.paused:
+                    break;
+                case screens.death:
+                    break;
+                case screens.end:
+                    loadend.loadScreen();
+                    break;
+                default:
+                    break;
             }
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-
         }
 
         public bool StopGame()

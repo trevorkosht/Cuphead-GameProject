@@ -108,7 +108,7 @@ public class LevelLoader
     }
     private static void SpawnEnd(string subtype, Vector2 position)
     {
-        GameObject endElement = EndingFactory.CreateElement(subtype, position);
+        GameObject endElement = MenuFactory.CreateElement(subtype, position);
         GOManager.Instance.allGOs.Add(endElement);
 
         if (endElement != null)
