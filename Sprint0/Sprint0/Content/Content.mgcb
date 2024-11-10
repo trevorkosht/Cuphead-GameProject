@@ -625,6 +625,30 @@
 /processorParam:TextureFormat=Color
 /build:EndGameScreen/forest-follies-endgame.png
 
+#begin EndGameScreen/iris-fade-in.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EndGameScreen/iris-fade-in.png
+
+#begin EndGameScreen/iris-fade-out.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EndGameScreen/iris-fade-out.png
+
 #begin EndGameScreen/winscreen_background.png
 /importer:TextureImporter
 /processor:TextureProcessor

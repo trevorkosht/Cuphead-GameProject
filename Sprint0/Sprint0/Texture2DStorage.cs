@@ -126,7 +126,9 @@ public class Texture2DStorage
         _textures["WinScreenCuphead"] = content.Load<Texture2D>(@"EndGameScreen\winscren-cuphead-idle");
         _textures["LossScreen"] = content.Load<Texture2D>(@"EndGameScreen\forest-follies-endgame");
         _textures["LossScreenIcon"] = content.Load<Texture2D>(@"EndgameScreen\cuphead-icon-retry-screen");
-
+        _textures["FadeIn"] = content.Load<Texture2D>(@"EndgameScreen\iris-fade-in");
+        _textures["FadeOut"] = content.Load<Texture2D>(@"EndGameScreen\iris-fade-out");
+ 
 
         //Player Animation Textures
         _textures["PlayerDashAir"] = content.Load<Texture2D>(@"PlayerAnimationTextures\PlayerDashAir");
