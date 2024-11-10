@@ -124,6 +124,8 @@ public class Texture2DStorage
         _textures["WinScreenResultsText"] = content.Load<Texture2D>(@"EndGameScreen\winscreen-results-text");
         _textures["WinScreenStarAppearAnimation"] = content.Load<Texture2D>(@"EndGameScreen\winscreen-star-appear");
         _textures["WinScreenCuphead"] = content.Load<Texture2D>(@"EndGameScreen\winscren-cuphead-idle");
+        _textures["LossScreen"] = content.Load<Texture2D>(@"EndGameScreen\forest-follies-endgame");
+        _textures["LossScreenIcon"] = content.Load<Texture2D>(@"EndgameScreen\cuphead-icon-retry-screen");
 
 
         //Player Animation Textures
