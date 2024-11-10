@@ -1,5 +1,6 @@
 ﻿using Cuphead.Player;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Input;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,15 @@ namespace Cuphead.Menu
     {
 
         private PlayerState player;
+        private TextSprite textSprite;
 
         int offsetx;
         int offsety;
 
-        public LoadStart(PlayerState player)
+        public LoadStart(PlayerState player, SpriteFont font)
         {
             this.player = player;
+            this.textSprite = new TextSprite(font);
         }
 
 

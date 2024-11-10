@@ -38,18 +38,17 @@ namespace Cuphead.Controllers
         public GameObject GameObject { get; set; }
         public bool enabled { get; set; }
 
-        public MenuController(PlayerState player, TextSprite textSprite)
+        public MenuController(PlayerState player, SpriteFont font)
         {
             mouseController = new MouseController();
             this.playerState = player;
-            this.textSprite = textSprite;
 
-            this.loadstart = new LoadStart(player);
+            this.loadstart = new LoadStart(player, font);
             this.loadpaused = new LoadPaused();
             this.loaddeath = new LoadDeath();
             this.loadend = new LoadEnd(player, textSprite);
 
-            screen = screens.start;
+            screen = screens.none;
 
         }
 

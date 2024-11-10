@@ -15,6 +15,13 @@ public class TextSprite : ISprite
         this.position = position;
         this.color = color;
     }
+    public TextSprite(SpriteFont font)
+    {
+        this.font = font;
+        this.text = "";
+        this.position = Vector2.Zero;
+        this.color = Color.White;
+    }
 
     public void UpdateText(string text)
     {

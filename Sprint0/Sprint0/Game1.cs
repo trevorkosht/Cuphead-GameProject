@@ -157,8 +157,6 @@ namespace Sprint0
             ScoreComponent playerScore = new ScoreComponent();
             player.AddComponent(playerScore);
 
-            menuController = new MenuController(playerState, texts);
-
             Texture2D hp3Texture = textureStorage.GetTexture("hp3");
             Texture2D hp2Texture = textureStorage.GetTexture("hp2");
             Texture2D[] hp1FlashingTextures = {
@@ -176,55 +174,65 @@ namespace Sprint0
             UI = new UI(playerHealth, playerScore, hp3Texture, hp2Texture, hp1FlashingTextures, deadTexture, cardBack, cardFront, new Vector2(50, 650), _spriteBatch2);
 
             font = Content.Load<SpriteFont>("Font/Winter");
-            texts = new TextSprite(font, "",new Vector2(0, 0), Color.White); 
+            texts = new TextSprite(font, "",new Vector2(0, 0), Color.White);
+
+            menuController = new MenuController(playerState, font);
 
         }
 
         protected override void Update(GameTime gameTime)
-        {      
-            for (int i = 0; i < gameObjects.Count; i++)
+        {   
+            menuController.Update(gameTime);
+            if (menuController.StopGame())
             {
-                GameObject gameObject = gameObjects[i];
-                if (gameObject.destroyed)
+                return;
+            }
+            else
+            {
+                for (int i = 0; i < gameObjects.Count; i++)
                 {
-                    gameObjects.RemoveAt(i);
-                    i--;
-                    continue;
+                    GameObject gameObject = gameObjects[i];
+                    if (gameObject.destroyed)
+                    {
+                        gameObjects.RemoveAt(i);
+                        i--;
+                        continue;
+                    }
+                    gameObject.Update(gameTime);
                 }
-                gameObject.Update(gameTime);
-            }
 
-            enemyController.Update(gameTime);
-            savedPlayerLoc = player.position;
+                enemyController.Update(gameTime);
+                savedPlayerLoc = player.position;
 
-            // Update camera based on player's position and the rail
-            cameraController.Update();
-            UI.Update(gameTime);
+                // Update camera based on player's position and the rail
+                cameraController.Update();
+                UI.Update(gameTime);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.D0))
-            {
+                if (Keyboard.GetState().IsKeyDown(Keys.D0))
+                {
                     saveLoc = true;
+                }
+
+                if (player.GetComponent<HealthComponent>().isDeadFull)
+                {
+                    ResetGame();
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.R))
+                    ResetGame();
+                if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                    Exit();
+                if (Keyboard.GetState().IsKeyDown(Keys.P))
+                {
+
+                }
+
+                if (keyboardController.OnKeyDown(Keys.L))
+
+                    GOManager.Instance.IsDebugging = !GOManager.Instance.IsDebugging;
             }
 
-            if (player.GetComponent<HealthComponent>().isDeadFull)
-            {
-                ResetGame();
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
-                ResetGame();
-            if (Keyboard.GetState().IsKeyDown(Keys.Q))
-                Exit();
-            if (Keyboard.GetState().IsKeyDown(Keys.P))
-            {
-                
-            }
-
-            if (keyboardController.OnKeyDown(Keys.L))
-
-                GOManager.Instance.IsDebugging = !GOManager.Instance.IsDebugging;
-
-            base.Update(gameTime);
+            
         }
 
         private void ResetGame()
