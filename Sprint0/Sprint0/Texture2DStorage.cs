@@ -111,7 +111,7 @@ public class Texture2DStorage
 
         //Title Screen
         _textures["Title1"] = content.Load<Texture2D>(@"TitleScreen\title-1");
-        _textures["Title1"] = content.Load<Texture2D>(@"TitleScreen\title-2");
+        _textures["Title2"] = content.Load<Texture2D>(@"TitleScreen\title-2");
 
         //Game Start
         _textures["GameStartText"] = content.Load<Texture2D>(@"GameStart\game-start-text-animation");

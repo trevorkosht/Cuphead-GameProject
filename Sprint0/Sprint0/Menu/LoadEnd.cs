@@ -16,7 +16,6 @@ namespace Cuphead.Menu
     {
         private PlayerState player;
         private TextSprite textSprite;
-        private GameTime gameTime;
 
         int offsetx;
         int offsety;
@@ -31,11 +30,10 @@ namespace Cuphead.Menu
         String disGrade;
 
 
-        public LoadEnd(GameTime time, PlayerState playerState, TextSprite text)
+        public LoadEnd(PlayerState playerState, TextSprite text)
         { 
             this.player = playerState;
             this.textSprite = text;
-            this.gameTime = time;
         }
 
         private void getTime(GameTime time)
@@ -100,7 +98,7 @@ namespace Cuphead.Menu
             }
         }
 
-        public void loadScreen()
+        public void loadScreen(GameTime gameTime)
         {
 
             getHealth();

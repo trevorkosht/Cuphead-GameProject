@@ -13,7 +13,6 @@ namespace Cuphead.Controllers
     internal class MenuController : IComponent
     {
         private readonly MouseController mouseController;
-        private readonly GameTime gameTime;
         private PlayerState playerState;
         private readonly TextSprite textSprite;
         
@@ -39,17 +38,16 @@ namespace Cuphead.Controllers
         public GameObject GameObject { get; set; }
         public bool enabled { get; set; }
 
-        public MenuController(GameTime gameTime, MouseController mouseController,PlayerState player, TextSprite textSprite)
+        public MenuController(PlayerState player, TextSprite textSprite)
         {
-            this.mouseController = mouseController;
-            this.gameTime = gameTime;
+            mouseController = new MouseController();
             this.playerState = player;
             this.textSprite = textSprite;
 
-            this.loadstart = new LoadStart();
+            this.loadstart = new LoadStart(player);
             this.loadpaused = new LoadPaused();
             this.loaddeath = new LoadDeath();
-            this.loadend = new LoadEnd(gameTime, player, textSprite);
+            this.loadend = new LoadEnd(player, textSprite);
 
             screen = screens.start;
 
@@ -65,7 +63,7 @@ namespace Cuphead.Controllers
 
         }
 
-        private void loadScreen()
+        private void loadScreen(GameTime gameTime)
         {
             switch (screen)
             {
@@ -80,7 +78,7 @@ namespace Cuphead.Controllers
                 case screens.death:
                     break;
                 case screens.end:
-                    loadend.loadScreen();
+                    loadend.loadScreen(gameTime);
                     break;
                 default:
                     break;

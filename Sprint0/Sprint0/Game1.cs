@@ -38,6 +38,7 @@ namespace Sprint0
         private Vector2 startingPlayerLoc = new Vector2(0, 500);
         private bool saveLoc = false;
         internal PlayerState playerState;
+        private MenuController menuController;
         private UI UI;
 
         string basePath;
@@ -47,7 +48,6 @@ namespace Sprint0
 
         private bool resetFrame;
         private bool endGame = false;
-        private bool paused = true;
 
         public Game1()
         {
@@ -145,6 +145,7 @@ namespace Sprint0
             audioStorage.LoadContent(Content);
             audioStorage.loadAudioManager(audioManager);
 
+            //load player stuff
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
             playerSpriteRenderer.orderInLayer = .1f;
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
@@ -155,6 +156,8 @@ namespace Sprint0
             player.AddComponent(new PlayerController2(playerState));
             ScoreComponent playerScore = new ScoreComponent();
             player.AddComponent(playerScore);
+
+            menuController = new MenuController(playerState, texts);
 
             Texture2D hp3Texture = textureStorage.GetTexture("hp3");
             Texture2D hp2Texture = textureStorage.GetTexture("hp2");
@@ -178,7 +181,7 @@ namespace Sprint0
         }
 
         protected override void Update(GameTime gameTime)
-        {
+        {      
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 GameObject gameObject = gameObjects[i];
