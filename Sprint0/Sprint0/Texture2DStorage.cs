@@ -113,6 +113,9 @@ public class Texture2DStorage
         _textures["Title1"] = content.Load<Texture2D>(@"TitleScreen\title-1");
         _textures["Title1"] = content.Load<Texture2D>(@"TitleScreen\title-2");
 
+        //Game Start
+        _textures["GameStartText"] = content.Load<Texture2D>(@"GameStart\game-start-text-animation");
+
         //End Game Screen
         _textures["DeathMessage"] = content.Load<Texture2D>(@"EndGameScreen\death-message");
         _textures["WinScreenBackground"] = content.Load<Texture2D>(@"EndGameScreen\winscreen_background");
@@ -128,6 +131,7 @@ public class Texture2DStorage
         _textures["LossScreenIcon"] = content.Load<Texture2D>(@"EndgameScreen\cuphead-icon-retry-screen");
         _textures["FadeIn"] = content.Load<Texture2D>(@"EndgameScreen\iris-fade-in");
         _textures["FadeOut"] = content.Load<Texture2D>(@"EndGameScreen\iris-fade-out");
+        _textures["Victory"] = content.Load<Texture2D>(@"TextAnimations\victory-text-animation");
  
 
         //Player Animation Textures

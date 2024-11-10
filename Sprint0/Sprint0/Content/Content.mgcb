@@ -1095,6 +1095,18 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/Winter.spritefont
 
+#begin GameStart/game-start-text-animation.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:GameStart/game-start-text-animation.png
+
 #begin Items/ChaserItem.png
 /importer:TextureImporter
 /processor:TextureProcessor
