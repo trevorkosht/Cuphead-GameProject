@@ -31,9 +31,9 @@ namespace Cuphead.Controllers
         private BoxCollider Collider;
         float deltaTime;
 
-        public PlayerController2(GameObject playerObject)
+        public PlayerController2(PlayerState player)
         {
-            player = new PlayerState(playerObject);
+            this.player = player;
 
             keyboardController = new KeyboardController();
             mouseController = new MouseController();
@@ -44,7 +44,7 @@ namespace Cuphead.Controllers
             playerMovement = new PlayerMovement(player, keyboardController, playerAnimation, playerCollision);
             playerHealth = new PlayerHealth(player, keyboardController, playerCollision, playerMovement);
             playerProjectile = new PlayerProjectile(player, keyboardController, playerAnimation);
-            this.playerObject = playerObject;
+            this.playerObject = player.GameObject;
 
             playerAnimation.HandleSpawnAnimation();
         }

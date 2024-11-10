@@ -19,14 +19,20 @@ namespace Cuphead.Controllers
         private LoadPaused loadpaused;
         private LoadDeath loaddeath;
         private LoadEnd loadend;
-        
-        private bool start;
-        private bool paused;
-        private bool death;
-        private bool end;
 
         private int playerX;
         private int playerY;
+
+        private enum screens
+        {
+            none = 0,
+            start = 1,
+            paused = 2,
+            death = 3,
+            end = 4,
+        };
+
+        private screens screen;
 
         public GameObject GameObject { get; set; }
         public bool enabled { get; set; }
@@ -42,16 +48,21 @@ namespace Cuphead.Controllers
             this.loaddeath = new LoadDeath();
             this.loadend = new LoadEnd(gameTime, this.textSprite, playerX, playerY);
 
-            this.start = true;
-            this.paused = false;
-            this.death = false;
-            this.enabled = false;
+            screen = 0;
 
         }
 
         public void Update(GameTime gameTime)
         {
-
+            switch (screen)
+            {
+                case screens.none:
+                    //nothing
+                    break;
+                case screens.start:
+                    //loadstart.load();
+                    break;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -61,7 +72,14 @@ namespace Cuphead.Controllers
 
         public bool StopGame()
         {
-            return start || paused || death || end;
+            if (screen == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

@@ -34,20 +34,20 @@ namespace Sprint0
 
         private Camera camera;
         private CameraController cameraController;
-        Vector2 savedPlayerLoc;
+        private Vector2 savedPlayerLoc;
         private Vector2 startingPlayerLoc = new Vector2(0, 500);
         private bool saveLoc = false;
+        internal PlayerState playerState;
         private UI UI;
-        private LoadEnd loadend;
 
         string basePath;
 
         TextSprite texts;
         SpriteFont font;
 
-        bool resetFrame;
-        bool endGame = false;
-        bool paused = true;
+        private bool resetFrame;
+        private bool endGame = false;
+        private bool paused = true;
 
         public Game1()
         {
@@ -151,7 +151,8 @@ namespace Sprint0
             player.AddComponent(playerSpriteRenderer);
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
             player.type = "Player";
-            player.AddComponent(new PlayerController2(player));
+            playerState = new PlayerState(player);
+            player.AddComponent(new PlayerController2(playerState));
             ScoreComponent playerScore = new ScoreComponent();
             player.AddComponent(playerScore);
 
@@ -211,13 +212,8 @@ namespace Sprint0
                 ResetGame();
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
-            if (Keyboard.GetState().IsKeyDown(Keys.E) || (player.position.X > 13500))
+            if (Keyboard.GetState().IsKeyDown(Keys.P))
             {
-                if (!endGame)
-                { 
-                    loadend = new LoadEnd(gameTime, texts, (int)player.position.X, 0);
-                    endGame = true;
-                }
                 
             }
 
@@ -248,7 +244,7 @@ namespace Sprint0
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
             player.AddComponent(audioManager);
             player.type = "Player";
-            player = new GameObject(0, 500, new List<IComponent> { new PlayerController2(player) });
+            player = new GameObject(0, 500, new List<IComponent> { new PlayerController2(playerState) });
             Initialize();
         }
 
