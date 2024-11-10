@@ -12,6 +12,8 @@ namespace Cuphead.Controllers
 {
     internal class MenuController : IComponent
     {
+        private List<GameObject> gameObjects;
+
         private readonly MouseController mouseController;
         private PlayerState playerState;
         private readonly TextSprite textSprite;
@@ -46,7 +48,7 @@ namespace Cuphead.Controllers
             this.loadstart = new LoadStart(player, font);
             this.loadpaused = new LoadPaused();
             this.loaddeath = new LoadDeath();
-            this.loadend = new LoadEnd(player, textSprite);
+            this.loadend = new LoadEnd(player, font);
 
             screen = screens.none;
 
@@ -54,7 +56,21 @@ namespace Cuphead.Controllers
 
         public void Update(GameTime gameTime)
         {
-            
+
+            if (mouseController.OnMouseClick(MouseButton.Left))
+            {
+                screen = screens.start;
+            }
+            else if (mouseController.OnMouseClick(MouseButton.Right))
+            {
+                screen = screens.end;
+            }
+            else if (mouseController.OnMouseClick(MouseButton.Middle))
+            {
+                screen = screens.none;
+            }
+
+            loadScreen(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -70,7 +86,7 @@ namespace Cuphead.Controllers
                     //nothing
                     break;
                 case screens.start:
-                    //loadstart.load();
+                    loadstart.loadScreen();
                     break;
                 case screens.paused:
                     break;

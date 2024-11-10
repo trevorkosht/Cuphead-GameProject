@@ -42,7 +42,7 @@ public static class MenuFactory
         { "FadeOut", (515, 290, 0.05f, 1) },
 
         //need to adjust width and height
-
+        
 
     };
 

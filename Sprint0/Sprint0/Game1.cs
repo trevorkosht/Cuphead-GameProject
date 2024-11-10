@@ -185,7 +185,7 @@ namespace Sprint0
             menuController.Update(gameTime);
             if (menuController.StopGame())
             {
-                return;
+                //return;
             }
             else
             {
@@ -232,7 +232,6 @@ namespace Sprint0
                     GOManager.Instance.IsDebugging = !GOManager.Instance.IsDebugging;
             }
 
-            
         }
 
         private void ResetGame()

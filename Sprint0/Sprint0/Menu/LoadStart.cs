@@ -23,6 +23,8 @@ namespace Cuphead.Menu
         {
             this.player = player;
             this.textSprite = new TextSprite(font);
+
+            getOffset();
         }
 
 
@@ -43,6 +45,7 @@ namespace Cuphead.Menu
         {
             addelement("Title1", new Vector2(0, 0));
             addelement("Title2", new Vector2 (0, 0));
+            addelement("GameStartText", new Vector2(500, 300));
         }
     }
 }

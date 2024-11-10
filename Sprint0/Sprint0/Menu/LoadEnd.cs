@@ -30,10 +30,10 @@ namespace Cuphead.Menu
         String disGrade;
 
 
-        public LoadEnd(PlayerState playerState, TextSprite text)
+        public LoadEnd(PlayerState playerState, SpriteFont font)
         { 
             this.player = playerState;
-            this.textSprite = text;
+            this.textSprite = new TextSprite(font);
         }
 
         private void getTime(GameTime time)
