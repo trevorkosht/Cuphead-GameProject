@@ -17,6 +17,8 @@ public static class MenuFactory
 
         //pause screen
 
+        //start game
+        { "GameStartText", (1285,720,0.91f,17) },
 
         //death screen
         { "DeathMessage", (500, 546, 0.91f, 1) },
@@ -29,14 +31,15 @@ public static class MenuFactory
         { "WinScreenResultsText", (800, 150, 0.098f, 3) },
         { "WinScreenCuphead", (450, 450, 0.097f, 12) },
         { "WinScreenUnearnedStar", (27, 27, 0.096f, 1) },
-        { "WinScreenStarAppearAnimation", (50, 50, 0.095f, 8) }, 
+        { "WinScreenStarAppearAnimation", (50, 50, 0.095f, 8) },
         { "WinScreenLine", (358, 3, 0.094f, 1) },
         { "WinScreenStar", (27, 27, 0.093f, 1) },
         { "WinScreenCircle", (90, 90, 0.092f, 12) },
+        { "Victory",(1300,700,0.91f,25) },
 
         //transition 
-        { "FadeIn", (511, 287, 0.05f, 1) },
-        { "FadeOut", (511, 287, 0.05f, 1) },
+        { "FadeIn", (515, 290, 0.05f, 1) },
+        { "FadeOut", (515, 290, 0.05f, 1) },
 
         //need to adjust width and height
 
