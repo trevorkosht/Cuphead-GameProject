@@ -70,6 +70,15 @@ public class SpriteRenderer : IComponent {
         spriteAnimations[currentAnimation.Key].updateAnimation();
     }
 
+    //another one without game time since it is not being used
+    public void Update()
+    {
+        if (!enabled) return;
+
+        destRectangle = new Rectangle(GameObject.X, GameObject.Y, destRectangle.Width, destRectangle.Height);
+        spriteAnimations[currentAnimation.Key].updateAnimation();
+    }
+
     public void Draw(SpriteBatch spriteBatch)
     {
         if (!enabled) return;

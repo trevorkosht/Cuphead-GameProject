@@ -62,6 +62,7 @@ public static class MenuFactory
             spriteRenderer.setAnimation("End");
             spriteRenderer.orderInLayer = endData.orderInLayer;
             EndScreen.AddComponent(spriteRenderer);
+            spriteRenderer.Update();
             return EndScreen;
         }
         else
