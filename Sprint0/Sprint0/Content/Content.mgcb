@@ -589,6 +589,18 @@
 /processorParam:TextureFormat=Color
 /build:BlockTextures/Trees/tree-7.png
 
+#begin EndGameScreen/cuphead-icon-retry-screen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EndGameScreen/cuphead-icon-retry-screen.png
+
 #begin EndGameScreen/death-message.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -600,6 +612,42 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EndGameScreen/death-message.png
+
+#begin EndGameScreen/forest-follies-endgame.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EndGameScreen/forest-follies-endgame.png
+
+#begin EndGameScreen/iris-fade-in.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EndGameScreen/iris-fade-in.png
+
+#begin EndGameScreen/iris-fade-out.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:EndGameScreen/iris-fade-out.png
 
 #begin EndGameScreen/winscreen_background.png
 /importer:TextureImporter
