@@ -7,8 +7,8 @@ using System.Threading;
 
 public class SpreadShotProjectile : Projectile
 {
-    private float speed = 500f;
-    private float angleSpread = 30f;
+    private float speed = 900f;
+    private float angleSpread = 20f;
     private Vector2[] directions;
     bool isFacingRight;
     private Vector2 direction;
@@ -92,7 +92,7 @@ public class SpreadShotProjectile : Projectile
 public class SpreadShotInstance : Projectile
 {
     private Vector2 direction;
-    private float lifetime = .5f;
+    private float lifetime = .4f;
     private float explosionTimer;
     private bool collided, lifetimeExpired;
     private SpriteRenderer spriteRenderer;

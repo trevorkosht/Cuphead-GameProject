@@ -6,7 +6,7 @@ using System;
 
 public class PeashooterProjectile : Projectile
 {
-    private float speed = 9f;
+    private float speed = 14f;
     private bool isFacingRight;
     private Collider collider;
     private SpriteRenderer spriteRenderer;
