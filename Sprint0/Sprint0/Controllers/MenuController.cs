@@ -12,8 +12,6 @@ namespace Cuphead.Controllers
 {
     internal class MenuController : IComponent
     {
-        private List<GameObject> gameObjects;
-
         private readonly MouseController mouseController;
         private PlayerState playerState;
         private readonly TextSprite textSprite;
@@ -56,7 +54,8 @@ namespace Cuphead.Controllers
 
         public void Update(GameTime gameTime)
         {
-
+            updatesprite();
+            mouseController.Update();
             if (mouseController.OnMouseClick(MouseButton.Left))
             {
                 screen = screens.start;
@@ -109,6 +108,25 @@ namespace Cuphead.Controllers
             else
             {
                 return true;
+            }
+        }
+
+        public void updatesprite()
+        {
+            List<GameObject> gameObjects = GOManager.Instance.allGOs;
+
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                GameObject go = gameObjects[i];
+                if (go.type == "Menu")
+                {
+                    SpriteRenderer temp = go.GetComponent<SpriteRenderer>();
+                    if (temp != null)
+                    {
+                        temp.Update();
+                    }
+                   
+                }
             }
         }
     }
