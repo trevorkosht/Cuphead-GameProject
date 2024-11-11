@@ -1,4 +1,5 @@
-﻿using Cuphead.Menu;
+﻿using Cuphead.Interfaces;
+using Cuphead.Menu;
 using Cuphead.Player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,7 +16,9 @@ namespace Cuphead.Controllers
         private readonly MouseController mouseController;
         private PlayerState playerState;
         private readonly TextSprite textSprite;
-        
+
+        private IMenu menu;
+
         private LoadStart loadstart;
         private LoadPaused loadpaused;
         private LoadDeath loaddeath;
@@ -23,17 +26,6 @@ namespace Cuphead.Controllers
 
         private int playerX;
         private int playerY;
-
-        private enum screens
-        {
-            none = 0,
-            start = 1,
-            paused = 2,
-            death = 3,
-            end = 4,
-        };
-
-        private screens screen;
 
         public GameObject GameObject { get; set; }
         public bool enabled { get; set; }
@@ -48,7 +40,7 @@ namespace Cuphead.Controllers
             this.loaddeath = new LoadDeath();
             this.loadend = new LoadEnd(player, font);
 
-            screen = screens.none;
+            menu = null;
 
         }
 
@@ -58,18 +50,23 @@ namespace Cuphead.Controllers
             mouseController.Update();
             if (mouseController.OnMouseClick(MouseButton.Left))
             {
-                screen = screens.start;
+                menu  = loadstart;
             }
             else if (mouseController.OnMouseClick(MouseButton.Right))
             {
-                screen = screens.end;
+                loadend.getTime(gameTime);
+                menu = loadend;
             }
             else if (mouseController.OnMouseClick(MouseButton.Middle))
             {
-                screen = screens.none;
+                menu.Unload();
+                menu = null;
             }
 
-            loadScreen(gameTime);
+            if(menu != null)
+            {
+                menu.LoadScreen();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -77,31 +74,9 @@ namespace Cuphead.Controllers
 
         }
 
-        private void loadScreen(GameTime gameTime)
-        {
-            switch (screen)
-            {
-                case screens.none:
-                    //nothing
-                    break;
-                case screens.start:
-                    loadstart.loadScreen();
-                    break;
-                case screens.paused:
-                    break;
-                case screens.death:
-                    break;
-                case screens.end:
-                    loadend.loadScreen(gameTime);
-                    break;
-                default:
-                    break;
-            }
-        }
-
         public bool StopGame()
         {
-            if (screen == 0)
+            if (menu == null)
             {
                 return false;
             }
@@ -111,7 +86,7 @@ namespace Cuphead.Controllers
             }
         }
 
-        public void updatesprite()
+        private void updatesprite()
         {
             List<GameObject> gameObjects = GOManager.Instance.allGOs;
 

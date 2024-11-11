@@ -10,10 +10,10 @@ public static class MenuFactory
     {
         //start screen
         //cuphead
-        { "Title1", (1827, 1021, 0.099f, 1) },
+        { "Title1", (1000, 555, 0.099f, 1) },
 
         //background
-        { "Title2", (1825, 1022, 0.1f, 1) },
+        { "Title2", (1450, 810, 0.1f, 1) },
 
         //pause screen
 

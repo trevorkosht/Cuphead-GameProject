@@ -1,4 +1,5 @@
-﻿using Cuphead.Player;
+﻿using Cuphead.Interfaces;
+using Cuphead.Player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Input;
@@ -10,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace Cuphead.Menu
 {
-    internal class LoadStart
+    internal class LoadStart : IMenu
     {
 
         private PlayerState player;
         private TextSprite textSprite;
+
+        private List<GameObject> list = new List<GameObject>();
 
         int offsetx;
         int offsety;
@@ -38,14 +41,26 @@ namespace Cuphead.Menu
         {
             pos.X = pos.X + offsetx;
             pos.Y = pos.Y + offsety;
-            GOManager.Instance.allGOs.Add(MenuFactory.CreateElement(obj, pos));
+            GameObject gameObject = MenuFactory.CreateElement(obj, pos);
+            GOManager.Instance.allGOs.Add(gameObject);
+            list.Add(gameObject);
         }
 
-        public void loadScreen()
+        public void LoadScreen()
         {
-            addelement("Title1", new Vector2(0, 0));
-            addelement("Title2", new Vector2 (0, 0));
-            addelement("GameStartText", new Vector2(500, 300));
+            getOffset();
+            addelement("Title1", new Vector2(-400, -300));
+            addelement("Title2", new Vector2 (-600, -500));
+            addelement("GameStartText", new Vector2(0, 300));
         }
+
+        public void Unload()
+        {
+            foreach (GameObject gameObject in list)
+            {
+                gameObject.Destroy();
+            }
+        }
+
     }
 }
