@@ -116,14 +116,14 @@ public class ChaserProjectile : Projectile
                 float distance = directionToEnemy.Length();
 
                 // Filter enemies based on the direction the player is facing
-                if ((isFacingRight && directionToEnemy.X > 0) || (!isFacingRight && directionToEnemy.X < 0))
-                {
+                //if ((isFacingRight && directionToEnemy.X > 0) || (!isFacingRight && directionToEnemy.X < 0))
+                //{
                     if (distance < closestDistance)
                     {
                         closestDistance = distance;
                         closestEnemy = gameObject;
                     }
-                }
+                //}
             }
         }
 
