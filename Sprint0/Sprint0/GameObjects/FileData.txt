@@ -1,8 +1,4 @@
 // Section 1 (0000-2000)
-Item,Spreadshot,0,500
-Item,Roundabout,0,300
-Item,Chaser,0,400
-Item,Lobber,0,400
 
 Block,BigHill1,-1300,100
 
@@ -13,6 +9,9 @@ Block,BigHill2,1400,500
 
 Enemy,AggravatingAcorn,2000,100
 Enemy,MurderousMushroom,1200,500
+Enemy,TerribleTulip,1400,500
+Enemy,DeadlyDaisy,1500,-200
+Enemy,DeadlyDaisy,1600,-200
 
 Item,Coin,1200,300
 
@@ -26,10 +25,14 @@ Background,Rock3,1200,475
 Block,BigHill1,2500,600
 Block,BigHill3,3500,450
 
+
 Enemy,ToothyTerror,2400,600
 Enemy,BothersomeBlueberry,2800,500
 Enemy,SpikyBulb,3000,500
+Enemy,MurderousMushroom,3000,500
 Enemy,DeadlyDaisy,3200,-200
+Enemy,TerribleTulip,3700,350
+Enemy,AggravatingAcorn,4800,100
 
 
 Background,TreeBackground1,3000,110
@@ -48,6 +51,10 @@ Block,Hill2,4500,500
 
 Enemy,DeadlyDaisy,4600,-200
 Enemy,MurderousMushroom,4600,400
+Enemy,DeadlyDaisy,4600,-200
+Enemy,BothersomeBlueberry,4300,500
+Enemy,DeadlyDaisy,4800,-200
+Enemy,TerribleTulip,5000,400
 
 Background,TreeBackground3,4100,000
 Background,Tree6,4600,-100
@@ -70,8 +77,11 @@ Block,Log1,7800,500
 Enemy,DeadlyDaisy,6400,-200
 Enemy,ToothyTerror,6900,600
 Enemy,TerribleTulip,6000,250
+Enemy,MurderousMushroom,6600,250
+Enemy,MurderousMushroom,6700,250
 Enemy,SpikyBulb,5400,375
 Enemy,SpikyBulb,6500,300
+Enemy,AggravatingAcorn,8000,100
 Enemy,SpikyBulb,8000
 
 Background,Rock4,6200,200
@@ -96,12 +106,14 @@ Platform,Platform1,9000,300
 Platform,Platform2,9700,600
 Platform,Platform2,10100,600
 
-Enemy,DeadlyDaisy,8500,-200
+Enemy,DeadlyDaisy,8000,-200
+Enemy,DeadlyDaisy,8200,-200
+Enemy,DeadlyDaisy,8400,-200
+Enemy,TerribleTulip,8200,400
 Enemy,BothersomeBlueberry,8800,500
 Enemy,ToothyTerror,9550,700
 Enemy,ToothyTerror,9950,700
 Enemy,TerribleTulip,9150,195
-Enemy,AggravatingAcorn,9500,100
 
 Background,TreeBackground6,8800,000
 Background,Leaves2,9300,-100
@@ -132,6 +144,11 @@ Block,BigHill1,12000,600
 Block,BigHill1,12900,600
 
 Enemy,AcornMaker,13000,225
+Enemy,TerribleTulip,11500,400
+Enemy,DeadlyDaisy,12200,-200
+Enemy,DeadlyDaisy,12500,-200
+Enemy,MurderousMushroom,11000,500
+Enemy,MurderousMushroom,12400,500
 Enemy,SpikyBulb,12100,575
 
 Background,LevelBackground,12500,200
