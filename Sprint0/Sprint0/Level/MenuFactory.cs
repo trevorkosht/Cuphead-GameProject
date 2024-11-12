@@ -73,4 +73,29 @@ public static class MenuFactory
         }
     }
 
+    public static GameObject CreateEffect(string subtype, Vector2 position)
+    {
+        Console.WriteLine(subtype);
+        Texture2D texture = GOManager.Instance.textureStorage.GetTexture(subtype);
+
+        if (Sizes.TryGetValue(subtype, out (int width, int height, float orderInLayer, int frameAmount) endData))
+        {
+            Rectangle destRectangle = new Rectangle((int)position.X, (int)position.Y, endData.width, endData.height);
+            GameObject Menu = new GameObject(destRectangle.X, destRectangle.Y);
+            Menu.type = "Menu";
+
+            Animation menuAnimation = new Animation(texture, 1, endData.frameAmount, destRectangle.Height, destRectangle.Width);
+
+            VisualEffectRenderer visualEffectRenderer = new VisualEffectRenderer(destRectangle,menuAnimation, true);
+
+            Menu.AddComponent(visualEffectRenderer);
+            visualEffectRenderer.Update();
+            return Menu;
+        }
+        else
+        {
+            Console.WriteLine($"Unknown background subtype: {subtype}");
+            return null;
+        }
+    }
 }

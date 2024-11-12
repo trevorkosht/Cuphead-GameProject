@@ -33,16 +33,22 @@ namespace Cuphead.Menu
         {
             pos.X = pos.X + offsetx;
             pos.Y = pos.Y + offsety;
-            GameObject gameObject = MenuFactory.CreateElement(obj, pos);
+            GameObject gameObject = MenuFactory.CreateEffect(obj, pos);
             GOManager.Instance.allGOs.Add(gameObject);
             list.Add(gameObject);
         }
 
-        public void LoadTrans()
+        public void LoadTransIn()
         {
             GetOffset();
 
             Addelement("FadeIn", new Vector2(50, 50));
+        }
+
+        public void LoadTransOut()
+        {
+            GetOffset();
+
             Addelement("FadeOut", new Vector2(50, 50));
         }
     }
