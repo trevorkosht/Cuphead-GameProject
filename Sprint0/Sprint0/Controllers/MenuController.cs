@@ -24,6 +24,8 @@ namespace Cuphead.Controllers
         private LoadDeath loaddeath;
         private LoadEnd loadend;
 
+        private LoadTransition loadtransition;
+
         private int playerX;
         private int playerY;
 
@@ -40,6 +42,8 @@ namespace Cuphead.Controllers
             this.loaddeath = new LoadDeath();
             this.loadend = new LoadEnd(player, font);
 
+            this.loadtransition = new LoadTransition(player);
+
             menu = loadstart;
 
         }
@@ -51,7 +55,9 @@ namespace Cuphead.Controllers
 
             if (mouseController.OnMouseClick(MouseButton.Right))
             {
+                //loadtransition.LoadTransIn();
                 menu.Unload();
+                loadtransition.LoadTransOut();
                 menu = null;
             }
 
@@ -60,7 +66,6 @@ namespace Cuphead.Controllers
                 CheckAction();
             }
             
-
             if(menu != null)
             {
                 menu.LoadScreen();
