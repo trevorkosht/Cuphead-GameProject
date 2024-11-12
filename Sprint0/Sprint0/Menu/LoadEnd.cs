@@ -160,7 +160,14 @@ namespace Cuphead.Menu
 
         public string CheckAction()
         {
-            return null;
+            if (player.GameObject.X > 13500)
+            {
+                return "end";
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
