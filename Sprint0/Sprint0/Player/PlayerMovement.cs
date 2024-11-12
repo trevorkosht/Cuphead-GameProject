@@ -65,6 +65,7 @@ namespace Cuphead.Player {
 
                 GOManager.Instance.Player.GetComponent<ScoreComponent>().AddScore(10);
                 player.IsParrying = true;
+                player.parryCount++;
                 player.parryableObject.Destroy();
             }
 

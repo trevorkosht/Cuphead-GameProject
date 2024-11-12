@@ -26,26 +26,20 @@ public class DaisyCollisionManager : IComponent {
         atPlatformEdge = false;
         foundAdjacentPlatform = false;
 
-
         foreach(GameObject GO in GOManager.Instance.allGOs) {
             if (GO != null && GO.GetComponent<BoxCollider>() != null && GO.type != null && (GO.type.Contains("Platform") || GO.type.Contains("Hill") || GO.type.Contains("Slope") || GO.type.Contains("Log")) ) {
                 BoxCollider platformCollider = GO.GetComponent<BoxCollider>();
                 if (CheckIfGrounded(GO) ) {
                     isGrounded = true;
                     currentPlatform = GO;
+                    atPlatformEdge = CheckForPlatformEdge();
                 }
-                if (!isJumping && CheckForJump(platformCollider) && !GO.Equals(currentPlatform)) {
-                    jumpRequested = true;
-                }
-                if (isGrounded && CheckForPlatformEdge()) {
-                    atPlatformEdge = true;
-                }
-                if (!GO.Equals(currentPlatform) && CheckForAdjacentPlatforms(platformCollider)) {
-                    foundAdjacentPlatform = true;
+                if (currentPlatform != null && !GO.Equals(currentPlatform)) {
+                    jumpRequested = jumpRequested || (!isJumping && CheckForJump(platformCollider));
+                    foundAdjacentPlatform = foundAdjacentPlatform || CheckForAdjacentPlatforms(platformCollider);
                 }
             }
         }
-
         atPlatformEdge = atPlatformEdge && !foundAdjacentPlatform;
     }
     public void Draw(SpriteBatch spriteBatch) {
@@ -54,16 +48,7 @@ public class DaisyCollisionManager : IComponent {
 
     private bool CheckIfGrounded(GameObject platform) {
         BoxCollider platformCollider = platform.GetComponent<BoxCollider>();
-
-        if (platform.type.Contains("Slope") || Math.Abs(platformCollider.BoundingBox.Top - daisyCollider.BoundingBox.Bottom) < 30) {
-            if (platformCollider.Intersects(daisyCollider)) {
-                return true;
-            }
-        }
-
-        
-
-        return false;
+        return (platform.type.Contains("Slope") || Math.Abs(platformCollider.BoundingBox.Top - daisyCollider.BoundingBox.Bottom) < 10) && platformCollider.Intersects(daisyCollider);
     }
 
     private bool CheckForJump(BoxCollider platformCollider) {
@@ -79,14 +64,11 @@ public class DaisyCollisionManager : IComponent {
             jumpCheckBounds.X -= 300;
         }
 
-        if (currentPlatform != null && !currentPlatform.GetComponent<BoxCollider>().Equals(platformCollider)) {
-            if (jumpCheckBounds.Left > platformCollider.BoundingBox.Left && jumpCheckBounds.Right < platformCollider.BoundingBox.Right) {
-                if (Math.Abs(platformCollider.BoundingBox.Top - currentPlatform.GetComponent<BoxCollider>().BoundingBox.Top) >= minJumpHeight) {
-                    landingSpot = new Rectangle(jumpCheckBounds.X, platformCollider.BoundingBox.Top - box.Height, box.Width, box.Height);
-                    requestJump = true;
-                }
-            }
+        if (jumpCheckBounds.Left > platformCollider.BoundingBox.Left && jumpCheckBounds.Right < platformCollider.BoundingBox.Right && (Math.Abs(platformCollider.BoundingBox.Top - currentPlatform.GetComponent<BoxCollider>().BoundingBox.Top) >= minJumpHeight)) {
+            landingSpot = new Rectangle(jumpCheckBounds.X, platformCollider.BoundingBox.Top - box.Height, box.Width, box.Height);
+            requestJump = true;
         }
+        
         return requestJump;
     }
 
@@ -98,28 +80,17 @@ public class DaisyCollisionManager : IComponent {
 
         Rectangle boundingBox = currentPlatform.GetComponent<BoxCollider>().BoundingBox;
 
-        if((!GameObject.GetComponent<DeadlyDaisy>().movingRight && leftEdge - edgeCheckDistance < boundingBox.Left) || (GameObject.GetComponent<DeadlyDaisy>().movingRight && rightEdge + edgeCheckDistance > boundingBox.Right)) {
-            return true;
-        }
-        return false;
+        return (!GameObject.GetComponent<DeadlyDaisy>().movingRight && leftEdge - edgeCheckDistance < boundingBox.Left) || (GameObject.GetComponent<DeadlyDaisy>().movingRight && rightEdge + edgeCheckDistance > boundingBox.Right);
     }
 
     private bool CheckForAdjacentPlatforms(BoxCollider platformCollider) {
-        if(currentPlatform != null) {
-            Rectangle adjacentPlatformChecker = new Rectangle();
-            adjacentPlatformChecker.X = daisyCollider.BoundingBox.X - 2 * edgeCheckDistance;
-            adjacentPlatformChecker.Y = currentPlatform.GetComponent<BoxCollider>().BoundingBox.Y;
-            adjacentPlatformChecker.Width = 4 * edgeCheckDistance + daisyCollider.BoundingBox.Width;
-            adjacentPlatformChecker.Height = 5;
+        Rectangle adjacentPlatformChecker = new Rectangle();
+        adjacentPlatformChecker.X = daisyCollider.BoundingBox.X - 2 * edgeCheckDistance;
+        adjacentPlatformChecker.Y = currentPlatform.GetComponent<BoxCollider>().BoundingBox.Y;
+        adjacentPlatformChecker.Width = 4 * edgeCheckDistance + daisyCollider.BoundingBox.Width;
+        adjacentPlatformChecker.Height = 5;
 
-            if (adjacentPlatformChecker.Intersects(platformCollider.BoundingBox) && Math.Abs(platformCollider.BoundingBox.Y - adjacentPlatformChecker.Y) < 10) {
-                return true;
-            }
-
-        }
-
-
-        return false;
+        return adjacentPlatformChecker.Intersects(platformCollider.BoundingBox) && Math.Abs(platformCollider.BoundingBox.Y - adjacentPlatformChecker.Y) < 10;
     }
 }
 

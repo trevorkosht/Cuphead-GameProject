@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework.Graphics;
+  using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 
@@ -57,7 +57,6 @@ public class DeadlyDaisy : BaseEnemy
                     HandleSlopeCollision();
                 }
 
-
                 if (movingRight)
                     GameObject.X += (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
                 else
@@ -74,7 +73,6 @@ public class DeadlyDaisy : BaseEnemy
                 movingRight = player.X > GameObject.X;
                 airVelocity.Y += gravity/15;
             }
-
         }
         turnDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -95,7 +93,6 @@ public class DeadlyDaisy : BaseEnemy
             collisionManager.isJumping = true;
             turnDelay = 1.75f;
         }
-
     }
 
     private void HandlePlatformEdge() {
@@ -125,15 +122,9 @@ public class DeadlyDaisy : BaseEnemy
         else if(collisionManager.jumpRequested){
             HandleJumpRequested();
         }
-        //check if turn needed
-
-
-
-
-
     }
 
-    private void HandleSlopeCollision() {
+    private void HandleSlopeCollision() { 
         BoxCollider daisyCollider = GameObject.GetComponent<BoxCollider>();
         BoxCollider slopeCollider = collisionManager.currentPlatform.GetComponent<BoxCollider>();
         Rectangle daisyBounds = daisyCollider.BoundingBox;
@@ -162,7 +153,6 @@ public class DeadlyDaisy : BaseEnemy
             GameObject.X = (int)(topRight.X + 5);
         }
     }
-
 
     public override void Shoot(GameTime gameTime)
     {
