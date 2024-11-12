@@ -26,6 +26,15 @@ public class VisualEffectRenderer : IComponent {
 
     }
 
+    //same thing but without game time
+    public void Update()
+    {
+        if (!enabled) return;
+
+        animation.updateAnimation();
+
+    }
+
     public void Draw(SpriteBatch spriteBatch) {
         if (!enabled) return;
 
