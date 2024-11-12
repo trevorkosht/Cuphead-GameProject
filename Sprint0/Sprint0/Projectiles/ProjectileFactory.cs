@@ -13,21 +13,11 @@ public class ProjectileFactory
         Texture2DStorage textureStorage = GOManager.Instance.textureStorage;
         float tempAngle = angle;
         Vector2 offset = new Vector2();
-        if (type == ProjectileType.Chaser)
+        if (type == ProjectileType.Chaser || type == ProjectileType.Lobber)
         {
             tempAngle = 0;
             projectile.Y += -80;
-            if (angle < -89f)
-                projectile.Y += -40;
-            else if (angle < 0)
-                projectile.Y += -20;
-            else if (angle > 89)
-                projectile.Y += 60;
-        }
-        else if (type == ProjectileType.Lobber)
-        {
-            tempAngle = 0;
-            projectile.Y += -80;
+
             if (angle < -89f)
                 projectile.Y += -40;
             else if (angle < 0)
@@ -44,20 +34,18 @@ public class ProjectileFactory
                 projectile.X += 70;
                 offset = new Vector2(-70, -75);
             }
+
             if (angle < 0 && angle > -89f)
             {
                 projectile.Y += 60;
-                offset.Y += -25;
-                if (isFacingRight)
-                    offset.Y += -15;
-                else
-                    offset.Y += 15;
+                offset.Y += isFacingRight ? -40 : -10;
                 offset.X += 25;
             }
             else if (angle < -89f)
             {
                 offset.Y += -60;
             }
+
             if (angle > -89f)
             {
                 float radians = MathHelper.ToRadians(angle);
@@ -74,17 +62,11 @@ public class ProjectileFactory
                 if (!isFacingRight)
                     projectile.X += 20;
             }
+
             if (angle > 89)
             {
                 projectile.X += 110;
-                if (isFacingRight)
-                {
-                    offset.X += -74;
-                }
-                else
-                {
-                    offset.Y += 74;
-                }
+                offset += isFacingRight ? new Vector2(-74, 0) : new Vector2(0, 74);
             }
         }
 
