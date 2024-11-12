@@ -269,6 +269,7 @@ namespace Sprint0
             }
             resetFrame = true;
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
+            audioManager.stopAll();
             audioManager.Dispose();
             audioStorage.loadAudioManager(audioManager);
             playerSpriteRenderer.orderInLayer = .3f;
