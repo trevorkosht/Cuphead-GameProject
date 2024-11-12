@@ -82,6 +82,14 @@ namespace Cuphead
             soundObjects = new Dictionary<string, SoundObject>();
         }
 
+        public void stopAll()
+        {
+            foreach(SoundObject SO in soundObjects.Values)
+            {
+                SO.instance.Stop();
+            }
+        }
+
         public void Update(GameTime gameTime)
         {
             return;

@@ -236,10 +236,6 @@ namespace Cuphead.Player
         {
             if (collider.Intersects(Enemy.GetComponent<Collider>()))
             {
-                if(!player.IsInvincible && !player.IsDead)
-                {
-                    GOManager.Instance.audioManager.getInstance("PlayerDamaged").Play();
-                }
                 if (Enemy.type.Contains("AcornMaker"))
                 {
                     player.GameObject.X = Enemy.X - player.playerWidth + 40;
