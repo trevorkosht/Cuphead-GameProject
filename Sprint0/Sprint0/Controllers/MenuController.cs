@@ -46,7 +46,7 @@ namespace Cuphead.Controllers
 
         public void Update(GameTime gameTime)
         {   
-            updatesprite();
+            UpdateSprite();
             mouseController.Update();
 
             if (mouseController.OnMouseClick(MouseButton.Right))
@@ -84,7 +84,7 @@ namespace Cuphead.Controllers
             }
         }
 
-        private void updatesprite()
+        private void UpdateSprite()
         {
             List<GameObject> gameObjects = GOManager.Instance.allGOs;
 
@@ -93,11 +93,17 @@ namespace Cuphead.Controllers
                 GameObject go = gameObjects[i];
                 if (go.type == "Menu")
                 {
-                    SpriteRenderer temp = go.GetComponent<SpriteRenderer>();
-                    if (temp != null)
+                    SpriteRenderer spriterender = go.GetComponent<SpriteRenderer>();
+                    if (spriterender != null)
                     {
-                        temp.setAnimation(temp.getAnimationName());
-                        temp.Update();
+                        spriterender.setAnimation(spriterender.getAnimationName());
+                        spriterender.Update();
+                    }
+
+                    VisualEffectRenderer visualEffectRenderer = go.GetComponent<VisualEffectRenderer>();
+                    if(visualEffectRenderer != null)
+                    {
+                        visualEffectRenderer.Update();
                     }
                    
                 }
