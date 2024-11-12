@@ -18,5 +18,10 @@ namespace Cuphead.Menu
         {
             //
         }
+
+        public string CheckAction()
+        {
+            return null;
+        }
     }
 }

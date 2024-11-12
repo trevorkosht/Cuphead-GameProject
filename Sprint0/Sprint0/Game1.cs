@@ -149,7 +149,7 @@ namespace Sprint0
 
             //load player stuff
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
-            playerSpriteRenderer.orderInLayer = .1f;
+            playerSpriteRenderer.orderInLayer = .3f;
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
             player.AddComponent(playerSpriteRenderer);
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
@@ -185,13 +185,16 @@ namespace Sprint0
         protected override void Update(GameTime gameTime)
         {   
             menuController.Update(gameTime);
+            RemoveDestroyedObjects();
             if (menuController.StopGame())
             {
                 cameraController.Update();
+
             }
             else
             {
-                updateGameObject(gameTime);
+                
+                UpdateGameObject(gameTime);
 
                 enemyController.Update(gameTime);
                 savedPlayerLoc = player.position;
@@ -268,7 +271,7 @@ namespace Sprint0
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
             audioManager.Dispose();
             audioStorage.loadAudioManager(audioManager);
-            playerSpriteRenderer.orderInLayer = .1f;
+            playerSpriteRenderer.orderInLayer = .3f;
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
             player.AddComponent(playerSpriteRenderer);
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
@@ -278,7 +281,16 @@ namespace Sprint0
             Initialize();
         }
 
-        private void updateGameObject(GameTime gameTime)
+        private void UpdateGameObject(GameTime gameTime)
+        {
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                GameObject gameObject = gameObjects[i];
+                gameObject.Update(gameTime);
+            }
+        }
+
+        private void RemoveDestroyedObjects()
         {
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -289,7 +301,6 @@ namespace Sprint0
                     i--;
                     continue;
                 }
-                gameObject.Update(gameTime);
             }
         }
     }

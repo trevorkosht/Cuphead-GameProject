@@ -35,33 +35,31 @@ namespace Cuphead.Controllers
             mouseController = new MouseController();
             this.playerState = player;
 
-            this.loadstart = new LoadStart(player, font);
+            this.loadstart = new LoadStart(player, mouseController, font);
             this.loadpaused = new LoadPaused();
             this.loaddeath = new LoadDeath();
             this.loadend = new LoadEnd(player, font);
 
-            menu = null;
+            menu = loadstart;
 
         }
 
         public void Update(GameTime gameTime)
-        {
+        {   
             updatesprite();
             mouseController.Update();
-            if (mouseController.OnMouseClick(MouseButton.Left))
-            {
-                menu  = loadstart;
-            }
-            else if (mouseController.OnMouseClick(MouseButton.Right))
-            {
-                loadend.getTime(gameTime);
-                menu = loadend;
-            }
-            else if (mouseController.OnMouseClick(MouseButton.Middle))
+
+            if (mouseController.OnMouseClick(MouseButton.Right))
             {
                 menu.Unload();
                 menu = null;
             }
+
+            if (menu != null)
+            {
+                CheckAction();
+            }
+            
 
             if(menu != null)
             {
@@ -98,10 +96,21 @@ namespace Cuphead.Controllers
                     SpriteRenderer temp = go.GetComponent<SpriteRenderer>();
                     if (temp != null)
                     {
+                        temp.setAnimation(temp.getAnimationName());
                         temp.Update();
                     }
                    
                 }
+            }
+        }
+
+        public void CheckAction()
+        {
+            String command = menu.CheckAction();
+            if (command == "start")
+            {
+                menu.Unload();
+                menu = null;
             }
         }
     }

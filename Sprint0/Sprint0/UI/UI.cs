@@ -95,13 +95,13 @@ namespace Cuphead.UI
             int filledHeight = (int)(cardBackTexture.Height * cardFillPercent);
             Rectangle cardBackSource = new Rectangle(0, cardBackTexture.Height - filledHeight, cardBackTexture.Width, filledHeight);
             Vector2 cardBackPosition = cardPosition + new Vector2(0, cardHeight - filledHeight * cardScale);
-            spriteBatch.Draw(cardBackTexture, cardBackPosition, cardBackSource, Color.White, 0, Vector2.Zero, cardScale, SpriteEffects.None, 0);
+            spriteBatch.Draw(cardBackTexture, cardBackPosition, cardBackSource, Color.White, 0, Vector2.Zero, cardScale, SpriteEffects.None, 0.3f);
 
             // Draw the front of each fully flipped card
             for (int i = 0; i < playerScore.CardFlips; i++)
             {
                 Vector2 flippedCardPosition = cardPosition + new Vector2((i + 1) * (cardWidth + 5), 0);  // Adjust spacing between cards
-                spriteBatch.Draw(cardFrontTexture, flippedCardPosition, null, Color.White, 0, Vector2.Zero, cardScale, SpriteEffects.None, 0);
+                spriteBatch.Draw(cardFrontTexture, flippedCardPosition, null, Color.White, 0, Vector2.Zero, cardScale, SpriteEffects.None, 0.3f);
             }
         }
 

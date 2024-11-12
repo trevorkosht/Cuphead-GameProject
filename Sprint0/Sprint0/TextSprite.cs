@@ -33,6 +33,11 @@ public class TextSprite : ISprite
         this.position = position;
     }
 
+    public void UpdateColor(Color color)
+    {
+        this.color = color;
+    }
+
     public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.DrawString(font, text, position, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
@@ -42,5 +47,12 @@ public class TextSprite : ISprite
     public void Update(GameTime gameTime)
     {
 
+    }
+
+
+    public Rectangle GetBoundingBox()
+    {
+        Vector2 textSize = font.MeasureString(text);
+        return new Rectangle(position.ToPoint(), textSize.ToPoint());
     }
 }

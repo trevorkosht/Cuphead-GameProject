@@ -34,7 +34,7 @@ namespace Cuphead.Menu
 
 
         public LoadEnd(PlayerState playerState, SpriteFont font)
-        { 
+        {
             this.player = playerState;
             this.textSprite = new TextSprite(font);
         }
@@ -62,7 +62,7 @@ namespace Cuphead.Menu
 
         private void getParry()
         {
-            
+
         }
 
         private void getCoin()
@@ -158,6 +158,10 @@ namespace Cuphead.Menu
             }
         }
 
+        public string CheckAction()
+        {
+            return null;
+        }
     }
 }
 

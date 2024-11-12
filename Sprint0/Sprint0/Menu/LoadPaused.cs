@@ -18,5 +18,10 @@ namespace Cuphead.Menu
         {
             throw new NotImplementedException();
         }
+
+        public string CheckAction()
+        {
+            return null;
+        }
     }
 }

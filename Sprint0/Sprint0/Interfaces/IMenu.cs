@@ -10,5 +10,7 @@ namespace Cuphead.Interfaces
     {
         public void LoadScreen();
         public void Unload();
+
+        public String CheckAction();
     }
 }
