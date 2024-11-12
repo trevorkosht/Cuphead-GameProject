@@ -35,7 +35,7 @@ public static class ItemFactory
         item.type += itemName;
         ItemManager itemManager = new ItemManager(itemName);
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
-        spriteRenderer.orderInLayer = .15f;
+        spriteRenderer.orderInLayer = .4f;
         Animation itemTexture = new Animation(texture, 1, 1, 144, 144);
         Animation coinTexture = new Animation(texture, 5, 17, 144, 144);
         Animation vfxTextureAnimation = new Animation(VFXTexture, 5, 17, 288, 288);

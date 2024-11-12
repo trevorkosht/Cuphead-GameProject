@@ -10,10 +10,10 @@ public static class MenuFactory
     {
         //start screen
         //cuphead
-        { "Title1", (1827, 1021, 0.099f, 1) },
+        { "Title1", (1000, 555, 0.099f, 1) },
 
         //background
-        { "Title2", (1825, 1022, 0.1f, 1) },
+        { "Title2", (1450, 810, 0.1f, 1) },
 
         //pause screen
 
@@ -54,16 +54,17 @@ public static class MenuFactory
         if (Sizes.TryGetValue(subtype, out (int width, int height, float orderInLayer, int frameAmount) endData))
         {
             Rectangle destRectangle = new Rectangle((int)position.X, (int)position.Y, endData.width, endData.height);
-            GameObject EndScreen = new GameObject(destRectangle.X, destRectangle.Y);
+            GameObject Menu = new GameObject(destRectangle.X, destRectangle.Y);
+            Menu.type = "Menu";
             SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
             Animation backgroundTexture = new Animation(texture, 1, endData.frameAmount, destRectangle.Height, destRectangle.Width);
 
             spriteRenderer.addAnimation("End", backgroundTexture);
             spriteRenderer.setAnimation("End");
             spriteRenderer.orderInLayer = endData.orderInLayer;
-            EndScreen.AddComponent(spriteRenderer);
+            Menu.AddComponent(spriteRenderer);
             spriteRenderer.Update();
-            return EndScreen;
+            return Menu;
         }
         else
         {

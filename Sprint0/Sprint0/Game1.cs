@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended;
+using MonoGame.Extended.Timers;
 using System;
 using System.Collections.Generic;
 
@@ -48,6 +49,7 @@ namespace Sprint0
 
         private bool resetFrame;
         private bool endGame = false;
+        private int startGame = 0;
 
         public Game1()
         {
@@ -147,7 +149,7 @@ namespace Sprint0
 
             //load player stuff
             SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
-            playerSpriteRenderer.orderInLayer = .1f;
+            playerSpriteRenderer.orderInLayer = .3f;
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
             player.AddComponent(playerSpriteRenderer);
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
@@ -183,23 +185,16 @@ namespace Sprint0
         protected override void Update(GameTime gameTime)
         {   
             menuController.Update(gameTime);
+            RemoveDestroyedObjects();
             if (menuController.StopGame())
             {
-                //return;
+                cameraController.Update();
+
             }
             else
             {
-                for (int i = 0; i < gameObjects.Count; i++)
-                {
-                    GameObject gameObject = gameObjects[i];
-                    if (gameObject.destroyed)
-                    {
-                        gameObjects.RemoveAt(i);
-                        i--;
-                        continue;
-                    }
-                    gameObject.Update(gameTime);
-                }
+                
+                UpdateGameObject(gameTime);
 
                 enemyController.Update(gameTime);
                 savedPlayerLoc = player.position;
@@ -234,30 +229,6 @@ namespace Sprint0
 
         }
 
-        private void ResetGame()
-        {
-            enemyController.currentEnemyIndex = 0;
-            for (int i = 0; i < gameObjects.Count; i++)
-            {
-                GameObject gameObject = gameObjects[i];
-                gameObject.Destroy();
-                gameObjects.RemoveAt(i);
-                i--;
-            }
-            resetFrame = true;
-            SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
-            audioManager.Dispose();
-            audioStorage.loadAudioManager(audioManager);
-            playerSpriteRenderer.orderInLayer = .1f;
-            textureStorage.loadPlayerAnimations(playerSpriteRenderer);
-            player.AddComponent(playerSpriteRenderer);
-            player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
-            player.AddComponent(audioManager);
-            player.type = "Player";
-            player = new GameObject(0, 500, new List<IComponent> { new PlayerController2(playerState) });
-            Initialize();
-        }
-
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.BlanchedAlmond);
@@ -284,6 +255,53 @@ namespace Sprint0
             UI.Draw();
             _spriteBatch2.End();
             base.Draw(gameTime);
+        }
+
+        private void ResetGame()
+        {
+            enemyController.currentEnemyIndex = 0;
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                GameObject gameObject = gameObjects[i];
+                gameObject.Destroy();
+                gameObjects.RemoveAt(i);
+                i--;
+            }
+            resetFrame = true;
+            SpriteRenderer playerSpriteRenderer = new SpriteRenderer(new Rectangle(player.X, player.Y, 144, 144), true);
+            audioManager.Dispose();
+            audioStorage.loadAudioManager(audioManager);
+            playerSpriteRenderer.orderInLayer = .3f;
+            textureStorage.loadPlayerAnimations(playerSpriteRenderer);
+            player.AddComponent(playerSpriteRenderer);
+            player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
+            player.AddComponent(audioManager);
+            player.type = "Player";
+            player = new GameObject(0, 500, new List<IComponent> { new PlayerController2(playerState) });
+            Initialize();
+        }
+
+        private void UpdateGameObject(GameTime gameTime)
+        {
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                GameObject gameObject = gameObjects[i];
+                gameObject.Update(gameTime);
+            }
+        }
+
+        private void RemoveDestroyedObjects()
+        {
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                GameObject gameObject = gameObjects[i];
+                if (gameObject.destroyed)
+                {
+                    gameObjects.RemoveAt(i);
+                    i--;
+                    continue;
+                }
+            }
         }
     }
 }

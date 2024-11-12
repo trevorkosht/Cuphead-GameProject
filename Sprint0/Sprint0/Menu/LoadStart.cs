@@ -1,4 +1,5 @@
-﻿using Cuphead.Player;
+﻿using Cuphead.Interfaces;
+using Cuphead.Player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Input;
@@ -10,42 +11,81 @@ using System.Threading.Tasks;
 
 namespace Cuphead.Menu
 {
-    internal class LoadStart
+    internal class LoadStart : IMenu
     {
-
+        private MouseController mouseController;
         private PlayerState player;
-        private TextSprite textSprite;
+        private TextSprite start;
+
+        private List<GameObject> list = new List<GameObject>();
 
         int offsetx;
         int offsety;
 
-        public LoadStart(PlayerState player, SpriteFont font)
+        public LoadStart(PlayerState player,MouseController mouseController, SpriteFont font)
         {
             this.player = player;
-            this.textSprite = new TextSprite(font);
+            this.mouseController = mouseController;
+            this.start = new TextSprite(font);
 
-            getOffset();
+            GetOffset();
         }
 
 
-        private void getOffset()
+        private void GetOffset()
         {
             offsetx = player.GameObject.X;
             offsety = player.GameObject.Y;
         }
 
-        private void addelement(string obj, Vector2 pos)
+        private void Addelement(string obj, Vector2 pos)
         {
             pos.X = pos.X + offsetx;
             pos.Y = pos.Y + offsety;
-            GOManager.Instance.allGOs.Add(MenuFactory.CreateElement(obj, pos));
+            GameObject gameObject = MenuFactory.CreateElement(obj, pos);
+            GOManager.Instance.allGOs.Add(gameObject);
+            list.Add(gameObject);
         }
 
-        public void loadScreen()
+        public void LoadScreen()
         {
-            addelement("Title1", new Vector2(0, 0));
-            addelement("Title2", new Vector2 (0, 0));
-            addelement("GameStartText", new Vector2(500, 300));
+            GetOffset();
+            Addelement("Title1", new Vector2(-400, -300));
+            Addelement("Title2", new Vector2 (-600, -500));
+            //Addelement("GameStartText", new Vector2(-200, 0));
+
+            LoadMenu();
         }
+
+        public void Unload()
+        {
+            foreach (GameObject gameObject in list)
+            {
+                gameObject.Destroy();
+            }
+        }
+
+        public void LoadMenu()
+        {
+            start.UpdateText("Click here to start");
+            start.UpdatePos(new Vector2(offsetx -100, offsety +50));
+            start.UpdateColor(Color.Gold);
+        }
+
+        public string CheckAction()
+        {
+            if (mouseController.OnMouseClick(MouseButton.Left))
+            {
+                Point mousePosition = mouseController.GetMousePosition();
+
+                if (start.GetBoundingBox().Contains(mousePosition))
+                {
+                    return "start";
+                }
+            }
+            return null;
+        }
+
+
     }
 }

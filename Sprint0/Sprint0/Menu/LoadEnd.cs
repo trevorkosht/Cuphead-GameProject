@@ -1,4 +1,5 @@
-﻿using Cuphead.Player;
+﻿using Cuphead.Interfaces;
+using Cuphead.Player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,10 +13,12 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Cuphead.Menu
 {
-    internal class LoadEnd
+    internal class LoadEnd : IMenu
     {
         private PlayerState player;
         private TextSprite textSprite;
+
+        private List<GameObject> list = new List<GameObject>();
 
         int offsetx;
         int offsety;
@@ -31,12 +34,12 @@ namespace Cuphead.Menu
 
 
         public LoadEnd(PlayerState playerState, SpriteFont font)
-        { 
+        {
             this.player = playerState;
             this.textSprite = new TextSprite(font);
         }
 
-        private void getTime(GameTime time)
+        public void getTime(GameTime time)
         {
             int seconds = (int)time.TotalGameTime.TotalSeconds;
             int min = seconds / 60;
@@ -59,7 +62,7 @@ namespace Cuphead.Menu
 
         private void getParry()
         {
-            
+
         }
 
         private void getCoin()
@@ -98,13 +101,12 @@ namespace Cuphead.Menu
             }
         }
 
-        public void loadScreen(GameTime gameTime)
+        public void LoadScreen()
         {
 
             getHealth();
             getCoin();
             getParry();
-            getTime(gameTime);
             getOffset();
             getGrade();
 
@@ -143,9 +145,23 @@ namespace Cuphead.Menu
         {
             pos.X = pos.X + offsetx;
             pos.Y = pos.Y + offsety;
-            GOManager.Instance.allGOs.Add(MenuFactory.CreateElement(obj, pos));
+            GameObject gameObject = MenuFactory.CreateElement(obj, pos);
+            GOManager.Instance.allGOs.Add(gameObject);
+            list.Add(gameObject);
         }
 
+        public void Unload()
+        {
+            foreach (GameObject gameObject in list)
+            {
+                gameObject.Destroy();
+            }
+        }
+
+        public string CheckAction()
+        {
+            return null;
+        }
     }
 }
 
