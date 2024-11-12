@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+  using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 
-public class DeadlyDaisy : BaseEnemy {
+public class DeadlyDaisy2 : BaseEnemy
+{
     private float speed;
     private Vector2 airVelocity;
     private int airTime = 50;
@@ -10,47 +11,49 @@ public class DeadlyDaisy : BaseEnemy {
     public bool movingRight { get; private set; }
     public float turnDelay { get; private set; } = -1.0f;
     private DaisyCollisionManager collisionManager;
-    private DaisyState state;
 
-    public override void Initialize(Texture2D texture, Texture2DStorage storage) {
+    public override void Initialize(Texture2D texture, Texture2DStorage storage)
+    {
         base.Initialize(texture, storage);
         sRend.setAnimation("Spawn");
         speed = 300f;
         airVelocity = Vector2.Zero;
     }
 
-    public override void Move(GameTime gameTime) {
-        if (GameObject.Y < 0 && GameObject.X - player.X > 750) {
+    public override void Move(GameTime gameTime)
+    {
+        if(GameObject.Y < 0 && GameObject.X - player.X > 750) {
             return;
         }
 
         sRend.isFacingRight = !movingRight;
         collisionManager = GameObject.GetComponent<DaisyCollisionManager>();
-        state = GameObject.GetComponent<DaisyState>();
 
-        if (sRend.getAnimationName() == "Spawn") {
-            if (state.isGrounded) {
+        if (sRend.getAnimationName() == "Spawn") 
+        { 
+            if(collisionManager.state.isGrounded)
+            {
                 GOManager.Instance.audioManager.getInstance("DeadlyDaisyLanding").Play();
-            }
-            else {
+            } else
+            {
                 if (GameObject.Y > 0 && GameObject.Y < 100)
-                    GOManager.Instance.audioManager.getInstance("DeadlyDaisyFloat").Play();
+                GOManager.Instance.audioManager.getInstance("DeadlyDaisyFloat").Play();
             }
         }
 
-        if (state.isGrounded) {
-            if (!state.isJumping || turnDelay < 1.5) {
-                state.isJumping = false;
+        if (collisionManager.state.isGrounded) {
+            if(!collisionManager.state.isJumping || turnDelay < 1.5){
+                collisionManager.state.isJumping = false;
                 airVelocity = Vector2.Zero;
             }
 
-            if (state.atPlatformEdge || GameObject.X < 1250) {
+            if (collisionManager.state.atPlatformEdge || GameObject.X < 1250){
                 HandlePlatformEdge();
             }
             else {
                 sRend.setAnimation("deadlyDaisyAnimation");
 
-                if (state.currentPlatform.type != null && state.currentPlatform.type.Contains("Slope")) {
+                if(collisionManager.state.currentPlatform.type != null && collisionManager.state.currentPlatform.type.Contains("Slope")) {
                     HandleSlopeCollision();
                 }
 
@@ -61,14 +64,14 @@ public class DeadlyDaisy : BaseEnemy {
             }
         }
         else {
-            if (state.isJumping) {
+            if (collisionManager.state.isJumping) {
                 sRend.setAnimation("Jump");
                 sRend.currentAnimation.Value.CurrentFrame = 8;
                 airVelocity.Y += gravity;
             }
             else {
                 movingRight = player.X > GameObject.X;
-                airVelocity.Y += gravity / 15;
+                airVelocity.Y += gravity/15;
             }
         }
         turnDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -80,25 +83,25 @@ public class DeadlyDaisy : BaseEnemy {
         sRend.setAnimation("Jump");
 
         if (sRend.currentAnimation.Value.CurrentFrame == 7) {
-            Rectangle landingSpot = state.landingSpot;
+            Rectangle landingSpot = collisionManager.state.landingSpot;
             float verticalSpeed = Math.Abs(((landingSpot.Y - GameObject.Y) - gravity * airTime * airTime / 2) / (airTime));
             float horizontalSpeed = (landingSpot.X - GameObject.X) / (airTime);
 
             airVelocity = new Vector2(horizontalSpeed, -verticalSpeed);
 
-            state.jumpRequested = false;
-            state.isJumping = true;
+            collisionManager.state.jumpRequested = false;
+            collisionManager.state.isJumping = true;
             turnDelay = 1.75f;
         }
     }
 
     private void HandlePlatformEdge() {
-        if (collisionManager.state.foundAdjacentPlatform) {
+        if(collisionManager.state.foundAdjacentPlatform) {
             return;
         }
 
         //check for jump
-        if (!collisionManager.state.jumpRequested || (movingRight != player.X > GameObject.X && Math.Abs(player.X - GameObject.X) > 500) || (GameObject.X < 1250 && !movingRight)) {
+        if (!collisionManager.state.jumpRequested || (movingRight != player.X > GameObject.X && Math.Abs(player.X - GameObject.X) > 500) || (GameObject.X < 1250 && !movingRight)){
             sRend.setAnimation("Turn");
 
             //Makes the sprite look a little less offset during the animation.
@@ -116,12 +119,12 @@ public class DeadlyDaisy : BaseEnemy {
             }
 
         }
-        else if (collisionManager.state.jumpRequested) {
+        else if(collisionManager.state.jumpRequested){
             HandleJumpRequested();
         }
     }
 
-    private void HandleSlopeCollision() {
+    private void HandleSlopeCollision() { 
         BoxCollider daisyCollider = GameObject.GetComponent<BoxCollider>();
         BoxCollider slopeCollider = collisionManager.state.currentPlatform.GetComponent<BoxCollider>();
         Rectangle daisyBounds = daisyCollider.BoundingBox;
@@ -151,7 +154,8 @@ public class DeadlyDaisy : BaseEnemy {
         }
     }
 
-    public override void Shoot(GameTime gameTime) {
+    public override void Shoot(GameTime gameTime)
+    {
         // Implement shooting logic if needed
     }
 }
