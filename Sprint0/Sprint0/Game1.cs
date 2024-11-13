@@ -85,7 +85,6 @@ namespace Sprint0
             GOManager.Instance.GraphicsDevice = GraphicsDevice;
             enemyController = new EnemyController(keyboardController, textureStorage);
 
-            // Initialize camera and controller
             camera = new Camera();
             GOManager.Instance.Camera = camera;
 
@@ -213,7 +212,6 @@ namespace Sprint0
                 enemyController.Update(gameTime);
                 savedPlayerLoc = player.position;
 
-                // Update camera based on player's position and the rail
                 cameraController.Update();
                 UI.Update(gameTime);
 
