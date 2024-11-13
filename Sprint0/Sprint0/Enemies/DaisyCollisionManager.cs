@@ -18,6 +18,8 @@ public class DaisyCollisionManager : IComponent {
         state.isGrounded = false;
         state.atPlatformEdge = false;
         state.foundAdjacentPlatform = false;
+        //state.isTurning = false;
+        //state.jumpRequested = false;
 
         foreach(GameObject GO in GOManager.Instance.allGOs) {
             if (GO != null && GO.GetComponent<BoxCollider>() != null && GO.type != null && (GO.type.Contains("Platform") || GO.type.Contains("Hill") || GO.type.Contains("Slope") || GO.type.Contains("Log")) ) {
@@ -51,17 +53,16 @@ public class DaisyCollisionManager : IComponent {
         Rectangle jumpCheckBounds = new Rectangle(box.X, box.Y - 50, box.Width, box.Height + 400);
 
         if (GameObject.GetComponent<DeadlyDaisy>().movingRight) {
-            jumpCheckBounds.X += 300;
+            jumpCheckBounds.X += 200;
         }
         else {
-            jumpCheckBounds.X -= 300;
+            jumpCheckBounds.X -= 200;
         }
 
         if (jumpCheckBounds.Left > platformCollider.BoundingBox.Left && jumpCheckBounds.Right < platformCollider.BoundingBox.Right && (Math.Abs(platformCollider.BoundingBox.Top - state.currentPlatform.GetComponent<BoxCollider>().BoundingBox.Top) >= state.minJumpHeight)) {
             state.landingSpot = new Rectangle(jumpCheckBounds.X, platformCollider.BoundingBox.Top - box.Height, box.Width, box.Height);
             requestJump = true;
         }
-        
         return requestJump;
     }
 

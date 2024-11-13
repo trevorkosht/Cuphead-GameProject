@@ -39,6 +39,7 @@ public static class EnemyFactory
                 spriteRenderer.addAnimation("Jump", new Animation(textureStorage.GetTexture("DaisyJump"), 5, 9, 144, 144));
                 spriteRenderer.addAnimation("Land", new Animation(textureStorage.GetTexture("DaisyLand"), 2, 11, 288, 288));
                 enemyLogic.Initialize(textureStorage.GetTexture("DeadlyDaisy"), textureStorage);
+                enemy.AddComponent(new DaisyAnimator(enemy.GetComponent<SpriteRenderer>(), enemy.GetComponent<DaisyState>()));
                 enemyHP = 1;
                 break;
             case EnemyType.MurderousMushroom:
