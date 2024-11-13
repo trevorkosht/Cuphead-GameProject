@@ -19,7 +19,6 @@ namespace Cuphead.Player {
 
         public void HandleMovementAndActions(GameTime gameTime, float deltaTime) {
             if (player.IsDead) {
-                GOManager.Instance.audioManager.getInstance("PlayerDeath").Play();
                 return;
             }
             Vector2 input = keyboardController.GetMovementInput();
