@@ -18,7 +18,6 @@ namespace Cuphead.Controllers
         private readonly MouseController mouseController;
         private PlayerState playerState;
         private readonly TextSprite textSprite;
-        private DelayGame delaygame;
 
         private IMenu menu;
 
@@ -36,7 +35,6 @@ namespace Cuphead.Controllers
         public MenuController(PlayerState player, SpriteFont font)
         {
             mouseController = new MouseController();
-            delaygame = new DelayGame();
             this.playerState = player;
 
             this.loadstart = new LoadStart(player, mouseController, font);
@@ -55,8 +53,7 @@ namespace Cuphead.Controllers
 
             if (mouseController.OnMouseClick(MouseButton.Right) && menu != null)
             {
-                FadeIn();
-                delaygame.Delay(gameTime, 1000);
+                FadeOut();
                 menu.Unload();
                 menu = null;
             }
@@ -122,13 +119,20 @@ namespace Cuphead.Controllers
         public void FadeIn()
         {
             Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeIn");
-            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, 500, 500), texture, 1, 16, 1f, true);
+
+            int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, width, height), texture, 1, 16, 1f, true);
         }
 
         public void FadeOut()
         {
-            Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeIn");
-            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, 500, 500), texture, 1, 16, 1f, true);
+            Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeOut");
+
+            int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
+            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, width, height), texture, 1, 16, 1f, true);
         }
 
     }

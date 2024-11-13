@@ -62,7 +62,7 @@ namespace Cuphead.Menu
 
         private void getParry()
         {
-
+            parryCount = player.parryCount;
         }
 
         private void getCoin()
@@ -113,7 +113,7 @@ namespace Cuphead.Menu
 
             Text = "TIME.............." + displayTime +
                 "\nHP BONUS.........." + health + "/3" +
-                "\nPARRY..............." + parryCount +
+                "\nPARRY..............." + parryCount + "/3" +
                 "\nGOLD COINS  ...." + coinCount + "/5" +
                 "\nSKILL LEVEL......" +
                 "\n\n       GRADE....  " + disGrade;
