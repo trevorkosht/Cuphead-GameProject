@@ -18,7 +18,6 @@ namespace Cuphead.Controllers
         private readonly MouseController mouseController;
         private PlayerState playerState;
         private readonly TextSprite textSprite;
-        private DelayGame delaygame;
 
         private IMenu menu;
 
@@ -36,7 +35,6 @@ namespace Cuphead.Controllers
         public MenuController(PlayerState player, SpriteFont font)
         {
             mouseController = new MouseController();
-            delaygame = new DelayGame();
             this.playerState = player;
 
             this.loadstart = new LoadStart(player, mouseController, font);
@@ -60,13 +58,21 @@ namespace Cuphead.Controllers
 
             if (mouseController.OnMouseClick(MouseButton.Right) && menu != null)
             {
-                FadeIn();
-                delaygame.Delay(gameTime, 1000);
                 menu.Unload();
                 menu = null;
             }
+
+            if (playerState.GameObject.X > 13550)
+            {
+                menu = loadend;
+            }
+
+            if (menu != null)
+            {
+                CheckAction();
+            }
             
-            if(menu != null)
+            if(menu != null && !menu.loaded())
             {
                 menu.LoadScreen();
             }
@@ -74,7 +80,10 @@ namespace Cuphead.Controllers
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            if(menu != null)
+            {
+                menu.Draw(spriteBatch);
+            }
         }
 
         public bool StopGame()
@@ -117,18 +126,6 @@ namespace Cuphead.Controllers
                 menu.Unload();
                 menu = null;
             }
-        }
-
-        public void FadeIn()
-        {
-            Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeIn");
-            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, 500, 500), texture, 1, 16, 1f, true);
-        }
-
-        public void FadeOut()
-        {
-            Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeIn");
-            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, 500, 500), texture, 1, 16, 1f, true);
         }
 
     }

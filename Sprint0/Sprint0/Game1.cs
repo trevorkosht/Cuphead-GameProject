@@ -226,6 +226,7 @@ namespace Sprint0
 
                     GOManager.Instance.IsDebugging = !GOManager.Instance.IsDebugging;
             }
+            base.Update(gameTime);
 
         }
 
@@ -247,7 +248,9 @@ namespace Sprint0
             }
             enemyController.Draw(_spriteBatch);
 
-            texts.Draw(_spriteBatch);
+            //texts.Draw(_spriteBatch);
+
+            menuController.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

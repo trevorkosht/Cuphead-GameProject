@@ -7,11 +7,12 @@ public class MurderousMushroom : BaseEnemy
 {
     private bool isHidden;
     private double shootCooldown;
-    private Texture2D purpleSporeTexture;
-    private Texture2D pinkSporeTexture;
-    private Texture2D attackVFX;
     private int closedHP;
     private float projectileScale = 0.5f;
+    private HealthComponent mushroomHealthComponent => GameObject.GetComponent<HealthComponent>();
+    private BoxCollider mushroomCollider => GameObject.GetComponent<BoxCollider>();
+
+    private MurderousMushroomProjectile mushroomProjectile;
 
     public override void Initialize(Texture2D texture, Texture2DStorage storage)
     {
@@ -21,18 +22,16 @@ public class MurderousMushroom : BaseEnemy
         isHidden = false;
         shootCooldown = 2.0;
 
-        purpleSporeTexture = storage.GetTexture("PurpleSpore");
-        pinkSporeTexture = storage.GetTexture("PinkSpore");
-        attackVFX = storage.GetTexture("MushroomAttackVFX");
-    }
+        Texture2D purpleSporeTexture = storage.GetTexture("PurpleSpore");
+        Texture2D pinkSporeTexture = storage.GetTexture("PinkSpore");
+        Texture2D attackVFX = storage.GetTexture("MushroomAttackVFX");
 
-    public override void Move(GameTime gameTime)
-    {
+        mushroomProjectile = new MurderousMushroomProjectile(purpleSporeTexture, pinkSporeTexture, attackVFX, projectileScale);
     }
 
     public override void Shoot(GameTime gameTime)
     {
-        if(GameObject.X > GOManager.Instance.Camera.Position.X + 1200)
+        if (GameObject.X > GOManager.Instance.Camera.Position.X + 1200)
         {
             return;
         }
@@ -44,48 +43,18 @@ public class MurderousMushroom : BaseEnemy
             {
                 GOManager.Instance.audioManager.getInstance("MurderousMushroomShoot").Play();
                 sRend.setAnimation("Attack");
-                if(sRend.currentAnimation.Value.CurrentFrame == 5) {
+                if (sRend.currentAnimation.Value.CurrentFrame == 5)
+                {
                     Vector2 playerPosition = new Vector2(player.X, player.Y);
-                    bool shootPinkSpore = (new Random().Next(0, 2) == 0);
-
-                    sRend.isFacingRight = player.X < GameObject.X;
-
-                    Texture2D sporeTexture = shootPinkSpore ? pinkSporeTexture : purpleSporeTexture;
-                    GameObject projectile = new GameObject(GameObject.X, GameObject.Y, new SporeProjectile(GameObject.position, playerPosition, sporeTexture, shootPinkSpore));
-                    
-                    SpriteRenderer projectileRenderer = new SpriteRenderer(new Rectangle(GameObject.X, GameObject.Y, (int)(144 * projectileScale), (int)(144 * projectileScale)), false);
-                    projectile.AddComponent(projectileRenderer);
-
-                    if (shootPinkSpore) {
-                        projectileRenderer.addAnimation("pinkSpore", new Animation(sporeTexture, 3, 12, 144, 144));
-                        projectileRenderer.setAnimation("pinkSpore");
-                    }
-                    else {
-                        projectileRenderer.addAnimation("purpleSpore", new Animation(sporeTexture, 3, 12, 144, 144));
-                        projectileRenderer.setAnimation("purpleSpore");
-                    }
-
-
-                    CircleCollider collider = new CircleCollider(30, new Vector2(-30, -35), GOManager.Instance.GraphicsDevice);
-                    projectile.AddComponent(collider);
-
-                    Rectangle effectPosition = new Rectangle();
-                    if (sRend.isFacingRight) {
-                        effectPosition = new Rectangle(GameObject.X - 7, GameObject.Y + 25, 72, 72);
-                    }
-                    else {
-                        effectPosition = new Rectangle(GameObject.X + 45, GameObject.Y + 25, 72, 72);
-                    }
-
-                    VisualEffectFactory.createVisualEffect(effectPosition, attackVFX, 3, 5, 0.5f, sRend.isFacingRight);
-
-                    GOManager.Instance.allGOs.Add(projectile);
-
+                    mushroomProjectile.SpawnProjectile(GameObject.position, playerPosition, sRend);
                     shootCooldown = 4.0;
                 }
-
             }
         }
+    }
+
+    public override void Move(GameTime gameTime)
+    {
     }
 
     public void HideUnderCap()

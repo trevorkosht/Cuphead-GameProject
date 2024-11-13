@@ -17,6 +17,7 @@ namespace Cuphead.Menu
     {
         private PlayerState player;
         private TextSprite textSprite;
+        private LoadTransition transition= new LoadTransition();
 
         private List<GameObject> list = new List<GameObject>();
 
@@ -31,6 +32,13 @@ namespace Cuphead.Menu
         string Text;
         string displayTime;
         String disGrade;
+
+        private bool load = false;
+
+        public bool loaded()
+        {
+            return load;
+        }
 
 
         public LoadEnd(PlayerState playerState, SpriteFont font)
@@ -62,7 +70,7 @@ namespace Cuphead.Menu
 
         private void getParry()
         {
-
+            parryCount = player.parryCount;
         }
 
         private void getCoin()
@@ -103,6 +111,8 @@ namespace Cuphead.Menu
 
         public void LoadScreen()
         {
+            load = true;
+            transition.FadeOut();
 
             getHealth();
             getCoin();
@@ -113,16 +123,16 @@ namespace Cuphead.Menu
 
             Text = "TIME.............." + displayTime +
                 "\nHP BONUS.........." + health + "/3" +
-                "\nPARRY..............." + parryCount +
+                "\nPARRY..............." + parryCount + "/3" +
                 "\nGOLD COINS  ...." + coinCount + "/5" +
                 "\nSKILL LEVEL......" +
                 "\n\n       GRADE....  " + disGrade;
 
 
             textSprite.UpdateText(Text);
-            textSprite.UpdatePos(new Vector2(250 + offsetx, 250 + offsety));
+            textSprite.UpdatePos(new Vector2(250 + offsetx, -250 + offsety));
 
-            addelement("WinScreenBackground", new Vector2(-500, -500));
+            addelement("WinScreenBackground", new Vector2(-550, -500));
             addelement("WinScreenBoard", new Vector2(150, 200));
             addelement("WinScreenResultsText", new Vector2(-300, 0));
             addelement("WinScreenCuphead", new Vector2(-400, 200));
@@ -144,7 +154,7 @@ namespace Cuphead.Menu
         private void addelement(string obj, Vector2 pos)
         {
             pos.X = pos.X + offsetx;
-            pos.Y = pos.Y + offsety;
+            //pos.Y = pos.Y + offsety;
             GameObject gameObject = MenuFactory.CreateElement(obj, pos);
             GOManager.Instance.allGOs.Add(gameObject);
             list.Add(gameObject);
@@ -152,6 +162,8 @@ namespace Cuphead.Menu
 
         public void Unload()
         {
+            load = false;
+
             foreach (GameObject gameObject in list)
             {
                 gameObject.Destroy();
@@ -168,6 +180,11 @@ namespace Cuphead.Menu
             {
                 return null;
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            textSprite.Draw(spriteBatch);
         }
     }
 }
