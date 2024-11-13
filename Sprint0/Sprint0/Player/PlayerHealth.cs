@@ -94,6 +94,7 @@ namespace Cuphead.Player
             {
                 if (animator.IsAnimationComplete())
                 {
+                    GOManager.Instance.audioManager.getInstance("PlayerDeath").Play();
                     //player.GameObject.destroyed = true;
                 }
                 return;
