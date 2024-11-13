@@ -37,11 +37,34 @@ Game1.cs Has become a bit of a mess and a hodgpodge of many different things. Mo
 
 Author: Zol Chen
 Date: 11/12/2024
+Sprint #: 4
 File Name: UI.cs 
 File Author: Trevor Kosht
 Review Time :12 min
 
 I believe the quality of this file to be pretty good. The simplistic approach to drawing the card lowers the amount of code that needs to be written. However there are some aspect that it can imporve on. For example there is a ton of texture passed into the constuctor. It can be lowered by calling texture2d storage. It would also be easier to maintain if the numbers at on top and not hard coded into the methods. lastly many parts of the DrawScoreUI can be split up into more sub methods to improve readability and maintainability
+
+
+Author: Ben Vidmar-McEwen
+Date: 11/12/2024
+Sprint #: 4
+File Name: PlayerMovement.cs
+File Author: Zol Chen
+Review Time: 10 minutes
+
+Cyclomatic complexity: 55
+Depth of inheritance: 1
+Class coupling: 18
+
+This file is designed fairly well overall, this file has to have a high cyclomatic complexity just from the task it handles. However there are some spots that could be improved and refactored slightly to improve complexity and readability. In UpdateFacingDirection an if-else statement can be replaced with one Boolean assignment. Additionally multiple if statements in HandleDucking can be simplified to single if statements. This file has high cyclomatic complexity as required by controlling all the player's movement commands, but small changes could be made to improve design of logic and control flow in some of the methods.
+
+Author: Jacob Subler
+Date: 11/12/2024
+Sprint #: 4
+File Name: MurderousMushroom.cs
+File Author: Trevor Kosht
+Review Time: 10 minutes
+Comments: Large methods like Shoot, HideUnderCap, and EmergeFromCap could be broken down into smaller methods to separate out distinct responsibilities such as projectile behavior and creation, etc, which would make the code easier to read and extend. There are a lot of repeat calls to access the GOManager which could require a lot of refactoring when changes need to be made later. Using constants or enums in place of hardcoded values would further improve clarity and reduce the risk of errors due to changes in the game logic. Lastly, grouping related logic together  would make the class more intuitive and easier to maintain as the project evolves as now the method layout doesn't seem to follow the logic flow as well as it could.
 
 SPRINT REFLECTION:
 This sprint was the last hoorah for the game, in which the team added an abundance of polish. There were many tweaks to animations, effects, enemies and projectiles to make the game play and feel much better. In addition UI and Sounds were a key addition which made the game feel alive. We were able to add some key features from the orginal into the game this sprint as well. Things like directional shooting, and parrying which were massive undertakings. The team focused on improving code quality for many files this sprint with more to come in Sprint 5. 
