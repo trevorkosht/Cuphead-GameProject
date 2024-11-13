@@ -53,17 +53,17 @@ namespace Cuphead.Controllers
             UpdateSprite();
             mouseController.Update();
 
+            if (menu != null)
+            {
+                CheckAction();
+            }
+
             if (mouseController.OnMouseClick(MouseButton.Right) && menu != null)
             {
                 //loadtransition.LoadTransIn();
                 menu.Unload();
                 loadtransition.LoadTransOut();
                 menu = null;
-            }
-
-            if (menu != null)
-            {
-                CheckAction();
             }
             
             if(menu != null)
