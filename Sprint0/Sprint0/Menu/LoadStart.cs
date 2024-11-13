@@ -81,9 +81,9 @@ namespace Cuphead.Menu
 
         public void LoadMenu()
         {
-            start.UpdateText("Click here to start");
-            start.UpdatePos(new Vector2(offsetx -100, offsety +50));
-            start.UpdateColor(Color.Gold);
+            start.UpdateText("Right Click to Start");
+            start.UpdatePos(new Vector2(offsetx -100, offsety +150));
+            start.UpdateColor(Color.Turquoise);
         }
 
         public string CheckAction()

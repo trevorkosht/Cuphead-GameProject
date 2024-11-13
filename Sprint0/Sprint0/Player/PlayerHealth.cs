@@ -41,7 +41,7 @@ namespace Cuphead.Player
                 }
                 if (enemy != null)
                 {
-                    TakeDamage(50);
+                    //TakeDamage(50);
                     GOManager.Instance.audioManager.getInstance("PlayerDamaged").Play();
                 } else
                 {

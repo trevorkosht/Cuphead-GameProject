@@ -81,7 +81,7 @@ namespace Cuphead.Menu
         private void getOffset()
         {
             offsetx = player.GameObject.X;
-            offsety = player.GameObject.Y;
+            offsety = (int)player.GroundLevel;
         }
 
         private void getGrade()
@@ -130,7 +130,7 @@ namespace Cuphead.Menu
 
 
             textSprite.UpdateText(Text);
-            textSprite.UpdatePos(new Vector2(250 + offsetx, -250 + offsety));
+            textSprite.UpdatePos(new Vector2(250 + offsetx, 250));
 
             addelement("WinScreenBackground", new Vector2(-550, -500));
             addelement("WinScreenBoard", new Vector2(150, 200));
@@ -142,13 +142,13 @@ namespace Cuphead.Menu
             addelement("WinScreenUnearnedStar", new Vector2(560, 445));
             addelement("WinScreenUnearnedStar", new Vector2(590, 445));
 
-            addelement("WinScreenStarAppearAnimation", new Vector2(560, 445));
-            addelement("WinScreenStarAppearAnimation", new Vector2(590, 445));
+            addelement("WinScreenStarAppearAnimation", new Vector2(550, 435));
+            addelement("WinScreenStarAppearAnimation", new Vector2(580, 435));
 
             addelement("WinScreenStar", new Vector2(560, 445));
             addelement("WinScreenStar", new Vector2(590, 445));
 
-            addelement("WinScreenCircle", new Vector2(700, 400));
+            addelement("WinScreenCircle", new Vector2(500, 500));
         }
 
         private void addelement(string obj, Vector2 pos)
