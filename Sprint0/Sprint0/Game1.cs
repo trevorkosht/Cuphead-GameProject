@@ -193,6 +193,17 @@ namespace Sprint0
                     ResetGame();
                 if (Keyboard.GetState().IsKeyDown(Keys.Q))
                     Exit();
+                for(int i = 0; i < GOManager.Instance.allGOs.Count; i++)
+                {
+                    if (GOManager.Instance.allGOs[i].type == "PlayerProjectile")
+                    {
+                        GOManager.Instance.allGOs[i].GetComponent<SpriteRenderer>().enabled = false;
+                    }
+                    if (GOManager.Instance.allGOs[i].type == "VFX")
+                    {
+                        GOManager.Instance.allGOs[i].GetComponent<VisualEffectRenderer>().enabled = false;
+                    }
+                }
             }
             else
             {
