@@ -18,12 +18,36 @@ CupHead will take damage from all enemies and projectiles
 Other controls
 Use 'q' to quit and 'r' to reset the program back to its initial state
 
-CODE METRICS SPRINT 3
-https://buckeyemailosu-my.sharepoint.com/:x:/g/personal/kosht_7_buckeyemail_osu_edu/EYji1WgDIPFOlO-ko4bz78YBTk0KmtQ1vpitdDOARLHwoQ?e=7tevZt
+CODE METRICS SPRINT 4
+https://buckeyemailosu-my.sharepoint.com/:x:/g/personal/kosht_7_buckeyemail_osu_edu/EX1qp_xiM_hKntkkmaw8_fUBvLlKoFlNqe77B9zOtpyT3w?e=9hrGEA&nav=MTVfezM2MzkyNUVFLTExMTktNEM1Ni05NkY1LTMwMTdDRDBFMDk2Q30
 
-CODE REVIEW:
 
-Trevor -
+CODE REVIEWS:
+
+SPRINT 4
+
+Author: Trevor Kosht
+Date: 11/12/2024
+Sprint #: 4
+File Name: Game1.cs
+File Author: Everyone
+Review Time: 10 minutes
+
+Game1.cs Has become a bit of a mess and a hodgpodge of many different things. Most of which do not belong here. This has caused a pretty terrible maintainabity score. Looking at LoadContent(), is where we see a lot of stuff that should be handled in a different location. Like all of the player being loaded here. Player loading should happen in a player loader method that returns a functional player. Same with UI. The Update() function should remove a lot of the logic and use different controllers that already exist to handle it. With the removal into sepereate files Game1.cs would have lower cyclomatic complexity, and much higher maintainability. 
+
+Author: Zol Chen
+Date: 11/12/2024
+File Name: UI.cs 
+File Author: Trevor Kosht
+Review Time :12 min
+
+I believe the quality of this file to be pretty good. The simplistic approach to drawing the card lowers the amount of code that needs to be written. However there are some aspect that it can imporve on. For example there is a ton of texture passed into the constuctor. It can be lowered by calling texture2d storage. It would also be easier to maintain if the numbers at on top and not hard coded into the methods. lastly many parts of the DrawScoreUI can be split up into more sub methods to improve readability and maintainability
+
+SPRINT REFLECTION:
+This sprint was the last hoorah for the game, in which the team added an abundance of polish. There were many tweaks to animations, effects, enemies and projectiles to make the game play and feel much better. In addition UI and Sounds were a key addition which made the game feel alive. We were able to add some key features from the orginal into the game this sprint as well. Things like directional shooting, and parrying which were massive undertakings. The team focused on improving code quality for many files this sprint with more to come in Sprint 5. 
+
+SPRINT 3
+
 Author: Trevor Kosht
 Date: 10/21/2024
 Sprint #: 3
@@ -35,7 +59,6 @@ When collision detection got added, it was not done so in a seperate file, this 
 BothersomeBlueberry also has a decent amount of coupling, by removing the reached edge and other collision detection into a seperate file it will reduce coupling. 
 With these simple fixes BothersomeBlueberry will have increased code quality.
 
-Zol - 
 Author: Zol Chen
 Date: 10/21/2024
 Sprint #: 3
@@ -45,7 +68,6 @@ Review Time: 10 minutes
 
 I would say most of the code is readable with the update method a bit long and complex. This makes the code harder to maintain. The update method also has a bunch of statements so it could add some Cyclomatic Complexity. The coupling isn't too bad, since it is only used in the projectile factory. There aren't many lines of code since it only includes 1 type of projectile. Overall, other than the update method, the file is very well done, and the update method can improve by moving some blocks out and making them methods.
 
-DJ -
 Author: DJ
 Date: 10/21/2024
 Sprint #: 3
@@ -55,7 +77,6 @@ Review Time: 10 minutes
 
 Several aspects make the quality of the TerribleTulip class questionable, particularly with respect to coupling and maintainability. The coupling is 18, meaning this class depends on or is closely connected with several outer systems: a player, projectiles, visual effects, and different renderers. In such a situation, this class will hardly be modifiable or reusable independently. Such strong dependence increases the risk of cascading changes at every modification of related classes. Also, the score of 65/100 for maintainability suggests that it works but is neither clear nor flexible. Poor separation of concerns is an issue: such as mixing shooting logic with animation management, and most of the code logics depend on hard values. This makes it inflexible and difficult to read. Refactoring might involve breaking down responsibilities into smaller, more modular components and reducing coupling for better maintainability.
 
-Ben -
 Author: Ben Vidmar-McEwen
 Date: 10/21/2024
 Sprint #: 3
@@ -74,7 +95,6 @@ This file handles the logic for each action the player can take, like moving. Th
 
 The maintainability of this code is a little low due to the fact that it is designed to handle a set and predetermined number of states and actions that the player could take. It could be hard to edit or add on to the methods defined here, since it could be easy to cause a bug in the player behavior, since a lot of it is handled here.
 
-Jacob - 
 Readability Code Review
 Author: Jacob Subler
 Date: 10/21/2024
