@@ -3,8 +3,10 @@ using Cuphead.Menu;
 using Cuphead.Player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Screens.Transitions;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ namespace Cuphead.Controllers
         private readonly MouseController mouseController;
         private PlayerState playerState;
         private readonly TextSprite textSprite;
+        private DelayGame delaygame;
 
         private IMenu menu;
 
@@ -23,8 +26,6 @@ namespace Cuphead.Controllers
         private LoadPaused loadpaused;
         private LoadDeath loaddeath;
         private LoadEnd loadend;
-
-        private LoadTransition loadtransition;
 
         private int playerX;
         private int playerY;
@@ -35,14 +36,13 @@ namespace Cuphead.Controllers
         public MenuController(PlayerState player, SpriteFont font)
         {
             mouseController = new MouseController();
+            delaygame = new DelayGame();
             this.playerState = player;
 
             this.loadstart = new LoadStart(player, mouseController, font);
             this.loadpaused = new LoadPaused();
             this.loaddeath = new LoadDeath();
             this.loadend = new LoadEnd(player, font);
-
-            this.loadtransition = new LoadTransition(player);
 
             menu = loadstart;
 
@@ -53,17 +53,17 @@ namespace Cuphead.Controllers
             UpdateSprite();
             mouseController.Update();
 
-            if (mouseController.OnMouseClick(MouseButton.Right))
-            {
-                //loadtransition.LoadTransIn();
-                menu.Unload();
-                loadtransition.LoadTransOut();
-                menu = null;
-            }
-
             if (menu != null)
             {
                 CheckAction();
+            }
+
+            if (mouseController.OnMouseClick(MouseButton.Right) && menu != null)
+            {
+                FadeIn();
+                delaygame.Delay(gameTime, 1000);
+                menu.Unload();
+                menu = null;
             }
             
             if(menu != null)
@@ -104,12 +104,6 @@ namespace Cuphead.Controllers
                         spriterender.setAnimation(spriterender.getAnimationName());
                         spriterender.Update();
                     }
-
-                    VisualEffectRenderer visualEffectRenderer = go.GetComponent<VisualEffectRenderer>();
-                    if(visualEffectRenderer != null)
-                    {
-                        visualEffectRenderer.Update();
-                    }
                    
                 }
             }
@@ -124,5 +118,18 @@ namespace Cuphead.Controllers
                 menu = null;
             }
         }
+
+        public void FadeIn()
+        {
+            Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeIn");
+            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, 500, 500), texture, 1, 16, 1f, true);
+        }
+
+        public void FadeOut()
+        {
+            Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeIn");
+            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, 500, 500), texture, 1, 16, 1f, true);
+        }
+
     }
 }
