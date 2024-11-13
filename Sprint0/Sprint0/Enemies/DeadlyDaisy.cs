@@ -1,9 +1,9 @@
-  using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
+using MonoGame.Extended.Timers;
 
-public class DeadlyDaisy : BaseEnemy
-{
+public class DeadlyDaisy : BaseEnemy {
     private float speed;
     private Vector2 airVelocity;
     private int airTime = 50;
@@ -11,122 +11,119 @@ public class DeadlyDaisy : BaseEnemy
     public bool movingRight { get; private set; }
     public float turnDelay { get; private set; } = -1.0f;
     private DaisyCollisionManager collisionManager;
+    private DaisyState state;
 
-    public override void Initialize(Texture2D texture, Texture2DStorage storage)
-    {
+    public override void Initialize(Texture2D texture, Texture2DStorage storage) {
         base.Initialize(texture, storage);
-        sRend.setAnimation("Spawn");
         speed = 300f;
         airVelocity = Vector2.Zero;
     }
 
-    public override void Move(GameTime gameTime)
-    {
-        if(GameObject.Y < 0 && GameObject.X - player.X > 750) {
-            return;
-        }
-
+    public override void Move(GameTime gameTime) {
         sRend.isFacingRight = !movingRight;
         collisionManager = GameObject.GetComponent<DaisyCollisionManager>();
+        state = GameObject.GetComponent<DaisyState>();
 
-        if (sRend.getAnimationName() == "Spawn") 
-        { 
-            if(collisionManager.isGrounded)
-            {
-                GOManager.Instance.audioManager.getInstance("DeadlyDaisyLanding").Play();
-            } else
-            {
-                if (GameObject.Y > 0 && GameObject.Y < 100)
-                GOManager.Instance.audioManager.getInstance("DeadlyDaisyFloat").Play();
-            }
-        }
-
-        if (collisionManager.isGrounded) {
-            if(!collisionManager.isJumping || turnDelay < 1.5){
-                collisionManager.isJumping = false;
-                airVelocity = Vector2.Zero;
-            }
-
-            if (collisionManager.atPlatformEdge || GameObject.X < 1250){
-                HandlePlatformEdge();
+        if (state.Spawned) {
+            if (state.isGrounded) {
+                HandleGroundMovement(gameTime);
             }
             else {
-                sRend.setAnimation("deadlyDaisyAnimation");
-
-                if(collisionManager.currentPlatform.type != null && collisionManager.currentPlatform.type.Contains("Slope")) {
-                    HandleSlopeCollision();
-                }
-
-                if (movingRight)
-                    GameObject.X += (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-                else
-                    GameObject.X -= (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                HandleAirMovement(gameTime);
             }
+            turnDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            GameObject.Move((int)airVelocity.X, (int)airVelocity.Y);
         }
-        else {
-            if (collisionManager.isJumping) {
-                sRend.setAnimation("Jump");
-                sRend.currentAnimation.Value.CurrentFrame = 8;
-                airVelocity.Y += gravity;
-            }
-            else {
-                movingRight = player.X > GameObject.X;
-                airVelocity.Y += gravity/15;
-            }
+        else if (GameObject.Y <= 0 && GameObject.X - player.X < 750) {
+            state.Spawned = true;
         }
-        turnDelay -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-        GameObject.Move((int)airVelocity.X, (int)airVelocity.Y);
     }
 
-    private void HandleJumpRequested() {
-        sRend.setAnimation("Jump");
+    private void HandleAirMovement(GameTime gameTime) {
+        if (state.isJumping && !state.isSpawning) {
+            airVelocity.Y += gravity;
+        }
+        else {
+            movingRight = player.X > GameObject.X;
+            airVelocity.Y += gravity / 15;
+        }
+    }
 
+    private void HandleGroundMovement(GameTime gameTime) {
+        if (!state.isJumping || turnDelay < 1.5) {
+            state.isJumping = false;
+            airVelocity = Vector2.Zero;
+        }
+
+        if (state.atPlatformEdge || GameObject.X < 1250) {
+            HandlePlatformEdge();
+        }
+        else {
+            if (state.currentPlatform.type != null && state.currentPlatform.type.Contains("Slope")) {
+                HandleSlopeCollision();
+            }
+
+            state.isWalking = true;
+
+            if (movingRight)
+                GameObject.X += (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            else
+                GameObject.X -= (int)(speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+        }
+    }
+
+    private void HandlePlatformEdge() {
+        if (!state.foundAdjacentPlatform || GameObject.X < 1250) {
+            if ((!state.jumpRequested || ((movingRight != player.X > GameObject.X && Math.Abs(player.X - GameObject.X) > 500) || (GameObject.X < 1250 && !movingRight)))) {
+                state.isTurning = true;
+                state.jumpRequested = false;
+                HandleTurnRequested();
+            }
+            else if (state.jumpRequested) {
+                HandleJumpRequested();
+            }
+        }
+
+    }
+
+    private void HandleTurnRequested() {
+        //Makes the sprite look a little less offset during the animation.
+
+        if (movingRight) {
+            GameObject.X += 1;
+        }
+        else {
+            GameObject.X -= 1;
+        }
+
+        if (sRend.currentAnimation.Value.CurrentFrame == 17) {
+            movingRight = !movingRight;
+            state.isTurning = false;
+            turnDelay = 3.0f;
+        }
+    }
+
+
+    private void HandleJumpRequested() {
         if (sRend.currentAnimation.Value.CurrentFrame == 7) {
-            Rectangle landingSpot = collisionManager.landingSpot;
+            Rectangle landingSpot = state.landingSpot;
             float verticalSpeed = Math.Abs(((landingSpot.Y - GameObject.Y) - gravity * airTime * airTime / 2) / (airTime));
             float horizontalSpeed = (landingSpot.X - GameObject.X) / (airTime);
 
             airVelocity = new Vector2(horizontalSpeed, -verticalSpeed);
 
-            collisionManager.jumpRequested = false;
-            collisionManager.isJumping = true;
+            state.isTurning = false;
+            state.jumpRequested = false;
+            state.isJumping = true;
             turnDelay = 1.75f;
         }
     }
 
-    private void HandlePlatformEdge() {
-        if(collisionManager.foundAdjacentPlatform == true) {
-            return;
-        }
 
-        //check for jump
-        if (!collisionManager.jumpRequested || (movingRight != player.X > GameObject.X && Math.Abs(player.X - GameObject.X) > 500) || (GameObject.X < 1250 && !movingRight)){
-            sRend.setAnimation("Turn");
-
-            //Makes the sprite look a little less offset during the animation.
-            if (movingRight) {
-                GameObject.X += 1;
-            }
-            else {
-                GameObject.X -= 1;
-            }
-
-            if (sRend.currentAnimation.Value.CurrentFrame == 17) {
-                movingRight = !movingRight;
-                sRend.setAnimation("deadlyDaisyAnimation");
-                turnDelay = 3.0f;
-            }
-
-        }
-        else if(collisionManager.jumpRequested){
-            HandleJumpRequested();
-        }
-    }
-
-    private void HandleSlopeCollision() { 
+    private void HandleSlopeCollision() {
         BoxCollider daisyCollider = GameObject.GetComponent<BoxCollider>();
-        BoxCollider slopeCollider = collisionManager.currentPlatform.GetComponent<BoxCollider>();
+        BoxCollider slopeCollider = state.currentPlatform.GetComponent<BoxCollider>();
         Rectangle daisyBounds = daisyCollider.BoundingBox;
 
         // Get the rotated corners of the obstacle's bounding box (assuming the obstacle is sloped)
@@ -154,8 +151,7 @@ public class DeadlyDaisy : BaseEnemy
         }
     }
 
-    public override void Shoot(GameTime gameTime)
-    {
+    public override void Shoot(GameTime gameTime) {
         // Implement shooting logic if needed
     }
 }

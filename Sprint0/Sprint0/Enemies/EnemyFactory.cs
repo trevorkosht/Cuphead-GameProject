@@ -31,13 +31,15 @@ public static class EnemyFactory
                 enemyLogic = new DeadlyDaisy();
                 enemy.AddComponent(enemyLogic);
                 enemy.AddComponent(new BoxCollider(new Vector2(135, 155), new Vector2(5, -5), GOManager.Instance.GraphicsDevice));
-                enemy.AddComponent(new DaisyCollisionManager(enemy.GetComponent<BoxCollider>()));
+                enemy.AddComponent(new DaisyState());
+                enemy.AddComponent(new DaisyCollisionManager(enemy.GetComponent<BoxCollider>(), enemy.GetComponent<DaisyState>()));
                 spriteRenderer.addAnimation("deadlyDaisyAnimation", new Animation(textureStorage.GetTexture("DeadlyDaisy"), 2, 16, 144, 144));
                 spriteRenderer.addAnimation("Spawn", new Animation(textureStorage.GetTexture("DaisySpawn"), 5, 16, 144, 144));
                 spriteRenderer.addAnimation("Turn", new Animation(textureStorage.GetTexture("DaisyTurn"), 1, 18, 144, 144));
                 spriteRenderer.addAnimation("Jump", new Animation(textureStorage.GetTexture("DaisyJump"), 5, 9, 144, 144));
                 spriteRenderer.addAnimation("Land", new Animation(textureStorage.GetTexture("DaisyLand"), 2, 11, 288, 288));
                 enemyLogic.Initialize(textureStorage.GetTexture("DeadlyDaisy"), textureStorage);
+                enemy.AddComponent(new DaisyAnimator(enemy.GetComponent<SpriteRenderer>(), enemy.GetComponent<DaisyState>()));
                 enemyHP = 1;
                 break;
             case EnemyType.MurderousMushroom:
