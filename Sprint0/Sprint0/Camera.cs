@@ -10,7 +10,6 @@ public class Camera
         Position = Vector2.Zero;
     }
 
-    // Call this method every frame to update the transformation matrix
     public void Update(Vector2 position)
     {
         Position = position;

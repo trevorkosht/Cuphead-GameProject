@@ -9,15 +9,12 @@ namespace Cuphead
 {
     internal class DelayGame
     {
-        //if delay is in progress
         private bool delayFlag = false;
         private bool coolFlag = true;
 
-        //amount of time to delay
         private double delayTime = 0;
         private double coolTime = 0;
 
-        //delay the game in milliseconds
         public bool Delay(GameTime gameTime, int milliSeconds)
         {
             if (delayFlag)
@@ -65,7 +62,6 @@ namespace Cuphead
             return false;
         }
 
-        //reset game time
         public void Reset()
         {
             delayFlag = false;

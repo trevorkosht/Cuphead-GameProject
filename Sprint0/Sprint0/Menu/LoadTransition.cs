@@ -14,19 +14,20 @@ namespace Cuphead.Menu
         {
             Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeIn");
 
-            int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            VisualEffectFactory.createVisualEffect(new Rectangle(0, 0, width, height), texture, 1, 16, 1f, true);
+            int width = 1280;
+            int height = 720;
+
+            VisualEffectFactory.createVisualEffect(new Rectangle((int)GOManager.Instance.Camera.Position.X, 0, width, height), new Vector2(515,290),texture, 5, 16, 1f, true);
         }
 
         public void FadeOut()
         {
             Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeOut");
 
-            int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            int width = 1280;
+            int height = 720;
 
-            VisualEffectFactory.createVisualEffect(new Rectangle(0, 0, width, height), texture, 1, 16, 1f, true);
+            VisualEffectFactory.createVisualEffect(new Rectangle((int)GOManager.Instance.Camera.Position.X, 0, width, height), new Vector2(515, 290), texture, 1, 16, 1f, true);
         }
     }
 }

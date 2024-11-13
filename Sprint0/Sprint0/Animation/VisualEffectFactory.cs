@@ -8,6 +8,18 @@ public class VisualEffectFactory {
         VisualEffectRenderer effectRenderer = new VisualEffectRenderer(destRectangle, effectAnimation, isFacingRight);
         effectRenderer.effectScale = scale;
         effect.AddComponent(effectRenderer);
+        effect.type = "VFX";
+        GOManager.Instance.allGOs.Add(effect);
+        return effect;
+    }
+
+    public static GameObject createVisualEffect(Rectangle destRectangle, Vector2 sourceRectangleSize, Texture2D texture, int updatesPerFrame, int frameCount, float scale, bool isFacingRight) {
+        GameObject effect = new GameObject(destRectangle.X, destRectangle.Y);
+        Animation effectAnimation = new Animation(texture, updatesPerFrame, frameCount, (int)sourceRectangleSize.Y, (int)sourceRectangleSize.X);
+        VisualEffectRenderer effectRenderer = new VisualEffectRenderer(destRectangle, effectAnimation, isFacingRight);
+        effectRenderer.effectScale = scale;
+        effect.AddComponent(effectRenderer);
+        effect.type = "VFX";
         GOManager.Instance.allGOs.Add(effect);
         return effect;
     }
