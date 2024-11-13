@@ -110,7 +110,7 @@ namespace Cuphead.Menu
         public void LoadScreen()
         {
             load = true;
-            //transition.FadeOut();
+            transition.FadeOut();
 
             getHealth();
             getCoin();
