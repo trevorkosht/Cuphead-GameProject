@@ -3,8 +3,10 @@ using Cuphead.Menu;
 using Cuphead.Player;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Screens.Transitions;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ namespace Cuphead.Controllers
         private readonly MouseController mouseController;
         private PlayerState playerState;
         private readonly TextSprite textSprite;
+        private DelayGame delaygame;
 
         private IMenu menu;
 
@@ -35,6 +38,7 @@ namespace Cuphead.Controllers
         public MenuController(PlayerState player, SpriteFont font)
         {
             mouseController = new MouseController();
+            delaygame = new DelayGame();
             this.playerState = player;
 
             this.loadstart = new LoadStart(player, mouseController, font);
@@ -57,7 +61,7 @@ namespace Cuphead.Controllers
             {
                 //loadtransition.LoadTransIn();
                 menu.Unload();
-                loadtransition.LoadTransOut();
+                FadeIn();
                 menu = null;
             }
 
@@ -124,5 +128,18 @@ namespace Cuphead.Controllers
                 menu = null;
             }
         }
+
+        public void FadeIn()
+        {
+            Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeIn");
+            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, 500, 500), texture, 1, 16, 1f, true);
+        }
+
+        public void FadeOut()
+        {
+            Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeIn");
+            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, 500, 500), texture, 1, 16, 1f, true);
+        }
+
     }
 }
