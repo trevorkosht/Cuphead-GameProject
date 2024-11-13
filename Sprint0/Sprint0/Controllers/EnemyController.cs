@@ -38,15 +38,6 @@ public class EnemyController
     {
         keyboardController.Update();
 
-        //if (keyboardController.OnKeyDown(Keys.O))
-        //{
-        //    CycleToPreviousEnemy();
-        //}
-        //else if (keyboardController.OnKeyDown(Keys.P))
-        //{
-        //    CycleToNextEnemy();
-        //}
-
         if (currentEnemy != null)
         {
             if (currentEnemy.destroyed)
@@ -59,19 +50,7 @@ public class EnemyController
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        //if (currentEnemy != null)
-        //    currentEnemy?.Draw(spriteBatch);
+        //else where
     }
 
-    private void CycleToNextEnemy()
-    {
-        currentEnemyIndex = (currentEnemyIndex + 1) % enemies.Count;
-        currentEnemy = enemies[currentEnemyIndex];
-    }
-
-    private void CycleToPreviousEnemy()
-    {
-        currentEnemyIndex = (currentEnemyIndex - 1 + enemies.Count) % enemies.Count;
-        currentEnemy = enemies[currentEnemyIndex];
-    }
 }

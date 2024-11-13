@@ -20,38 +20,32 @@ namespace Cuphead.GameObjects
 
         }
 
-        //chatgpt wrote this idk if it right lol
         public void Update(GameTime gameTime)
         {
             foreach (var (platform, start, x, y, speed, toward) in platformList.ToList())
             {
-                // Calculate target position based on start position and x, y offsets
                 Vector2 targetPosition = start + new Vector2(x, y);
 
-                // Determine the direction based on `toward` property
                 Vector2 direction = toward ? Vector2.Normalize(targetPosition - new Vector2(platform.X, platform.Y))
                                            : Vector2.Normalize(start - new Vector2(platform.X, platform.Y));
 
-                // Calculate movement amount based on speed and elapsed time
                 int distanceToMove = speed * (int)gameTime.ElapsedGameTime.TotalSeconds;
 
-                // Move the platform's X and Y toward the target or start position
                 platform.X += (int)direction.X * distanceToMove;
                 platform.Y += (int)direction.Y * distanceToMove;
 
-                // Check if the platform has reached the target position
                 if (toward && Vector2.Distance(new Vector2(platform.X, platform.Y), targetPosition) < distanceToMove)
                 {
-                    // Platform reached target position, change direction
-                    platform.X = (int)targetPosition.X; // Snap to target to avoid overshoot
+
+                    platform.X = (int)targetPosition.X;
                     platform.Y = (int)targetPosition.Y;
                     platformList.Remove((platform, start, x, y, speed, toward));
                     platformList.Add((platform, start, x, y, speed, !toward));
                 }
                 else if (!toward && Vector2.Distance(new Vector2(platform.X, platform.Y), start) < distanceToMove)
                 {
-                    // Platform returned to start position, change direction
-                    platform.X = (int)start.X; // Snap to start to avoid overshoot
+
+                    platform.X = (int)start.X; 
                     platform.Y = (int)start.Y;
                     platformList.Remove((platform, start, x, y, speed, toward));
                     platformList.Add((platform, start, x, y, speed, !toward));
