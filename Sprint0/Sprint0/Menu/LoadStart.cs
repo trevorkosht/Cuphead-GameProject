@@ -71,7 +71,7 @@ namespace Cuphead.Menu
         {
             load = false;
 
-            transition.FadeIn();
+            //transition.FadeIn();
 
             foreach (GameObject gameObject in list)
             {

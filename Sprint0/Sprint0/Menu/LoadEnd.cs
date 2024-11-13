@@ -39,8 +39,6 @@ namespace Cuphead.Menu
         {
             return load;
         }
-
-
         public LoadEnd(PlayerState playerState, SpriteFont font)
         {
             this.player = playerState;
@@ -112,7 +110,7 @@ namespace Cuphead.Menu
         public void LoadScreen()
         {
             load = true;
-            transition.FadeOut();
+            //transition.FadeOut();
 
             getHealth();
             getCoin();
