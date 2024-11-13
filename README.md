@@ -66,6 +66,15 @@ File Author: Trevor Kosht
 Review Time: 10 minutes
 Comments: Large methods like Shoot, HideUnderCap, and EmergeFromCap could be broken down into smaller methods to separate out distinct responsibilities such as projectile behavior and creation, etc, which would make the code easier to read and extend. There are a lot of repeat calls to access the GOManager which could require a lot of refactoring when changes need to be made later. Using constants or enums in place of hardcoded values would further improve clarity and reduce the risk of errors due to changes in the game logic. Lastly, grouping related logic together  would make the class more intuitive and easier to maintain as the project evolves as now the method layout doesn't seem to follow the logic flow as well as it could.
 
+Code Review
+Author: David Dermanelian
+Date 11/12/2024
+Sprintg #: 4
+File Name ProjectileFactory
+File Author: Trevor Kosht
+Review time: 20 minutes
+The method has high cyclomatic complexity (22), indicating multiple branching paths and conditional logic, which could be refactored into separate methods or classes to simplify the main flow. Each projectile type’s initialization could be separated into individual helper methods or classes implementing a common interface, following the Factory Method or Strategy design patterns. Additionally, complex calculations for projectile positioning and offset adjustments could be extracted into methods for modularity, reducing the need for inline calculations and enhancing readability. The class coupling (23) is relatively high, with various dependencies on GOManager, BoxCollider, CircleCollider, and SpriteRenderer. By encapsulating animations, colliders, and textures within dedicated configuration classes, we can centralize and simplify component setup, further improving the maintainability index of the code and facilitating future changes to projectile types or behavior.
+
 SPRINT REFLECTION:
 This sprint was the last hoorah for the game, in which the team added an abundance of polish. There were many tweaks to animations, effects, enemies and projectiles to make the game play and feel much better. In addition UI and Sounds were a key addition which made the game feel alive. We were able to add some key features from the orginal into the game this sprint as well. Things like directional shooting, and parrying which were massive undertakings. The team focused on improving code quality for many files this sprint with more to come in Sprint 5. 
 
