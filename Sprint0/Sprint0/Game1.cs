@@ -189,7 +189,10 @@ namespace Sprint0
             if (menuController.StopGame())
             {
                 cameraController.Update();
-
+                if (Keyboard.GetState().IsKeyDown(Keys.R))
+                    ResetGame();
+                if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                    Exit();
             }
             else
             {
