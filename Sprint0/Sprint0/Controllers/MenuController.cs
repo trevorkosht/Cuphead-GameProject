@@ -53,9 +53,13 @@ namespace Cuphead.Controllers
 
             if (mouseController.OnMouseClick(MouseButton.Right) && menu != null)
             {
-                FadeOut();
                 menu.Unload();
                 menu = null;
+            }
+
+            if (playerState.GameObject.X > 13550)
+            {
+                menu = loadend;
             }
 
             if (menu != null)
@@ -63,7 +67,7 @@ namespace Cuphead.Controllers
                 CheckAction();
             }
             
-            if(menu != null)
+            if(menu != null && !menu.loaded())
             {
                 menu.LoadScreen();
             }
@@ -71,7 +75,10 @@ namespace Cuphead.Controllers
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            if(menu != null)
+            {
+                menu.Draw(spriteBatch);
+            }
         }
 
         public bool StopGame()
@@ -114,25 +121,6 @@ namespace Cuphead.Controllers
                 menu.Unload();
                 menu = null;
             }
-        }
-
-        public void FadeIn()
-        {
-            Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeIn");
-
-            int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, width, height), texture, 1, 16, 1f, true);
-        }
-
-        public void FadeOut()
-        {
-            Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FadeOut");
-
-            int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-
-            VisualEffectFactory.createVisualEffect(new Rectangle(00, 0, width, height), texture, 1, 16, 1f, true);
         }
 
     }

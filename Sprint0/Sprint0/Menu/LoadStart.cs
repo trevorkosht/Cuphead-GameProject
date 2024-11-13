@@ -14,6 +14,7 @@ namespace Cuphead.Menu
     internal class LoadStart : IMenu
     {
         private MouseController mouseController;
+        LoadTransition transition = new LoadTransition();
         private PlayerState player;
         private TextSprite start;
 
@@ -21,6 +22,13 @@ namespace Cuphead.Menu
 
         int offsetx;
         int offsety;
+
+        private bool load = false;
+
+        public bool loaded()
+        {
+            return load;
+        }
 
         public LoadStart(PlayerState player,MouseController mouseController, SpriteFont font)
         {
@@ -49,6 +57,8 @@ namespace Cuphead.Menu
 
         public void LoadScreen()
         {
+            load = true;
+
             GetOffset();
             Addelement("Title1", new Vector2(-400, -300));
             Addelement("Title2", new Vector2 (-600, -500));
@@ -59,6 +69,10 @@ namespace Cuphead.Menu
 
         public void Unload()
         {
+            load = false;
+
+            transition.FadeIn();
+
             foreach (GameObject gameObject in list)
             {
                 gameObject.Destroy();
@@ -86,6 +100,9 @@ namespace Cuphead.Menu
             return null;
         }
 
-
+        void IMenu.Draw(SpriteBatch _spriteBatch)
+        {
+            start.Draw(_spriteBatch);
+        }
     }
 }
