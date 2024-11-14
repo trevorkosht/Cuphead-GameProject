@@ -64,6 +64,7 @@ namespace Cuphead.Controllers
 
             if (playerState.GameObject.X > 13550)
             {
+                loadend.getTime(gameTime);
                 menu = loadend;
             }
 
