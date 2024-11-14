@@ -18,6 +18,7 @@ namespace Cuphead.Menu
             int height = 720;
 
 
+
             Vector2 cameraPosition = GOManager.Instance.Camera.Position;
             Texture2D GameStartText = GOManager.Instance.textureStorage.GetTexture("GameStartText");
             VisualEffectFactory.createVisualEffect(new Rectangle((int)cameraPosition.X - 64, (int)cameraPosition.Y - 36, width, height), new Rectangle(0, 0, 1285, 720), GameStartText, 4, 17, 1.1f, true);
