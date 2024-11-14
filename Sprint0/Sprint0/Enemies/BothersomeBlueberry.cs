@@ -114,12 +114,14 @@ public class BothersomeBlueberry : BaseEnemy
                     GOManager.Instance.audioManager.getInstance("BothersomeBlueberryRevive").Play();
                 }
                 sRend.setAnimation("Respawn");
-                GameObject.GetComponent<CircleCollider>().Radius = 40;
             }
             else
             {
                 sRend.setAnimation("WaitForRespawn");
             }
+        }
+        else {
+            GameObject.GetComponent<CircleCollider>().Radius = 40;
         }
     }
 
