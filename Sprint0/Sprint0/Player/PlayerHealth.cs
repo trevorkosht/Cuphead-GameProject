@@ -65,6 +65,8 @@ namespace Cuphead.Player
                 player.IsTakingDamage = true;
                 SpriteRenderer sRend = player.GameObject.GetComponent<SpriteRenderer>();
 
+                VisualEffectFactory.createVisualEffect(new Rectangle(player.GameObject.X, player.GameObject.Y, 144, 144), new Rectangle(0,0,500, 500), GOManager.Instance.textureStorage.GetTexture("PlayerDamageVFX"), 2, 7, 1.0f, true);
+
 
                 if (player.IsGrounded) {
                     sRend.setAnimation("HitGround");

@@ -57,7 +57,7 @@ public static class MenuFactory
             GameObject Menu = new GameObject(destRectangle.X, destRectangle.Y);
             Menu.type = "Menu";
             SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
-            Animation backgroundTexture = new Animation(texture, 1, endData.frameAmount, destRectangle.Height, destRectangle.Width);
+            Animation backgroundTexture = new Animation(texture, 5, endData.frameAmount, destRectangle.Height, destRectangle.Width);
 
             spriteRenderer.addAnimation("End", backgroundTexture);
             spriteRenderer.setAnimation("End");

@@ -186,6 +186,7 @@ public class Texture2DStorage
         _textures["ParryVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\parry-vfx");
         _textures["CoinVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\coin-vfx");
         _textures["PropVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\acorn-prop-vfx");
+        _textures["PlayerDamageVFX"] = content.Load<Texture2D>(@"VisualEffectTextures\dmg-vfx");
 
 
         //item texture

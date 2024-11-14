@@ -1,4 +1,7 @@
-﻿namespace Cuphead.Player
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace Cuphead.Player
 {
     internal class SpawnAnimation : IAnimationState
     {
@@ -12,7 +15,7 @@
         public void Play(SpriteRenderer animator)
         {
             animator.setAnimation("Spawn");
-            if (animator.IsAnimationComplete())
+            if (animator.currentAnimation.Value.IsComplete())
             {
                 player.IsSpawning = false;
                 animator.setAnimation("Idle");
