@@ -19,19 +19,26 @@ namespace Cuphead.UI
         private Texture2D cardBackTexture;
         private Texture2D cardFrontTexture;
 
-        public UI(HealthComponent playerHealth, ScoreComponent scoreComponent, Texture2D hp3, Texture2D hp2, Texture2D[] hp1Flashing, Texture2D dead, Texture2D cardBack, Texture2D cardFront, Vector2 position, SpriteBatch spriteBatch)
+        public UI(HealthComponent playerHealth, ScoreComponent scoreComponent, Texture2DStorage textureStorage, Vector2 position, SpriteBatch spriteBatch)
         {
             this.playerHealth = playerHealth;
             this.playerScore = scoreComponent;
-            hp3Texture = hp3;
-            hp2Texture = hp2;
-            hp1FlashingTextures = hp1Flashing;
-            deadTexture = dead;
+            hp3Texture = textureStorage.GetTexture("hp3");
+            hp2Texture = textureStorage.GetTexture("hp2");
+            hp1FlashingTextures = new Texture2D[]
+            {
+                textureStorage.GetTexture("hp1-v1"),
+                textureStorage.GetTexture("hp1-v2"),
+                textureStorage.GetTexture("hp1-v3")
+            };
+
+            deadTexture = textureStorage.GetTexture("hpDead");
             uiPosition = position;
             this.spriteBatch = spriteBatch;
 
-            cardBackTexture = cardBack;
-            cardFrontTexture = cardFront;
+
+            cardBackTexture = textureStorage.GetTexture("CardBack");
+            cardFrontTexture = textureStorage.GetTexture("CardFront");
         }
 
         public void Update(GameTime gameTime)

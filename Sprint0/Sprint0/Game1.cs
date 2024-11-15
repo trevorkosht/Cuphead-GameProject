@@ -48,8 +48,7 @@ namespace Sprint0
         SpriteFont font;
 
         private bool resetFrame;
-        private bool endGame = false;
-        private int startGame = 0;
+
 
         public Game1()
         {
@@ -62,6 +61,12 @@ namespace Sprint0
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             keyboardController = new KeyboardController();
+
+            keyboardController.OnReset = ResetGame;
+            keyboardController.OnExit = Exit;
+            keyboardController.OnSaveLocation = () => saveLoc = true;
+            keyboardController.OnDebugToggle = () => GOManager.Instance.IsDebugging = !GOManager.Instance.IsDebugging;
+
             audioManager = new AudioManager();
         }
 
@@ -88,45 +93,7 @@ namespace Sprint0
             camera = new Camera();
             GOManager.Instance.Camera = camera;
 
-            List<Vector2> railPoints = new List<Vector2>()
-            {
-                new Vector2(0, 0), 
-                new Vector2(500, 0),  
-                new Vector2(1000, 0),  
-                new Vector2(1200, -50),  
-                new Vector2(1500, -50),  
-                new Vector2(1700, -50), 
-                new Vector2(2000, 0), 
-                new Vector2(2200, 0),  
-                new Vector2(2500, 0),  
-                new Vector2(2700, 0),  
-                new Vector2(3000, -25),
-                new Vector2(3200, -25),
-                new Vector2(3500, -25),
-                new Vector2(3700, 0),
-                new Vector2(4000, 0),
-                new Vector2(4200, 0),
-                new Vector2(4500, 0),
-                new Vector2(4700, -50),
-                new Vector2(5000, -100),
-                new Vector2(5200, -100),
-                new Vector2(5500, -100),
-                new Vector2(5700, -100),
-                new Vector2(6000, -100),
-                new Vector2(6200, -100),
-                new Vector2(6500, 0),
-                new Vector2(6700, 0),
-                new Vector2(7000, 0),
-                new Vector2(7200, 0),
-                new Vector2(7500, -50),
-                new Vector2(7700, -50),
-                new Vector2(8000, 0),
-                new Vector2(8200, 0),
-                new Vector2(8500, 0),
-                new Vector2(8700, 0)
-            };
-
-            cameraController = new CameraController(camera, player, railPoints);
+            cameraController = new CameraController(camera, player);
             basePath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\.." + "\\GameObjects\\";
             LevelLoader.LoadLevel(basePath + "FileData.txt");
             gameObjects.Add(player);
@@ -158,21 +125,9 @@ namespace Sprint0
             ScoreComponent playerScore = new ScoreComponent();
             player.AddComponent(playerScore);
 
-            Texture2D hp3Texture = textureStorage.GetTexture("hp3");
-            Texture2D hp2Texture = textureStorage.GetTexture("hp2");
-            Texture2D[] hp1FlashingTextures = {
-                textureStorage.GetTexture("hp1-v1"),
-                textureStorage.GetTexture("hp1-v2"),
-                textureStorage.GetTexture("hp1-v3")
-            };
-            Texture2D deadTexture = textureStorage.GetTexture("hpDead");
-
-            Texture2D cardBack = textureStorage.GetTexture("CardBack");
-            Texture2D cardFront = textureStorage.GetTexture("CardFront");
-
             HealthComponent playerHealth = player.GetComponent<HealthComponent>();
             playerScore = player.GetComponent<ScoreComponent>();
-            UI = new UI(playerHealth, playerScore, hp3Texture, hp2Texture, hp1FlashingTextures, deadTexture, cardBack, cardFront, new Vector2(50, 650), _spriteBatch2);
+            UI = new UI(playerHealth, playerScore, textureStorage, new Vector2(50, 650), _spriteBatch2);
 
             font = Content.Load<SpriteFont>("Font/Winter");
             texts = new TextSprite(font, "",new Vector2(0, 0), Color.White);
@@ -182,65 +137,39 @@ namespace Sprint0
         }
 
         protected override void Update(GameTime gameTime)
-        {   
+        {
             menuController.Update(gameTime);
             RemoveDestroyedObjects();
+
+            keyboardController.Update();
+
             if (menuController.StopGame())
             {
                 cameraController.Update();
-                if (Keyboard.GetState().IsKeyDown(Keys.R))
-                    ResetGame();
-                if (Keyboard.GetState().IsKeyDown(Keys.Q))
-                    Exit();
-                for(int i = 0; i < GOManager.Instance.allGOs.Count; i++)
+                foreach (var go in GOManager.Instance.allGOs)
                 {
-                    if (GOManager.Instance.allGOs[i].type == "PlayerProjectile")
-                    {
-                        GOManager.Instance.allGOs[i].GetComponent<SpriteRenderer>().enabled = false;
-                    }
-                    if (GOManager.Instance.allGOs[i].type == "VFX")
-                    {
-                        GOManager.Instance.allGOs[i].GetComponent<VisualEffectRenderer>().enabled = false;
-                    }
+                    if (go.type == "PlayerProjectile")
+                        go.GetComponent<SpriteRenderer>().enabled = false;
+                    else if (go.type == "VFX")
+                        go.GetComponent<VisualEffectRenderer>().enabled = false;
                 }
             }
             else
             {
-                
                 UpdateGameObject(gameTime);
-
                 enemyController.Update(gameTime);
                 savedPlayerLoc = player.position;
-
                 cameraController.Update();
                 UI.Update(gameTime);
 
-                if (Keyboard.GetState().IsKeyDown(Keys.D0))
-                {
-                    saveLoc = true;
-                }
-
+                // Check if player is dead
                 if (player.GetComponent<HealthComponent>().isDeadFull)
-                {
                     ResetGame();
-                }
-
-                if (Keyboard.GetState().IsKeyDown(Keys.R))
-                    ResetGame();
-                if (Keyboard.GetState().IsKeyDown(Keys.Q))
-                    Exit();
-                if (Keyboard.GetState().IsKeyDown(Keys.P))
-                {
-
-                }
-
-                if (keyboardController.OnKeyDown(Keys.L))
-
-                    GOManager.Instance.IsDebugging = !GOManager.Instance.IsDebugging;
             }
-            base.Update(gameTime);
 
+            base.Update(gameTime);
         }
+
 
         protected override void Draw(GameTime gameTime)
         {

@@ -8,6 +8,12 @@ public class KeyboardController : IController
 {
     private KeyboardState curKS, preKS;
 
+    // Define delegates for key actions
+    public Action OnReset { get; set; }
+    public Action OnExit { get; set; }
+    public Action OnSaveLocation { get; set; }
+    public Action OnDebugToggle { get; set; }
+
     public KeyboardController()
     {
         curKS = Keyboard.GetState();
@@ -18,6 +24,12 @@ public class KeyboardController : IController
     {
         preKS = curKS;
         curKS = Keyboard.GetState();
+
+        // Call assigned actions if specific keys are pressed
+        if (OnKeyDown(Keys.R)) OnReset?.Invoke();
+        if (OnKeyDown(Keys.Q)) OnExit?.Invoke();
+        if (OnKeyDown(Keys.D0)) OnSaveLocation?.Invoke();
+        if (OnKeyDown(Keys.L)) OnDebugToggle?.Invoke();
     }
 
     public bool OnKeyDown(Keys key)
