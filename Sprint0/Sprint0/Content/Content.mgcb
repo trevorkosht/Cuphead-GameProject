@@ -589,6 +589,78 @@
 /processorParam:TextureFormat=Color
 /build:BlockTextures/Trees/tree-7.png
 
+#begin BossLevel/BossProjectiles/small-acorn-projectile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/BossProjectiles/small-acorn-projectile.png
+
+#begin BossLevel/Environment/boss-level-floating-platform.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/Environment/boss-level-floating-platform.png
+
+#begin BossLevel/SpawnedEnemies/chomper-minion-death.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/chomper-minion-death.png
+
+#begin BossLevel/SpawnedEnemies/flower-vine-groundburst.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/flower-vine-groundburst.png
+
+#begin BossLevel/SpawnedEnemies/flytrap-minion-death.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/flytrap-minion-death.png
+
+#begin BossLevel/SpawnedEnemies/flytrap-minion-vine.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/flytrap-minion-vine.png
+
 #begin BossLevel/Stage1/boss-create-item.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -613,6 +685,18 @@
 /processorParam:TextureFormat=Color
 /build:BossLevel/Stage1/boss-idle.png
 
+#begin BossLevel/Stage1/boss-shoot-seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/Stage1/boss-shoot-seeds.png
+
 #begin BossLevel/Stage1/boss-stage1-intro-temp.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -636,6 +720,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:BossLevel/Stage3/boss-death.png
+
+#begin BossLevel/Stage3/boss-final-stage-idle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/Stage3/boss-final-stage-idle.png
 
 #begin BossLevel/Stage3/boss-final-stage-transformation.png
 /importer:TextureImporter

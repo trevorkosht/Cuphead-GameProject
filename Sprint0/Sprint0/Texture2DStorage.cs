@@ -215,9 +215,10 @@ public class Texture2DStorage
         //Boss level
         //Stage 1
         _textures["BossCreateItem"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-create-item");
-        _textures["BossIdle"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-idle");
+        _textures["BossStageOneIdle"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-idle");
         _textures["BossSpawn"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-stage1-intro-temp");
         // ^ I might redo this texture at some point, I think some of the frames might be weird but not sure how it'll actually look in game
+        _textures["BossShootSeeds"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-create-item");
 
 
         //Stage 2
@@ -225,6 +226,21 @@ public class Texture2DStorage
         //Stage 3
         _textures["BossDeath"] = content.Load<Texture2D>(@"BossLevel\Stage3\boss-death");
         _textures["BossFinalTransformation"] = content.Load<Texture2D>(@"BossLevel\Stage3\boss-final-stage-transformation");
+        _textures["BossFinalStageIdle"] = content.Load<Texture2D>(@"BossLevel\Stage3\boss-final-stage-idle");
+
+        //Boss level enemy textures
+        _textures["ChomperDeath"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\chomper-minion-death");
+        _textures["FlowerVineGroundburst"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\flower-vine-groundburst");
+        _textures["FlytrapDeath"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\flytrap-minion-death");
+        _textures["FlytrapVine"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\flytrap-minion-vine");
+
+        //Boss level environment
+        _textures["BossLevelFloatingPlatform"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-floating-platform");
+
+        //Boss projectiles
+        _textures["SmallAcornProjectile"] = content.Load<Texture2D>(@"BossLevel\BossProjectiles\small-acorn-projectile");
+
+
 
         // Add more textures as needed
     }
