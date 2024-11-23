@@ -212,6 +212,20 @@ public class Texture2DStorage
         _textures["hpDead"] = content.Load<Texture2D>(@"UI\hp-dead");
 
 
+        //Boss level
+        //Stage 1
+        _textures["BossCreateItem"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-create-item");
+        _textures["BossIdle"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-idle");
+        _textures["BossSpawn"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-stage1-intro-temp");
+        // ^ I might redo this texture at some point, I think some of the frames might be weird but not sure how it'll actually look in game
+
+
+        //Stage 2
+
+        //Stage 3
+        _textures["BossDeath"] = content.Load<Texture2D>(@"BossLevel\Stage3\boss-death");
+        _textures["BossFinalTransformation"] = content.Load<Texture2D>(@"BossLevel\Stage3\boss-final-stage-transformation");
+
         // Add more textures as needed
     }
 
