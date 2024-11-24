@@ -589,6 +589,42 @@
 /processorParam:TextureFormat=Color
 /build:BlockTextures/Trees/tree-7.png
 
+#begin BossLevel/BossProjectiles/boomerang-projectile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/BossProjectiles/boomerang-projectile.png
+
+#begin BossLevel/BossProjectiles/pollen-projectile-pink.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/BossProjectiles/pollen-projectile-pink.png
+
+#begin BossLevel/BossProjectiles/pollen-projectile-white.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/BossProjectiles/pollen-projectile-white.png
+
 #begin BossLevel/BossProjectiles/small-acorn-projectile.png
 /importer:TextureImporter
 /processor:TextureProcessor
