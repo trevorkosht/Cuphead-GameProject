@@ -239,6 +239,9 @@ public class Texture2DStorage
 
         //Boss projectiles
         _textures["SmallAcornProjectile"] = content.Load<Texture2D>(@"BossLevel\BossProjectiles\small-acorn-projectile");
+        _textures["BoomerangProjectile"] = content.Load<Texture2D>(@"BossLevel\BossProjectiles\boomerang-projectile");
+        _textures["PollenProjectilePink"] = content.Load<Texture2D>(@"BossLevel\BossProjectiles\pollen-projectile-pink");
+        _textures["PollenProjectileWhite"] = content.Load<Texture2D>(@"BossLevel\BossProjectiles\pollen-projectile-white");
 
 
 
