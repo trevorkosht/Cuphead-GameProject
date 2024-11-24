@@ -12,6 +12,7 @@ public class Animation {
     private int frameHeight;
     private int frameWidth;
     private int currentFrame = 0;
+    private Vector2 offset;
 
     public int UpdatesPerFrame { get { return updatesPerFrame; } set { updatesPerFrame = value; } }
     public int FrameCount { get { return frameCount; } set { frameCount = value; } }
@@ -26,6 +27,18 @@ public class Animation {
         this.frameCount = frameCount;
         this.frameHeight = frameHeight;
         this.frameWidth = frameWidth;
+        this.offset = Vector2.Zero;
+
+        this.loadFrames();
+    }
+
+    public Animation(Texture2D spriteSheet, int updatesPerFrame, int frameCount, int frameHeight, int frameWidth, Vector2 offset) {
+        this.spriteSheet = spriteSheet;
+        this.updatesPerFrame = updatesPerFrame;
+        this.frameCount = frameCount;
+        this.frameHeight = frameHeight;
+        this.frameWidth = frameWidth;
+        this.offset = offset;
 
         this.loadFrames();
     }
@@ -55,10 +68,10 @@ public class Animation {
     public void draw(SpriteBatch spriteBatch, Rectangle destRectangle, bool isFacingRight, float orderInLayer, float rotation) {
         if(spriteSheet != null){
             if (isFacingRight) {
-                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, rotation, new Vector2(0, 0), SpriteEffects.None, orderInLayer);
+                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, rotation, offset, SpriteEffects.None, orderInLayer);
             }
             else {
-                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, rotation, new Vector2(0, 0), SpriteEffects.FlipHorizontally, orderInLayer);
+                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, rotation, offset, SpriteEffects.FlipHorizontally, orderInLayer);
             }
         }
     }
