@@ -23,10 +23,6 @@ public class DaisyCollisionManager : IComponent {
             if (GO != null && GO.GetComponent<BoxCollider>() != null && GO.type != null && (GO.type.Contains("Platform") || GO.type.Contains("Hill") || GO.type.Contains("Slope") || GO.type.Contains("Log")) ) {
                 BoxCollider platformCollider = GO.GetComponent<BoxCollider>();
                 if (CheckIfGrounded(GO) ) {
-                    if(GO != state.currentPlatform) {
-                        System.Diagnostics.Debug.WriteLine("Daisy grounded on new platform");
-                    }
-
                     state.isGrounded = true;
                     state.currentPlatform = GO;
                     state.atPlatformEdge = CheckForPlatformEdge();
@@ -70,11 +66,7 @@ public class DaisyCollisionManager : IComponent {
 
         if ((jumpCheckBounds.Intersects(platformCollider.BoundingBox) && jumpCheckBounds.Left > platformCollider.BoundingBox.Left && jumpCheckBounds.Right < platformCollider.BoundingBox.Right && jumpHeight >= state.minJumpHeight)){
             state.landingSpot = new Rectangle(jumpCheckBounds.X + (checkOffset/5), platformCollider.BoundingBox.Top - box.Height, box.Width, box.Height);
-
-
             requestJump = true;
-
-            System.Diagnostics.Debug.WriteLine("Properly registering jump request");
         }
 
         return requestJump;
