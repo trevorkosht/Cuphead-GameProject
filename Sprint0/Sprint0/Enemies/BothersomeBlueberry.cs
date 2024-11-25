@@ -121,7 +121,7 @@ public class BothersomeBlueberry : BaseEnemy
             }
         }
         else {
-            GameObject.GetComponent<CircleCollider>().Radius = 40;
+            GameObject.GetComponent<CircleCollider>().Radius = 20;
         }
     }
 

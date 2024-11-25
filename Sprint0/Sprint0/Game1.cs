@@ -122,8 +122,7 @@ namespace Sprint0
             playerSpriteRenderer.orderInLayer = .3f;
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
             player.AddComponent(playerSpriteRenderer);
-            player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
-            player.GetComponent<BoxCollider>().ChangeSize(-15);
+            player.AddComponent(new BoxCollider(new Vector2(70, 120), new Vector2(40, 20), GraphicsDevice));
             player.type = "Player";
             playerState = new PlayerState(player);
             player.AddComponent(new PlayerController2(playerState));

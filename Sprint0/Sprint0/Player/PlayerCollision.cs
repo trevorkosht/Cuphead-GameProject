@@ -151,7 +151,7 @@ namespace Cuphead.Player
         {
             Rectangle playerBounds = player.GameObject.GetComponent<BoxCollider>().BoundingBox;
             Rectangle colliderBounds = obstacle.GetComponent<BoxCollider>().BoundingBox;
-            if (playerBounds.Bottom - 60 < colliderBounds.Top) 
+            if (playerBounds.Bottom - 70 < colliderBounds.Top) 
             {
                 int duckingOffset = 1;
                 if (player.IsDucking) duckingOffset = -30;
