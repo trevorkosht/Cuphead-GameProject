@@ -48,6 +48,7 @@ namespace Sprint0
         SpriteFont font;
 
         private bool resetFrame;
+        private bool bossLevel;
 
 
         public Game1()
@@ -95,7 +96,10 @@ namespace Sprint0
 
             cameraController = new CameraController(camera, player);
             basePath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\.." + "\\GameObjects\\";
-            LevelLoader.LoadLevel(basePath + "FileData.txt");
+            if (!bossLevel)
+                LevelLoader.LoadLevel(basePath + "FileData.txt");
+            else
+                LevelLoader.LoadLevel(basePath + "BossData.txt");
             gameObjects.Add(player);
             GOManager.Instance.audioManager.getInstance("Intro").Play();
             MediaPlayer.Play(GOManager.Instance.audioManager.backgroundMusic);
