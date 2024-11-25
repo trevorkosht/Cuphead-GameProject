@@ -47,7 +47,7 @@ namespace Cuphead.Player {
 
             }
 
-            if (jumpRequested && player.IsGrounded && !player.IsDucking) {
+            if (!player.isFalling && jumpRequested && player.IsGrounded && !player.IsDucking) {
                 if (!player.IsDead) {
                     GOManager.Instance.audioManager.getInstance("PlayerJump").Play();
                 }
