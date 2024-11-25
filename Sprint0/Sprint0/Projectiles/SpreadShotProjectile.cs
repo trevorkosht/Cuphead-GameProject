@@ -68,7 +68,7 @@ public class SpreadShotProjectile : Projectile
             SpriteRenderer spriteRenderer = new SpriteRenderer(new Rectangle(spreadShot.X, spreadShot.Y, 144, 144), false, rotFacingDir);
             spriteRenderer.spriteScale = 0.5f;
 
-            Collider collider = new BoxCollider(new Vector2(60, 45), new Vector2(15 + offset.X, 15 + offset.Y), GOManager.Instance.GraphicsDevice, MathHelper.ToRadians(rotFacingDir));
+            Collider collider = new BoxCollider(new Vector2(60, 40), new Vector2(15 + offset.X, 15 + offset.Y), GOManager.Instance.GraphicsDevice, MathHelper.ToRadians(rotFacingDir));
             spreadShot.AddComponent(collider);
 
             var spreadLogic = new SpreadShotInstance(directions[i] * speed, spriteRenderer);

@@ -79,6 +79,7 @@ public class ProjectileFactory
                 projectileLogic = new PeashooterProjectile(isFacingRight, spriteRenderer, angle);
                 projectile.AddComponent(projectileLogic);
                 projectile.AddComponent(new BoxCollider(new Vector2(60, 20), new Vector2(10 + offset.X, 28 + offset.Y), GOManager.Instance.GraphicsDevice, MathHelper.ToRadians(tempAngle)));
+                projectile.GetComponent<BoxCollider>().ChangeSize(-10);
                 spriteRenderer.addAnimation("PeashooterAnimation", new Animation(textureStorage.GetTexture("Peashooter"), 5, 8, 144, 144));
                 spriteRenderer.addAnimation("PeashooterExplosionAnimation", new Animation(textureStorage.GetTexture("PeashooterExplosion"), 5, 6, 144, 144));
                 spriteRenderer.setAnimation("PeashooterAnimation");
@@ -97,6 +98,7 @@ public class ProjectileFactory
                 projectileLogic = new ChaserProjectile(isFacingRight, spriteRenderer);
                 projectile.AddComponent(projectileLogic);
                 projectile.AddComponent(new CircleCollider(30f, new Vector2(-40 - offset.X, -35 - offset.Y), GOManager.Instance.GraphicsDevice));
+                projectile.GetComponent<CircleCollider>().ChangeSize(-5);
                 spriteRenderer.addAnimation("ChaserAnimation", new Animation(textureStorage.GetTexture("Chaser"), 5, 8, 144, 144));
                 spriteRenderer.addAnimation("ChaserExplosionAnimation", new Animation(textureStorage.GetTexture("ChaserExplosion"), 5, 3, 144, 144));
                 spriteRenderer.setAnimation("ChaserAnimation");
