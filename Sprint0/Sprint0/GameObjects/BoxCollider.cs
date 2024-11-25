@@ -7,6 +7,8 @@ public class BoxCollider : Collider
     public Rectangle BoundingBox { get; private set; }
 
     private Texture2D _debugTexture;
+
+    private int changeSize { get; set; }
     public Vector2 offset { get; set; }
     public Vector2 bounds { get; set; } // Width = X and Height = Y
     public float Rotation { get; set; } // Rotation in radians
@@ -26,8 +28,17 @@ public class BoxCollider : Collider
         if (GameObject != null)
         {
             // Set the non-rotated bounding box
-            BoundingBox = new Rectangle(GameObject.X + (int)offset.X, GameObject.Y + (int)offset.Y, (int)bounds.X, (int)bounds.Y);
+            int x = GameObject.X + (int)offset.X - changeSize;
+            int y = GameObject.Y + (int)offset.Y - changeSize;
+            int width = (int)bounds.X + (2 * changeSize);
+            int height = (int)bounds.Y + (2 * changeSize);
+            BoundingBox = new Rectangle(x, y, width, height);
         }
+    }
+
+    public override void ChangeSize(int change)
+    {
+        this.changeSize = change;
     }
 
     public override void Draw(SpriteBatch spriteBatch)

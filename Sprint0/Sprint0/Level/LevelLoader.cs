@@ -79,6 +79,7 @@ public class LevelLoader
     private static void SpawnBlock(string subtype, Vector2 position)
     {
         GameObject block = BlockFactory.CreateBlock(subtype, position);
+        block.GetComponent<BoxCollider>().ChangeSize(-10);
         GOManager.Instance.allGOs.Add(block);
 
     }
@@ -92,6 +93,7 @@ public class LevelLoader
     private static void SpawnPlatform(string subtype, Vector2 position)
     {
         GameObject platform = PlatformFactory.CreatePlatform(subtype, position);
+        platform.GetComponent<BoxCollider>().ChangeSize(-10);
         GOManager.Instance.allGOs.Add(platform);
     }
 

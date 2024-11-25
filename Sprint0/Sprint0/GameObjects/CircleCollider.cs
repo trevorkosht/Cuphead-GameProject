@@ -25,6 +25,11 @@ public class CircleCollider : Collider
         }
     }
 
+    public override void ChangeSize(int change)
+    {
+        this.Radius += change;
+    }
+
     public override void Draw(SpriteBatch spriteBatch)
     {
         if (GOManager.Instance.IsDebugging)
