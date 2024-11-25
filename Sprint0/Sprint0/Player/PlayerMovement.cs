@@ -120,7 +120,7 @@ namespace Cuphead.Player {
                     player.IsDucking = true;
                     player.isDuckingYAdjust = true;
 
-                    collider.bounds = new Vector2(144, 70);
+                    collider.bounds = new Vector2(144, 80);
                     collider.offset = new Vector2(0, 30);
                 }
             }
