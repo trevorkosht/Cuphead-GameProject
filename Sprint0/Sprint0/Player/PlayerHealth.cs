@@ -16,7 +16,7 @@ namespace Cuphead.Player
         private PlayerMovement move;
         private DelayGame delayGame = new DelayGame();
 
-        public HealthComponent health = new HealthComponent(300, false, true); //300
+        public HealthComponent health = new HealthComponent(300000, false, true); //300
 
         public PlayerHealth(PlayerState player, KeyboardController keyboardController, PlayerCollision collision, PlayerMovement move)
         {

@@ -23,6 +23,10 @@ public class DaisyCollisionManager : IComponent {
             if (GO != null && GO.GetComponent<BoxCollider>() != null && GO.type != null && (GO.type.Contains("Platform") || GO.type.Contains("Hill") || GO.type.Contains("Slope") || GO.type.Contains("Log")) ) {
                 BoxCollider platformCollider = GO.GetComponent<BoxCollider>();
                 if (CheckIfGrounded(GO) ) {
+                    if(GO != state.currentPlatform) {
+                        System.Diagnostics.Debug.WriteLine("Daisy grounded on new platform");
+                    }
+
                     state.isGrounded = true;
                     state.currentPlatform = GO;
                     state.atPlatformEdge = CheckForPlatformEdge();
@@ -32,7 +36,7 @@ public class DaisyCollisionManager : IComponent {
                 }
                 if (state.currentPlatform != null && !GO.Equals(state.currentPlatform)) {
                     state.foundAdjacentPlatform = state.foundAdjacentPlatform || CheckForAdjacentPlatforms(platformCollider);
-                    state.jumpRequested = state.jumpRequested || (!state.isJumping && CheckForJump(platformCollider));
+                    state.jumpRequested = state.jumpRequested || (CheckForJump(platformCollider) && !state.isJumping);
                 }
             }
         }
@@ -44,14 +48,14 @@ public class DaisyCollisionManager : IComponent {
 
     private bool CheckIfGrounded(GameObject platform) {
         BoxCollider platformCollider = platform.GetComponent<BoxCollider>();
-        return (platform.type.Contains("Slope") || Math.Abs(platformCollider.BoundingBox.Top - daisyCollider.BoundingBox.Bottom) < 10) && platformCollider.Intersects(daisyCollider);
+        return (platform.type.Contains("Slope") || Math.Abs(platformCollider.BoundingBox.Top - daisyCollider.BoundingBox.Bottom) < 15) && platformCollider.Intersects(daisyCollider);
     }
 
     private bool CheckForJump(BoxCollider platformCollider) {
         bool requestJump = false;
 
         Rectangle box = daisyCollider.BoundingBox;
-        Rectangle jumpCheckBounds = new Rectangle(box.X, box.Y - 50, box.Width, box.Height + 400);
+        Rectangle jumpCheckBounds = new Rectangle(box.Left, box.Top - 50, box.Width, box.Height + 400);
 
         int checkOffset = 0;
         if (GameObject.GetComponent<DeadlyDaisy>().movingRight) {
@@ -64,9 +68,13 @@ public class DaisyCollisionManager : IComponent {
 
         int jumpHeight = Math.Abs(platformCollider.BoundingBox.Top - state.currentPlatform.GetComponent<BoxCollider>().BoundingBox.Top);
 
-        if (state.isGrounded && (jumpCheckBounds.Left > platformCollider.BoundingBox.Left && jumpCheckBounds.Right < platformCollider.BoundingBox.Right && jumpHeight >= state.minJumpHeight)){
+        if ((jumpCheckBounds.Intersects(platformCollider.BoundingBox) && jumpCheckBounds.Left > platformCollider.BoundingBox.Left && jumpCheckBounds.Right < platformCollider.BoundingBox.Right && jumpHeight >= state.minJumpHeight)){
             state.landingSpot = new Rectangle(jumpCheckBounds.X + (checkOffset/5), platformCollider.BoundingBox.Top - box.Height, box.Width, box.Height);
+
+
             requestJump = true;
+
+            System.Diagnostics.Debug.WriteLine("Properly registering jump request");
         }
 
         return requestJump;

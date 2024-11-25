@@ -75,14 +75,13 @@ public class DeadlyDaisy : BaseEnemy {
 
     private void HandlePlatformEdge() {
         if (!state.foundAdjacentPlatform || GameObject.X < 1250) {
-            if ((!state.jumpRequested || ((movingRight != player.X > GameObject.X && Math.Abs(player.X - GameObject.X) > 500) || (GameObject.X < 1250 && !movingRight)))) {
+            if ((!state.jumpRequested || (((movingRight != player.X > GameObject.X) && Math.Abs(player.X - GameObject.X) > 500) || (GameObject.X < 1250 && !movingRight)))) {
                 HandleTurnRequested();
             }
             else if (state.jumpRequested) {
                 HandleJumpRequested();
             }
         }
-
     }
 
     private void HandleTurnRequested() {
