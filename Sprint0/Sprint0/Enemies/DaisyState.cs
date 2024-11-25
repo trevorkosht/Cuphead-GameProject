@@ -20,8 +20,8 @@ public class DaisyState : IComponent {
     //Other
     public GameObject currentPlatform { get; set; }
     public Rectangle landingSpot { get; set; }
-    public int edgeCheckDistance = 50;
-    public int minJumpHeight = 35;
+    public int edgeCheckDistance = 35; 
+    public int minJumpHeight = 35; 
 
     private float speed;
     private Vector2 airVelocity;

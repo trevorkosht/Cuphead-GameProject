@@ -6,7 +6,7 @@ public class DaisyCollisionManager : IComponent {
     public GameObject GameObject{ get; set;}
     public bool enabled {  get; set;}
 
-    public BoxCollider daisyCollider { get; private set; }
+    public BoxCollider daisyCollider { get; set; }
     public DaisyState state;
 
     public DaisyCollisionManager(BoxCollider daisyCollider, DaisyState daisyState) {
@@ -18,8 +18,6 @@ public class DaisyCollisionManager : IComponent {
         state.isGrounded = false;
         state.atPlatformEdge = false;
         state.foundAdjacentPlatform = false;
-        //state.isTurning = false;
-        //state.jumpRequested = false;
 
         foreach(GameObject GO in GOManager.Instance.allGOs) {
             if (GO != null && GO.GetComponent<BoxCollider>() != null && GO.type != null && (GO.type.Contains("Platform") || GO.type.Contains("Hill") || GO.type.Contains("Slope") || GO.type.Contains("Log")) ) {
@@ -28,10 +26,13 @@ public class DaisyCollisionManager : IComponent {
                     state.isGrounded = true;
                     state.currentPlatform = GO;
                     state.atPlatformEdge = CheckForPlatformEdge();
+                    if (state.currentPlatform.type.Contains("Slope")) {
+                        HandleSlopeCollision();
+                    }
                 }
                 if (state.currentPlatform != null && !GO.Equals(state.currentPlatform)) {
-                    state.jumpRequested = state.jumpRequested || (!state.isJumping && CheckForJump(platformCollider));
                     state.foundAdjacentPlatform = state.foundAdjacentPlatform || CheckForAdjacentPlatforms(platformCollider);
+                    state.jumpRequested = state.jumpRequested || (!state.isJumping && CheckForJump(platformCollider));
                 }
             }
         }
@@ -52,17 +53,22 @@ public class DaisyCollisionManager : IComponent {
         Rectangle box = daisyCollider.BoundingBox;
         Rectangle jumpCheckBounds = new Rectangle(box.X, box.Y - 50, box.Width, box.Height + 400);
 
+        int checkOffset = 0;
         if (GameObject.GetComponent<DeadlyDaisy>().movingRight) {
-            jumpCheckBounds.X += 200;
+            checkOffset += 250;
         }
         else {
-            jumpCheckBounds.X -= 200;
+            checkOffset -= 250;
         }
+        jumpCheckBounds.X += checkOffset;
 
-        if (jumpCheckBounds.Left > platformCollider.BoundingBox.Left && jumpCheckBounds.Right < platformCollider.BoundingBox.Right && (Math.Abs(platformCollider.BoundingBox.Top - state.currentPlatform.GetComponent<BoxCollider>().BoundingBox.Top) >= state.minJumpHeight)) {
-            state.landingSpot = new Rectangle(jumpCheckBounds.X, platformCollider.BoundingBox.Top - box.Height, box.Width, box.Height);
+        int jumpHeight = Math.Abs(platformCollider.BoundingBox.Top - state.currentPlatform.GetComponent<BoxCollider>().BoundingBox.Top);
+
+        if (state.isGrounded && (jumpCheckBounds.Left > platformCollider.BoundingBox.Left && jumpCheckBounds.Right < platformCollider.BoundingBox.Right && jumpHeight >= state.minJumpHeight)){
+            state.landingSpot = new Rectangle(jumpCheckBounds.X + (checkOffset/5), platformCollider.BoundingBox.Top - box.Height, box.Width, box.Height);
             requestJump = true;
         }
+
         return requestJump;
     }
 
@@ -85,6 +91,36 @@ public class DaisyCollisionManager : IComponent {
         adjacentPlatformChecker.Height = 5;
 
         return adjacentPlatformChecker.Intersects(platformCollider.BoundingBox) && Math.Abs(platformCollider.BoundingBox.Y - adjacentPlatformChecker.Y) < 10;
+    }
+
+    private void HandleSlopeCollision() {
+        BoxCollider daisyCollider = GameObject.GetComponent<BoxCollider>();
+        BoxCollider slopeCollider = state.currentPlatform.GetComponent<BoxCollider>();
+        Rectangle daisyBounds = daisyCollider.BoundingBox;
+
+        // Get the rotated corners of the obstacle's bounding box (assuming the obstacle is sloped)
+        Vector2[] slopeCorners = slopeCollider.GetRotatedCorners();
+
+        // Get the top edge of the slope (assuming it's a left-to-right slope)
+        Vector2 topLeft = slopeCorners[0]; // Top-left corner of the slope
+        Vector2 topRight = slopeCorners[1]; // Top-right corner of the slope
+
+        // Check if the player is within the horizontal bounds of the slope's top edge
+        if (daisyBounds.Bottom > Math.Min(topLeft.Y, topRight.Y) && daisyBounds.Left >= topLeft.X && daisyBounds.Right <= topRight.X) {
+            float slopeHeightAtDaisyX = MathHelper.Lerp(topLeft.Y, topRight.Y, (daisyBounds.Center.X - topLeft.X) / (topRight.X - topLeft.X));
+
+            if (daisyBounds.Bottom + 20 > slopeHeightAtDaisyX) {
+                GameObject.Y = (int)slopeHeightAtDaisyX - daisyBounds.Height + 10;
+            }
+        }
+        else if (daisyBounds.Right < topLeft.X) // Left of the slope
+        {
+            GameObject.X = (int)(topLeft.X - daisyBounds.Width - 5);
+        }
+        else if (daisyBounds.Left > topRight.X) // Right of the slope
+        {
+            GameObject.X = (int)(topRight.X + 5);
+        }
     }
 }
 
