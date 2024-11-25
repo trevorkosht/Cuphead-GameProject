@@ -74,7 +74,7 @@ Block,BigHill1,5800,350
 Block,BigHill2,7100,500
 Block,Log1,7800,500
 
-Enemy,DeadlyDaisy,6400,-200
+Enemy,DeadlyDaisy,6400,-250
 Enemy,ToothyTerror,6900,600
 Enemy,TerribleTulip,6000,250
 Enemy,MurderousMushroom,6600,250
