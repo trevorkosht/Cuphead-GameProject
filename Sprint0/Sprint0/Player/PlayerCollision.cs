@@ -112,11 +112,11 @@ namespace Cuphead.Player
                     player.floorY = (int)player.GroundLevel;
                     player.airTime = 1;
 
-                    if (player.changeColliderBound)
-                    {
-                        player.changeColliderBound = false;
-                        player.GameObject.GetComponent<BoxCollider>().ChangeHeight(20);
-                    }
+                    //if (player.changeColliderBound)
+                    //{
+                    //    player.changeColliderBound = false;
+                    //    player.GameObject.GetComponent<BoxCollider>().ChangeHeight(20);
+                    //}
 
                     if (player.velocity.Y > 0) player.velocity.Y = 0;
                     player.GameObject.Y = player.floorY;
@@ -174,7 +174,7 @@ namespace Cuphead.Player
             }
             else if (player.GameObject.X > obstacle.X)
             {
-                player.GameObject.X = colliderBounds.Right - 25;
+                player.GameObject.X = colliderBounds.Right - 30;
             }
         }
 
