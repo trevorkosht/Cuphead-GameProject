@@ -119,6 +119,7 @@ namespace Sprint0
             textureStorage.loadPlayerAnimations(playerSpriteRenderer);
             player.AddComponent(playerSpriteRenderer);
             player.AddComponent(new BoxCollider(new Vector2(90, 144), new Vector2(25, 0), GraphicsDevice));
+            player.GetComponent<BoxCollider>().ChangeSize(-15);
             player.type = "Player";
             playerState = new PlayerState(player);
             player.AddComponent(new PlayerController2(playerState));

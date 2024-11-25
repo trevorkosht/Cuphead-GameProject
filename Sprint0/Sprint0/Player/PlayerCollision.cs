@@ -112,6 +112,12 @@ namespace Cuphead.Player
                     player.floorY = (int)player.GroundLevel;
                     player.airTime = 1;
 
+                    if (player.changeColliderBound)
+                    {
+                        player.changeColliderBound = false;
+                        player.GameObject.GetComponent<BoxCollider>().ChangeHeight(20);
+                    }
+
                     if (player.velocity.Y > 0) player.velocity.Y = 0;
                     player.GameObject.Y = player.floorY;
                 }
@@ -131,6 +137,12 @@ namespace Cuphead.Player
                 player.floorY = colliderBounds.Bottom + 100;
                 player.IsGrounded = true;
                 player.HasDashed = false;
+
+                if (player.changeColliderBound)
+                {
+                    player.changeColliderBound = false;
+                    player.GameObject.GetComponent<BoxCollider>().ChangeHeight(20);
+                }
             }
 
         }
@@ -139,7 +151,7 @@ namespace Cuphead.Player
         {
             Rectangle playerBounds = player.GameObject.GetComponent<BoxCollider>().BoundingBox;
             Rectangle colliderBounds = obstacle.GetComponent<BoxCollider>().BoundingBox;
-            if (playerBounds.Bottom - 50 < colliderBounds.Top) 
+            if (playerBounds.Bottom - 100 < colliderBounds.Top) 
             {
                 int duckingOffset = 1;
                 if (player.IsDucking) duckingOffset = -30;
@@ -149,6 +161,12 @@ namespace Cuphead.Player
                 player.floorY = colliderBounds.Top + 10;
                 player.IsGrounded = true;
                 player.HasDashed = false;
+
+                if (player.changeColliderBound)
+                {
+                    player.changeColliderBound = false;
+                    player.GameObject.GetComponent<BoxCollider>().ChangeHeight(20);
+                }
             }
             else if (player.GameObject.X < obstacle.X)
             {
@@ -184,6 +202,12 @@ namespace Cuphead.Player
                     player.velocity.Y = 0;
                     player.IsGrounded = true;
                     player.HasDashed = false;
+
+                    if (player.changeColliderBound)
+                    {
+                        player.changeColliderBound = false;
+                        player.GameObject.GetComponent<BoxCollider>().ChangeHeight(20);
+                    }
                 }
             }
             else if (playerBounds.Right < topLeft.X) 

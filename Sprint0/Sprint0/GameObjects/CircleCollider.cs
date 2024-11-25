@@ -12,7 +12,7 @@ public class CircleCollider : Collider
     public CircleCollider(float radius, Vector2 offset, GraphicsDevice graphicsDevice)
     {
         this.offset = offset;
-        Radius = radius;
+        this.Radius = radius;
         _debugTexture = new Texture2D(graphicsDevice, 1, 1);
         _debugTexture = CreateCircleTexture((int)Radius * 2, graphicsDevice);
     }

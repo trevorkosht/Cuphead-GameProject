@@ -53,6 +53,9 @@ namespace Cuphead.Player {
                 }
                 player.velocity.Y = player.JumpForce;
                 player.IsGrounded = false;
+
+                player.GameObject.GetComponent<BoxCollider>().ChangeHeight(-20);
+                player.changeColliderBound = true;
             }
 
             if (jumpRequested && !player.IsGrounded && player.CanParry) {

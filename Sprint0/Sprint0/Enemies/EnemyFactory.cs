@@ -31,6 +31,8 @@ public static class EnemyFactory
                 enemyLogic = new DeadlyDaisy();
                 enemy.AddComponent(enemyLogic);
                 enemy.AddComponent(new BoxCollider(new Vector2(135, 155), new Vector2(5, -5), GOManager.Instance.GraphicsDevice));
+                enemy.GetComponent<BoxCollider>().ChangeWidth(-30);
+                enemy.GetComponent<BoxCollider>().ChangeHeight(-10);
                 enemy.AddComponent(new DaisyState());
                 enemy.AddComponent(new DaisyCollisionManager(enemy.GetComponent<BoxCollider>(), enemy.GetComponent<DaisyState>()));
                 spriteRenderer.addAnimation("deadlyDaisyAnimation", new Animation(textureStorage.GetTexture("DeadlyDaisy"), 2, 16, 144, 144));
@@ -47,6 +49,7 @@ public static class EnemyFactory
                 enemyLogic = new MurderousMushroom();
                 enemy.AddComponent(enemyLogic);
                 enemy.AddComponent(new BoxCollider(new Vector2(36, 36), Vector2.Zero, GOManager.Instance.GraphicsDevice));
+                enemy.GetComponent<BoxCollider>().ChangeSize(-5);
                 spriteRenderer.addAnimation("murderousMushroomAnimation", new Animation(textureStorage.GetTexture("MurderousMushroom"), 5, 8, 144, 144));
                 spriteRenderer.addAnimation("Attack", new Animation(textureStorage.GetTexture("MushroomAttack"), 3, 15, 144, 144));
                 spriteRenderer.addAnimation("Closed", new Animation(textureStorage.GetTexture("MushroomClosed"), 3, 3, 144, 144));
@@ -61,6 +64,7 @@ public static class EnemyFactory
                 enemyLogic = new TerribleTulip();
                 enemy.AddComponent(enemyLogic);
                 enemy.AddComponent(new BoxCollider(new Vector2(115, 145), new Vector2(10, 0), GOManager.Instance.GraphicsDevice));
+                enemy.GetComponent<BoxCollider>().ChangeWidth(-30);
                 spriteRenderer.addAnimation("terribleTulipAnimation", new Animation(textureStorage.GetTexture("TerribleTulip"), 5, 15, 144, 144));
                 spriteRenderer.addAnimation("Idle", new Animation(textureStorage.GetTexture("TulipIdle"), 2, 30, 144, 144));
                 enemyLogic.Initialize(textureStorage.GetTexture("TerribleTulip"), textureStorage);
@@ -80,6 +84,7 @@ public static class EnemyFactory
                 enemyLogic = new BothersomeBlueberry();
                 enemy.AddComponent(enemyLogic);
                 enemy.AddComponent(new CircleCollider(20, new Vector2(-30,-30), GOManager.Instance.GraphicsDevice));
+                enemy.GetComponent<CircleCollider>().ChangeSize(-10);
                 spriteRenderer.addAnimation("bothersomeBlueberryAnimation", new Animation(textureStorage.GetTexture("BothersomeBlueberry"), 3, 12, 144, 144));
                 spriteRenderer.addAnimation("Melt", new Animation(textureStorage.GetTexture("BlueberryMelt"), 5, 10, 144, 144));
                 spriteRenderer.addAnimation("WaitForRespawn", new Animation(textureStorage.GetTexture("BlueberryWaitingToRespawn"), 5, 1, 144, 144));
