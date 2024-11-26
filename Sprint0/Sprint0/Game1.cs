@@ -138,7 +138,7 @@ namespace Sprint0
             UI = new UI(playerHealth, playerScore, textureStorage, new Vector2(50, 650), _spriteBatch2);
 
             //load boss stuff
-            boss = new Boss(300, -200, textureStorage);
+            boss = new Boss(300, 300, textureStorage);
 
 
             font = Content.Load<SpriteFont>("Font/Winter");
