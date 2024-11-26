@@ -43,7 +43,7 @@ public class Boss : GameObject
         Texture2D idleTexture = textureStorage.GetTexture("BossStageOneIdle");
         Texture2D magicHandsTexture = textureStorage.GetTexture("BossMagicHands");
 
-        sRend.addAnimation("Idle", new Animation(idleTexture, 1, 1, 256, 256));
+        sRend.addAnimation("Idle", new Animation(idleTexture, 1, 24, 675, 510));
         sRend.addAnimation("MagicHands", new Animation(magicHandsTexture, 10, 10, 256, 256));
         sRend.setAnimation("Idle");
     }
