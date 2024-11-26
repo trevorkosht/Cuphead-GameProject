@@ -5,7 +5,9 @@ namespace Cuphead.Player {
         private PlayerState player;
         private KeyboardController keyboardController;
         private BoxCollider collider;
-        private DelayGame gameDelay = new DelayGame();
+        private DelayGame DashCooldown = new DelayGame();
+        private DelayGame parryDelay = new DelayGame(); // For parry timing window
+        private DelayGame parryCooldown = new DelayGame(); // For parry cooldown
         private PlayerAnimation playerAnimator;
         private PlayerCollision PlayerCollision;
         public PlayerMovement(PlayerState player, KeyboardController keyboard, PlayerAnimation playerAnimator, PlayerCollision playerCollision) {
@@ -58,17 +60,28 @@ namespace Cuphead.Player {
                 player.changeColliderBound = true;
             }
 
-            if (jumpRequested && !player.IsGrounded && player.CanParry) {
-                GOManager.Instance.audioManager.getInstance("PlayerParry").Play();
-                GOManager.Instance.audioManager.getInstance("SpikyBulbDeath").Play();
+            if (!player.IsGrounded)
+            {
+                if (jumpRequested && player.CanParry && parryDelay.Delay(gameTime, 300)) 
+                {
+                    GOManager.Instance.audioManager.getInstance("PlayerParry").Play();
+                    GOManager.Instance.audioManager.getInstance("SpikyBulbDeath").Play();
 
-                Rectangle vfxDestRectangle = new Rectangle(player.parryableObject.X - 30, player.parryableObject.Y - 30, 288, 288);
-                VisualEffectFactory.createVisualEffect(vfxDestRectangle, GOManager.Instance.textureStorage.GetTexture("ParryVFX"), 3, 9, 0.625f, true);
+                    Rectangle vfxDestRectangle = new Rectangle(player.parryableObject.X - 30, player.parryableObject.Y - 30, 288, 288);
+                    VisualEffectFactory.createVisualEffect(vfxDestRectangle, GOManager.Instance.textureStorage.GetTexture("ParryVFX"), 3, 9, 0.625f, true);
 
-                GOManager.Instance.Player.GetComponent<ScoreComponent>().AddScore(10);
-                player.IsParrying = true;
-                player.parryCount++;
-                player.parryableObject.Destroy();
+                    GOManager.Instance.Player.GetComponent<ScoreComponent>().AddScore(10);
+                    player.IsParrying = true;
+                    player.parryCount++;
+                    player.parryableObject.Destroy();
+
+                    parryCooldown.Cooldown(gameTime, 1000);
+                    player.CanParry = false; 
+                }
+                else if (parryCooldown.Cooldown(gameTime, 1000))
+                {
+                    player.CanParry = true;
+                }
             }
 
             if (!player.IsGrounded && player.velocity.Y < 0) {
@@ -143,7 +156,7 @@ namespace Cuphead.Player {
                 // Continue dashing
                 PerformDash(gameTime, player.height, deltaTime);
             }
-            else if (!player.HasDashed && dashRequested && gameDelay.Cooldown(gameTime, player.TimeTillNextDash) && !player.IsInvincible) {
+            else if (!player.HasDashed && dashRequested && DashCooldown.Cooldown(gameTime, player.TimeTillNextDash) && !player.IsInvincible) {
                 // Start dash
                 player.IsDashing = true;
                 player.HasDashed = true;
@@ -188,21 +201,21 @@ namespace Cuphead.Player {
             }
         }
 
-        public void HandleKnockBack(bool knockBackRequested, GameTime gameTime, float deltaTime) {
-            if (player.IsKnockBacked) {
-                // Continue knockback
-                PerformKnockBack(gameTime, deltaTime);
-            }
-            else if (knockBackRequested && gameDelay.Cooldown(gameTime, player.InvincibilityDuration)) {
-                // Start knockback
-                player.IsKnockBacked = true;
-                player.knockBackTime = player.InvincibilityDuration;
-                //player.Gravity = 0;
-                player.Speed = 0;
-                playerAnimator.CreateDustEffect();
-                PerformDash(gameTime, player.height, deltaTime);
-            }
-        }
+        //public void HandleKnockBack(bool knockBackRequested, GameTime gameTime, float deltaTime) {
+        //    if (player.IsKnockBacked) {
+        //        // Continue knockback
+        //        PerformKnockBack(gameTime, deltaTime);
+        //    }
+        //    else if (knockBackRequested && gameDelay.Cooldown(gameTime, player.InvincibilityDuration)) {
+        //        // Start knockback
+        //        player.IsKnockBacked = true;
+        //        player.knockBackTime = player.InvincibilityDuration;
+        //        //player.Gravity = 0;
+        //        player.Speed = 0;
+        //        playerAnimator.CreateDustEffect();
+        //        PerformDash(gameTime, player.height, deltaTime);
+        //    }
+        //}
 
         public void PerformKnockBack(GameTime gameTime, float deltaTime) {
             if (player.knockBackTime > 0) {
