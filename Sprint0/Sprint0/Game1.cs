@@ -48,7 +48,7 @@ namespace Sprint0
         SpriteFont font;
 
         private bool resetFrame;
-        private bool bossLevel;
+        private bool bossLevel = true;
 
 
         public Game1()
@@ -132,6 +132,13 @@ namespace Sprint0
             HealthComponent playerHealth = player.GetComponent<HealthComponent>();
             playerScore = player.GetComponent<ScoreComponent>();
             UI = new UI(playerHealth, playerScore, textureStorage, new Vector2(50, 650), _spriteBatch2);
+
+            //load boss stuff
+            if(bossLevel)
+            {
+                Boss boss = new Boss(300, -200, textureStorage);
+                gameObjects.Add(boss);
+            }
 
             font = Content.Load<SpriteFont>("Font/Winter");
             texts = new TextSprite(font, "",new Vector2(0, 0), Color.White);

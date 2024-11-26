@@ -42,6 +42,7 @@ public class Boss : GameObject
 
         sRend.addAnimation("Idle", new Animation(idleTexture, 1, 1, 256, 256));
         sRend.addAnimation("MagicHands", new Animation(magicHandsTexture, 10, 10, 256, 256));
+        sRend.setAnimation("Idle");
     }
 
     public void SetState(string stateName)
