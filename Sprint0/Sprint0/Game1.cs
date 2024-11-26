@@ -200,7 +200,12 @@ namespace Sprint0
             _spriteBatch.End();
 
             _spriteBatch2.Begin();
-            UI.Draw();
+
+            if (!menuController.StopGame())
+            {
+                UI.Draw();
+            }
+            
             _spriteBatch2.End();
             base.Draw(gameTime);
         }
