@@ -59,6 +59,7 @@ namespace Cuphead.Player
         public float dashTime = 0f;
         public float knockBackDuration = .75f;
         public float knockBackTime = 0f;
+        public float opacity = 1f;
 
         //ints
         public int TimeTillNextDash { get; set; } = 500;

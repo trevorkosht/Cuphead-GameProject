@@ -52,7 +52,7 @@ public class VisualEffectRenderer : IComponent {
             GameObject.Destroy();
         }
         else {
-            animation.draw(spriteBatch, scaledDestRectangle, isFacingRight, orderInLayer, 0);
+            animation.draw(spriteBatch, scaledDestRectangle, isFacingRight, orderInLayer, 0, 1f);
         }
 
     }

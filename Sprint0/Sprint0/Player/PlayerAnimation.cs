@@ -8,6 +8,7 @@ namespace Cuphead.Player
     {
         private readonly PlayerState player;
         private readonly Dictionary<string, IAnimationState> animationStates;
+        private readonly DelayGame cooldown = new DelayGame();
 
         public PlayerAnimation(PlayerState player)
         {
@@ -39,10 +40,12 @@ namespace Cuphead.Player
             }
         }
 
-        public void UpdateAnimationState(SpriteRenderer animator)
+        public void UpdateAnimationState(SpriteRenderer animator, GameTime gameTime)
         {
             string animationState = GetAnimationState();
             animationStates[animationState].Play(animator);
+
+            CheckInvicibiltyFrames(gameTime);
         }
 
         private string GetAnimationState()
@@ -101,5 +104,26 @@ namespace Cuphead.Player
             Texture2D dustTexture = textureStorage.GetTexture("Dust");
             VisualEffectFactory.createVisualEffect(dustPosition, dustTexture, updatesPerFrame: 1, frameCount: 14, scale: 1f, true);
         }
+
+        public void CheckInvicibiltyFrames(GameTime gameTime)
+        {
+            if (player.IsInvincible && cooldown.Cooldown(gameTime, 100))
+            {
+                if (player.GameObject.GetComponent<SpriteRenderer>().opacity == 1f)
+                {
+                    player.GameObject.GetComponent<SpriteRenderer>().ChangeOpacity(.5f);
+                }
+                else
+                {
+                    player.GameObject.GetComponent<SpriteRenderer>().ChangeOpacity(1f);
+                }
+            }
+            else
+            {
+                player.GameObject.GetComponent<SpriteRenderer>().ChangeOpacity(1f);
+            }
+        }
+        
+
     }
 }

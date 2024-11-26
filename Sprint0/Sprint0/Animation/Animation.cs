@@ -65,16 +65,27 @@ public class Animation {
         }
     }
 
-    public void draw(SpriteBatch spriteBatch, Rectangle destRectangle, bool isFacingRight, float orderInLayer, float rotation) {
-        if(spriteSheet != null){
-            if (isFacingRight) {
-                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, rotation, offset, SpriteEffects.None, orderInLayer);
+    public void draw(SpriteBatch spriteBatch, Rectangle destRectangle, bool isFacingRight, float orderInLayer, float rotation, float opacity)
+    {
+        if (spriteSheet != null)
+        {
+            // Clamp opacity to ensure it's between 0 (fully transparent) and 1 (fully opaque)
+            opacity = MathHelper.Clamp(opacity, 0f, 1f);
+
+            // Create a color with the specified opacity
+            Color color = new Color(1f, 1f, 1f, opacity);
+
+            if (isFacingRight)
+            {
+                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], color, rotation, offset, SpriteEffects.None, orderInLayer);
             }
-            else {
-                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], Color.White, rotation, offset, SpriteEffects.FlipHorizontally, orderInLayer);
+            else
+            {
+                spriteBatch.Draw(spriteSheet, destRectangle, frames[currentFrame], color, rotation, offset, SpriteEffects.FlipHorizontally, orderInLayer);
             }
         }
     }
+
 
     public void resetAnimation() {
         currentFrame = 0;

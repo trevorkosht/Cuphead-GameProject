@@ -12,6 +12,7 @@ public class SpriteRenderer : IComponent {
     public float spriteScale { get; set; } = 1f;
     public float orderInLayer { get; set; } = 0f;
     public float rotation { get; set; } = 0f;
+    public float opacity {  get; set; } = 1f;
 
 
     public KeyValuePair<string, Animation> currentAnimation { get; set; }
@@ -89,12 +90,17 @@ public class SpriteRenderer : IComponent {
             (int)(destRectangle.Width * spriteScale),
             (int)(destRectangle.Height * spriteScale));
 
-        spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, isFacingRight, orderInLayer, rotation);
+        spriteAnimations[currentAnimation.Key].draw(spriteBatch, scaledDestRectangle, isFacingRight, orderInLayer, rotation, opacity);
     }
 
     public bool IsAnimationComplete()
     {
         return spriteAnimations[currentAnimation.Key].IsComplete();
+    }
+
+    public void ChangeOpacity(float newOpacity)
+    {
+        this.opacity = newOpacity;
     }
 
 }
