@@ -115,11 +115,11 @@ namespace Cuphead.Player
             }
             else if (shotsFired == 1 || shotsFired == 3)
             {
-                return 10 + duckadd;
+                return 0 + duckadd;
             }
             else
             {
-                return 20 + duckadd;
+                return 0 + duckadd;
             }
         }
 
