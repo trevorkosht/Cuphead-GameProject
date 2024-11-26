@@ -141,7 +141,7 @@ namespace Sprint0
 
             if (bossLevel)
             {
-                boss = new Boss(300, 300, textureStorage);
+                boss = new Boss(300, -100, textureStorage);
                 gameObjects.Add(boss);
                 boss.InitializeAnimations();
             }

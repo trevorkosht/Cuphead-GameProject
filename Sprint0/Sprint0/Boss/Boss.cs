@@ -20,6 +20,7 @@ public class Boss : GameObject
     {
         this.textureStorage = textureStorage;
         sRend = new SpriteRenderer(new Rectangle(x, y, 256, 256), true);
+        sRend.spriteScale = 3;
         AddComponent(sRend);
 
         states = new Dictionary<string, IState>
