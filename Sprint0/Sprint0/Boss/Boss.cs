@@ -32,18 +32,32 @@ public class Boss : GameObject
         CurrentAnimation = "Idle";
         IsFacingRight = true;
 
-        InitializeAnimations();
     }
 
-    private void InitializeAnimations()
+    public void InitializeAnimations()
     {
-        Texture2D idleTexture = textureStorage.GetTexture("BossIdle");
+        if (sRend.getAnimationName() != null)
+        {
+            return;
+        }
+        Texture2D idleTexture = textureStorage.GetTexture("BossStageOneIdle");
         Texture2D magicHandsTexture = textureStorage.GetTexture("BossMagicHands");
 
         sRend.addAnimation("Idle", new Animation(idleTexture, 1, 1, 256, 256));
         sRend.addAnimation("MagicHands", new Animation(magicHandsTexture, 10, 10, 256, 256));
         sRend.setAnimation("Idle");
     }
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        var temp = sRend.getAnimationName();
+        if (temp != null){
+            sRend.Draw(spriteBatch);
+        }
+
+    }
+
+
 
     public void SetState(string stateName)
     {
