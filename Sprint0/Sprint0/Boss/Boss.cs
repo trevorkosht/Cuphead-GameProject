@@ -48,17 +48,6 @@ public class Boss : GameObject
         sRend.setAnimation("Idle");
     }
 
-    public void Draw(SpriteBatch spriteBatch)
-    {
-        var temp = sRend.getAnimationName();
-        if (temp != null){
-            sRend.Draw(spriteBatch);
-        }
-
-    }
-
-
-
     public void SetState(string stateName)
     {
         if (states.ContainsKey(stateName))

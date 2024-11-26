@@ -138,7 +138,13 @@ namespace Sprint0
             UI = new UI(playerHealth, playerScore, textureStorage, new Vector2(50, 650), _spriteBatch2);
 
             //load boss stuff
-            boss = new Boss(300, 300, textureStorage);
+
+            if (bossLevel)
+            {
+                boss = new Boss(300, 300, textureStorage);
+                gameObjects.Add(boss);
+                boss.InitializeAnimations();
+            }
 
 
             font = Content.Load<SpriteFont>("Font/Winter");
@@ -177,11 +183,6 @@ namespace Sprint0
                 // Check if player is dead
                 if (player.GetComponent<HealthComponent>().isDeadFull)
                     ResetGame();
-
-                if (bossLevel)
-                {
-                    boss.InitializeAnimations();
-                }
             }
 
             base.Update(gameTime);
@@ -209,8 +210,6 @@ namespace Sprint0
             //texts.Draw(_spriteBatch);
 
             menuController.Draw(_spriteBatch);
-
-            boss.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
