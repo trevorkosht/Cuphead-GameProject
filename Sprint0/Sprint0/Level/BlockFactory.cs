@@ -67,7 +67,7 @@ public static class BlockFactory
         if (subtype == "BigHill2")
         {
             block.type = "Slope";
-            BoxCollider boxCollider = new BoxCollider(bounds, offset + new Vector2(50, 90), GOManager.Instance.GraphicsDevice, -10f * (float)(Math.PI / 180));
+            BoxCollider boxCollider = new BoxCollider(bounds, offset + new Vector2(30, 90), GOManager.Instance.GraphicsDevice, -10f * (float)(Math.PI / 180));
             block.AddComponent(boxCollider);
         }
         else if (collider)

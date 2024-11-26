@@ -8,7 +8,7 @@ Block,BigHill2,1400,500
 
 
 Enemy,AggravatingAcorn,2000,100
-Enemy,MurderousMushroom,1200,516
+Enemy,MurderousMushroom,1200,500
 Enemy,TerribleTulip,1400,500
 Enemy,DeadlyDaisy,1500,-200
 Enemy,DeadlyDaisy,1600,-200
@@ -27,9 +27,9 @@ Block,BigHill3,3500,450
 
 
 Enemy,ToothyTerror,2400,600
-Enemy,BothersomeBlueberry,2800,520
+Enemy,BothersomeBlueberry,2800,500
 Enemy,SpikyBulb,3000,500
-Enemy,MurderousMushroom,3000,516
+Enemy,MurderousMushroom,3000,500
 Enemy,DeadlyDaisy,3200,-200
 Enemy,TerribleTulip,3700,350
 Enemy,AggravatingAcorn,4800,100
@@ -50,9 +50,9 @@ Block,BigHill2,4950,350
 Block,Hill2,4500,500
 
 Enemy,DeadlyDaisy,4600,-200
-Enemy,MurderousMushroom,4600,416
+Enemy,MurderousMushroom,4600,400
 Enemy,DeadlyDaisy,4600,-200
-Enemy,BothersomeBlueberry,4300,520
+Enemy,BothersomeBlueberry,4300,500
 Enemy,DeadlyDaisy,4800,-200
 Enemy,TerribleTulip,5000,400
 
@@ -77,8 +77,8 @@ Block,Log1,7800,500
 Enemy,DeadlyDaisy,6400,-250
 Enemy,ToothyTerror,6900,600
 Enemy,TerribleTulip,6000,250
-Enemy,MurderousMushroom,6600,266
-Enemy,MurderousMushroom,6700,266
+Enemy,MurderousMushroom,6600,250
+Enemy,MurderousMushroom,6700,250
 Enemy,SpikyBulb,5400,375
 Enemy,SpikyBulb,6500,300
 Enemy,AggravatingAcorn,8000,100
@@ -110,7 +110,7 @@ Enemy,DeadlyDaisy,8000,-200
 Enemy,DeadlyDaisy,8200,-200
 Enemy,DeadlyDaisy,8400,-200
 Enemy,TerribleTulip,8200,400
-Enemy,BothersomeBlueberry,8800,520
+Enemy,BothersomeBlueberry,8800,500
 Enemy,ToothyTerror,9550,700
 Enemy,ToothyTerror,9950,700
 Enemy,TerribleTulip,9150,195
@@ -128,7 +128,7 @@ Block,BigHill1,10500,600
 Block,BigHill3,11200,500
 Block,Hill1,11500,600
 
-Enemy,BothersomeBlueberry,11200,520
+Enemy,BothersomeBlueberry,11200,500
 Enemy,ToothyTerror,10350,700
 Enemy,AggravatingAcorn,11500,100
 
@@ -147,8 +147,8 @@ Enemy,AcornMaker,13000,225
 Enemy,TerribleTulip,11500,400
 Enemy,DeadlyDaisy,12200,-200
 Enemy,DeadlyDaisy,12500,-200
-Enemy,MurderousMushroom,11000,516
-Enemy,MurderousMushroom,12400,516
+Enemy,MurderousMushroom,11000,500
+Enemy,MurderousMushroom,12400,500
 Enemy,SpikyBulb,12100,575
 
 Background,LevelBackground,12500,200

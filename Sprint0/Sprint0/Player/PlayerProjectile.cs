@@ -104,17 +104,22 @@ namespace Cuphead.Player
 
         private int AddProjectileHeight(int shotsFired, ProjectileType type)
         {
+            int duckadd = 0;
+            if (player.IsDucking)
+            {
+                duckadd = 15;
+            }
             if ((type != ProjectileType.Peashooter && type != ProjectileType.Chaser) || shotsFired == 0 || shotsFired == 4)
             {
-                return 0;
+                return 0 + duckadd;
             }
             else if (shotsFired == 1 || shotsFired == 3)
             {
-                return 10;
+                return 10 + duckadd;
             }
             else
             {
-                return 20;
+                return 20 + duckadd;
             }
         }
 
