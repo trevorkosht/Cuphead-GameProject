@@ -243,6 +243,11 @@ public class Texture2DStorage
 
         //Boss level environment
         _textures["BossLevelFloatingPlatform"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-floating-platform");
+        _textures["BossLevelBush"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-bush");
+        _textures["BossLevelClouds"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-clouds");
+        _textures["BossLevelGround"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-ground");
+        _textures["BossLevelHills"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-hills");
+        _textures["BossLevelSky"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-sky-background");
 
         //Boss projectiles
         _textures["SmallAcornProjectile"] = content.Load<Texture2D>(@"BossLevel\BossProjectiles\small-acorn-projectile");

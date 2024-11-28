@@ -637,6 +637,30 @@
 /processorParam:TextureFormat=Color
 /build:BossLevel/BossProjectiles/small-acorn-projectile.png
 
+#begin BossLevel/Environment/boss-level-bush.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/Environment/boss-level-bush.png
+
+#begin BossLevel/Environment/boss-level-clouds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/Environment/boss-level-clouds.png
+
 #begin BossLevel/Environment/boss-level-floating-platform.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -648,6 +672,42 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:BossLevel/Environment/boss-level-floating-platform.png
+
+#begin BossLevel/Environment/boss-level-ground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/Environment/boss-level-ground.png
+
+#begin BossLevel/Environment/boss-level-hills.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/Environment/boss-level-hills.png
+
+#begin BossLevel/Environment/boss-level-sky-background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/Environment/boss-level-sky-background.png
 
 #begin BossLevel/SpawnedEnemies/chomper-minion-death.png
 /importer:TextureImporter
