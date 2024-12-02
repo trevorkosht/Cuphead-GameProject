@@ -214,7 +214,7 @@ public class Texture2DStorage
 
         //Boss level
         //Stage 1
-        _textures["BossCreateItem"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-create-item");
+        _textures["BossMagicHands"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-create-item");
         _textures["BossStageOneIdle"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-idle");
         _textures["BossSpawn"] = content.Load<Texture2D>(@"BossLevel\Stage1\boss-stage1-intro-temp");
         // ^ I might redo this texture at some point, I think some of the frames might be weird but not sure how it'll actually look in game

@@ -39,7 +39,7 @@ public class Boss : GameObject
         {
             return;
         }
-        Texture2D createItem = textureStorage.GetTexture("BossCreateItem"); //606x670 26
+        Texture2D magicHands = textureStorage.GetTexture("BossMagicHands"); //606x670 26
         Texture2D idle = textureStorage.GetTexture("BossStageOneIdle");
         //Texture2D spawn = textureStorage.GetTexture("BossSpawn"); //
         Texture2D seeds = textureStorage.GetTexture("BossShootSeeds"); //600x600 22
@@ -56,7 +56,7 @@ public class Boss : GameObject
         Texture2D vertExtend = textureStorage.GetTexture("VerticalVineAttackExtend"); //164x485 21
         Texture2D vertRetract = textureStorage.GetTexture("VerticalVineAttackRetract"); //164x485 21*/
 
-        sRend.addAnimation("CreateItem", new Animation(createItem, 3, 26, 670, 606));
+        sRend.addAnimation("MagicHands", new Animation(magicHands, 3, 26, 670, 606));
         sRend.addAnimation("Idle", new Animation(idle, 3, 24, 675, 510));
         sRend.addAnimation("ShootSeeds", new Animation(seeds, 3, 22, 600, 600));
         sRend.addAnimation("AttackHigh", new Animation(attackHigh, 3, 19, 665, 1150));

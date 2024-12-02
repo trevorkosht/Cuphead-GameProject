@@ -18,7 +18,6 @@ public class MagicHandsAttackState : IComponent
     public MagicHandsAttackState(Boss boss, Texture2DStorage storage)
     {
         this.boss = boss;
-        attackCooldown = 0.0;
         sycamoreTexture = storage.GetTexture("BoomerangProjectile");
         acornTexture = storage.GetTexture("SmallAcornProjectile");
         pollenTexture = storage.GetTexture("PollenProjectileWhite");
@@ -26,22 +25,13 @@ public class MagicHandsAttackState : IComponent
         random = new Random();
     }
 
-    public void Enter()
-    {
-        attackCooldown = 0.0;
-    }
-
-    public void Exit() { }
-
     public void Update(GameTime gameTime)
     {
-        attackCooldown -= gameTime.ElapsedGameTime.TotalSeconds;
-
-        if (attackCooldown <= 0)
+        if (boss.CurrentAnimation == "MagicHands")
         {
-            if (boss.CurrentAnimation == "ShootSeeds" && boss.phase == 2)
+            if (boss.phase == 2 && boss.CurrentAnimationFrame == 20)
             {
-                if (boss.CurrentAnimationFrame == 7)
+                if (attackCooldown <= 0)
                 {
                     int attackType = random.Next(0, 2);
                     if (attackType == 0)
@@ -52,65 +42,84 @@ public class MagicHandsAttackState : IComponent
                     {
                         SpawnAcorns();
                     }
-                    //attackCooldown = 3.0;
+                    attackCooldown = 2.0; // Cooldown in seconds (adjust as needed)
                 }
             }
-            if (boss.CurrentAnimation == "ShootSeeds" && boss.phase == 3)
+            else if (boss.phase == 3 && boss.CurrentAnimationFrame == 20)
             {
-                if (boss.CurrentAnimationFrame == 7)
+                if (attackCooldown <= 0)
                 {
                     SpawnPollen();
-                    //attackCooldown = 1.5;
+                    attackCooldown = 2.0; // Cooldown in seconds
                 }
             }
         }
+
+        // Update the attack cooldown
+        if (attackCooldown > 0)
+        {
+            attackCooldown -= gameTime.ElapsedGameTime.TotalSeconds;
+        }
     }
+
 
     private void SpawnSycamore()
     {
-        GameObject sycamore = new GameObject(boss.X, boss.Y - 50, new SycamoreProjectile(new Vector2(boss.X, boss.Y - 50)));
-        SpriteRenderer sr = new SpriteRenderer(new Rectangle(sycamore.X, sycamore.Y, 64, 64), boss.IsFacingRight);
+        GameObject sycamore = new GameObject(boss.X, boss.Y +300, new SycamoreProjectile(new Vector2(boss.X, boss.Y +300)));
+        SpriteRenderer sr = new SpriteRenderer(new Rectangle(sycamore.X, sycamore.Y, 212, 212), boss.IsFacingRight);
         CircleCollider collider = new CircleCollider(30, Vector2.Zero, GOManager.Instance.GraphicsDevice);
         sycamore.type = "sycamoreEnemy";
         sycamore.AddComponent(collider);
         sycamore.AddComponent(sr);
-        sr.addAnimation("boomerang", new Animation(sycamoreTexture, 1, 1, 64, 64));
+        sr.addAnimation("boomerang", new Animation(sycamoreTexture, 1, 8, 212, 212));
         sr.setAnimation("boomerang");
         GOManager.Instance.allGOs.Add(sycamore);
     }
 
     private void SpawnAcorns()
     {
+        GameObject player = GOManager.Instance.Player; // Assuming there's a way to access the player object
+
         for (int i = 0; i < 3; i++)
         {
-            Vector2 spawnPosition = new Vector2(boss.X, boss.Y - 50);
-            GameObject acorn = new GameObject((int)spawnPosition.X, (int)spawnPosition.Y, new AcornProjectile(spawnPosition, i));
-            SpriteRenderer sr = new SpriteRenderer(new Rectangle(acorn.X, acorn.Y, 48, 48), boss.IsFacingRight);
+            // Adjust vertical position for each acorn
+            float verticalOffset = i * 50; // Each acorn spawns 50 units apart vertically
+            Vector2 spawnPosition = new Vector2(boss.X, boss.Y + 300 + verticalOffset);
+
+            // Create the acorn game object
+            GameObject acorn = new GameObject((int)spawnPosition.X, (int)spawnPosition.Y, new AcornProjectile(spawnPosition, player));
+            SpriteRenderer sr = new SpriteRenderer(new Rectangle(acorn.X, acorn.Y, 90, 90), boss.IsFacingRight);
             CircleCollider collider = new CircleCollider(20, Vector2.Zero, GOManager.Instance.GraphicsDevice);
             acorn.type = "acornEnemy";
             acorn.AddComponent(collider);
             acorn.AddComponent(sr);
-            sr.addAnimation("acorn", new Animation(acornTexture, 1, 1, 48, 48));
+
+            // Set up the animation for the acorn
+            sr.addAnimation("acorn", new Animation(acornTexture, 1, 4, 90, 90));
             sr.setAnimation("acorn");
+
+            // Add the acorn to the game objects list
             GOManager.Instance.allGOs.Add(acorn);
         }
     }
+
+
 
     private void SpawnPollen()
     {
         bool spawnPink = random.Next(0, 2) == 0; // 50% chance for pink pollen
         Texture2D texture = spawnPink ? pollenPinkTexture : pollenTexture;
 
-        Vector2 spawnPosition = new Vector2(boss.X, boss.Y - 50);
+        Vector2 spawnPosition = new Vector2(boss.X, boss.Y + 300);
         GameObject pollen = new GameObject((int)spawnPosition.X, (int)spawnPosition.Y, new PollenProjectile(spawnPosition, texture, spawnPink, 3.0f));
-        SpriteRenderer sr = new SpriteRenderer(new Rectangle(pollen.X, pollen.Y, 48, 48), boss.IsFacingRight);
+        SpriteRenderer sr = new SpriteRenderer(new Rectangle(pollen.X, pollen.Y, 56, 56), boss.IsFacingRight);
         CircleCollider collider = new CircleCollider(20, Vector2.Zero, GOManager.Instance.GraphicsDevice);
         pollen.type = "pollenEnemy";
         pollen.AddComponent(collider);
         pollen.AddComponent(sr);
 
         string animationName = spawnPink ? "PinkPollen" : "WhitePollen";
-        sr.addAnimation(animationName, new Animation(texture, 2, 12, 48, 48));
+        sr.addAnimation(animationName, new Animation(texture, 2, 5, 56, 56));
         sr.setAnimation(animationName);
 
         GOManager.Instance.allGOs.Add(pollen);

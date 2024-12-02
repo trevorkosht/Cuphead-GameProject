@@ -1,17 +1,17 @@
 // Section 1 (0000-2000)
 
-Block,BigHill1,-1300,100
+Block,BigHill1,-1250,100
 
 Block,BigHill1,-500,600
 Block,BigHill1,450,600
-Block,BigHill2,1400,500
 
-Background,BossLevelHills,-200,100
-Background,BossLevelGround,-200,100
-Background,BossLevelClouds,-200,-100
-Background,BossLevelSky,-200,100
-Background,BossLevelBush,800,400
 
-Platform,BossLevelFloatingPlatform,-100,400
-Platform,BossLevelFloatingPlatform,200,400
-Platform,BossLevelFloatingPlatform,500,400
+Background,BossLevelHills,-700,0
+Background,BossLevelHills,-300,25
+Background,BossLevelGround,-300,0
+Background,BossLevelSky,-300,25
+Background,BossLevelBush,900,400
+
+Platform,BossLevelFloatingPlatform,-150,400
+Platform,BossLevelFloatingPlatform,150,400
+Platform,BossLevelFloatingPlatform,450,400

@@ -19,8 +19,8 @@ public class PollenProjectile : IComponent
     {
         this.texture = texture;
         this.isPink = isPink;
-        amplitude = 30f; // Adjust for a higher/lower wave
-        frequency = 0.1f; // Adjust for tighter/wider waves
+        amplitude = 50f; // Adjust for a higher/lower wave
+        frequency = 5f; // Adjust for tighter/wider waves
         velocity = new Vector2(-speed, 0);
         phaseOffset = startPosition.Y;
     }
@@ -30,7 +30,6 @@ public class PollenProjectile : IComponent
         float time = (float)gameTime.TotalGameTime.TotalSeconds;
         GameObject.Move((int)velocity.X, (int)(amplitude * MathF.Sin(frequency * time) + phaseOffset - GameObject.Y));
 
-        BoxCollider playerCollider = GOManager.Instance.Player.GetComponent<BoxCollider>();
 
     }
 

@@ -102,7 +102,7 @@ public class BossLogic : IComponent
         {
             string[] animations = phase == 1
                 ? new[] { "AttackHigh", "AttackLow" }
-                : new[] { "CreateItem", "ShootSeeds", "AttackHigh", "AttackLow" };
+                : new[] { "MagicHands", "AttackHigh", "AttackLow" };
 
             attackChoice = random.Next(animations.Length);
             sRend.setAnimation(animations[attackChoice]);
@@ -110,7 +110,7 @@ public class BossLogic : IComponent
         }
         else
         {
-            sRend.setAnimation(random.Next(0, 2) < 1 ? "FinalAttack" : "ShootSeeds");
+            sRend.setAnimation(random.Next(0, 2) < 1 ? "FinalAttack" : "MagicHands");
             animationRepeatCount = 0;
         }
     }
