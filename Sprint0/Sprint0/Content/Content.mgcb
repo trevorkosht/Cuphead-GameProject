@@ -709,6 +709,18 @@
 /processorParam:TextureFormat=Color
 /build:BossLevel/Environment/boss-level-sky-background.png
 
+#begin BossLevel/SpawnedEnemies/chomper-attack.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/chomper-attack.png
+
 #begin BossLevel/SpawnedEnemies/chomper-minion-death.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -721,6 +733,18 @@
 /processorParam:TextureFormat=Color
 /build:BossLevel/SpawnedEnemies/chomper-minion-death.png
 
+#begin BossLevel/SpawnedEnemies/enemy-spawn-vine.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/enemy-spawn-vine.png
+
 #begin BossLevel/SpawnedEnemies/flower-vine-groundburst.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -732,6 +756,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:BossLevel/SpawnedEnemies/flower-vine-groundburst.png
+
+#begin BossLevel/SpawnedEnemies/flytrap-attack.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/flytrap-attack.png
 
 #begin BossLevel/SpawnedEnemies/flytrap-minion-death.png
 /importer:TextureImporter
@@ -756,6 +792,174 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:BossLevel/SpawnedEnemies/flytrap-minion-vine.png
+
+#begin BossLevel/SpawnedEnemies/flytrap-spawn.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/flytrap-spawn.png
+
+#begin BossLevel/SpawnedEnemies/mini-flower-attack-orange.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/mini-flower-attack-orange.png
+
+#begin BossLevel/SpawnedEnemies/mini-flower-death.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/mini-flower-death.png
+
+#begin BossLevel/SpawnedEnemies/mini-flower-fly-orange.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/mini-flower-fly-orange.png
+
+#begin BossLevel/SpawnedEnemies/mini-flower-hit-vfx.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/mini-flower-hit-vfx.png
+
+#begin BossLevel/SpawnedEnemies/mini-flower-projectile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/mini-flower-projectile.png
+
+#begin BossLevel/SpawnedEnemies/mini-flower-spawn-orange.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/mini-flower-spawn-orange.png
+
+#begin BossLevel/SpawnedEnemies/seed-missile-fire-vfx.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/seed-missile-fire-vfx.png
+
+#begin BossLevel/SpawnedEnemies/Seeds/blue-seed-plant.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/Seeds/blue-seed-plant.png
+
+#begin BossLevel/SpawnedEnemies/Seeds/boss-blue-seed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/Seeds/boss-blue-seed.png
+
+#begin BossLevel/SpawnedEnemies/Seeds/boss-pink-seed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/Seeds/boss-pink-seed.png
+
+#begin BossLevel/SpawnedEnemies/Seeds/boss-purple-seed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/Seeds/boss-purple-seed.png
+
+#begin BossLevel/SpawnedEnemies/Seeds/pink-seed-plant.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/Seeds/pink-seed-plant.png
+
+#begin BossLevel/SpawnedEnemies/Seeds/purple-seed-plant.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:BossLevel/SpawnedEnemies/Seeds/purple-seed-plant.png
 
 #begin BossLevel/Stage1/boss-create-item.png
 /importer:TextureImporter

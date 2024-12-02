@@ -236,10 +236,34 @@ public class Texture2DStorage
         _textures["VerticalVineAttackRetract"] = content.Load<Texture2D>(@"BossLevel\Stage3\vine-attack-vertical-retract");
 
         //Boss level enemy textures
-        _textures["ChomperDeath"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\chomper-minion-death");
-        _textures["FlowerVineGroundburst"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\flower-vine-groundburst");
+        _textures["VineGroundburst"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\flower-vine-groundburst");
+        _textures["EnemySpawnVine"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\enemy-spawn-vine");
+
         _textures["FlytrapDeath"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\flytrap-minion-death");
+        _textures["FlytrapSpawn"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\flytrap-spawn");
+        _textures["FlytrapAttack"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\flytrap-attack");
         _textures["FlytrapVine"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\flytrap-minion-vine");
+
+        _textures["ChomperDeath"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\chomper-minion-death");
+        _textures["ChomperAttack"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\chomper-attack");
+
+        _textures["MiniFlowerAttack"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\mini-flower-attack-orange");
+        _textures["MiniFlowerDeath"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\mini-flower-death");
+        _textures["MiniFlowerFly"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\mini-flower-fly-orange");
+        _textures["MiniFlowerProjectile"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\mini-flower-projectile");
+        _textures["MiniFlowerHitVFX"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\mini-flower-hit-vfx");
+        _textures["MiniFlowerSpawn"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\mini-flower-spawn-orange");
+
+
+        //Seeds
+        _textures["BlueSeed"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\boss-blue-seed");
+        _textures["BlueSeedPlant"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\blue-seed-plant");
+        _textures["PinKSeed"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\boss-pink-seed");
+        _textures["PinkSeedPlant"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\pink-seed-plant");
+        _textures["PurpleSeed"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\boss-purple-seed");
+        _textures["PurpleSeedPlant"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\purple-seed-plant");
+        _textures["SeedMissileFireVFX"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\seed-missile-fire-vfx");
+
 
         //Boss level environment
         _textures["BossLevelFloatingPlatform"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-floating-platform");
