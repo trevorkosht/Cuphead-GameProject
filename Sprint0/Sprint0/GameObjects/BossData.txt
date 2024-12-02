@@ -12,6 +12,6 @@ Background,BossLevelClouds,-200,-100
 Background,BossLevelSky,-200,100
 Background,BossLevelBush,800,400
 
-Platform,BossLevelFloatingPlatform,-100,375
-Platform,BossLevelFloatingPlatform,200,375
-Platform,BossLevelFloatingPlatform,500,375
+Platform,BossLevelFloatingPlatform,-100,400
+Platform,BossLevelFloatingPlatform,200,400
+Platform,BossLevelFloatingPlatform,500,400

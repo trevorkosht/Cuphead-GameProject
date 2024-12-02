@@ -242,7 +242,7 @@ public class Texture2DStorage
         _textures["FlytrapVine"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\flytrap-minion-vine");
 
         //Boss level environment
-        _textures["BossLevelFloatingPlatform"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-floating-platform"); //200x200 9
+        _textures["BossLevelFloatingPlatform"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-floating-platform");
         _textures["BossLevelBush"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-bush");
         _textures["BossLevelClouds"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-clouds");
         _textures["BossLevelGround"] = content.Load<Texture2D>(@"BossLevel\Environment\boss-level-ground");

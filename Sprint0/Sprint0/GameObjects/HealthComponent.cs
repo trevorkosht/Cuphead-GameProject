@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Threading;
 
 public class HealthComponent : IComponent
 {
@@ -11,13 +12,15 @@ public class HealthComponent : IComponent
     public bool isPlayer { get; set; }
     public bool isDeadFull { get; set; }
     public float timeTillDeath = 1f;
+    bool delayDeath;
 
-    public HealthComponent(int maxHP, bool isDead = false, bool isPlayer = false)
+    public HealthComponent(int maxHP, bool isDead = false, bool isPlayer = false, bool delayDeath = false)
     {
         maxHealth = maxHP;
         currentHealth = maxHealth;
         this.isDead = isDead;
         this.isPlayer = isPlayer;
+        this.delayDeath = delayDeath;
     }
 
     public void AddHealth(int healthAmount)
@@ -47,11 +50,11 @@ public class HealthComponent : IComponent
 
     public void Update(GameTime gameTime)
     {
-        if (isDead && !isPlayer)
+        if (isDead && !(isPlayer || delayDeath))
         {
             GameObject.Destroy();
         }
-        else if (isDead && isPlayer)
+        else if (isDead && (isPlayer || delayDeath))
         {
             timeTillDeath -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (timeTillDeath <= 0)

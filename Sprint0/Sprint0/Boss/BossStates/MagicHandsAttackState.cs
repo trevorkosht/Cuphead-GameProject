@@ -36,7 +36,7 @@ public class MagicHandsAttackState : IState
 
         if (attackCooldown <= 0)
         {
-            if (boss.CurrentAnimation == "MagicHands" && boss.phase == 2)
+            if (boss.CurrentAnimation == "MagicHands") //&& boss.phase == 2)
             {
                 if (boss.CurrentAnimationFrame == 7)
                 {
@@ -52,7 +52,7 @@ public class MagicHandsAttackState : IState
                     attackCooldown = 3.0;
                 }
             }
-            if (boss.CurrentAnimation == "MagicHands" && boss.phase == 3)
+            if (boss.CurrentAnimation == "MagicHands") //&& boss.phase == 3)
             {
                 if (boss.CurrentAnimationFrame == 7)
                 {

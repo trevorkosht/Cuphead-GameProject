@@ -21,7 +21,7 @@ public class IdleState : IState
         // Placeholder for transitioning to attack states.
         if (SomeConditionToTriggerMagicHands())
         {
-            boss.SetState("MagicHandsAttack");
+            //boss.SetState("MagicHandsAttack");
         }
     }
 

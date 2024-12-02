@@ -77,6 +77,7 @@ namespace Sprint0
 
         protected override void Initialize()
         {
+            GOManager.Instance.GraphicsDevice = GraphicsDevice;
             base.Initialize();
             if (savedPlayerLoc != Vector2.Zero && saveLoc)
             {
@@ -92,7 +93,6 @@ namespace Sprint0
             GOManager.Instance.allGOs = gameObjects;
             GOManager.Instance.textureStorage = textureStorage;
             GOManager.Instance.audioManager = audioManager;
-            GOManager.Instance.GraphicsDevice = GraphicsDevice;
             enemyController = new EnemyController(keyboardController, textureStorage);
 
             camera = new Camera();
