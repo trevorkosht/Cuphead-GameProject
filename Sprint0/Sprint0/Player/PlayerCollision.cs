@@ -132,7 +132,11 @@ namespace Cuphead.Player
             Rectangle colliderBounds = platform.GetComponent<BoxCollider>().BoundingBox;
             if (playerBounds.Bottom - 50 < colliderBounds.Top) 
             {
-                player.velocity.Y = 0;
+                if (player.velocity.Y > 0)
+                {
+                    player.velocity.Y = 0;
+                }
+
                 player.GroundLevel = colliderBounds.Top;
                 player.floorY = colliderBounds.Bottom + 100;
                 player.IsGrounded = true;
