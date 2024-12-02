@@ -10,11 +10,13 @@ public class BossLogic : IComponent
     public bool enabled { get; set; }
 
     bool enableTimer = true, transform = false; //True if in Idle
-    float timer = 2f, timerDuration = 3f;
+    float timer = 2f, timerDuration = 1f;
     int animationRepeatCount = 0; //If animation repeats
     int attackChoice = 0;
     int phase = 1;
     int maxHP;
+    bool lowFace, highFace, vines;
+    float lowFaceTimer, highFaceTimer, vinesTimer;
     public BossLogic(int maxHP)
     {
         this.maxHP = maxHP;
@@ -25,6 +27,8 @@ public class BossLogic : IComponent
         bool willReturn = CaseAnimations();
         if (willReturn)
             return;
+        HandleFaceAttacks();
+        HandleVines();
 
         if (enableTimer)
         {
@@ -37,8 +41,25 @@ public class BossLogic : IComponent
         }
         else
         {
-            timer = timerDuration;
+            Random random = new Random();
+            timer = timerDuration + (float)random.NextDouble() * 3;
             SwitchAnimation();
+        }
+    }
+
+    void HandleFaceAttacks()
+    {
+        if(phase < 3)
+        {
+
+        }
+    }
+
+    void HandleVines()
+    {
+        if(phase == 3)
+        {
+
         }
     }
 
@@ -80,6 +101,8 @@ public class BossLogic : IComponent
             }
             else
             {
+                lowFace = false;
+                highFace = false;
                 if (phase < 3)
                     sRend.setAnimation("Idle");
                 else
