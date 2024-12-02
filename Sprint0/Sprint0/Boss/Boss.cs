@@ -63,7 +63,7 @@ public class Boss : GameObject
         sRend.addAnimation("AttackLow", new Animation(attackLow, 3, 20, 608, 1245));
         sRend.addAnimation("Death", new Animation(death, 3, 12, 628, 492));
         sRend.addAnimation("Transform", new Animation(transform, 3, 26, 660, 664));
-        sRend.addAnimation("FinalIdle", new Animation(finalIdle, 3, 22, 675, 510));
+        sRend.addAnimation("FinalIdle", new Animation(finalIdle, 3, 18, 710, 514));
         sRend.addAnimation("FinalAttack", new Animation(finalAttack, 3, 22, 653, 621));
 
         sRend.setAnimation("Idle");
