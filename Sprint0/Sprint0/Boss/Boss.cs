@@ -13,7 +13,7 @@ public class Boss : GameObject
 
     private SpriteRenderer sRend;
     private Texture2DStorage textureStorage;
-    public int maxHP = 50;
+    public int maxHP = 100;
 
     public Boss(int x, int y, Texture2DStorage textureStorage) : base(x, y)
     {
@@ -22,9 +22,10 @@ public class Boss : GameObject
         sRend.spriteScale = 2.5f;
         AddComponent(sRend);
         AddComponent(new BossLogic(maxHP, this));
-        AddComponent(new BoxCollider(new Vector2(400, 400), new Vector2(200, 0), GOManager.Instance.GraphicsDevice));
+        AddComponent(new BoxCollider(new Vector2(400, 800), new Vector2(200, 0), GOManager.Instance.GraphicsDevice));
         AddComponent(new HealthComponent(maxHP, false, true));
         AddComponent(new MagicHandsAttackState(this, textureStorage));
+        AddComponent(new SwipeAttackState(this));
         type = "BossEnemy";
 
         CurrentAnimation = "Idle";

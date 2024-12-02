@@ -9,13 +9,13 @@ public class BossLogic : IComponent
     public GameObject GameObject { get; set; }
     public bool enabled { get; set; }
 
-    bool setNewState = true, transforming = false; //True if in Idle
-    float timer = 2f, timerDuration = 1f;
-    int animationRepeatCount = 0; //If animation repeats
-    int attackChoice = 0;
-    int phase = 1;
-    int maxHP;
-    Boss boss;
+    private bool setNewState = true, transforming = false; //True if in Idle
+    private float timer = 2f, timerDuration = 1f;
+    private int animationRepeatCount = 0; //If animation repeats
+    private int attackChoice = 0;
+    private int phase = 1;
+    private readonly int maxHP;
+    private readonly Boss boss;
     Random random = new Random();
     public BossLogic(int maxHP, Boss boss)
     {
@@ -25,8 +25,7 @@ public class BossLogic : IComponent
 
     public void Update(GameTime gameTime)
     {
-        bool endEarly = CaseAnimations();
-        if (endEarly)
+        if (CaseAnimations())
             return;
 
         if (setNewState)
@@ -111,7 +110,7 @@ public class BossLogic : IComponent
         }
         else
         {
-            sRend.setAnimation("FinalAttack");
+            sRend.setAnimation(random.Next(0, 2) < 1 ? "FinalAttack" : "ShootSeeds");
             animationRepeatCount = 0;
         }
     }

@@ -4,7 +4,7 @@ using System;
 
 public class MagicHandsAttackState : IComponent
 {
-    private Boss boss;
+    private readonly Boss boss;
     private double attackCooldown;
     private Texture2D sycamoreTexture;
     private Texture2D acornTexture;
@@ -71,6 +71,7 @@ public class MagicHandsAttackState : IComponent
         GameObject sycamore = new GameObject(boss.X, boss.Y - 50, new SycamoreProjectile(new Vector2(boss.X, boss.Y - 50)));
         SpriteRenderer sr = new SpriteRenderer(new Rectangle(sycamore.X, sycamore.Y, 64, 64), boss.IsFacingRight);
         CircleCollider collider = new CircleCollider(30, Vector2.Zero, GOManager.Instance.GraphicsDevice);
+        sycamore.type = "sycamoreEnemy";
         sycamore.AddComponent(collider);
         sycamore.AddComponent(sr);
         sr.addAnimation("boomerang", new Animation(sycamoreTexture, 1, 1, 64, 64));
@@ -86,6 +87,7 @@ public class MagicHandsAttackState : IComponent
             GameObject acorn = new GameObject((int)spawnPosition.X, (int)spawnPosition.Y, new AcornProjectile(spawnPosition, i));
             SpriteRenderer sr = new SpriteRenderer(new Rectangle(acorn.X, acorn.Y, 48, 48), boss.IsFacingRight);
             CircleCollider collider = new CircleCollider(20, Vector2.Zero, GOManager.Instance.GraphicsDevice);
+            acorn.type = "acornEnemy";
             acorn.AddComponent(collider);
             acorn.AddComponent(sr);
             sr.addAnimation("acorn", new Animation(acornTexture, 1, 1, 48, 48));
@@ -103,7 +105,7 @@ public class MagicHandsAttackState : IComponent
         GameObject pollen = new GameObject((int)spawnPosition.X, (int)spawnPosition.Y, new PollenProjectile(spawnPosition, texture, spawnPink, 3.0f));
         SpriteRenderer sr = new SpriteRenderer(new Rectangle(pollen.X, pollen.Y, 48, 48), boss.IsFacingRight);
         CircleCollider collider = new CircleCollider(20, Vector2.Zero, GOManager.Instance.GraphicsDevice);
-
+        pollen.type = "pollenEnemy";
         pollen.AddComponent(collider);
         pollen.AddComponent(sr);
 
