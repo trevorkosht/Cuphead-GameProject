@@ -28,7 +28,7 @@ public static class BackgroundFactory
             { "Bush3", (1052, 350, 0.1f, 0.853f) },
             {"Clouds", (2036, 530, 0.1f, 0.91f)},
             {"SkyBackground1", (1806, 760, 0.1f, 0.95f)},
-            {"HillBackground1", (2048, 256, 0.1f, 0.87f)}, 
+            {"HillBackground1", (2048, 256, 0.1f, 0.87f)},
             {"TreeBackground1", (2048, 594, 0.1f, 0.89f)},
             {"TreeBackground2", (2046, 432, 0.1f, 0.83f)},
             {"TreeBackground3", (2037, 762, 0.1f, 0.86f)},
@@ -36,9 +36,12 @@ public static class BackgroundFactory
             {"TreeBackground5", (2048, 756, 0.1f, 0.84f)},
             {"TreeBackground6", (2046, 810, 0.1f, 0.83f)},
             {"TreeBackground7", (2040, 841, 0.1f, 0.82f)},
-            {"TreeBackground8", (2016, 786, 0.1f, 0.81f)}
-            
-
+            {"TreeBackground8", (2016, 786, 0.1f, 0.81f)},
+            {"BossLevelHills", (1379, 509, 0.1f, 0.80f) },
+            {"BossLevelClouds", (1401, 194, 0.1f, 0.75f) },
+            {"BossLevelSky", (1376, 457, 0.1f, 0.90f) },
+            {"BossLevelBush", (417, 323, 0.1f, 0.60f) },
+            {"BossLevelGround", (1444, 809, 0.1f, .65f) }
     };
     public static float layerBoost = 0;
 

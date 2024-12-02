@@ -20,8 +20,9 @@ public class Boss : GameObject
     {
         this.textureStorage = textureStorage;
         sRend = new SpriteRenderer(new Rectangle(x, y, 256, 256), true);
-        sRend.spriteScale = 3;
+        sRend.spriteScale = 2.5f;
         AddComponent(sRend);
+        AddComponent(new BossLogic());
 
         states = new Dictionary<string, IState>
         {

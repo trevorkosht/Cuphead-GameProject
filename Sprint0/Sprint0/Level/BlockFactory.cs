@@ -22,6 +22,7 @@ public static class BlockFactory
     {"BigHill4", (737, 660, new Vector2(737, 660), new Vector2(0,0), 0.7f) },
     {"Hill4", (537, 144, new Vector2(537, 144), new Vector2(0,0), 0.7f) },
     {"Hill5", (761, 177, new Vector2(761, 177), new Vector2(0,0), 0.71f) },
+    {"BossLevelGround", (1444, 809, new Vector2(1444, 809), new Vector2(0, 35), .7f)}
 };
     public static float layerBoost = 0;
 

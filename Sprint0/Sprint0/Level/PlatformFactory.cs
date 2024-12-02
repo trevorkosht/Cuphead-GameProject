@@ -2,13 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Reflection.PortableExecutable;
 
 public static class PlatformFactory
 {
     private static Dictionary<string, (int width, int height, Vector2 bounds, Vector2 offset, float orderInLayer)> platformSizes = new Dictionary<string, (int width, int height, Vector2 bounds, Vector2 offset, float orderInLayer)>()
     {
         { "Platform1", (427, 102, new Vector2(427, 25), new Vector2(0, 10), 0.5f) },
-        { "Platform2", (208, 110, new Vector2(188, 25), new Vector2(10, 10), 0.501f) }
+        { "Platform2", (208, 110, new Vector2(188, 25), new Vector2(10, 10), 0.501f) },
+        { "BossLevelFloatingPlatform", (200, 200, new Vector2(160, 25), new Vector2(20, 20), .502f) }
     };
 
     public static GameObject CreatePlatform(string subtype, Vector2 position)
@@ -23,7 +25,10 @@ public static class PlatformFactory
 
             bool collider = true;
 
-            GameObject platform = CreatePlatform(destRectangle, texture, platformData.width, platformData.height, collider, platformData.bounds, platformData.offset, platformData.orderInLayer);
+            int frameCount = 1;
+            if (subtype.Contains("Boss"))
+                frameCount = 9;
+            GameObject platform = CreatePlatform(destRectangle, texture, platformData.width, platformData.height, collider, platformData.bounds, platformData.offset, platformData.orderInLayer, frameCount);
             platform.type = "Platform" + subtype;
 
             return platform;
@@ -32,18 +37,18 @@ public static class PlatformFactory
         {
             Console.WriteLine($"Warning: Platform subtype '{subtype}' not found. Using default size.");
             Rectangle defaultRect = new Rectangle((int)position.X, (int)position.Y, 200, 50);
-            return CreatePlatform(defaultRect, texture, 200, 50, true, new Vector2(200, 50), Vector2.Zero, 0.5f); 
+            return CreatePlatform(defaultRect, texture, 200, 50, true, new Vector2(200, 50), Vector2.Zero, 0.5f, 1); 
         }
     }
 
-    private static GameObject CreatePlatform(Rectangle destRectangle, Texture2D texture, int frameWidth, int frameHeight, bool collider, Vector2 bounds, Vector2 offset, float orderInLayer)
+    private static GameObject CreatePlatform(Rectangle destRectangle, Texture2D texture, int frameWidth, int frameHeight, bool collider, Vector2 bounds, Vector2 offset, float orderInLayer, int frameCount)
     {
         GameObject platform = new GameObject(destRectangle.X, destRectangle.Y);
 
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
         platform.AddComponent(spriteRenderer);
 
-        Animation platformTexture = new Animation(texture, 1, 1, frameHeight, frameWidth);
+        Animation platformTexture = new Animation(texture, 1, frameCount, frameHeight, frameWidth);
         spriteRenderer.addAnimation("texture", platformTexture);
         spriteRenderer.setAnimation("texture");
 

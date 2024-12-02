@@ -6,17 +6,12 @@ Block,BigHill1,-500,600
 Block,BigHill1,450,600
 Block,BigHill2,1400,500
 
+Background,BossLevelHills,-200,100
+Background,BossLevelGround,-200,100
+Background,BossLevelClouds,-200,-100
+Background,BossLevelSky,-200,100
+Background,BossLevelBush,800,400
 
-//Enemy,AggravatingAcorn,2000,100
-//Enemy,MurderousMushroom,1200,500
-//Enemy,TerribleTulip,1400,500
-//Enemy,DeadlyDaisy,1500,-200
-//Enemy,DeadlyDaisy,1600,-200
-
-Item,Coin,1200,300
-
-//Background,SkyBackground1,-600,-100
-//Background,HillBackground1,-500,400
-//Background,TreeBackground2,1000,200
-//Background,SkyBackground1,1200,-100
-//Background,Rock3,1200,475
+Platform,BossLevelFloatingPlatform,-100,375
+Platform,BossLevelFloatingPlatform,200,375
+Platform,BossLevelFloatingPlatform,500,375
