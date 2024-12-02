@@ -7,6 +7,8 @@ public class Boss : GameObject
 {
     public string CurrentAnimation { get; set; }
     public int CurrentAnimationFrame { get; set; }
+    public int phase { get; set; }
+
     public bool IsFacingRight { get; set; }
 
     private SpriteRenderer sRend;
@@ -19,9 +21,10 @@ public class Boss : GameObject
         sRend = new SpriteRenderer(new Rectangle(x, y, 256, 256), true);
         sRend.spriteScale = 2.5f;
         AddComponent(sRend);
-        AddComponent(new BossLogic(maxHP));
+        AddComponent(new BossLogic(maxHP, this));
         AddComponent(new BoxCollider(new Vector2(400, 400), new Vector2(200, 0), GOManager.Instance.GraphicsDevice));
         AddComponent(new HealthComponent(maxHP, false, true));
+        AddComponent(new MagicHandsAttackState(this, textureStorage));
         type = "BossEnemy";
 
         CurrentAnimation = "Idle";

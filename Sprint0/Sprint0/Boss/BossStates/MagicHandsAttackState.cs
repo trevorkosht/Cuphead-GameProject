@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-public class MagicHandsAttackState : IState
+public class MagicHandsAttackState : IComponent
 {
     private Boss boss;
     private double attackCooldown;
@@ -11,6 +11,9 @@ public class MagicHandsAttackState : IState
     private Texture2D pollenTexture;
     private Texture2D pollenPinkTexture;
     private Random random;
+
+    public GameObject GameObject { get; set; }
+    public bool enabled { get; set; }
 
     public MagicHandsAttackState(Boss boss, Texture2DStorage storage)
     {
@@ -36,7 +39,7 @@ public class MagicHandsAttackState : IState
 
         if (attackCooldown <= 0)
         {
-            if (boss.CurrentAnimation == "MagicHands") //&& boss.phase == 2)
+            if (boss.CurrentAnimation == "ShootSeeds" && boss.phase == 2)
             {
                 if (boss.CurrentAnimationFrame == 7)
                 {
@@ -49,15 +52,15 @@ public class MagicHandsAttackState : IState
                     {
                         SpawnAcorns();
                     }
-                    attackCooldown = 3.0;
+                    //attackCooldown = 3.0;
                 }
             }
-            if (boss.CurrentAnimation == "MagicHands") //&& boss.phase == 3)
+            if (boss.CurrentAnimation == "ShootSeeds" && boss.phase == 3)
             {
                 if (boss.CurrentAnimationFrame == 7)
                 {
                     SpawnPollen();
-                    attackCooldown = 1.5;
+                    //attackCooldown = 1.5;
                 }
             }
         }

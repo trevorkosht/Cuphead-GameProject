@@ -17,9 +17,11 @@ public class BossLogic : IComponent
     int maxHP;
     bool lowFace, highFace, vines;
     float lowFaceTimer, highFaceTimer, vinesTimer;
-    public BossLogic(int maxHP)
+    Boss boss;
+    public BossLogic(int maxHP, Boss boss)
     {
         this.maxHP = maxHP;
+        this.boss = boss;
     }
 
     public void Update(GameTime gameTime)
@@ -66,6 +68,9 @@ public class BossLogic : IComponent
     bool CaseAnimations()
     {
         SpriteRenderer sRend = GameObject.GetComponent<SpriteRenderer>();
+        boss.CurrentAnimation = sRend.currentAnimation.Key;
+        boss.CurrentAnimationFrame = sRend.currentAnimation.Value.CurrentFrame;
+        boss.phase = phase;
         if (GameObject.GetComponent<HealthComponent>().isDead)
         {
             sRend.setAnimation("Death");
