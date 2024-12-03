@@ -6,9 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class LevelLoader
 {
+    private static bool isBoss = false;
     public static void LoadLevel(string filePath)
     {
         string[] lines = File.ReadAllLines(filePath);
+        isBoss = filePath.Contains("Boss");
 
         foreach (string line in lines)
         {
@@ -65,15 +67,34 @@ public class LevelLoader
 
     private static void SpawnEnemy(string subtype, int x, int y)
     {
-        if (Enum.TryParse(subtype, out EnemyType enemyType))
+        if (isBoss)
         {
-            GameObject enemy = EnemyFactory.CreateEnemy(enemyType, x, y);
-            GOManager.Instance.allGOs.Add(enemy);
+            if(Enum.TryParse(subtype, out BossEnemyType enemyType))
+            {
+                GameObject enemy = BossEnemyFactory.CreateEnemy(enemyType, x, y);
+                GOManager.Instance.allGOs.Add(enemy);
+            }
+            else
+            {
+                Console.WriteLine($"Unknown enemy type: {subtype}");
+            }
         }
         else
         {
-            Console.WriteLine($"Unknown enemy type: {subtype}");
+            if (Enum.TryParse(subtype, out EnemyType enemyType))
+            {
+
+                GameObject enemy = EnemyFactory.CreateEnemy(enemyType, x, y);
+                GOManager.Instance.allGOs.Add(enemy);
+
+            }
+            else
+            {
+                Console.WriteLine($"Unknown enemy type: {subtype}");
+            }
         }
+
+
     }
 
     private static void SpawnBlock(string subtype, Vector2 position)

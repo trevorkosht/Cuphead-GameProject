@@ -15,3 +15,7 @@ Background,BossLevelBush,900,400
 Platform,BossLevelFloatingPlatform,-150,400
 Platform,BossLevelFloatingPlatform,150,400
 Platform,BossLevelFloatingPlatform,450,400
+
+Enemy,ToothyTerrorSeed,-150,-100
+Enemy,FlowerSeed,150,-100
+Enemy,FlytrapSeed,450,-100

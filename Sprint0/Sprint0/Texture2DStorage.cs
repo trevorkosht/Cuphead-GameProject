@@ -258,7 +258,7 @@ public class Texture2DStorage
         //Seeds
         _textures["BlueSeed"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\boss-blue-seed");
         _textures["BlueSeedPlant"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\blue-seed-plant");
-        _textures["PinKSeed"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\boss-pink-seed");
+        _textures["PinkSeed"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\boss-pink-seed");
         _textures["PinkSeedPlant"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\pink-seed-plant");
         _textures["PurpleSeed"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\boss-purple-seed");
         _textures["PurpleSeedPlant"] = content.Load<Texture2D>(@"BossLevel\SpawnedEnemies\Seeds\purple-seed-plant");

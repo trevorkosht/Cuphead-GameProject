@@ -31,7 +31,7 @@ public abstract class BaseEnemy : IComponent
 
     public virtual void Update(GameTime gameTime)
     {
-        if(GameObject.GetComponent<HealthComponent>().currentHealth == 0) {
+        if(GameObject.GetComponent<HealthComponent>() != null && GameObject.GetComponent<HealthComponent>().currentHealth == 0) {
             if (this is AcornMaker) {
                 GOManager.Instance.audioManager.getInstance("AcornMakerIdle").Stop();
                 GOManager.Instance.audioManager.getInstance("AcornMakerDeath").Play();
