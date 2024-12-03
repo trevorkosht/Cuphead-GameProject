@@ -6,12 +6,13 @@ using MonoGame.Extended;
 
 public class FlyingFlower : BaseEnemy
 {
-
-    private const int FLIGHT_HEIGHT = 150;
+    private const int FLIGHT_HEIGHT = 50;
     private const int FLIGHT_SPEED = 2;
-    private const int LEFT_BOUNDS = -75;
-    private const int RIGHT_BOUNDS = 525;
+    private const int MOVEMENT_RANGE = 150;
+    private const float SPRING_CONST = 0.0004f;
     private bool hasSpawned = false;
+    private int spawnX = 0;
+    private float xVelocity;
 
     public override void Move(GameTime gameTime)
     {
@@ -21,20 +22,8 @@ public class FlyingFlower : BaseEnemy
         }
         else if (GameObject.Y <= FLIGHT_HEIGHT)
         {
-
-            if(GameObject.X < LEFT_BOUNDS || GameObject.X >= RIGHT_BOUNDS)
-            {
-                GameObject.GetComponent<SpriteRenderer>().isFacingRight = !GameObject.GetComponent<SpriteRenderer>().isFacingRight;
-            }
-
-            if (GameObject.GetComponent<SpriteRenderer>().isFacingRight)
-            {
-                GameObject.X += FLIGHT_SPEED;
-            }
-            else
-            {
-                GameObject.X -= FLIGHT_SPEED;
-            }
+            xVelocity += SPRING_CONST * (spawnX - GameObject.X);
+            GameObject.X += (int)xVelocity;
         }
     }
 
@@ -43,23 +32,34 @@ public class FlyingFlower : BaseEnemy
         base.Update(gameTime);
         KeyValuePair<string, Animation> currentAnim = GameObject.GetComponent<SpriteRenderer>().currentAnimation;
 
-        if(currentAnim.Key.Equals("Spawn") && GameObject.GetComponent<SpriteRenderer>().IsAnimationComplete())
+        HealthComponent healthComponent = GameObject.GetComponent<HealthComponent>();
+        SpriteRenderer spriteRenderer = GameObject.GetComponent<SpriteRenderer>();
+
+        if (!hasSpawned || currentAnim.Key.Equals("Fly"))
         {
-            GameObject.GetComponent<SpriteRenderer>().setAnimation("Fly");
-            hasSpawned = true;
+            healthComponent.currentHealth = healthComponent.maxHealth;
         }
 
-        if (GameObject.Y <= FLIGHT_HEIGHT && GameObject.X != (LEFT_BOUNDS + RIGHT_BOUNDS) / 2)
+        if(currentAnim.Key.Equals("Spawn") && spriteRenderer.IsAnimationComplete())
         {
-            double tan = (600 - GameObject.Y) / ((LEFT_BOUNDS + RIGHT_BOUNDS)/2 - GameObject.X);
+            spriteRenderer.setAnimation("Fly");
+            hasSpawned = true;
+            spawnX = GameObject.X;
+
+            xVelocity = (float)(0.5 * SPRING_CONST * -1 * (Math.Pow(MOVEMENT_RANGE, 2)));
+
+        }
+        else if (GameObject.Y <= FLIGHT_HEIGHT && GameObject.X != spawnX)
+        {
+            double tan = (600 - GameObject.Y) / (spawnX - GameObject.X);
             double rotationAngle = (Math.Atan(tan) - Math.PI/2);
-            if((LEFT_BOUNDS + RIGHT_BOUNDS) / 2 < GameObject.X)
+            if(spawnX < GameObject.X)
             {
                 rotationAngle += Math.PI;
             }
             rotationAngle *= 0.25;
 
-            GameObject.GetComponent<SpriteRenderer>().rotation = (float)rotationAngle;
+            spriteRenderer.rotation = (float)rotationAngle;
         }
     }
 
