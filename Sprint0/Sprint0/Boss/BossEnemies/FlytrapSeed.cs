@@ -7,6 +7,7 @@ public class FlytrapSeed : BaseEnemy
     public int GROUND_HEIGHT { get; set; }
     public int FALL_SPEED { get; set; }
     private bool isFalling = true;
+    private bool hasSpawned = false;
 
     public override void Move(GameTime gameTime)
     {
@@ -47,14 +48,13 @@ public class FlytrapSeed : BaseEnemy
             {
                 GameObject.Destroy();
             }
-            else if (currentAnim.Key.Equals("Grow") && currentAnim.Value.CurrentFrame == 15)
+            else if (currentAnim.Key.Equals("Grow") && currentAnim.Value.CurrentFrame == 15 && !hasSpawned)
             {
                 GameObject enemy = BossEnemyFactory.CreateEnemy(BossEnemyType.FollowingFlytrap, GameObject.X, GameObject.Y - 265);
                 GOManager.Instance.allGOs.Add(enemy);
+                hasSpawned = true;
             }
         }
-
-
     }
 
     public override void Shoot(GameTime gameTime)

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class CircleCollider : Collider
 {
-    public Vector2 Center { get; private set; }
+    public Vector2 Center { get;  set; }
     public float Radius { get; set; }
 
     private Texture2D _debugTexture;

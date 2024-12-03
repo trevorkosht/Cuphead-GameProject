@@ -7,6 +7,7 @@ public class FlowerSeed : BaseEnemy
     public int GROUND_HEIGHT { get; set; }
     public int FALL_SPEED {  get; set; }
     private bool isFalling = true;
+    private bool hasSpawned = false;
 
     public override void Move(GameTime gameTime)
     {
@@ -46,10 +47,11 @@ public class FlowerSeed : BaseEnemy
             {
                 GameObject.Destroy();
             }
-            else if(currentAnim.Key.Equals("Grow") && currentAnim.Value.CurrentFrame == 15)
+            else if(currentAnim.Key.Equals("Grow") && currentAnim.Value.CurrentFrame == 15 && !hasSpawned)
             {
                 GameObject enemy = BossEnemyFactory.CreateEnemy(BossEnemyType.FlyingFlower, GameObject.X - 20, GameObject.Y - 300);
                 GOManager.Instance.allGOs.Add(enemy);
+                hasSpawned = true;
             }
         }
 
