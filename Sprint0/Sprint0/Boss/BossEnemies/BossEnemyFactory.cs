@@ -98,7 +98,7 @@ public static class BossEnemyFactory {
                 Animation flightAnim = new Animation(textureStorage.GetTexture("MiniFlowerFly"), 4, 9, 118, 118);
                 spawnAnim = new Animation(textureStorage.GetTexture("MiniFlowerSpawn"), 4, 4, 100, 100);
                 deathAnim = new Animation(textureStorage.GetTexture("MiniFlowerDeath"), 3, 14, 432, 432);
-                attackAnim = new Animation(textureStorage.GetTexture("MiniFlowerAttack"), 3, 26, 128, 128);
+                attackAnim = new Animation(textureStorage.GetTexture("MiniFlowerAttack"), 4, 26, 168, 168, new Vector2(21,21));
                 spriteRenderer.addAnimation("Fly", flightAnim);
                 spriteRenderer.addAnimation("Spawn", spawnAnim);
                 spriteRenderer.addAnimation("Death", deathAnim);

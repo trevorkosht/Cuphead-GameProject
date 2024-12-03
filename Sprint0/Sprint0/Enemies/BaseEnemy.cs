@@ -38,6 +38,12 @@ public abstract class BaseEnemy : IComponent
                 Rectangle destRectangle = new Rectangle(GameObject.X - 250, GameObject.Y - 250, 900, 900);
                 VisualEffectFactory.createVisualEffect(destRectangle, acornMakerDeath, 3, 18, 1.0f, true);
             }
+            else if (this is FlyingFlower)
+            {
+                Texture2D texture = GOManager.Instance.textureStorage.GetTexture("MiniFlowerDeath");
+                Rectangle destRectangle = new Rectangle(GameObject.X - 132, GameObject.Y - 132, 432, 432); 
+                VisualEffectFactory.createVisualEffect(destRectangle, texture, 3, 14, 1.0f, true);
+            }
             else {
                 string objectClassName = this.GetType().Name;
                 if (objectClassName == "AggravatingAcorn" || objectClassName == "BothersomeBlueberry")
