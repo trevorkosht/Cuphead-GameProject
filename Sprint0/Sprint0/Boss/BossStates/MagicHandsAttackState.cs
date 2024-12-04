@@ -45,7 +45,10 @@ public class MagicHandsAttackState : IComponent
                     attackCooldown = 2.0; // Cooldown in seconds (adjust as needed)
                 }
             }
-            else if (boss.phase == 3 && boss.CurrentAnimationFrame == 20)
+        }
+        if (boss.CurrentAnimation == "FinalAttack")
+        {
+            if (boss.phase == 3 && boss.CurrentAnimationFrame == 15)
             {
                 if (attackCooldown <= 0)
                 {
@@ -67,7 +70,7 @@ public class MagicHandsAttackState : IComponent
     {
         GameObject sycamore = new GameObject(boss.X, boss.Y +300, new SycamoreProjectile(new Vector2(boss.X, boss.Y +300)));
         SpriteRenderer sr = new SpriteRenderer(new Rectangle(sycamore.X, sycamore.Y, 212, 212), boss.IsFacingRight);
-        CircleCollider collider = new CircleCollider(30, Vector2.Zero, GOManager.Instance.GraphicsDevice);
+        CircleCollider collider = new CircleCollider(30, new Vector2(-100, 0), GOManager.Instance.GraphicsDevice);
         sycamore.type = "sycamoreEnemy";
         sycamore.AddComponent(collider);
         sycamore.AddComponent(sr);

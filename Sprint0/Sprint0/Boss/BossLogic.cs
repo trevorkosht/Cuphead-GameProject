@@ -118,7 +118,7 @@ public class BossLogic : IComponent
         }
         else
         {
-            sRend.setAnimation(random.Next(0, 2) < 1 ? "FinalAttack" : "MagicHands");
+            sRend.setAnimation("FinalAttack");
             animationRepeatCount = 0;
         }
     }
