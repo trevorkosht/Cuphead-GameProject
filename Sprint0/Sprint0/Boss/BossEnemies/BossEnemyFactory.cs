@@ -66,6 +66,7 @@ public static class BossEnemyFactory {
                 enemyHP = 999;
                 break;
             case BossEnemyType.BabyToothyTerror:
+            
                 enemyLogic = new BabyToothyTerror();
                 enemy.AddComponent(enemyLogic);
                 enemy.AddComponent(new CircleCollider(25, new Vector2(-55, -45), GOManager.Instance.GraphicsDevice));

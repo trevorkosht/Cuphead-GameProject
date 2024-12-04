@@ -9,8 +9,6 @@ public class BossLogic : IComponent
 {
     public GameObject GameObject { get; set; }
     public bool enabled { get; set; }
-
-    private AudioManager audioManager;
     private bool setNewState = true, transforming = false; //True if in Idle
     private float timer = 2f, timerDuration = 1f;
     private int animationRepeatCount = 0; //If animation repeats
@@ -23,12 +21,12 @@ public class BossLogic : IComponent
     {
         this.maxHP = maxHP;
         this.boss = boss;
-        audioManager = GOManager.Instance.audioManager;
     }
 
     public void Update(GameTime gameTime)
     {
         if(GameObject.GetComponent<HealthComponent>().isDeadFull) {
+            GOManager.Instance.audioManager.getInstance("Death").Play();
             GOManager.Instance.menuManager.SetMenu("WinMenu");
             GOManager.Instance.menuManager.LoadContent(GOManager.Instance.textureStorage);
             GOManager.Instance.menuManager.Update(gameTime);
@@ -73,6 +71,7 @@ public class BossLogic : IComponent
         {
             phase = 3;
             sRend.setAnimation("Transform");
+            GOManager.Instance.audioManager.getInstance("PhaseOneToTwoTransition").Play();
             transforming = true;
             setNewState = false;
         }

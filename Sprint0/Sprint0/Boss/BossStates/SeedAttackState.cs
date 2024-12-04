@@ -29,6 +29,7 @@ public class SeedAttackState : IComponent
         {
             if (!hasFired)
             {
+                GOManager.Instance.audioManager.getInstance("GattlingGunStart").Play();
                 Rectangle vfxDest = new Rectangle(GameObject.X + 220, GameObject.Y - 85, 158, 158);
                 Texture2D vfxTexture = GOManager.Instance.textureStorage.GetTexture("SeedMissileFireVFX");
                 VisualEffectFactory.createVisualEffect(vfxDest, vfxTexture, 3, 12, 1.0f, true);
@@ -45,12 +46,14 @@ public class SeedAttackState : IComponent
                     }
                 }
 
+                GOManager.Instance.audioManager.getInstance("GattlingGunLoop").Play();
                 ShootSeeds(seeds);
                 hasFired = true;
+                //GOManager.Instance.audioManager.getInstance("GattlingGunLoop").Stop();
+                GOManager.Instance.audioManager.getInstance("GattlingGunEnd").Play();
             }
         }
-        else
-        {
+        else{
             hasFired = false;
         }
     }

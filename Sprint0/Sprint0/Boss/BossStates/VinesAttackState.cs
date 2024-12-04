@@ -82,6 +82,7 @@ public class VinesAttackState : IComponent
                     }
                     else
                     {
+                        GOManager.Instance.audioManager.getInstance("PlatformVineStart").Play();
                         for(int i = 0; i < 3; i++)
                         {
                             InitializeAnimations(GameObject.X - 60 - i * 300, GameObject.Y + 175);
@@ -103,6 +104,7 @@ public class VinesAttackState : IComponent
             {
                 foreach (GameObject vine in GOManager.Instance.allGOs)
                 {
+                    GOManager.Instance.audioManager.getInstance("PlatformVineGrow").Play();
                     if (vine.type == "AttackEnemyVine")
                     {
                         vine.GetComponent<BoxCollider>().enabled = true;
@@ -120,6 +122,7 @@ public class VinesAttackState : IComponent
                     foreach (GameObject vine in vines)
                     {
                         vine.GetComponent<SpriteRenderer>().setAnimation("vertRetract");
+                        GOManager.Instance.audioManager.getInstance("PlatformVineRetract").Play();
                     }
                 }
                 attackPart = 2;

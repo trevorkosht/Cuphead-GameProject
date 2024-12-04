@@ -45,9 +45,9 @@ public class DeathMenu : Menu
         } else {
             if(!lossScreenDisplayed) {
                 lossScreenDisplayed = true;
-                MediaPlayer.Stop();
                 GOManager.Instance.audioManager.stopAll();
             } else {
+                MediaPlayer.Stop();
                 if(deathMessageTime >= DEATH_MESSAGE_DURATION + 0.05f) {
                     game.gameState = GameState.DeathMenu;
                     game.paused = true;

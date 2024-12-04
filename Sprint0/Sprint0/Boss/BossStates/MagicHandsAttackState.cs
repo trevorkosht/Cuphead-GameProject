@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cuphead;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -11,7 +12,6 @@ public class MagicHandsAttackState : IComponent
     private Texture2D pollenTexture;
     private Texture2D pollenPinkTexture;
     private Random random;
-
     public GameObject GameObject { get; set; }
     public bool enabled { get; set; }
 
@@ -29,20 +29,27 @@ public class MagicHandsAttackState : IComponent
     {
         if (boss.CurrentAnimation == "MagicHands")
         {
-            if (boss.phase == 2 && boss.CurrentAnimationFrame == 20)
+            if (boss.phase == 2)
             {
-                if (attackCooldown <= 0)
-                {
-                    int attackType = random.Next(0, 2);
-                    if (attackType == 0)
+                if(boss.CurrentAnimationFrame == 1) {
+                    GOManager.Instance.audioManager.getInstance("HandSpawnStart").Play();
+                } 
+                if(boss.CurrentAnimationFrame == 20) {
+                    GOManager.Instance.audioManager.getInstance("HandSpawnOpen").Play();
+                    if (attackCooldown <= 0)
                     {
-                        SpawnSycamore();
+                        int attackType = random.Next(0, 2);
+                        if (attackType == 0)
+                        {
+                            SpawnSycamore();
+                        }
+                        else
+                        {
+                            SpawnAcorns();
+                        }
+                        attackCooldown = 2.0; // Cooldown in seconds (adjust as needed)
                     }
-                    else
-                    {
-                        SpawnAcorns();
-                    }
-                    attackCooldown = 2.0; // Cooldown in seconds (adjust as needed)
+                    GOManager.Instance.audioManager.getInstance("HandSpawnEnd").Play();
                 }
             }
         }
@@ -110,6 +117,7 @@ public class MagicHandsAttackState : IComponent
 
     private void SpawnPollen()
     {
+        GOManager.Instance.audioManager.getNewInstance("ProjectileSpit").Play();
         bool spawnPink = random.Next(0, 2) == 0; // 50% chance for pink pollen
         Texture2D texture = spawnPink ? pollenPinkTexture : pollenTexture;
 

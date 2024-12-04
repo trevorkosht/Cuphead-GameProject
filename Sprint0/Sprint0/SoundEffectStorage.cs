@@ -19,6 +19,7 @@ public class SoundEffectStorage
         loadEnemySounds(content);
         loadItemSounds(content);
         loadLevelSounds(content);
+        loadBossSounds(content);
     }
 
     public SoundEffect getAudio(string audioName)
@@ -106,6 +107,26 @@ public class SoundEffectStorage
         // LevelSFX
         audioManager.changeVolume("Intro", 0.3f);
 
+        // BossSFX
+        audioManager.changeVolume("BoomerangLoop", 0.4f); 
+        audioManager.changeVolume("Death", 0.5f); 
+        audioManager.changeVolume("FaceStretchEnd", 0.4f); 
+        audioManager.changeVolume("FaceStretchLoop", 0.2f); 
+        audioManager.changeVolume("FaceStretchStart", 0.3f); 
+        audioManager.changeVolume("GattlingGunEnd", 0.7f); 
+        audioManager.changeVolume("GattlingGunLoop", 0.5f); 
+        audioManager.changeVolume("GattlingGunStart", 0.3f); 
+        audioManager.changeVolume("HandSpawnEnd", 0.5f); 
+        audioManager.changeVolume("HandSpawnOpen", 0.4f); 
+        audioManager.changeVolume("HandSpawnStart", 0.5f); 
+        audioManager.changeVolume("PhaseOneToTwoTransition", 0.3f);
+        audioManager.changeVolume("PlatformVineGrow", 0.3f); 
+        audioManager.changeVolume("PlatformVineRetract", 0.3f); 
+        audioManager.changeVolume("PlatformVineStart", 0.3f); 
+        audioManager.changeVolume("ProjectileSpit", 0.5f); 
+        audioManager.changeVolume("SeedLanding", 0.7f); 
+        audioManager.changeVolume("SeedVineGrow", 0.7f); 
+
     }
 
     public void loadProjectileSounds(ContentManager content)
@@ -182,12 +203,12 @@ public class SoundEffectStorage
     }
 
     public void loadBossSounds(ContentManager content) {
-        _audios["BoomerangLoop"] = content.Load<SoundEffect>(@"SFX\BossSFX\BoomerangLoop");
+        _audios["BoomerangLoop"] = content.Load<SoundEffect>(@"SFX\BossSFX\BoomerangLoop"); 
         _audios["ChomperSpawn"] = content.Load<SoundEffect>(@"SFX\BossSFX\ChomperSpawn");
-        _audios["Death"] = content.Load<SoundEffect>(@"SFX\BossSFX\Death");
-        _audios["FaceStretchEnd"] = content.Load<SoundEffect>(@"SFX\BossSFX\FaceStretchEnd");
-        _audios["FaceStretchLoop"] = content.Load<SoundEffect>(@"SFX\BossSFX\FaceStretchLoop");
-        _audios["FaceStretchStart"] = content.Load<SoundEffect>(@"SFX\BossSFX\FaceStretchStart");
+        _audios["Death"] = content.Load<SoundEffect>(@"SFX\BossSFX\Death"); 
+        _audios["FaceStretchEnd"] = content.Load<SoundEffect>(@"SFX\BossSFX\FaceStretchEnd"); 
+        _audios["FaceStretchLoop"] = content.Load<SoundEffect>(@"SFX\BossSFX\FaceStretchLoop");  
+        _audios["FaceStretchStart"] = content.Load<SoundEffect>(@"SFX\BossSFX\FaceStretchStart"); 
         _audios["GattlingGunEnd"] = content.Load<SoundEffect>(@"SFX\BossSFX\GattlingGunEnd");
         _audios["GattlingGunLoop"] = content.Load<SoundEffect>(@"SFX\BossSFX\GattlingGunLoop");
         _audios["GattlingGunStart"] = content.Load<SoundEffect>(@"SFX\BossSFX\GattlingGunStart");
@@ -195,9 +216,9 @@ public class SoundEffectStorage
         _audios["HandSpawnOpen"] = content.Load<SoundEffect>(@"SFX\BossSFX\HandSpawnOpen");
         _audios["HandSpawnStart"] = content.Load<SoundEffect>(@"SFX\BossSFX\HandSpawnStart");
         _audios["PhaseOneToTwoTransition"] = content.Load<SoundEffect>(@"SFX\BossSFX\PhaseOneToTwoTransition");
-        _audios["PlatformVineGrow"] = content.Load<SoundEffect>(@"SFX\BossSFX\PlatformVineGrow");
-        _audios["PlatformVineRetract"] = content.Load<SoundEffect>(@"SFX\BossSFX\PlatformVineRetract");
-        _audios["PlatformVineStart"] = content.Load<SoundEffect>(@"SFX\BossSFX\PlatformVineStart");
+        _audios["PlatformVineGrow"] = content.Load<SoundEffect>(@"SFX\BossSFX\PlatformVineGrow"); 
+        _audios["PlatformVineRetract"] = content.Load<SoundEffect>(@"SFX\BossSFX\PlatformVineRetract"); 
+        _audios["PlatformVineStart"] = content.Load<SoundEffect>(@"SFX\BossSFX\PlatformVineStart"); 
         _audios["ProjectileSpit"] = content.Load<SoundEffect>(@"SFX\BossSFX\ProjectileSpit");
         _audios["SeedLanding"] = content.Load<SoundEffect>(@"SFX\BossSFX\SeedLanding");
         _audios["SeedVineGrow"] = content.Load<SoundEffect>(@"SFX\BossSFX\SeedVineGrow");

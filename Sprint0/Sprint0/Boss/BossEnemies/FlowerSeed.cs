@@ -31,12 +31,15 @@ public class FlowerSeed : BaseEnemy
 
         if (!isFalling)
         {
+            GOManager.Instance.audioManager.getInstance("SeedLanding").Play();
             if (finishedAnim && currentAnim.Key.Equals("Plant"))
             {
                 GameObject.GetComponent<SpriteRenderer>().spriteScale = 1.5f;
                 GameObject.GetComponent<SpriteRenderer>().setAnimation("Sprout");
             }
             else if (finishedAnim && currentAnim.Key.Equals("Sprout")){
+                GOManager.Instance.audioManager.getInstance("SeedLanding").Stop();
+                GOManager.Instance.audioManager.getInstance("SeedVineGrow").Play();
                 GameObject.GetComponent<SpriteRenderer>().spriteScale = 2.0f;
                 Rectangle scaledDest = GameObject.GetComponent<SpriteRenderer>().destRectangle;
                 scaledDest.Width = (int)(0.5 * scaledDest.Width);
@@ -45,6 +48,7 @@ public class FlowerSeed : BaseEnemy
             }
             else if (finishedAnim && currentAnim.Key.Equals("Grow"))
             {
+                GOManager.Instance.audioManager.getInstance("SeedVineGrow").Stop();
                 GameObject.Destroy();
             }
             else if(currentAnim.Key.Equals("Grow") && currentAnim.Value.CurrentFrame == 15 && !hasSpawned)

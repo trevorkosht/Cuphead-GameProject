@@ -18,27 +18,37 @@ public class SwipeAttackState : IComponent
     public void Update(GameTime gameTime)
     {
         if(boss.CurrentAnimation == "AttackHigh")
-        {
+        {   
+            GOManager.Instance.audioManager.getInstance("FaceStretchStart").Play();
             Rectangle destRect = GameObject.GetComponent<SpriteRenderer>().destRectangle;
             destRect.Width = 550;
             GameObject.GetComponent<SpriteRenderer>().destRectangle = destRect;
 
-            if (boss.CurrentAnimationFrame == 12)
+            if (boss.CurrentAnimationFrame == 12) {
+                GOManager.Instance.audioManager.getInstance("FaceStretchLoop").Play();
                 SpawnHighHitBox();
-            if(boss.CurrentAnimationFrame == 15)
+            }
+            if(boss.CurrentAnimationFrame == 15){
+                GOManager.Instance.audioManager.getInstance("FaceStretchEnd").Play();
                 ClearHitBox();
+            }
         }
         else if(boss.CurrentAnimation == "AttackLow")
-        {
+        {        
+            GOManager.Instance.audioManager.getInstance("FaceStretchStart").Play();
             Rectangle destRect = GameObject.GetComponent<SpriteRenderer>().destRectangle;
             destRect.Width = 535;
             destRect.Height = 231;
             GameObject.GetComponent<SpriteRenderer>().destRectangle = destRect;
 
-            if (boss.CurrentAnimationFrame == 12)
+            if (boss.CurrentAnimationFrame == 12) {
                 SpawnLowHitBox();
-            if (boss.CurrentAnimationFrame == 15)
+                GOManager.Instance.audioManager.getInstance("FaceStretchLoop").Play();
+            }
+            if (boss.CurrentAnimationFrame == 15) {
+                GOManager.Instance.audioManager.getInstance("FaceStretchEnd").Play();
                 ClearHitBox();
+            }
         }
         else
         {

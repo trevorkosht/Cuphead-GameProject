@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Cuphead;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class SycamoreProjectile : IComponent
@@ -19,6 +20,7 @@ public class SycamoreProjectile : IComponent
 
     public void Update(GameTime gameTime)
     {
+        GOManager.Instance.audioManager.getInstance("BoomerangLoop").Play();
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         if (!returning)
