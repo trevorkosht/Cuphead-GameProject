@@ -38,11 +38,23 @@ public abstract class BaseEnemy : IComponent
                 Rectangle destRectangle = new Rectangle(GameObject.X - 250, GameObject.Y - 250, 900, 900);
                 VisualEffectFactory.createVisualEffect(destRectangle, acornMakerDeath, 3, 18, 1.0f, true);
             }
+            else if(this is BabyToothyTerror)
+            {
+                Texture2D texture = GOManager.Instance.textureStorage.GetTexture("ChomperDeath");
+                Rectangle destRectangle = new Rectangle(GameObject.X - 80, GameObject.Y - 80, 288, 288);
+                VisualEffectFactory.createVisualEffect(destRectangle, texture, 3, 15, 1.0f, true);
+            }
             else if (this is FlyingFlower)
             {
                 Texture2D texture = GOManager.Instance.textureStorage.GetTexture("MiniFlowerDeath");
                 Rectangle destRectangle = new Rectangle(GameObject.X - 132, GameObject.Y - 132, 432, 432); 
                 VisualEffectFactory.createVisualEffect(destRectangle, texture, 3, 14, 1.0f, true);
+            }
+            else if (this is FollowingFlytrap)
+            {
+                Texture2D texture = GOManager.Instance.textureStorage.GetTexture("FlytrapDeath");
+                Rectangle destRectangle = new Rectangle(GameObject.X - 86, GameObject.Y - 86, 288, 288);
+                VisualEffectFactory.createVisualEffect(destRectangle, texture, 3, 10, 1.0f, true);
             }
             else {
                 string objectClassName = this.GetType().Name;

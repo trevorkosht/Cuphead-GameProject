@@ -8,9 +8,9 @@ public class SeedAttackState : IComponent
     private readonly Boss boss;
     private double attackCooldown;
     private Random random;
-    private const int NUM_TARGET_ZONES = 10;
+    private const int NUM_TARGET_ZONES = 8;
     private const int LEFT_BOUND = -200;
-    private const int RIGHT_BOUND = 800;
+    private const int RIGHT_BOUND = 600;
     private bool hasFired = false;
 
     public GameObject GameObject { get; set; }
@@ -20,6 +20,7 @@ public class SeedAttackState : IComponent
     {
         this.boss = boss;
         random = new Random();
+
     }
 
     public void Update(GameTime gameTime)
@@ -28,6 +29,9 @@ public class SeedAttackState : IComponent
         {
             if (!hasFired)
             {
+                Rectangle vfxDest = new Rectangle(GameObject.X + 220, GameObject.Y - 85, 158, 158);
+                Texture2D vfxTexture = GOManager.Instance.textureStorage.GetTexture("SeedMissileFireVFX");
+                VisualEffectFactory.createVisualEffect(vfxDest, vfxTexture, 3, 12, 1.0f, true);
                 Queue<int> seeds = new Queue<int>();
 
                 int numShots = random.Next(3, 6);

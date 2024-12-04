@@ -6,7 +6,7 @@ using MonoGame.Extended;
 
 public class FollowingFlytrap : BaseEnemy
 {
-    private const float TURN_RATE =  (float)(Math.PI / 16);
+    private const float TURN_RATE =  (float)(Math.PI / 32);
     private const float SPEED = 3.0f;
     private bool hasSpawned = false;
     private Vector2 velocity = new Vector2(0, 0);
