@@ -23,6 +23,26 @@ https://buckeyemailosu-my.sharepoint.com/:x:/g/personal/kosht_7_buckeyemail_osu_
 
 
 CODE REVIEWS:
+SPRINT 5:
+
+Ben Vidmar-McEwen
+12/4/2024
+Sprint 5
+VinesAttackState.cs
+DJ
+10 minutes
+Readability comments:
+This file contains a lot of nested conditional logic and loops to deal with the vine attack in the boss level. Unfortunately this contributes to the file having readability issues, especially since many of the if statements are consecutive if blocks to work properly, rather than an if-else statement, making it a bit harder to track the flow of conditional logic. There are some small logical reconfigurations that could make this file more readable, as well as updating some of the variable names. The different logical blocks also aren't spaced out, which would also improve visual clarity and make it easier to tell them apart and trace control flow. Especially since so many of them are consecutive if blocks it makes it a bit harder to tell right away that they are not just a single if-elseif-else block.
+
+Ben Vidmar-McEwen
+12/4/2024
+Sprint 5
+WinMenu.cs
+Jacob
+Code maintainability comments:
+This file has a bit of awkwardly designed code simply by necessity: it needs to calculate a bunch of stats and then format them in a specific way for the win screen, so there has to be a lot of hard-coded values for the formatting to get everything lined up properly on screen, since the menu is made up of a lot of parts. That being said, some of the code that handles getting and calculating game stats and score could be extracted out into its own class. Right now the file is handling both formatting and drawing the menu as well as calculating statistics, and separating those into two classes would increase cohesion and improve readability, as well as making everything more maintainable. Since the file is trying to handle two fairly distinct tasks, it would make sense to separate them while still maintaining full functionality, since it would be very easy for the WinMenu class to just pull values from the stat handler class and then print them on screen.
+
+
 
 SPRINT 4
 
