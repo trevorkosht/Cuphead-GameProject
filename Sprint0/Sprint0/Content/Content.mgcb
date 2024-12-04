@@ -2007,6 +2007,120 @@
 /processorParam:TextureFormat=Color
 /build:ProjectileTextures/Spread.png
 
+#begin SFX/BossSFX/flower_boomerang_projectile.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_boomerang_projectile.wav;SFX/BossSFX/BoomerangLoop.wav
+
+#begin SFX/BossSFX/flower_gattling_end.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_gattling_end.wav;SFX/BossSFX/GattlingGunEnd.wav
+
+#begin SFX/BossSFX/flower_gattling_loop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_gattling_loop.wav;SFX/BossSFX/GattlingGunLoop.wav
+
+#begin SFX/BossSFX/flower_gattling_start.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_gattling_start.wav;SFX/BossSFX/GattlingGunStart.wav
+
+#begin SFX/BossSFX/flower_ground_pop_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_ground_pop_03.wav;SFX/BossSFX/SeedLanding.wav
+
+#begin SFX/BossSFX/flower_man_phaseOneTwo_transition.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_man_phaseOneTwo_transition.wav;SFX/BossSFX/PhaseOneToTwoTransition.wav
+
+#begin SFX/BossSFX/flower_phase2_death_scream.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_phase2_death_scream.wav;SFX/BossSFX/Death.wav
+
+#begin SFX/BossSFX/flower_phase2_spit_projectile.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_phase2_spit_projectile.wav;SFX/BossSFX/ProjectileSpit.wav
+
+#begin SFX/BossSFX/flower_plants_grow_start.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_plants_grow_start.wav;SFX/BossSFX/ChomperSpawn.wav
+
+#begin SFX/BossSFX/flower_pot_hands_end.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_pot_hands_end.wav;SFX/BossSFX/HandSpawnEnd.wav
+
+#begin SFX/BossSFX/flower_pot_hands_open.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_pot_hands_open.wav;SFX/BossSFX/HandSpawnOpen.wav
+
+#begin SFX/BossSFX/flower_pot_hands_start.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_pot_hands_start.wav;SFX/BossSFX/HandSpawnStart.wav
+
+#begin SFX/BossSFX/flower_top_laser_attack_end.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_top_laser_attack_end.wav;SFX/BossSFX/FaceStretchEnd.wav
+
+#begin SFX/BossSFX/flower_top_laser_attack_hold_loop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_top_laser_attack_hold_loop.wav;SFX/BossSFX/FaceStretchLoop.wav
+
+#begin SFX/BossSFX/flower_top_laser_attack_start.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_top_laser_attack_start.wav;SFX/BossSFX/FaceStretchStart.wav
+
+#begin SFX/BossSFX/flower_vine_groundburst_start.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_vine_groundburst_start.wav;SFX/BossSFX/SeedVineGrow.wav
+
+#begin SFX/BossSFX/flower_vinehand_grow_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_vinehand_grow_01.wav;SFX/BossSFX/PlatformVineStart.wav
+
+#begin SFX/BossSFX/flower_vinehand_grow_continue_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_vinehand_grow_continue_02.wav;SFX/BossSFX/PlatformVineGrow.wav
+
+#begin SFX/BossSFX/flower_vinehand_grow_retract_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/BossSFX/flower_vinehand_grow_retract_01.wav;SFX/BossSFX/PlatformVineRetract.wav
+
 #begin SFX/EnemySFX/AcornMakerSFX/platforming_acorn_maker_death_01.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
