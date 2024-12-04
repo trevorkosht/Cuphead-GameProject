@@ -10,7 +10,7 @@ public class VinesAttackState : IComponent
     Texture2DStorage storage;
     List<GameObject> vines = new List<GameObject>();
     bool horizAttack = true;
-    float timeToAttack = 0;
+    float timeToAttack = 3;
     float attackTimeConst = 2;
     int attackPart = 0;
     public GameObject GameObject { get; set; }
