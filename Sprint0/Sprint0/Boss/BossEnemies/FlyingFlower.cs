@@ -77,7 +77,7 @@ public class FlyingFlower : BaseEnemy
             {
                 rotationAngle += Math.PI;
             }
-            rotationAngle *= 0.25;
+            rotationAngle *= 0.375;
 
             spriteRenderer.rotation = (float)rotationAngle;
         }
@@ -100,14 +100,37 @@ public class FlyingFlower : BaseEnemy
         }
         else if (spriteRenderer.currentAnimation.Value.CurrentFrame == 13)
         {
-            Shoot(gameTime);
+            ShootProjectile(gameTime);
         }
 
 
+    }
+
+    public void ShootProjectile(GameTime gameTime)
+    {
+        
+        Texture2D projectileTexture = GOManager.Instance.textureStorage.GetTexture("MiniFlowerProjectile");
+        Vector2 hitboxCenter = GameObject.GetComponent<CircleCollider>().Center;
+        GameObject projectile = new GameObject((int)hitboxCenter.X - 22, (int)hitboxCenter.Y - 22);
+
+        SpriteRenderer projectileRenderer = new SpriteRenderer(new Rectangle(projectile.X, projectile.Y,44, 44), true);
+        CircleCollider projectileCollider = new CircleCollider(15, new Vector2(-22, -22), GOManager.Instance.GraphicsDevice);
+        FlowerProjectile projectileLogic = new FlowerProjectile(new Vector2(projectile.X, projectile.Y));
+        projectile.AddComponent(projectileRenderer);
+        projectile.AddComponent(projectileCollider);
+        projectile.AddComponent(projectileLogic);
+
+        Animation projectileAnim = new Animation(projectileTexture, 3, 4, 44, 44);
+        projectileRenderer.addAnimation("Projectile", projectileAnim);
+        projectileRenderer.setAnimation("Projectile");
+
+        GOManager.Instance.allGOs.Add(projectile);
     }
 
     public override void Shoot(GameTime gameTime)
     {
 
     }
+
+
 }
