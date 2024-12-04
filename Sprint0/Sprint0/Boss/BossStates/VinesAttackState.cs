@@ -39,7 +39,7 @@ public class VinesAttackState : IComponent
             sRend.addAnimation("horizRetract", new Animation(horizRetract, 3, 23, 221, 946));
             sRend.setAnimation("horizExtend");
             vine.AddComponent(new BoxCollider(new Vector2(946, 150), new Vector2(0,71), GOManager.Instance.GraphicsDevice));
-            vine.GetComponent<BoxCollider>().enabled = true;
+            vine.GetComponent<BoxCollider>().enabled = false;
         }
         else
         {
@@ -50,7 +50,7 @@ public class VinesAttackState : IComponent
             sRend.addAnimation("vertRetract", new Animation(vertRetract, 3, 21, 485, 164));
             sRend.setAnimation("vertExtend");
             vine.AddComponent(new BoxCollider(new Vector2(100, 328), new Vector2(30, 50), GOManager.Instance.GraphicsDevice));
-            vine.GetComponent<BoxCollider>().enabled = true;
+            vine.GetComponent<BoxCollider>().enabled = false;
         }
         GOManager.Instance.allGOs.Add(vine);
     }
