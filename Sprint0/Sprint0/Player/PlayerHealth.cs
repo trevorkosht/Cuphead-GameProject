@@ -41,8 +41,11 @@ namespace Cuphead.Player
                 }
                 if (enemy != null)
                 {
-                    TakeDamage(50);
-                    GOManager.Instance.audioManager.getInstance("PlayerDamaged").Play();
+                    if ((enemy.GetComponent<BoxCollider>() != null && enemy.GetComponent<BoxCollider>().enabled) || (enemy.GetComponent<CircleCollider>() != null && enemy.GetComponent<CircleCollider>().enabled))
+                    {
+                        TakeDamage(50);
+                        GOManager.Instance.audioManager.getInstance("PlayerDamaged").Play();
+                    }
                 } else
                 {
                     GOManager.Instance.audioManager.getInstance("PlayerDamaged").Stop();
