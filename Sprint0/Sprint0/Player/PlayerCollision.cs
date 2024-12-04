@@ -272,9 +272,9 @@ namespace Cuphead.Player
         {
             if (collider.Intersects(Enemy.GetComponent<Collider>()))
             {
-                if (Enemy.type.Contains("AcornMaker"))
+                if (Enemy.type.Contains("AcornMaker") || Enemy.type.Equals("BossEnemy"))
                 {
-                    player.GameObject.X = Enemy.X - player.playerWidth + 40;
+                    player.GameObject.X = Enemy.X - player.playerWidth + 130;
                 }
             }
 
