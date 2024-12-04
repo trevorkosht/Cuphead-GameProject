@@ -57,15 +57,12 @@ public class VinesAttackState : IComponent
 
     public void Update(GameTime gameTime)
     {
-        /*foreach (GameObject vine in vines)
-        {
-            vine.Update(gameTime);
-        }*/
-        if(boss.GetComponent<HealthComponent>().isDead)
+        if (boss.GetComponent<HealthComponent>().isDead)
         {
             DestroyVines();
             return;
         }
+
         if (boss.phase == 3)
         {
             if (attackPart == 0)
@@ -76,16 +73,24 @@ public class VinesAttackState : IComponent
                     attackPart = 1;
                     horizAttack = !horizAttack;
                     timeToAttack = attackTimeConst;
-                    if(horizAttack)
+                    if (horizAttack)
                     {
                         InitializeAnimations(GameObject.X - 700, GameObject.Y + -100);
                     }
                     else
                     {
                         GOManager.Instance.audioManager.getInstance("PlatformVineStart").Play();
-                        for(int i = 0; i < 3; i++)
+
+                        // Randomly select 2 out of 3 platforms
+                        List<int> platformIndices = new List<int> { 0, 1, 2 };
+                        Shuffle(platformIndices); // Shuffle the list
+                        platformIndices = platformIndices.GetRange(0, 2); // Pick the first 2 platforms
+
+                        for (int i = 0; i < platformIndices.Count; i++)
                         {
-                            InitializeAnimations(GameObject.X - 60 - i * 300, GameObject.Y + 175);
+                            int platformIndex = platformIndices[i];
+                            int xOffset = -60 - platformIndex * 300;
+                            InitializeAnimations(GameObject.X + xOffset, GameObject.Y + 175);
                         }
                     }
                 }
@@ -96,6 +101,22 @@ public class VinesAttackState : IComponent
             }
         }
     }
+
+    // Utility method to shuffle a list (Fisher-Yates algorithm)
+    private void Shuffle<T>(List<T> list)
+    {
+        Random rng = new Random();
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
+
     void HandleAttack()
     {
         if(attackPart == 1)
