@@ -57,8 +57,8 @@ public class Boss : GameObject
         sRend.addAnimation("MagicHands", new Animation(magicHands, 3, 26, 670, 606));
         sRend.addAnimation("Idle", new Animation(idle, 3, 24, 675, 510));
         sRend.addAnimation("ShootSeeds", new Animation(seeds, 3, 22, 600, 600));
-        sRend.addAnimation("AttackHigh", new Animation(attackHigh, 3, 19, 665, 1150, new Vector2(640,0)));
-        sRend.addAnimation("AttackLow", new Animation(attackLow, 3, 20, 608, 1245, new Vector2(735,-67)));
+        sRend.addAnimation("AttackHigh", new Animation(attackHigh, 4, 19, 665, 1150, new Vector2(640,0)));
+        sRend.addAnimation("AttackLow", new Animation(attackLow, 4, 20, 608, 1245, new Vector2(735,-67)));
         sRend.addAnimation("Death", new Animation(death, 3, 12, 628, 492));
         sRend.addAnimation("Transform", new Animation(transform, 3, 26, 660, 664));
         sRend.addAnimation("FinalIdle", new Animation(finalIdle, 3, 18, 710, 514));
