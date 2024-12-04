@@ -13,13 +13,14 @@ public class FlowerProjectile : IComponent
     private float speed;
     private Texture2D hitVFXTexture = GOManager.Instance.textureStorage.GetTexture("MiniFlowerHitVFX");
     private Vector2 direction;
+    private bool hit = false;
 
     public FlowerProjectile(Vector2 startPosition)
     {
         position = startPosition;
         this.targetPosition.X = GOManager.Instance.Player.GetComponent<BoxCollider>().BoundingBox.Center.X;
         this.targetPosition.Y = GOManager.Instance.Player.GetComponent<BoxCollider>().BoundingBox.Center.Y;
-        speed = 200f;
+        speed = 400f;
         direction = targetPosition - position;
 
     }
@@ -36,13 +37,17 @@ public class FlowerProjectile : IComponent
 
         Random rand = new Random();
 
-        if (GameObject.GetComponent<CircleCollider>().Intersects(GOManager.Instance.Player.GetComponent<BoxCollider>()) || GameObject.Y >= 600)
+        if (!hit && (GameObject.GetComponent<CircleCollider>().Intersects(GOManager.Instance.Player.GetComponent<BoxCollider>()) || GameObject.Y >= 600))
         {
             VisualEffectFactory.createVisualEffect(new Rectangle(GameObject.X - 44, GameObject.Y - 44, 132, 132), hitVFXTexture, 2, 4, 1.0f, true);
-
-            GameObject.Destroy();
-
+            hit = true;
+            GameObject.GetComponent<SpriteRenderer>().setAnimation("NULL");
         }
+        if (GameObject.Y >= 600)
+        {
+            GameObject.Destroy();
+        }
+
     }
 
     public void Draw(SpriteBatch spriteBatch)

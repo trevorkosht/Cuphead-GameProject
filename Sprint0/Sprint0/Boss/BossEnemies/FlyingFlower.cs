@@ -12,6 +12,7 @@ public class FlyingFlower : BaseEnemy
     private const float SPRING_CONST = 0.0004f;
     private bool hasSpawned = false;
     private bool isAttacking = false;
+    private bool hasFired = false;
     private int spawnX = 0;
     private float xVelocity;
     private float prevVelocity = 1;
@@ -93,14 +94,16 @@ public class FlyingFlower : BaseEnemy
         if (spriteRenderer.IsAnimationComplete()) 
         {
             isAttacking = false;
+            hasFired = false;
             turnsForAttack = 0;
             spriteRenderer.setAnimation("Fly");
             spriteRenderer.spriteScale = 0.75f;
             GameObject.GetComponent<CircleCollider>().Radius = 30;
         }
-        else if (spriteRenderer.currentAnimation.Value.CurrentFrame == 13)
+        else if (!hasFired && spriteRenderer.currentAnimation.Value.CurrentFrame == 13)
         {
             ShootProjectile(gameTime);
+            hasFired = true;
         }
 
 
