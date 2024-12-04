@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public static class BossEnemyFactory {
     private const int GROUND_HEIGHT = 600;
-    private const int FALL_SPEED = 5;
+    private const int FALL_SPEED = 2;
     public static GameObject CreateEnemy(BossEnemyType type, int posX = 300, int posY = 300) {
         GameObject enemy = new GameObject(posX, posY);
 
@@ -113,6 +113,7 @@ public static class BossEnemyFactory {
         }
         enemy.AddComponent(new HealthComponent(enemyHP, false));
         enemy.type = "Enemy" + type;
+        GOManager.Instance.allGOs.Add(enemy);
         return enemy;
     }
 }

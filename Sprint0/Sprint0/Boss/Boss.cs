@@ -26,6 +26,7 @@ public class Boss : GameObject
         AddComponent(new HealthComponent(maxHP, false, true));
         AddComponent(new MagicHandsAttackState(this, textureStorage));
         AddComponent(new SwipeAttackState(this));
+        AddComponent(new SeedAttackState(this));
         AddComponent(new VinesAttackState(this, textureStorage));
         type = "BossEnemy";
 

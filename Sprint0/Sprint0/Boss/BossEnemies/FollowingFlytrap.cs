@@ -6,7 +6,7 @@ using MonoGame.Extended;
 
 public class FollowingFlytrap : BaseEnemy
 {
-    private const float TURN_RATE =  (float)(Math.PI / 32);
+    private const float TURN_RATE =  (float)(Math.PI / 16);
     private const float SPEED = 3.0f;
     private bool hasSpawned = false;
     private Vector2 velocity = new Vector2(0, 0);
@@ -31,13 +31,14 @@ public class FollowingFlytrap : BaseEnemy
             dot /= (vMagnitude * targetDirection.Length());
             float angle = (float)Math.Acos(dot);
 
+            float angleDiff = (float)(Math.Atan(velocity.Y / velocity.X) - Math.Atan(targetDirection.Y / targetDirection.X));
 
 
             if (angle <= TURN_RATE)
             {
                 velocity = targetDirection;
             }
-            else if (targetDirection.Y > velocity.Y)
+            else if (angleDiff < Math.PI && angleDiff >= 0)
             {
                 velocity = velocity.Rotate(-1 * TURN_RATE);
             }
