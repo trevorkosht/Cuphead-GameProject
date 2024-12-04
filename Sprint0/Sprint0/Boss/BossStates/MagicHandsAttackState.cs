@@ -77,7 +77,7 @@ public class MagicHandsAttackState : IComponent
     {
         GameObject sycamore = new GameObject(boss.X, boss.Y +300, new SycamoreProjectile(new Vector2(boss.X, boss.Y +300)));
         SpriteRenderer sr = new SpriteRenderer(new Rectangle(sycamore.X, sycamore.Y, 212, 212), boss.IsFacingRight);
-        CircleCollider collider = new CircleCollider(30, new Vector2(-100, 0), GOManager.Instance.GraphicsDevice);
+        CircleCollider collider = new CircleCollider(40, new Vector2(-100, -60), GOManager.Instance.GraphicsDevice);
         sycamore.type = "sycamoreEnemy";
         sycamore.AddComponent(collider);
         sycamore.AddComponent(sr);
@@ -99,7 +99,7 @@ public class MagicHandsAttackState : IComponent
             // Create the acorn game object
             GameObject acorn = new GameObject((int)spawnPosition.X, (int)spawnPosition.Y, new AcornProjectile(spawnPosition, player));
             SpriteRenderer sr = new SpriteRenderer(new Rectangle(acorn.X, acorn.Y, 90, 90), boss.IsFacingRight);
-            CircleCollider collider = new CircleCollider(20, Vector2.Zero, GOManager.Instance.GraphicsDevice);
+            CircleCollider collider = new CircleCollider(20, new Vector2(-25, -20), GOManager.Instance.GraphicsDevice);
             acorn.type = "acornEnemy";
             acorn.AddComponent(collider);
             acorn.AddComponent(sr);
@@ -124,7 +124,7 @@ public class MagicHandsAttackState : IComponent
         Vector2 spawnPosition = new Vector2(boss.X, boss.Y + 300);
         GameObject pollen = new GameObject((int)spawnPosition.X, (int)spawnPosition.Y, new PollenProjectile(spawnPosition, texture, spawnPink, 3.0f));
         SpriteRenderer sr = new SpriteRenderer(new Rectangle(pollen.X, pollen.Y, 56, 56), boss.IsFacingRight);
-        CircleCollider collider = new CircleCollider(20, Vector2.Zero, GOManager.Instance.GraphicsDevice);
+        CircleCollider collider = new CircleCollider(20, new Vector2(-28, -28), GOManager.Instance.GraphicsDevice);
         pollen.type = "pollenEnemy";
         pollen.AddComponent(collider);
         pollen.AddComponent(sr);
