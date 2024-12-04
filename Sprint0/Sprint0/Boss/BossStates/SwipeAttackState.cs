@@ -49,16 +49,16 @@ public class SwipeAttackState : IComponent
     }
     void SpawnHighHitBox()
     {
-        hitbox = new GameObject(300, 200);
+        hitbox = new GameObject(-1000, 200);
         hitbox.type = "EnemyBossHitBox";
-        hitbox.AddComponent(new BoxCollider(new Vector2(1500, 200), Vector2.Zero, GOManager.Instance.GraphicsDevice));
+        hitbox.AddComponent(new BoxCollider(new Vector2(3500, 200), Vector2.Zero, GOManager.Instance.GraphicsDevice));
         GOManager.Instance.allGOs.Add(hitbox);
     }
     void SpawnLowHitBox()
     {
-        hitbox = new GameObject(300, 550);
+        hitbox = new GameObject(-1000, 550);
         hitbox.type = "EnemyBossHitBox";
-        hitbox.AddComponent(new BoxCollider(new Vector2(1500, 200), Vector2.Zero, GOManager.Instance.GraphicsDevice));
+        hitbox.AddComponent(new BoxCollider(new Vector2(3500, 200), Vector2.Zero, GOManager.Instance.GraphicsDevice));
         GOManager.Instance.allGOs.Add(hitbox);
     }
     void ClearHitBox()
