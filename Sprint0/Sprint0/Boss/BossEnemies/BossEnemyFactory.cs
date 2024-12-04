@@ -20,7 +20,7 @@ public static class BossEnemyFactory {
                 enemyLogic = new ToothyTerrorSeed();
                 enemy.AddComponent(enemyLogic);
                 Animation fallAnim = new Animation(textureStorage.GetTexture("PurpleSeed"), 1, 34, 60, 60);
-                Animation plantAnim = new Animation(textureStorage.GetTexture("PurpleSeedPlant"), 5, 10, 60, 60);
+                Animation plantAnim = new Animation(textureStorage.GetTexture("PurpleSeedPlant"), 3, 10, 60, 60);
                 Animation sproutAnim = new Animation(textureStorage.GetTexture("VineGroundburst"), 5, 7, 422, 163, new Vector2(63, 275));
                 spriteRenderer.addAnimation("Fall", fallAnim);
                 spriteRenderer.addAnimation("Plant", plantAnim);
@@ -35,7 +35,7 @@ public static class BossEnemyFactory {
                 enemyLogic = new FlowerSeed();
                 enemy.AddComponent(enemyLogic);
                 fallAnim = new Animation(textureStorage.GetTexture("PinkSeed"), 3, 34, 60, 60);
-                plantAnim = new Animation(textureStorage.GetTexture("PinkSeedPlant"), 5, 10, 60, 60);
+                plantAnim = new Animation(textureStorage.GetTexture("PinkSeedPlant"), 3, 10, 60, 60);
                 Animation growAnim = new Animation(textureStorage.GetTexture("EnemySpawnVine"), 4, 39, 400, 120, new Vector2(60, 300));
                 sproutAnim = new Animation(textureStorage.GetTexture("VineGroundburst"), 5, 7, 422, 163,new Vector2(63, 275));
                 spriteRenderer.addAnimation("Fall", fallAnim);
@@ -52,7 +52,7 @@ public static class BossEnemyFactory {
                 enemyLogic = new FlytrapSeed();
                 enemy.AddComponent(enemyLogic);
                 fallAnim = new Animation(textureStorage.GetTexture("BlueSeed"), 3, 34, 60, 60);
-                plantAnim = new Animation(textureStorage.GetTexture("BlueSeedPlant"), 5, 10, 60, 60);
+                plantAnim = new Animation(textureStorage.GetTexture("BlueSeedPlant"),3, 10, 60, 60);
                 growAnim = new Animation(textureStorage.GetTexture("EnemySpawnVine"), 4, 39, 400, 120, new Vector2(60, 300));
                 sproutAnim = new Animation(textureStorage.GetTexture("VineGroundburst"), 5, 7, 422, 163, new Vector2(63, 275));
                 spriteRenderer.addAnimation("Fall", fallAnim);
@@ -80,10 +80,10 @@ public static class BossEnemyFactory {
             case BossEnemyType.FollowingFlytrap:
                 enemyLogic = new FollowingFlytrap();
                 enemy.AddComponent(enemyLogic);
-                enemy.AddComponent(new CircleCollider(25, new Vector2(-38, -45), GOManager.Instance.GraphicsDevice));
+                enemy.AddComponent(new CircleCollider(30, new Vector2(10, 5), GOManager.Instance.GraphicsDevice));
                 Animation spawnAnim = new Animation(textureStorage.GetTexture("FlytrapSpawn"), 4, 6, 68, 68);
                 deathAnim = new Animation(textureStorage.GetTexture("FlytrapDeath"), 3, 10, 288, 288);
-                attackAnim = new Animation(textureStorage.GetTexture("FlytrapAttack"), 3, 5, 116, 116);
+                attackAnim = new Animation(textureStorage.GetTexture("FlytrapAttack"), 3, 5, 116, 116, new Vector2(58, 58));
                 spriteRenderer.addAnimation("Spawn", spawnAnim);
                 spriteRenderer.addAnimation("Death", deathAnim);
                 spriteRenderer.addAnimation("Attack", attackAnim);

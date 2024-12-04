@@ -49,7 +49,27 @@ public class FlowerSeed : BaseEnemy
             }
             else if(currentAnim.Key.Equals("Grow") && currentAnim.Value.CurrentFrame == 15 && !hasSpawned)
             {
-                GameObject enemy = BossEnemyFactory.CreateEnemy(BossEnemyType.FlyingFlower, GameObject.X - 20, GameObject.Y - 300);
+                bool flowerAlreadySpawned = false;
+                foreach (GameObject GO in GOManager.Instance.allGOs)
+                {
+                    if (GO.GetComponent<FlyingFlower>() != null)
+                    {
+                        flowerAlreadySpawned = true;
+                        break;
+                    }
+                }
+
+                GameObject enemy;
+
+                if (!flowerAlreadySpawned)
+                {
+                    enemy = BossEnemyFactory.CreateEnemy(BossEnemyType.FlyingFlower, GameObject.X - 20, GameObject.Y - 300);
+                }
+                else
+                {
+                    enemy = BossEnemyFactory.CreateEnemy(BossEnemyType.FollowingFlytrap, GameObject.X, GameObject.Y - 265);
+                }
+                
                 GOManager.Instance.allGOs.Add(enemy);
                 hasSpawned = true;
             }

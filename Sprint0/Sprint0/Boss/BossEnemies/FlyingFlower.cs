@@ -51,10 +51,12 @@ public class FlyingFlower : BaseEnemy
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        KeyValuePair<string, Animation> currentAnim = GameObject.GetComponent<SpriteRenderer>().currentAnimation;
 
         HealthComponent healthComponent = GameObject.GetComponent<HealthComponent>();
         SpriteRenderer spriteRenderer = GameObject.GetComponent<SpriteRenderer>();
+
+        KeyValuePair<string, Animation> currentAnim = spriteRenderer.currentAnimation;
+
 
         if (!hasSpawned || currentAnim.Key.Equals("Fly"))
         {

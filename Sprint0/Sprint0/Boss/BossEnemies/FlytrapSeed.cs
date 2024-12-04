@@ -51,6 +51,7 @@ public class FlytrapSeed : BaseEnemy
             else if (currentAnim.Key.Equals("Grow") && currentAnim.Value.CurrentFrame == 15 && !hasSpawned)
             {
                 GameObject enemy = BossEnemyFactory.CreateEnemy(BossEnemyType.FollowingFlytrap, GameObject.X, GameObject.Y - 265);
+                enemy.GetComponent<SpriteRenderer>().isFacingRight = GameObject.X > GOManager.Instance.Player.X;
                 GOManager.Instance.allGOs.Add(enemy);
                 hasSpawned = true;
             }
