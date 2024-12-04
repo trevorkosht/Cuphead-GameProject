@@ -25,6 +25,11 @@ public class BossLogic : IComponent
 
     public void Update(GameTime gameTime)
     {
+        if(GameObject.GetComponent<HealthComponent>().isDeadFull) {
+            GOManager.Instance.menuManager.SetMenu("WinMenu");
+            GOManager.Instance.menuManager.LoadContent(GOManager.Instance.textureStorage);
+            GOManager.Instance.menuManager.Update(gameTime);
+        }
         if (CaseAnimations())
             return;
 

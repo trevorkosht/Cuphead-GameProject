@@ -2157,11 +2157,29 @@
 /processorParam:Quality=Best
 /build:SFX/LevelSFX/16 Forest Follies.mp3;SFX/LevelSFX/ForestFolliesBackgroundMusic.mp3
 
+#begin SFX/LevelSFX/Cuphead OST - Floral Fury [Music].mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SFX/LevelSFX/Cuphead OST - Floral Fury [Music].mp3;SFX/LevelSFX/FloralFuryBackgroundMusic.mp3
+
+#begin SFX/LevelSFX/Cuphead OST - Victory Tune [Music].mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SFX/LevelSFX/Cuphead OST - Victory Tune [Music].mp3;SFX/LevelSFX/VictoryScreenBackgroundMusic.mp3
+
 #begin SFX/LevelSFX/Cuphead_level_intro.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:SFX/LevelSFX/Cuphead_level_intro.wav;SFX/LevelSFX/Intro.wav
+
+#begin SFX/LevelSFX/vinyl_scratch_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/LevelSFX/vinyl_scratch_02.wav;SFX/LevelSFX/VinylScratch.wav
 
 #begin SFX/PlayerSFX/PlayerMovementSFX/player_dash_01.wav
 /importer:WavImporter

@@ -19,6 +19,8 @@ namespace Cuphead
 
         private Dictionary<string, SoundObject> soundObjects = new Dictionary<string, SoundObject>();
         public Song backgroundMusic { get; set; }
+        public Song bossFightMusic {get; set;}
+        public Song victoryMusic {get; set;}
 
         public void addSoundObject(string soundObjectName, SoundEffect soundEffect)
         {

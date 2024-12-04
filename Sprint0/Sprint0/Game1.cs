@@ -1,20 +1,24 @@
 ﻿using Cuphead;
 using Cuphead.Controllers;
-using Cuphead.Menu;
 using Cuphead.Player;
 using Cuphead.UI;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended;
-using MonoGame.Extended.Timers;
 using System;
 using System.Collections.Generic;
 
 namespace Sprint0
 {
+    public enum GameState
+    {
+        MainMenu,
+        Playing,
+        PauseMenu,
+        DeathMenu,
+        WinMenu
+    }
     public class Game1 : Game
     {
         private static GraphicsDeviceManager _graphics;
@@ -22,7 +26,7 @@ namespace Sprint0
 
         private SpriteBatch _spriteBatch;
         private SpriteBatch _spriteBatch2;
-
+        private SpriteBatch _spriteBatchMenus;
         private Texture2DStorage textureStorage;
         private SoundEffectStorage audioStorage;
         private KeyboardController keyboardController;
@@ -40,6 +44,7 @@ namespace Sprint0
         private bool saveLoc = false;
         internal PlayerState playerState;
         private MenuController menuController;
+        private MenuManager menuManager;
         private UI UI;
 
         string basePath;
@@ -48,7 +53,12 @@ namespace Sprint0
         SpriteFont font;
 
         private bool resetFrame;
-        private bool bossLevel = true;
+        public bool bossLevel = false;
+
+        public float totalGameTime = 0f;
+        public bool paused = true;
+
+        public GameState gameState = GameState.MainMenu;
 
 
         //boss part
@@ -105,8 +115,7 @@ namespace Sprint0
             else
                 LevelLoader.LoadLevel(basePath + "BossData.txt");
             gameObjects.Add(player);
-            GOManager.Instance.audioManager.getInstance("Intro").Play();
-            MediaPlayer.Play(GOManager.Instance.audioManager.backgroundMusic);
+
             MediaPlayer.Volume = 0.3f;
             MediaPlayer.IsRepeating = true;
         }
@@ -115,6 +124,7 @@ namespace Sprint0
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _spriteBatch2 = new SpriteBatch(GraphicsDevice);
+            _spriteBatchMenus = new SpriteBatch(GraphicsDevice);
             textureStorage = new Texture2DStorage();
             audioStorage = new SoundEffectStorage();
             textureStorage.LoadContent(Content);
@@ -151,38 +161,107 @@ namespace Sprint0
             texts = new TextSprite(font, "",new Vector2(0, 0), Color.White);
 
             menuController = new MenuController(playerState, font);
-
+            menuManager = new MenuManager();
+            GOManager.Instance.menuManager = menuManager;
+            menuManager.AddMenu("MainMenu", new MainMenu(this));
+            menuManager.AddMenu("PauseMenu", new PauseMenu(this));
+            menuManager.AddMenu("DeathMenu", new DeathMenu(this));
+            menuManager.AddMenu("WinMenu", new WinMenu(this));
+            menuManager.SetMenu("MainMenu");
+            menuManager.LoadContent(textureStorage);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            menuController.Update(gameTime);
-            RemoveDestroyedObjects();
+            if(Keyboard.GetState().IsKeyDown(Keys.O)) {
+                paused = true;
+                gameState = GameState.WinMenu;
+                MediaPlayer.Pause();
+            }
 
+            if(Keyboard.GetState().IsKeyDown(Keys.P)) {
+                paused = true;
+                gameState = GameState.PauseMenu;
+                MediaPlayer.Pause();
+            }
             keyboardController.Update();
 
-            if (menuController.StopGame())
+            switch (gameState)
             {
-                cameraController.Update();
-                foreach (var go in GOManager.Instance.allGOs)
-                {
-                    if (go.type == "PlayerProjectile")
-                        go.GetComponent<SpriteRenderer>().enabled = false;
-                    else if (go.type == "VFX")
-                        go.GetComponent<VisualEffectRenderer>().enabled = false;
-                }
-            }
-            else
-            {
-                UpdateGameObject(gameTime);
-                enemyController.Update(gameTime);
-                savedPlayerLoc = player.position;
-                cameraController.Update();
-                UI.Update(gameTime);
+                case GameState.Playing:
+                    totalGameTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if(!paused) {
+                        if(!bossLevel) {
+                            if (MediaPlayer.State != MediaState.Playing || GOManager.Instance.audioManager.backgroundMusic != MediaPlayer.Queue.ActiveSong)
+                            {
+                                MediaPlayer.Play(GOManager.Instance.audioManager.backgroundMusic);
+                            }
+                            if(player.position.X > 13000) {
+                                gameState = GameState.WinMenu;
+                                paused = true;
+                                break;
+                            }
+                        } else {
+                            if (MediaPlayer.State != MediaState.Playing || GOManager.Instance.audioManager.bossFightMusic != MediaPlayer.Queue.ActiveSong)
+                            {
+                                MediaPlayer.Play(GOManager.Instance.audioManager.bossFightMusic);
+                            }
+                        }
 
-                // Check if player is dead
-                if (player.GetComponent<HealthComponent>().isDeadFull)
+                        RemoveDestroyedObjects();
+                        UpdateGameObject(gameTime);
+                        enemyController.Update(gameTime);
+                        savedPlayerLoc = player.position;
+                        cameraController.Update();
+                        UI.Update(gameTime);
+
+                        // Check if player is dead
+                        if (player.GetComponent<HealthComponent>().isDeadFull) {
+                            menuManager.SetMenu("DeathMenu");
+                            menuManager.LoadContent(textureStorage);
+                        }
+                        if(menuManager.getCurrentMenuName() == "DeathMenu") {
+                            menuManager.Update(gameTime);
+                        }
+                    }
+                    break;
+
+                case GameState.MainMenu:
+                    paused = true;
                     ResetGame();
+                    menuManager.SetMenu("MainMenu");
+                    menuManager.LoadContent(textureStorage);
+                    break;
+                case GameState.PauseMenu:
+                    paused = true;
+                    menuManager.SetMenu("PauseMenu");
+                    menuManager.LoadContent(textureStorage);
+                    break;
+                case GameState.DeathMenu:
+                    menuManager.SetMenu("DeathMenu"); 
+                    menuManager.LoadContent(textureStorage);
+                    break;
+                case GameState.WinMenu:
+                    if (!paused) {
+                        bossLevel = true;
+                        ResetGame();
+                        gameState = GameState.Playing;
+                        paused = false;
+                    } else {
+                        if (MediaPlayer.State != MediaState.Playing || GOManager.Instance.audioManager.victoryMusic != MediaPlayer.Queue.ActiveSong)
+                        {
+                            MediaPlayer.Play(GOManager.Instance.audioManager.victoryMusic);
+                        }
+                        paused = true;
+                        menuManager.getCurrentMenu().totalGametimeSeconds = (int)totalGameTime;
+                        menuManager.SetMenu("WinMenu");
+                        menuManager.LoadContent(textureStorage);
+                    }
+                    break;
+            }
+
+            if(gameState != GameState.Playing) {
+                menuManager.Update(gameTime);
             }
 
             base.Update(gameTime);
@@ -191,41 +270,63 @@ namespace Sprint0
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.BlanchedAlmond);
-
-            // Begin sprite batch with camera transformation matrix
-            _spriteBatch.Begin(SpriteSortMode.BackToFront, transformMatrix: camera.Transform);
-
-            foreach (var gameObject in gameObjects)
+            if(gameState != GameState.DeathMenu) {
+                GraphicsDevice.Clear(Color.BlanchedAlmond);
+            }
+            switch (gameState)
             {
-                if (resetFrame)
-                {
-                    resetFrame = false;
+                case GameState.Playing:
+                    if(!paused) {
+                        // Begin sprite batch with camera transformation matrix
+                        _spriteBatch.Begin(SpriteSortMode.BackToFront, transformMatrix: camera.Transform);
+                        foreach (var gameObject in gameObjects)
+                        {
+                            if (resetFrame)
+                            {
+                                resetFrame = false;
+                                break;
+                            }
+                            gameObject.Draw(_spriteBatch);
+                        }
+                        enemyController.Draw(_spriteBatch);
+                        _spriteBatch.End();
+
+                        if(menuManager.getCurrentMenuName() == "DeathMenu") {
+                            _spriteBatchMenus.Begin();
+                            menuManager.Draw(_spriteBatchMenus, font);
+                            _spriteBatchMenus.End();
+                        }
+                    }
                     break;
-                }
-                gameObject.Draw(_spriteBatch);
+
+                case GameState.MainMenu:
+                case GameState.PauseMenu:
+                case GameState.DeathMenu:
+                case GameState.WinMenu:
+                    _spriteBatchMenus.Begin();
+                    menuManager.Draw(_spriteBatchMenus, font);
+                    _spriteBatchMenus.End();
+                    break;
             }
-            enemyController.Draw(_spriteBatch);
 
-            //texts.Draw(_spriteBatch);
+            if(gameState == GameState.Playing) {
 
-            menuController.Draw(_spriteBatch);
-
-            _spriteBatch.End();
-
-            _spriteBatch2.Begin();
-
-            if (!menuController.StopGame())
-            {
+                _spriteBatch2.Begin();
                 UI.Draw();
+                _spriteBatch2.End();
             }
-            
-            _spriteBatch2.End();
+
             base.Draw(gameTime);
         }
 
         private void ResetGame()
         {
+            totalGameTime = 0;
+            
+            gameState = GameState.MainMenu;
+            menuManager.SetMenu("MainMenu");
+            menuManager.LoadContent(textureStorage);
+
             enemyController.currentEnemyIndex = 0;
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -270,6 +371,11 @@ namespace Sprint0
                     continue;
                 }
             }
+        }
+
+        public int[] getPlayerStats() {
+            int[] playerStats = {playerState.parryCount, playerState.coinCount};
+            return playerStats;
         }
     }
 }

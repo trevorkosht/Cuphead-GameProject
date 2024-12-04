@@ -158,5 +158,3 @@ Background,Rock2,12000,0
 Background,Leaves2,12000,-100
 Background,Clouds,12700,-300
 Background,Tree7,13000,250
-
-Item,Coin,13500,400

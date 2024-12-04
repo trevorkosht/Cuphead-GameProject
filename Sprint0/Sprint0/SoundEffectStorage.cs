@@ -1,23 +1,19 @@
 ﻿using Cuphead;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 public class SoundEffectStorage
 {
     private Dictionary<string, SoundEffect> _audios = new Dictionary<string, SoundEffect>();
-    private Song backgroundMusic;
+    private Song backgroundMusic, bossFightMusic, victoryMusic;
 
     public void LoadContent(ContentManager content)
     {
         backgroundMusic = content.Load<Song>(@"SFX\LevelSFX\ForestFolliesBackgroundMusic");
+        bossFightMusic = content.Load<Song>(@"SFX\LevelSFX\FloralFuryBackgroundMusic");
+        victoryMusic = content.Load<Song>(@"SFX\LevelSFX\VictoryScreenBackgroundMusic");
         loadProjectileSounds(content);
         loadPlayerSounds(content);
         loadEnemySounds(content);
@@ -36,6 +32,8 @@ public class SoundEffectStorage
     public void loadAudioManager(AudioManager audioManager)
     {
         audioManager.backgroundMusic = backgroundMusic;
+        audioManager.bossFightMusic = bossFightMusic;
+        audioManager.victoryMusic = victoryMusic;
         audioManager.addSoundObject(_audios);
 
         // PlayerProjectileSFX
