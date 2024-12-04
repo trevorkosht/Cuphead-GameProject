@@ -35,7 +35,7 @@ public class SeedAttackState : IComponent
                 VisualEffectFactory.createVisualEffect(vfxDest, vfxTexture, 3, 12, 1.0f, true);
                 Queue<int> seeds = new Queue<int>();
 
-                int numShots = random.Next(3, 6);
+                int numShots = random.Next(3, 5);
 
                 while (seeds.Count < numShots)
                 {
@@ -69,7 +69,7 @@ public class SeedAttackState : IComponent
     {
         int type = random.Next(0, 3);
         int X = LEFT_BOUND + targetIndex * (RIGHT_BOUND - LEFT_BOUND) / NUM_TARGET_ZONES;
-        int Y = -1 * random.Next(200, 600);
+        int Y = -1 * random.Next(200, 700);
 
         switch (type)
         {
