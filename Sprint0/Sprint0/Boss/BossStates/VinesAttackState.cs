@@ -30,7 +30,9 @@ public class VinesAttackState : IComponent
         vines.Add(vine);
         if (horizAttack)
         {
-            sRend.spriteScale = 4;
+            vine.Y += 525;
+            sRend.destRectangle = new Rectangle(x, y, 946, 221);
+            sRend.spriteScale = 1;
             Texture2D horizExtend = storage.GetTexture("HorizontalVineAttackExtend"); //946x221 23
             Texture2D horizRetract = storage.GetTexture("HorizontalVineAttackRetract"); //946x221 23
             sRend.addAnimation("horizExtend", new Animation(horizExtend, 3, 23, 221, 946));
@@ -41,6 +43,7 @@ public class VinesAttackState : IComponent
         }
         else
         {
+            sRend.destRectangle = new Rectangle(x, y, 164, 485);
             Texture2D vertExtend = storage.GetTexture("VerticalVineAttackExtend"); //164x485 21
             Texture2D vertRetract = storage.GetTexture("VerticalVineAttackRetract"); //164x485 21
             sRend.addAnimation("vertExtend", new Animation(vertExtend, 3, 21, 485, 164));
@@ -81,7 +84,7 @@ public class VinesAttackState : IComponent
                     {
                         for(int i = 0; i < 3; i++)
                         {
-                            InitializeAnimations(GameObject.X -100 - i * 300, GameObject.Y + 300);
+                            InitializeAnimations(GameObject.X - 60 - i * 300, GameObject.Y + 175);
                         }
                     }
                 }

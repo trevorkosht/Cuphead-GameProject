@@ -53,7 +53,7 @@ namespace Sprint0
         SpriteFont font;
 
         private bool resetFrame;
-        public bool bossLevel = true;
+        public bool bossLevel = false;
 
         public float totalGameTime = 0f;
         public bool paused = true;
