@@ -96,9 +96,16 @@ public class MagicHandsAttackState : IComponent
             float verticalOffset = i * 50; // Each acorn spawns 50 units apart vertically
             Vector2 spawnPosition = new Vector2(boss.X, boss.Y + 300 + verticalOffset);
 
+            // Calculate the direction vector towards the player
+            Vector2 direction = Vector2.Normalize(player.position - spawnPosition);
+            float rotation = (float)Math.Atan2(direction.Y, direction.X); // Calculate the angle in radians
+
+            // Reverse the rotation direction
+            rotation += MathHelper.Pi; // Add 180 degrees (π radians)
+
             // Create the acorn game object
             GameObject acorn = new GameObject((int)spawnPosition.X, (int)spawnPosition.Y, new AcornProjectile(spawnPosition, player));
-            SpriteRenderer sr = new SpriteRenderer(new Rectangle(acorn.X, acorn.Y, 90, 90), boss.IsFacingRight);
+            SpriteRenderer sr = new SpriteRenderer(new Rectangle(acorn.X, acorn.Y, 90, 90), boss.IsFacingRight, MathHelper.ToDegrees(rotation));
             CircleCollider collider = new CircleCollider(20, new Vector2(-25, -20), GOManager.Instance.GraphicsDevice);
             acorn.type = "acornEnemy";
             acorn.AddComponent(collider);
@@ -112,6 +119,8 @@ public class MagicHandsAttackState : IComponent
             GOManager.Instance.allGOs.Add(acorn);
         }
     }
+
+
 
 
 
