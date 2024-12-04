@@ -31,6 +31,8 @@ public class SwipeAttackState : IComponent
             if (boss.CurrentAnimationFrame == 15)
                 ClearHitBox();
         }
+        if(boss.CurrentAnimation != "AttackHigh" && boss.CurrentAnimation != "AttackLow")
+            ClearHitBox();
     }
     void SpawnHighHitBox()
     {

@@ -55,7 +55,7 @@ public class BoxCollider : Collider
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        if (GOManager.Instance.IsDebugging)
+        if (GOManager.Instance.IsDebugging && enabled)
         {
             // Get the rotated corners of the rectangle
             Vector2[] corners = GetRotatedCorners();
@@ -81,6 +81,8 @@ public class BoxCollider : Collider
 
     public override bool Intersects(Collider other)
     {
+        if(!enabled)
+            return false;
         if (other is BoxCollider box)
         {
             return CheckRotatedCollision(box);

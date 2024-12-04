@@ -13,7 +13,7 @@ public class Boss : GameObject
 
     private SpriteRenderer sRend;
     private Texture2DStorage textureStorage;
-    public int maxHP = 100;
+    public int maxHP = 20;
 
     public Boss(int x, int y, Texture2DStorage textureStorage) : base(x, y)
     {
@@ -26,6 +26,7 @@ public class Boss : GameObject
         AddComponent(new HealthComponent(maxHP, false, true));
         AddComponent(new MagicHandsAttackState(this, textureStorage));
         AddComponent(new SwipeAttackState(this));
+        AddComponent(new VinesAttackState(this, textureStorage));
         type = "BossEnemy";
 
         CurrentAnimation = "Idle";
@@ -51,10 +52,6 @@ public class Boss : GameObject
         Texture2D transform = textureStorage.GetTexture("BossFinalTransformation"); //664x660 26
         Texture2D finalIdle = textureStorage.GetTexture("BossFinalStageIdle"); // ??
         Texture2D finalAttack = textureStorage.GetTexture("BossFinalStageAttack"); //621x653 22
-        /*Texture2D horizExtend = textureStorage.GetTexture("HorizontalVineAttackExtend"); //946x221 23
-        Texture2D horizRetract = textureStorage.GetTexture("HorizontalVineAttackRetract"); //946x221 23
-        Texture2D vertExtend = textureStorage.GetTexture("VerticalVineAttackExtend"); //164x485 21
-        Texture2D vertRetract = textureStorage.GetTexture("VerticalVineAttackRetract"); //164x485 21*/
 
         sRend.addAnimation("MagicHands", new Animation(magicHands, 3, 26, 670, 606));
         sRend.addAnimation("Idle", new Animation(idle, 3, 24, 675, 510));
