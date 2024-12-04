@@ -6,8 +6,8 @@ using MonoGame.Extended;
 
 public class FollowingFlytrap : BaseEnemy
 {
-    private const float TURN_RATE =  (float)(Math.PI / 4);
-    private const float SPEED = 1.0f;
+    private const float TURN_RATE =  (float)(Math.PI / 32);
+    private const float SPEED = 3.0f;
     private bool hasSpawned = false;
     private Vector2 velocity = new Vector2(0, 0);
     private Vector2 position;
@@ -20,7 +20,7 @@ public class FollowingFlytrap : BaseEnemy
             Vector2 targetPosition;
             targetPosition.X = GOManager.Instance.Player.GetComponent<BoxCollider>().BoundingBox.Center.X;
             targetPosition.Y = GOManager.Instance.Player.GetComponent<BoxCollider>().BoundingBox.Center.Y;
-            GameObject.GetComponent<SpriteRenderer>().isFacingRight = GameObject.X > targetPosition.X;
+            GameObject.GetComponent<SpriteRenderer>().isFacingRight = velocity.X < 0;
             position = GameObject.GetComponent<CircleCollider>().Center;
             targetDirection = targetPosition - position;
             targetDirection.Normalize();
@@ -37,13 +37,13 @@ public class FollowingFlytrap : BaseEnemy
             {
                 velocity = targetDirection;
             }
-            else if (targetDirection.Y < velocity.Y)
+            else if (targetDirection.Y > velocity.Y)
             {
-                velocity.Rotate(-1 * TURN_RATE);
+                velocity = velocity.Rotate(-1 * TURN_RATE);
             }
             else
             {
-                velocity.Rotate(TURN_RATE);
+                velocity = velocity.Rotate(TURN_RATE);
             }
 
             angle = (float)Math.Atan(velocity.Y / velocity.X);
