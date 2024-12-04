@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using Cuphead;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,6 +10,7 @@ public class BossLogic : IComponent
     public GameObject GameObject { get; set; }
     public bool enabled { get; set; }
 
+    private AudioManager audioManager;
     private bool setNewState = true, transforming = false; //True if in Idle
     private float timer = 2f, timerDuration = 1f;
     private int animationRepeatCount = 0; //If animation repeats
@@ -21,6 +23,7 @@ public class BossLogic : IComponent
     {
         this.maxHP = maxHP;
         this.boss = boss;
+        audioManager = GOManager.Instance.audioManager;
     }
 
     public void Update(GameTime gameTime)
