@@ -20,7 +20,7 @@ public class SwipeAttackState : IComponent
         if(boss.CurrentAnimation == "AttackHigh")
         {
             Rectangle destRect = GameObject.GetComponent<SpriteRenderer>().destRectangle;
-            destRect.Width = 400;
+            destRect.Width = 550;
             GameObject.GetComponent<SpriteRenderer>().destRectangle = destRect;
 
             if (boss.CurrentAnimationFrame == 12)
@@ -31,7 +31,7 @@ public class SwipeAttackState : IComponent
         else if(boss.CurrentAnimation == "AttackLow")
         {
             Rectangle destRect = GameObject.GetComponent<SpriteRenderer>().destRectangle;
-            destRect.Width = 435;
+            destRect.Width = 535;
             destRect.Height = 231;
             GameObject.GetComponent<SpriteRenderer>().destRectangle = destRect;
 
