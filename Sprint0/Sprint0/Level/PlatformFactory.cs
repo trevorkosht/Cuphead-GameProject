@@ -48,7 +48,7 @@ public static class PlatformFactory
         SpriteRenderer spriteRenderer = new SpriteRenderer(destRectangle, true);
         platform.AddComponent(spriteRenderer);
 
-        Animation platformTexture = new Animation(texture, 1, frameCount, frameHeight, frameWidth);
+        Animation platformTexture = new Animation(texture, 5, frameCount, frameHeight, frameWidth);
         spriteRenderer.addAnimation("texture", platformTexture);
         spriteRenderer.setAnimation("texture");
 
