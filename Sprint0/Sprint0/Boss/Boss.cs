@@ -13,7 +13,7 @@ public class Boss : GameObject
 
     private SpriteRenderer sRend;
     private Texture2DStorage textureStorage;
-    public int maxHP = 20;
+    public int maxHP = 200;
 
     public Boss(int x, int y, Texture2DStorage textureStorage) : base(x, y)
     {
