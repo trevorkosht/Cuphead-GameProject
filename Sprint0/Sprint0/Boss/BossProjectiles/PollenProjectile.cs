@@ -8,19 +8,19 @@ public class PollenProjectile : IComponent
     public bool enabled { get; set; }
 
     private Vector2 velocity;
-    private float amplitude; // Height of the sine wave
-    private float frequency; // Frequency of the sine wave
-    private float phaseOffset; // Keeps track of the wave offset for smooth animation
+    private float amplitude;
+    private float frequency;
+    private float phaseOffset;
     private Texture2D texture;
-    private bool isPink; // Indicates if the projectile is pink or not
+    private bool isPink;
     private int damage = 20;
 
     public PollenProjectile(Vector2 startPosition, Texture2D texture, bool isPink, float speed)
     {
         this.texture = texture;
         this.isPink = isPink;
-        amplitude = 50f; // Adjust for a higher/lower wave
-        frequency = 5f; // Adjust for tighter/wider waves
+        amplitude = 50f;
+        frequency = 5f;
         velocity = new Vector2(-speed, 0);
         phaseOffset = startPosition.Y;
     }

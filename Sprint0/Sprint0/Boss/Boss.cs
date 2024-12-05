@@ -43,7 +43,6 @@ public class Boss : GameObject
         }
         Texture2D magicHands = textureStorage.GetTexture("BossMagicHands"); //606x670 26
         Texture2D idle = textureStorage.GetTexture("BossStageOneIdle");
-        //Texture2D spawn = textureStorage.GetTexture("BossSpawn"); //
         Texture2D seeds = textureStorage.GetTexture("BossShootSeeds"); //600x600 22
         Texture2D attackHigh = textureStorage.GetTexture("BossFaceAttackHigh"); //1150x665 19
         Texture2D attackLow = textureStorage.GetTexture("BossFaceAttackLow"); //1245x608 20

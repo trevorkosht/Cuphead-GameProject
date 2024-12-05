@@ -49,7 +49,6 @@ public class SeedAttackState : IComponent
                 GOManager.Instance.audioManager.getInstance("GattlingGunLoop").Play();
                 ShootSeeds(seeds);
                 hasFired = true;
-                //GOManager.Instance.audioManager.getInstance("GattlingGunLoop").Stop();
                 GOManager.Instance.audioManager.getInstance("GattlingGunEnd").Play();
             }
         }

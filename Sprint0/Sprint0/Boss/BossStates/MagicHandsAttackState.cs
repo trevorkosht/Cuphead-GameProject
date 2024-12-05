@@ -47,7 +47,7 @@ public class MagicHandsAttackState : IComponent
                         {
                             SpawnAcorns();
                         }
-                        attackCooldown = 2.0; // Cooldown in seconds (adjust as needed)
+                        attackCooldown = 2.0;
                     }
                     GOManager.Instance.audioManager.getInstance("HandSpawnEnd").Play();
                 }
@@ -60,12 +60,11 @@ public class MagicHandsAttackState : IComponent
                 if (attackCooldown <= 0)
                 {
                     SpawnPollen();
-                    attackCooldown = 2.0; // Cooldown in seconds
+                    attackCooldown = 2.0;
                 }
             }
         }
 
-        // Update the attack cooldown
         if (attackCooldown > 0)
         {
             attackCooldown -= gameTime.ElapsedGameTime.TotalSeconds;
@@ -88,22 +87,17 @@ public class MagicHandsAttackState : IComponent
 
     private void SpawnAcorns()
     {
-        GameObject player = GOManager.Instance.Player; // Assuming there's a way to access the player object
+        GameObject player = GOManager.Instance.Player;
 
         for (int i = 0; i < 3; i++)
         {
-            // Adjust vertical position for each acorn
-            float verticalOffset = i * 50; // Each acorn spawns 50 units apart vertically
+            float verticalOffset = i * 50;
             Vector2 spawnPosition = new Vector2(boss.X, boss.Y + 300 + verticalOffset);
 
-            // Calculate the direction vector towards the player
             Vector2 direction = Vector2.Normalize(player.position - spawnPosition);
-            float rotation = (float)Math.Atan2(direction.Y, direction.X); // Calculate the angle in radians
+            float rotation = (float)Math.Atan2(direction.Y, direction.X);
+            rotation += MathHelper.Pi;
 
-            // Reverse the rotation direction
-            rotation += MathHelper.Pi; // Add 180 degrees (π radians)
-
-            // Create the acorn game object
             GameObject acorn = new GameObject((int)spawnPosition.X, (int)spawnPosition.Y, new AcornProjectile(spawnPosition, player));
             SpriteRenderer sr = new SpriteRenderer(new Rectangle(acorn.X, acorn.Y, 90, 90), boss.IsFacingRight, MathHelper.ToDegrees(rotation));
             CircleCollider collider = new CircleCollider(20, new Vector2(-25, -20), GOManager.Instance.GraphicsDevice);
@@ -111,11 +105,9 @@ public class MagicHandsAttackState : IComponent
             acorn.AddComponent(collider);
             acorn.AddComponent(sr);
 
-            // Set up the animation for the acorn
             sr.addAnimation("acorn", new Animation(acornTexture, 1, 4, 90, 90));
             sr.setAnimation("acorn");
 
-            // Add the acorn to the game objects list
             GOManager.Instance.allGOs.Add(acorn);
         }
     }
@@ -127,7 +119,7 @@ public class MagicHandsAttackState : IComponent
     private void SpawnPollen()
     {
         GOManager.Instance.audioManager.getNewInstance("ProjectileSpit").Play();
-        bool spawnPink = random.Next(0, 2) == 0; // 50% chance for pink pollen
+        bool spawnPink = random.Next(0, 2) == 0;
         Texture2D texture = spawnPink ? pollenPinkTexture : pollenTexture;
 
         Vector2 spawnPosition = new Vector2(boss.X, boss.Y + 300);
