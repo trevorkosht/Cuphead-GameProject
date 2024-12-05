@@ -28,6 +28,58 @@ CODE REVIEWS:
 
 SPRINT 5:
 
+Author: Zol Chen 
+Date: 12/4/2024 
+Sprint #: 5 
+File Name: WinMenu.cs 
+File Author: Jacob 
+Review Time :21 min
+
+The code is pretty good with how simple it is; the code mostly used the code in Microsoft framework, which makes the code very easy to understand if they are new to the team. There are places that it can improve on, such as how much information is passed to the file. To construct the class, it requires the whole "game1" class to be passed in, which is very inefficient. Furthermore, it does not make use of the sprite render class, which is designed to be used for animating the sprite in the project. Lastly, there are places where the code pieces can be turned into methods, which make the code shorter since it is sitting at 256 lines. If I were to change some part of the code, I would start by using sprite render, which will move the need for the draw function and their frame #, remove "game1", and use player state to get all of the player state information, and lastly remove some of the switch statement and make it a method, which shortens the code a bit. Overall it is not bad, but there are many places that can use the resources that are already in the project
+
+Author: Trevor Kosht 
+Date: 12/4/2024 
+Sprint #: 5 
+File Name: BossLogic.cs
+File Author: DJ
+Review Time: 10 minutes
+
+Readability Review:
+This file is pretty readable but there are a few magic numbers which could be made as constants. The biggest thing with the readbality is the cyclomatic complexity, there are many if statments involved in this file. This could be split up into different files as states where the behavior is set in the states. Like a Phase 1 states file, that runs all of the phase 1 behavior, then a phase 2 that will check the health threshold and once it meets it then it signals to BossLogic that its in phase 2 and does the rest of the logic.
+
+
+Author: Trevor Kosht
+Date: 12/4/2024 
+Sprint #: 5 
+File Name: BossLogic.cs
+File Author: DJ
+Review Time: 10 minutes
+
+Maintainability Review:
+This file could get really complex if more checks were needed. because of the pseudo state machine you will need an increase in if statements, which will make the cyclomatic complexity even higher and increase the overall lines of code. If there was a dictionary of states and then in the update it cycles through all the states update method and thats where the logic takes place all you would have to do is make an additional state file with the logic. You could also move out all of that animation setting into the state files to reduce some of the coupling with that.
+
+Author of the code review: David Dermanelian
+Date of the code review: 12/4/2024
+Sprint number: 5
+Name of the .cs file being reviewed: BossEnemyFactory.cs
+Author of the .cs file being reviewed: Ben
+Number of minutes taken to complete the review: 17 minutes
+
+Readable:
+The code is well-organized, with a clear structure and modularity in how different enemy types are handled within the CreateEnemy method. Constants like GROUND_HEIGHT and FALL_SPEED make the logic easier to follow and reusable. Variable names are descriptive and self-explanatory, helping to clarify the purpose of each part of the code. The use of an enum for BossEnemyType keeps the enemy type selection clean and manageable. Additionally, the animation setup, though repetitive, is consistent, and the methods like addAnimation and setAnimation are straightforward and readable.
+Unreadable:
+The method is too long and has a lot of repeated logic for animation and component setup, making it hard to follow. Magic numbers and string keys scattered throughout make the code less clear and prone to errors. The switch cases are overly detailed, and the lack of helper methods makes the logic feel cluttered. Centralizing the configuration for enemy types or extracting repeated patterns into methods would make the code more maintainable and readable. 
+Author of the code review: David Dermanelian
+Date of the code review: 12/4/2024
+Sprint number: 5
+Name of the .cs file being reviewed: FlyingFlower.cs
+Author of the .cs file being reviewed: Ben
+
+The FlyingFlower class is moderately well-structured, with encapsulated methods for movement, updates, and attacks. Constants like FLIGHT_HEIGHT, SPRING_CONST, and MOVEMENT_RANGE make the behavior of the enemy predictable and reusable. However, the logic in methods like Move and Update is densely packed and includes conditional branches that could benefit from being split into helper methods. Repeated retrievals of components like SpriteRenderer and HealthComponent across different methods make the code harder to maintain and slightly less efficient. Extracting these calls to fields or caching components would simplify the logic. Additionally, the use of magic numbers in some calculations (e.g., rotationAngle *= 0.375) reduces readability and makes adjustments more error-prone.
+
+Hypothetical Change and Support:
+The current implementation, while modular for the single Attack method, does not readily support adding or switching between additional attaclk patterns. This would require significant refactoring to generalize the attack logic. A better approach would be to encapsulate attack behavior in a strategy or state pattern, allowing for interchangeable attack styles. Similarly, introducing a central animation manager for the class would streamline the animation transitions and reduce the repeated calls to setAnimation. These adjustments would make the code more extensible for future changes
+
 Jacob Subler
 12/4/2024
 Sprint 5
@@ -65,7 +117,9 @@ Jacob
 Code maintainability comments:
 This file has a bit of awkwardly designed code simply by necessity: it needs to calculate a bunch of stats and then format them in a specific way for the win screen, so there has to be a lot of hard-coded values for the formatting to get everything lined up properly on screen, since the menu is made up of a lot of parts. That being said, some of the code that handles getting and calculating game stats and score could be extracted out into its own class. Right now the file is handling both formatting and drawing the menu as well as calculating statistics, and separating those into two classes would increase cohesion and improve readability, as well as making everything more maintainable. Since the file is trying to handle two fairly distinct tasks, it would make sense to separate them while still maintaining full functionality, since it would be very easy for the WinMenu class to just pull values from the stat handler class and then print them on screen.
 
+SPRINT 5 REVIEW
 
+This sprint was rough on the team, communications fell apart and things were delayed quite a bit. With finals approarching and break being in the middle people put things off for a bit. I think the boss fight turned out great, all of the expected behavior was in and it played nice. There could be a few improvemnets made to make it a bit easier and there could maybe be something to reduce to computer usage since if you dont have a powerful computer then some of the boss sprites will not render. 
 
 SPRINT 4
 
