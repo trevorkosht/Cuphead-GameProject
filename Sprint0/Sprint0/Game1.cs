@@ -43,7 +43,6 @@ namespace Sprint0
         private Vector2 startingPlayerLoc = new Vector2(0, 500);
         private bool saveLoc = false;
         internal PlayerState playerState;
-        private MenuController menuController;
         private MenuManager menuManager;
         private UI UI;
 
@@ -160,7 +159,6 @@ namespace Sprint0
             font = Content.Load<SpriteFont>("Font/Winter");
             texts = new TextSprite(font, "",new Vector2(0, 0), Color.White);
 
-            menuController = new MenuController(playerState, font);
             menuManager = new MenuManager();
             GOManager.Instance.menuManager = menuManager;
             menuManager.AddMenu("MainMenu", new MainMenu(this));

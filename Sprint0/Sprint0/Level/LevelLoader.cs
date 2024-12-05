@@ -48,10 +48,6 @@ public class LevelLoader
                     SpawnPlatform(subtype, new Vector2(posX, posY));
                     break;
 
-                case "End":
-                    SpawnEnd(subtype, new Vector2(posX, posY));
-                    break;
-
                 case "Item":
                     SpawnItem(subtype, posX, posY);
                     break;
@@ -127,16 +123,6 @@ public class LevelLoader
         if (item != null)
         {
             GOManager.Instance.allGOs.Add(item);
-        }
-    }
-    private static void SpawnEnd(string subtype, Vector2 position)
-    {
-        GameObject endElement = MenuFactory.CreateElement(subtype, position);
-        GOManager.Instance.allGOs.Add(endElement);
-
-        if (endElement != null)
-        {
-            GOManager.Instance.allGOs.Add(endElement);
         }
     }
 }
