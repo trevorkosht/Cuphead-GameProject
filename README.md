@@ -17,6 +17,8 @@ CupHead will take damage from all enemies and projectiles
 
 Other controls
 Use 'q' to quit and 'r' to reset the program back to its initial state
+'o' - Progress the game to the win screen of the current stage.
+'p' - Pause the game.
 
 CODE METRICS SPRINT 4
 https://buckeyemailosu-my.sharepoint.com/:x:/g/personal/kosht_7_buckeyemail_osu_edu/EX1qp_xiM_hKntkkmaw8_fUBvLlKoFlNqe77B9zOtpyT3w?e=9hrGEA&nav=MTVfezM2MzkyNUVFLTExMTktNEM1Ni05NkY1LTMwMTdDRDBFMDk2Q30
@@ -25,6 +27,26 @@ https://buckeyemailosu-my.sharepoint.com/:x:/g/personal/kosht_7_buckeyemail_osu_
 CODE REVIEWS:
 
 SPRINT 5:
+
+Jacob Subler
+12/4/2024
+Sprint 5
+VinesAttackState.cs
+DJ
+14 minutes
+
+Readability Review:
+Regarding readability for the VinesAttackState class, while the logic is not super difficult to follow as someone with context of the different parts of the project, I think there would be a benefit to clarifying variable names and conditionals for the sake of potential future or outside developers. Equivalency checks for boss.phase and attackPart using numbers can make sense if you know what enemy is using the vine attacks, but it is unclear exactly what the action phases and attacks are meant to do. Using names to describe the different phases like vineRetracting or vineExtendingPhase. Since the animation names are written in to the class, it makes it easier to match the actions to the numbers, but could benefit from a bit of clarification for those who are not actively working on the project.
+
+Jacob Subler
+12/4/2024
+Sprint 5
+WinMenu.cs
+Jacob
+10 minutes
+
+Maintainability Review:
+This specific menu class contains a lot of hard-coded values for Rectangles and score/grade calculations that could be split out into config files or other helper classes. The Rectangles for example could be stored in a config file separaretly since they are likely not to change much but could be stored alongside the hard coded rectangle values for all the different menus cleaning up all of the menu files. There are also some helper methods in WinMenu.cs that are used for reformatting or calculating a displayable score out of known player information like timePlayed, coins collected, heatlh, and parry count. These functions don't necessarily need to exist in the WinMenu.cs file, although they wouldn't be used in the other menus, but it would shorten up the WinMenu.cs class significantly and reduce the complexity of responsibilities that are put on the class itself.
 
 Ben Vidmar-McEwen
 12/4/2024
